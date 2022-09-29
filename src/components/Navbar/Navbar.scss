@@ -2,6 +2,8 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 8vw !important;
+  align-items: center;
+  height: 80px;
 }
 
 .navbar__nav-left {
@@ -11,7 +13,7 @@
 }
 
 .navbar__logo {
-  height: 60px;
+  height: 50px;
   width: 150px;
 
   img {
@@ -29,7 +31,8 @@
 
 .navlink {
   a {
-    color: black;
+    color: var(--black);
+    font-weight: 600;
     text-decoration: none;
   }
 }

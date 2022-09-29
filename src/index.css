@@ -9,7 +9,8 @@ a {
 }
 
 ul,
-li {
+li,
+p {
   margin: 0px;
   padding: 0px;
 }
@@ -18,7 +19,12 @@ body {
   font-family: "Lexend", sans-serif;
 }
 
+.sectionPadding {
+  padding: 10px 8vw;
+}
+
 :root {
   --theme-color: #fee100;
   --black: #121113;
+  --white: white;
 }
