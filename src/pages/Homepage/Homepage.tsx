@@ -1,4 +1,5 @@
 import React from "react";
+import FourIconComponent from "../../components/FourIconComponent/FourIconComponent";
 import HeroSection from "../../components/HeroSection/HeroSection";
 import HomeCounterComponent from "../../components/HomeCounterComponent/HomeCounterComponent";
 import HowItWorks from "../../components/HowItWorks/HowItWorks";
@@ -11,6 +12,7 @@ const Homepage = () => {
       <HeroSection />
       <HomeCounterComponent />
       <HowItWorks />
+      <FourIconComponent />
     </div>
   );
 };

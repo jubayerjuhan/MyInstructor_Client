@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import Button from "../core/Button/Button";

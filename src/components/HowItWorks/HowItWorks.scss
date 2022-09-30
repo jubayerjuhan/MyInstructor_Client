@@ -4,10 +4,6 @@
   gap: 40px;
 }
 
-.bookbutton {
-  margin-top: 20px;
-}
-
 .how__works-wrapper {
   display: flex;
   flex-direction: column;
@@ -96,5 +92,9 @@
   }
   .how__works-media {
     display: none;
+  }
+
+  .how__works-text > .title {
+    font-size: 30px;
   }
 }
