@@ -1,16 +1,20 @@
 import React from "react";
 import "./Button.scss";
 
-interface ButtonType {
-  title: string;
-  link: string;
-}
-const Button = ({ title = "Button", link = "/" }: ButtonType) => {
+const Button = ({ title = "Button", className, link, width, onClick }: any) => {
   return (
-    <div className="btn-box">
-      <a href={link} className="theme-btn btn-one">
-        {title}
-      </a>
+    <div
+      onClick={onClick}
+      className={`btn-box ${className}`}
+      style={{ width: width ? width : "140px" }}
+    >
+      {link ? (
+        <a href={link} className="theme-btn btn-one">
+          {title}
+        </a>
+      ) : (
+        <p className="theme-btn btn-one">{title}</p>
+      )}
     </div>
   );
 };

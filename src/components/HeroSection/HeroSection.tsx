@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "./HeroSection.scss";
 import Select from "react-select";
-import subrubs from "../../json_data/australiaSubrubs.json";
+import { client } from "../../client";
+import Button from "../core/Button/Button";
 
+interface Suburb {
+  suburb: string;
+  state: string;
+  postcode: number;
+}
 const HeroSection = () => {
+  const [suburbs, setSuburbs] = useState<Suburb[]>([]);
+  const [keyWord, setkeyWord] = useState("");
+  const [listOpen, setListOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
   const transmissions = [
     { name: "Auto", value: "Auto" },
     { name: "Manual", value: "Manual" },
@@ -13,13 +24,27 @@ const HeroSection = () => {
     value: "",
   });
 
-  const options = [{ value: "null", label: "Select Subrub" }];
-
   useEffect(() => {
     setTransmission(transmissions[0]);
   }, []);
 
-  console.log(transmission, "trans");
+  useEffect(() => {
+    getSuburbs();
+  }, [keyWord]);
+
+  // handle input change
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setkeyWord(e.target.value);
+    setInputValue(e.target.value);
+  };
+
+  const getSuburbs = async () => {
+    if (keyWord.length === 0) setSuburbs([]);
+    if (keyWord.length < 2) return;
+    const { data } = await client.get(`/search-suburbs/${keyWord}`);
+    setSuburbs(data.suburbs);
+  };
+
   return (
     <div className="heroSection sectionPadding">
       <div className="heroSection__textContainer">
@@ -49,12 +74,49 @@ const HeroSection = () => {
         </div>
         <div className="heroSection__subrub-selector">
           <input
+            onChange={handleInputChange}
+            value={inputValue}
+            onFocus={() => setListOpen(true)}
+            onBlur={() => {
+              setTimeout(function () {
+                setListOpen(false);
+              }, 500);
+            }}
             type="text"
             className="subrub__input"
             placeholder="Enter Your Subrub"
           />
-
-          <Select options={subrubs} onChange={(val) => console.log(val)} />
+          {listOpen && (
+            <div
+              className="subrubs__list"
+              onFocus={() => setListOpen(true)}
+              onClick={() => console.log("first")}
+            >
+              {suburbs.length === 0 && (
+                <p className="suburb__list-name-title">
+                  Enter Suburb Name or Postcode
+                </p>
+              )}
+              {suburbs.map((suburb, key) => (
+                <p
+                  onClick={() =>
+                    setInputValue(
+                      `${suburb.suburb} ${suburb.state} ${suburb.postcode}`
+                    )
+                  }
+                  className="suburb__list-name"
+                  key={key}
+                >{`${suburb.suburb} ${suburb.state} ${suburb.postcode}`}</p>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="suburb__submit-btn">
+          <Button
+            className="submit__suburb"
+            title="Submit"
+            width="100%"
+          ></Button>
         </div>
       </div>
     </div>

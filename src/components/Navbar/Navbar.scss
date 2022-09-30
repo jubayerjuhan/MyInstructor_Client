@@ -4,6 +4,7 @@
   padding: 10px 8vw !important;
   align-items: center;
   height: 80px;
+  z-index: 10;
 }
 
 .navbar__nav-left {
@@ -44,7 +45,7 @@
 
 @media (max-width: 800px) {
   .navbar {
-    padding: 25px !important;
+    padding: 40px !important;
     padding-top: 20px !important;
     display: flex;
     flex-direction: column;

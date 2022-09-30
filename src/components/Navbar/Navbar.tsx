@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className="navbar__nav-left">
           <div className="navbar__logo">
             <img
-              src="https://www.ezlicence.com.au/assets/logo-ezlicence-full-coloured-d818224a6354379532a8ba37ece24b4bb99a525d5a7cec64b90a8c9a82717afa.png"
+              // src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.jpg"
               alt=""
             />
           </div>

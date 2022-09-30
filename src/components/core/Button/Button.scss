@@ -4,13 +4,14 @@
   overflow: hidden;
   vertical-align: middle;
   font-size: 14px;
+  cursor: pointer;
   line-height: 26px;
   font-weight: 600;
   font-family: "Lexend", sans-serif;
   text-align: center;
-  padding: 12px 38px;
+  padding: 10px 0px;
+  width: 100%;
   text-transform: uppercase;
-  z-index: 1;
   transition: all 500ms ease;
 }
 
