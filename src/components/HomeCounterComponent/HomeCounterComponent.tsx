@@ -12,7 +12,7 @@ const HomeCounterComponent = () => {
     { count: "100+", title: "Own Cars", icon: <FaCar /> },
   ];
   return (
-    <div className="sectionPadding home__counter-wrapper">
+    <section className="sectionPadding home__counter-wrapper">
       <div className=" home__counter">
         {counterElements.map((element, key) => (
           <div className="count__card">
@@ -24,7 +24,7 @@ const HomeCounterComponent = () => {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

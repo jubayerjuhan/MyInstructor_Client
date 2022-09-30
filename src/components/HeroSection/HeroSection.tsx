@@ -46,7 +46,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="heroSection sectionPadding">
+    <section className="heroSection sectionPadding">
       <div className="heroSection__textContainer">
         <p className="heroSection__title">
           Where do you need a driving instructor?
@@ -119,7 +119,7 @@ const HeroSection = () => {
           ></Button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
