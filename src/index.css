@@ -21,11 +21,11 @@ body {
 
 .sectionPadding {
   padding: 5vw 8vw;
-  padding-bottom: 0px;
+  padding-bottom: 3vw;
 }
 @media (max-width: 768px) {
   .sectionPadding {
-    padding: 30px 4vw;
+    padding: 6vw 4vw;
   }
 }
 
@@ -33,7 +33,7 @@ body {
   --theme-color: #fee100;
   --text: #121113;
   --text-sec: #666;
-
+  --light-gray: #f6f6f6;
   --black: #121113;
   --white: white;
 }
