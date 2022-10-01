@@ -1,7 +1,14 @@
 import React from "react";
 import "./Button.scss";
 
-const Button = ({ title = "Button", className, link, width, onClick }: any) => {
+const Button = ({
+  big,
+  title = "Button",
+  className,
+  link,
+  width,
+  onClick,
+}: any) => {
   return (
     <div
       onClick={onClick}
