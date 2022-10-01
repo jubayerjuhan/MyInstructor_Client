@@ -1,4 +1,5 @@
 import React from "react";
+import Advantage from "../../components/Advantage/Advantage";
 import FaqSection from "../../components/FaqSection/FaqSection";
 import FourIconComponent from "../../components/FourIconComponent/FourIconComponent";
 import HeroSection from "../../components/HeroSection/HeroSection";
@@ -17,8 +18,9 @@ const Homepage = () => {
       <HowItWorks />
       <FourIconComponent />
       <HomeGiftcard />
-      <WhyusSection />
       <FaqSection />
+      <WhyusSection />
+      <Advantage />
     </div>
   );
 };

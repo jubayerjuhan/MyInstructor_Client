@@ -4,16 +4,14 @@ import FaqComponent from "../FAQ/FaqComponent";
 import "./FaqSection.scss";
 
 const FaqSection = () => {
+  const faqs = [1, 2, 3, 4, 5];
   return (
     <section className="faq__section sectionPadding">
       <p className="title">Top Frequently Asked Questions</p>
       <div className="faq__list">
-        <FaqComponent />
-        <FaqComponent />
-        <FaqComponent />
-        <FaqComponent />
-        <FaqComponent />
-        <FaqComponent />
+        {faqs.map((faq, key) => {
+          return <FaqComponent key={key} />;
+        })}
       </div>
       <div className="bookbutton">
         <Button title="Book Now" width="30vw" />

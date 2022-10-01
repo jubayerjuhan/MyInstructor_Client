@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { BsArrowRight, BsArrowDown } from "react-icons/bs";
-import { GiSteeringWheel } from "react-icons/gi";
 import "./FaqComponent.scss";
 
-const FaqComponent = () => {
+const FaqComponent = ({ icon }: any) => {
   const [open, setOpen] = useState(false);
   return (
     <div className="faq__component">
@@ -12,9 +11,7 @@ const FaqComponent = () => {
         onClick={() => setOpen(!open)}
       >
         <div className="faq__title">
-          <div className="icon">
-            <GiSteeringWheel />
-          </div>
+          {icon && <div className="icon">{icon} </div>}{" "}
           <p className="title">
             How many lessons will I need to learn to drive?
           </p>
