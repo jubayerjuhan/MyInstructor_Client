@@ -8,12 +8,10 @@ const GetReady = () => {
   return (
     <section className="getReady__section sectionPadding">
       <p className="title">Ready for driving lessons?</p>
-      <p className="description">
-        My Instructor connects learner drivers with the best driving schools
-      </p>
+      <p className="description">Choose a driving instructor you can trust </p>
       <div className="getReady__options">
         {options.map((opt, key) => (
-          <div className="getReady__option">
+          <div className="getReady__option" key={key}>
             <div className="icon">
               <GiSteeringWheel />
             </div>

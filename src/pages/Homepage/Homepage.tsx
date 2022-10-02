@@ -8,6 +8,7 @@ import HomeCounterComponent from "../../components/HomeCounterComponent/HomeCoun
 import HomeGiftcard from "../../components/Home_Giftcard/Home_Giftcard";
 import HowItWorks from "../../components/HowItWorks/HowItWorks";
 import Navbar from "../../components/Navbar/Navbar";
+import ReviewSlider from "../../components/ReviewSlider/ReviewSlider";
 import WhyusSection from "../../components/WhyusSection/WhyusSection";
 
 const Homepage = () => {
@@ -23,6 +24,7 @@ const Homepage = () => {
       <WhyusSection />
       <Advantage />
       <GetReady />
+      <ReviewSlider />
     </div>
   );
 };
