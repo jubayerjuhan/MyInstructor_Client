@@ -1,6 +1,7 @@
 import React from "react";
 import Advantage from "../../components/Advantage/Advantage";
 import FaqSection from "../../components/FaqSection/FaqSection";
+import Footer from "../../components/Footer/Footer";
 import FourIconComponent from "../../components/FourIconComponent/FourIconComponent";
 import GetReady from "../../components/GetReady/GetReady";
 import HeroSection from "../../components/HeroSection/HeroSection";
@@ -25,6 +26,7 @@ const Homepage = () => {
       <Advantage />
       <GetReady />
       <ReviewSlider />
+      <Footer />
     </div>
   );
 };

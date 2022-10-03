@@ -1,6 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import "./HeroSection.scss";
-import Select from "react-select";
 import { client } from "../../client";
 import Button from "../core/Button/Button";
 
