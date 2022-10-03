@@ -31,6 +31,7 @@ body {
 
 :root {
   --theme-color: #fee100;
+  --input-glow: #fee0005d;
   --text: #121113;
   --text-sec: #666;
   --light-gray: #f6f6f6;
@@ -46,3 +47,38 @@ body {
 .bookbutton {
   margin-top: 60px;
 }
+
+/* bootstrap focus glow for input */
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  /* border-color: var(--theme-color);
+  box-shadow: 0 2px var(--theme-color) inset, 0 0 8px var(--theme-color); */
+  border-color: var(--theme-color);
+  box-shadow: 0 0 0 0.2rem var(--input-glow);
+
+  outline: 0 none;
+}
+
+.input__element {
+  height: 45px;
+}
+
+.input__element.login {
+  height: 55px;
+}
+
+/*  */

@@ -1,0 +1,34 @@
+@import "../../main.scss";
+
+.login__component {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: repeat(2, 1fr);
+  > .title {
+    @include titleFont;
+    margin-bottom: 25px;
+  }
+}
+
+.login__graphics {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 100%;
+  }
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  > .title {
+    @include titleFont;
+    margin-bottom: 20px;
+  }
+}
