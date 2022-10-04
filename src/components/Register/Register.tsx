@@ -42,7 +42,9 @@ const Register = () => {
           {registerFields.map((field, key) => {
             return (
               <div className="input__wrapper_w-header">
-                <p className="title">{field.label}</p>
+                <p className="title">
+                  {field.label} <span>*</span>
+                </p>
                 <input
                   key={key}
                   type={field.type}

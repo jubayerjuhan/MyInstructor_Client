@@ -44,5 +44,9 @@
   > .title {
     @include descriptionFont();
     margin-bottom: 10px;
+
+    span {
+      color: red;
+    }
   }
 }
