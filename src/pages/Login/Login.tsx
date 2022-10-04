@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import "./Login.scss";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginValidationSchema } from "../../utils/validation_schemas/login_schema";
+import Navbar from "../../components/Navbar/Navbar";
 
 const Login = () => {
   const {
@@ -33,6 +34,7 @@ const Login = () => {
   ];
   return (
     <>
+      <Navbar></Navbar>
       <div className="login__component">
         <div className="login__graphics">
           <img src={loginImage} alt="Login Graphics Vector" />

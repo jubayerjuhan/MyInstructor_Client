@@ -37,3 +37,12 @@
     font-size: 20px;
   }
 }
+
+// input desgign
+
+.input__wrapper_w-header {
+  > .title {
+    @include descriptionFont();
+    margin-bottom: 10px;
+  }
+}
