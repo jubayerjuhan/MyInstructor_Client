@@ -3,6 +3,7 @@ import Button from "../core/Button/Button";
 import { FaTimes } from "react-icons/fa";
 import "./Navbar.scss";
 import Mobilenav from "../Mobilenav/Mobilenav";
+import Logo from "../../assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,10 +26,7 @@ const Navbar = () => {
         )}
         <div className="navbar__nav-left">
           <div className="navbar__logo">
-            <img
-              // src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.jpg"
-              alt=""
-            />
+            <img src={Logo} alt="" />
           </div>
           <ul className="navbar__navlinks">
             {navLinks.map((link, key) => {

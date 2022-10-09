@@ -2,7 +2,7 @@
 
 .login__component {
   display: grid;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 85px);
   grid-template-columns: repeat(2, 1fr);
   > .title {
     @include titleFont;

@@ -37,6 +37,7 @@ body {
   --light-gray: #f6f6f6;
   --black: #121113;
   --white: white;
+  --font-family: "Lexend", sans-serif !important;
 }
 
 * {
