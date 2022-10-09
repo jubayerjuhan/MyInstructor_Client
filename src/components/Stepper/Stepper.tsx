@@ -83,7 +83,7 @@ const steps = [
 
 export default function CustomizedSteppers() {
   return (
-    <Stack sx={{ width: "100%" }} spacing={4}>
+    <Stack sx={{ width: "100%", marginTop: "20px" }} spacing={4}>
       <Stepper
         alternativeLabel
         activeStep={3}

@@ -19,6 +19,10 @@
 .theme-btn.btn-one {
   background: var(--theme-color);
 }
+.theme-btn.revert {
+  background: var(--text-sec);
+  color: var(--theme-color);
+}
 
 .theme-btn.btn-one {
   color: var(--black);

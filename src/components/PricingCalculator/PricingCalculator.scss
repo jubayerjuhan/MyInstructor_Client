@@ -5,7 +5,7 @@
   padding: 15px;
   // box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 20px;
-  border-radius: 10px;
+  height: fit-content;
 }
 
 .lesson__pricing {
@@ -110,5 +110,54 @@
       @include descriptionFont;
       font-size: 13px;
     }
+  }
+}
+
+@media (max-width: 1024px) {
+  .lesson__info > .lesson__duration,
+  .lesson__info .lesson__price {
+    font-size: 15px;
+  }
+}
+@media (max-width: 768px) {
+  .lesson__info > .lesson__duration,
+  .lesson__info .lesson__price {
+    font-size: 13px;
+  }
+  .lesson__info {
+    gap: 15px;
+  }
+  .pricing__calculator {
+    padding: 10px;
+  }
+
+  .lesson__info > .saving__tips {
+    padding: 2px 4px;
+  }
+}
+@media (max-width: 600px) {
+  .lesson__info > .lesson__duration,
+  .lesson__info .lesson__price {
+    font-size: 20px;
+  }
+  .lesson__info {
+    gap: 15px;
+  }
+  .pricing__calculator {
+    padding: 10px;
+  }
+
+  .lesson__info > .saving__tips {
+    padding: 2px 5px;
+  }
+
+  .lesson__pricing > .title {
+    font-size: 20px;
+  }
+  .lesson__calculator > .title {
+    font-size: 20px;
+  }
+  .test__package > .title {
+    font-size: 20px;
   }
 }

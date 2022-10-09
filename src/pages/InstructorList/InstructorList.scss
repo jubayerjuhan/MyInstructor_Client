@@ -1,4 +1,26 @@
 .instructors__main {
   display: grid;
-  grid-template-columns: 7fr 3fr;
+  gap: 50px;
+  grid-template-columns: 6fr 3fr;
+  position: relative;
+}
+
+.all-instructors__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px 20px;
+}
+
+@media (max-width: 600px) {
+  .instructors__main {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .all-instructors__list {
+    grid-template-columns: 1fr;
+  }
+  .instructor__info {
+    width: 100%;
+  }
 }

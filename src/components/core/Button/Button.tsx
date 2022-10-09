@@ -2,7 +2,8 @@ import React from "react";
 import "./Button.scss";
 
 const Button = ({
-  big,
+  smallFont,
+  revertColor,
   title = "Button",
   className,
   link,
@@ -20,7 +21,14 @@ const Button = ({
           {title}
         </a>
       ) : (
-        <p className="theme-btn btn-one">{title}</p>
+        <p
+          className={`theme-btn  ${revertColor ? "revert" : "btn-one"}`}
+          style={{
+            fontSize: smallFont ? "12px" : "",
+          }}
+        >
+          {title}
+        </p>
       )}
     </div>
   );
