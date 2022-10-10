@@ -66,13 +66,15 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="select"]:focus,
 input[type="color"]:focus,
+input[type="select"]:focus,
+select:focus,
 .uneditable-input:focus {
   /* border-color: var(--theme-color);
   box-shadow: 0 2px var(--theme-color) inset, 0 0 8px var(--theme-color); */
-  border-color: var(--theme-color);
-  box-shadow: 0 0 0 0.2rem var(--input-glow);
+  border-color: var(--theme-color) !important;
+  box-shadow: 0 0 0 0.2rem var(--input-glow) !important;
 
-  outline: 0 none;
+  outline: 0 none !important;
 }
 
 .input__element {
