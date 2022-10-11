@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./components/Register/Register";
 import Homepage from "./pages/Homepage/Homepage";
 import InstructorList from "./pages/InstructorList/InstructorList";
+import InstructorProfile from "./pages/InstructorProfile/InstructorProfile";
 import Login from "./pages/Login/Login";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/instructors-list" element={<InstructorList />} />
+        <Route path="/instructor-profile" element={<InstructorProfile />} />
       </Routes>
     </BrowserRouter>
   );
