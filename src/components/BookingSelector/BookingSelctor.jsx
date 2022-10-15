@@ -71,7 +71,7 @@ const BookingSelector = () => {
                   value={duration}
                   onChange={handleDurationChange}
                 />
-                <label className="form-check-label">{duration} Hours</label>
+                <label className="form-check-label">{duration} Hours </label>
               </div>
             );
           })}
