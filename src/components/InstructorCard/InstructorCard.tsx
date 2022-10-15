@@ -1,24 +1,46 @@
 import React from "react";
-import InstructorImage from "../../assets/reviewavater.jpg";
 import "./InstructorCard.scss";
 import { BiCalendar } from "react-icons/bi";
 import Button from "../core/Button/Button";
+import { Instructor } from "../../typings/instructorTypings";
 
-const InstructorCard = () => {
+interface InstructorCardProps {
+  instructor: Instructor;
+}
+const InstructorCard = ({ instructor }: InstructorCardProps) => {
+  console.log(instructor);
   return (
     <div className="instructor__card">
       <div className="instructor__image">
-        <img src={InstructorImage} alt="" />
+        <img
+          src={`${process.env.REACT_APP_IMAGEURL}/${instructor.avater}`}
+          alt=""
+        />
       </div>
       <div className="instructor__info">
-        <p className="name">Jubayer Hossain Juhan</p>
-        <p className="language">Jubayer Speaks English</p>
+        <p className="name">
+          {instructor.firstName} {instructor.lastName}
+        </p>
+        <p className="language">
+          {instructor.firstName} Speaks
+          {instructor.languages.map((lang, key) => (
+            <span key={key}>{lang}</span>
+          ))}
+        </p>
         <div className="availability">
           <BiCalendar />
           <p className="title">Check Availability</p>
         </div>
         <div className="buttons">
-          <Button width="100%" smallFont title="View Profile" revertColor />
+          <Button
+            width="100%"
+            smallFont
+            title="View Profile"
+            revertColor
+            onClick={() =>
+              window.location.replace(`/instructor-profile/${instructor._id}`)
+            }
+          />
           <Button width="100%" smallFont title="Book Now" />
         </div>
       </div>

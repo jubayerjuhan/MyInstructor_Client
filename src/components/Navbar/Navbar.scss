@@ -1,3 +1,21 @@
+@import "../../main.scss";
+
+.nav__header-links {
+  height: 40px;
+  background-color: var(--theme-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 30px;
+  gap: 30px;
+
+  .navbar__header-link {
+    color: var(--black);
+    font-weight: 500;
+    font-size: 15px;
+  }
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;

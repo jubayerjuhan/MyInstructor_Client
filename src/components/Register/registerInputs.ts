@@ -1,6 +1,6 @@
 export const registerFields = [
   {
-    name: "fistName",
+    name: "firstName",
     label: "First Name",
     placeholder: "First Name",
     type: "text",
@@ -34,6 +34,11 @@ export const registerFields = [
     label: "Liscense Status",
     placeholder: "Licence Status",
     type: "select",
+    options: [
+      "I Don't Have A Learner Liscense",
+      "I Have a Learner Card",
+      "Yes, I Have License",
+    ],
   },
   {
     name: "dateOfBirth",

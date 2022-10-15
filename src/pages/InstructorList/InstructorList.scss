@@ -8,6 +8,13 @@
   padding-top: 150px;
 }
 
+.all__instructors-wrapper {
+  > .title {
+    @include bigDescription;
+    margin-bottom: 30px;
+  }
+}
+
 .all-instructors__list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

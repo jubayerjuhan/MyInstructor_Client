@@ -85,4 +85,9 @@ select:focus,
   height: 55px;
 }
 
+.input__errorMessage {
+  color: red;
+  margin-top: 8px;
+  font-size: 14px;
+}
 /*  */

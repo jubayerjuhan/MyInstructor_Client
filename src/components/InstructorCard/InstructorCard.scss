@@ -25,6 +25,7 @@
 
 .instructor__info {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -38,6 +39,9 @@
   > .language {
     @include descriptionFont;
     font-size: 13px;
+
+    display: flex;
+    gap: 5px;
   }
   .availability {
     cursor: pointer;

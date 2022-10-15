@@ -47,6 +47,18 @@
       font-size: 20px;
     }
   }
+
+  .titleWrapper {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    .language {
+      font-size: 12px;
+      padding: 3px 5px;
+      background-color: var(--theme-color);
+      border-radius: 5px;
+    }
+  }
   .title {
     @include descriptionFont;
   }

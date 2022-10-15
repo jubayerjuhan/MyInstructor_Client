@@ -75,7 +75,7 @@ const Footer = () => {
         <Button title="Book now" />
         <div className="footer__drive-links">
           {driveLinks.map((driveLink, key) => (
-            <a href={driveLink.link} className="footer__link">
+            <a href={driveLink.link} className="footer__link" key={key}>
               {driveLink.name}
             </a>
           ))}

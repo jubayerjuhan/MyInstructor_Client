@@ -10,6 +10,22 @@
   }
 }
 
+.login__form-header {
+  > .title {
+    @include titleFont;
+    margin-bottom: 10px;
+  }
+
+  > .description {
+    @include descriptionFont;
+    margin-bottom: 15px;
+    a {
+      text-decoration: underline;
+      color: var(--theme-color);
+    }
+  }
+}
+
 .login__graphics {
   width: 100%;
   display: flex;

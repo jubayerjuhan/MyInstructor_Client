@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./HeroSection.scss";
 import { client } from "../../client";
 import Button from "../core/Button/Button";
-
+import { toast } from "material-react-toastify";
 interface Suburb {
   suburb: string;
   state: string;
@@ -11,13 +11,18 @@ interface Suburb {
 }
 const HeroSection = () => {
   const [suburbs, setSuburbs] = useState<Suburb[]>([]);
+  const [selectedSuburb, setSelectedSuburb] = useState<Suburb>({
+    suburb: "",
+    state: "",
+    postcode: 0,
+  });
   const [keyWord, setkeyWord] = useState("");
   const [listOpen, setListOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
   const transmissions = [
-    { name: "Auto", value: "Auto" },
-    { name: "Manual", value: "Manual" },
+    { name: "Auto", value: "auto" },
+    { name: "Manual", value: "manual" },
   ];
   const [transmission, setTransmission] = useState({
     name: "",
@@ -43,6 +48,15 @@ const HeroSection = () => {
     if (keyWord.length < 2) return;
     const { data } = await client.get(`/search-suburbs/${keyWord}`);
     setSuburbs(data.suburbs);
+  };
+
+  const handleSubmit = () => {
+    console.log(transmission);
+    console.log(selectedSuburb);
+    if (!selectedSuburb.state) return toast.warn("Please Select A Suburb");
+    window.location.replace(
+      `/instructors-list/${selectedSuburb.postcode}/${transmission.value}/${selectedSuburb.suburb}`
+    );
   };
 
   return (
@@ -99,11 +113,12 @@ const HeroSection = () => {
               )}
               {suburbs.map((suburb, key) => (
                 <p
-                  onClick={() =>
+                  onClick={() => {
                     setInputValue(
                       `${suburb.suburb} ${suburb.state} ${suburb.postcode}`
-                    )
-                  }
+                    );
+                    setSelectedSuburb(suburb);
+                  }}
                   className="suburb__list-name"
                   key={key}
                 >{`${suburb.suburb} ${suburb.state} ${suburb.postcode}`}</p>
@@ -113,6 +128,7 @@ const HeroSection = () => {
         </div>
         <div className="suburb__submit-btn">
           <Button
+            onClick={handleSubmit}
             className="submit__suburb"
             title="Submit"
             width="100%"

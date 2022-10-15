@@ -4,13 +4,13 @@ import { FaTimes } from "react-icons/fa";
 import "./Navbar.scss";
 import Mobilenav from "../Mobilenav/Mobilenav";
 import Logo from "../../assets/logo.png";
+import NavbarHeader from "../NavbarHeader/NavbarHeader";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   let mobileMenu = false;
   if (window.innerWidth <= 800) mobileMenu = true;
 
-  console.log(mobileMenu);
   const navLinks = [
     { name: "Driving Lessons", path: "/driving-lessons" },
     { name: "Test Packages", path: "/test-package" },
@@ -18,6 +18,7 @@ const Navbar = () => {
   ];
   return (
     <>
+      <NavbarHeader />
       <nav
         className={`navbar ${mobileMenu && isOpen ? "mobileNavActive" : ""}`}
       >
@@ -25,9 +26,9 @@ const Navbar = () => {
           <FaTimes className="timesIcon" onClick={() => setIsOpen(false)} />
         )}
         <div className="navbar__nav-left">
-          <div className="navbar__logo">
+          <a href="/" className="navbar__logo">
             <img src={Logo} alt="" />
-          </div>
+          </a>
           <ul className="navbar__navlinks">
             {navLinks.map((link, key) => {
               return (
