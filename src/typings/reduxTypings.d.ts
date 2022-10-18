@@ -1,5 +1,10 @@
+import { Instructor } from "./instructorTypings";
+
 export interface State {
   user: UserState;
+  instructor: {
+    instructor: Instructor;
+  };
 }
 
 export interface UserState {

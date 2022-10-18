@@ -6,10 +6,11 @@ const PricingCalculator = ({ cart }) => {
   const lessonPrice = 80;
   const hoursArray = Array.from(Array(101).keys());
   const [totalLessonPrice, setTotalLessonPrice] = useState(lessonPrice);
+  let discountPercent = 0;
 
   const calculateHoursPrice = (e) => {
     const hours = e.target.value;
-    let discountPercent = 0;
+
     if (hours > 5) discountPercent = 5;
     if (hours > 9) discountPercent = 10;
 
@@ -45,7 +46,7 @@ const PricingCalculator = ({ cart }) => {
                 <p className="lesson__duration">{lesson.title} hrs</p>
                 <p className="lesson__price">{calculatedPrice}$/hr</p>
                 {lesson.discountPercentage > 0 && (
-                  <p className="saving__tips">
+                  <p className="discount__tooltip">
                     Save {lesson.discountPercentage}%
                   </p>
                 )}
@@ -63,7 +64,11 @@ const PricingCalculator = ({ cart }) => {
           <select name="" id="" onChange={calculateHoursPrice}>
             {hoursArray.map((hour, key) => {
               if (hour <= 0) return null;
-              return <option value={hour}>{hour}</option>;
+              return (
+                <option value={hour} key={key}>
+                  {hour}
+                </option>
+              );
             })}
           </select>
           <p className="description">/hrs</p>

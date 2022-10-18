@@ -9,3 +9,7 @@ export const OTP_VERIFIED = "OTP_VERIFIED";
 export const OTP_ERROR = "OTP_ERROR";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const SET_JWTTOKEN = "SET_JWTTOKEN";
+
+// instructor naming
+export const SET_INSTRUCTOR = "SET_INSTRUCTOR";
+export const DELETE_INSTRUCTOR = " DELETE_INSTRUCTOR";

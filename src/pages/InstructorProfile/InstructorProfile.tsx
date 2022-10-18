@@ -22,7 +22,7 @@ const InstructorProfile = () => {
       const { data } = await client.get(`/instructor/${id}`);
       setInstructor(data.instructor);
     } catch (error) {
-      window.location.replace("/not-found");
+      window.location.href = "/not-found";
     }
   };
 

@@ -44,19 +44,20 @@
   align-items: center;
   padding: 3px;
 
-  > .saving__tips {
-    // line-height: 1;
-    font-size: 10px;
-    padding: 3px 5px;
-    background-color: var(--theme-color);
-    border-radius: 10px;
-  }
-
   > .lesson__duration,
   .lesson__price {
     @include bigDescription;
     color: var(--black);
   }
+}
+
+.discount__tooltip {
+  // line-height: 1;
+  font-size: 10px;
+  padding: 3px 5px;
+  background-color: var(--theme-color);
+  border-radius: 10px;
+  width: fit-content;
 }
 
 .lesson__calculator {
@@ -88,6 +89,8 @@
   @include bigDescription;
   color: var(--theme-color);
   font-weight: 700;
+  display: flex;
+  gap: 20px;
 }
 
 .test__package {

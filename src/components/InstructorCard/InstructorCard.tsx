@@ -3,12 +3,20 @@ import "./InstructorCard.scss";
 import { BiCalendar } from "react-icons/bi";
 import Button from "../core/Button/Button";
 import { Instructor } from "../../typings/instructorTypings";
+import { useDispatch } from "react-redux";
+import { SET_INSTRUCTOR } from "../../redux/reducer/reduxNamings";
 
 interface InstructorCardProps {
   instructor: Instructor;
 }
 const InstructorCard = ({ instructor }: InstructorCardProps) => {
-  console.log(instructor);
+  const dispatch = useDispatch();
+
+  // handle booking now
+  const handleBookNow = () => {
+    dispatch({ type: SET_INSTRUCTOR, payload: instructor });
+    window.location.href = "/booking";
+  };
   return (
     <div className="instructor__card">
       <div className="instructor__image">
@@ -38,10 +46,15 @@ const InstructorCard = ({ instructor }: InstructorCardProps) => {
             title="View Profile"
             revertColor
             onClick={() =>
-              window.location.replace(`/instructor-profile/${instructor._id}`)
+              (window.location.href = `/instructor-profile/${instructor._id}`)
             }
           />
-          <Button width="100%" smallFont title="Book Now" />
+          <Button
+            width="100%"
+            smallFont
+            title="Book Now"
+            onClick={handleBookNow}
+          />
         </div>
       </div>
     </div>

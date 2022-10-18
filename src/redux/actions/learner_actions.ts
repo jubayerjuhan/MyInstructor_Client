@@ -8,7 +8,7 @@ import {
   LEARNER_SIGN_UP_COMPLETE,
   LEARNER_SIGN_UP_ERROR,
   LEARNER_SIGN_UP_PENDING,
-} from "../reducer/userTypings";
+} from "../reducer/reduxNamings";
 import {
   Action,
   LearnerLoginCredentials,

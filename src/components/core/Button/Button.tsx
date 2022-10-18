@@ -1,8 +1,10 @@
 import React from "react";
 import "./Button.scss";
+import { InfinitySpin, RotatingLines } from "react-loader-spinner";
 
 const Button = ({
   smallFont,
+  loading,
   revertColor,
   title = "Button",
   className,
@@ -27,7 +29,17 @@ const Button = ({
             fontSize: smallFont ? "12px" : "",
           }}
         >
-          {title}
+          {loading ? (
+            <RotatingLines
+              strokeColor="black"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="25"
+              visible={true}
+            />
+          ) : (
+            <>{title}</>
+          )}
         </p>
       )}
     </div>

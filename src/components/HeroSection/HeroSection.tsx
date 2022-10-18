@@ -54,9 +54,7 @@ const HeroSection = () => {
     console.log(transmission);
     console.log(selectedSuburb);
     if (!selectedSuburb.state) return toast.warn("Please Select A Suburb");
-    window.location.replace(
-      `/instructors-list/${selectedSuburb.postcode}/${transmission.value}/${selectedSuburb.suburb}`
-    );
+    window.location.href = `/instructors-list/${selectedSuburb.postcode}/${transmission.value}/${selectedSuburb.suburb}`;
   };
 
   return (

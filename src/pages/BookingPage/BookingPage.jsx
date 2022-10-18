@@ -5,11 +5,17 @@ import "./BookingPage.scss";
 import { CartInstructor } from "../AddToCart/AddToCart";
 import Button from "../../components/core/Button/Button";
 import { BsCalendar2Date } from "react-icons/bs";
-import moment from "moment";
 import BookingSelector from "../../components/BookingSelector/BookingSelctor";
+import { useSelector } from "react-redux";
 const BookingPage = () => {
   const [bookDrivingLesson, setBookDrivingLesson] = useState(false);
+  const { instructor } = useSelector((state) => state.instructor);
+  useEffect(() => {
+    if (!instructor) window.location.href = "/";
+  }, [instructor]);
+  console.log(instructor);
 
+  if (!instructor) return <></>;
   return (
     <div className="booking-page">
       <Navbar />
@@ -33,12 +39,13 @@ const BookingPage = () => {
               />
               <Button
                 width={"100%"}
+                onClick={() => (window.location.href = "/add-cart")}
                 title={"Continue Without Driving Lesson"}
               />
             </div>
           )}
         </div>
-        <CartInstructor />
+        <CartInstructor instructor={instructor} />
       </div>
       <Footer />
     </div>

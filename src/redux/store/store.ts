@@ -14,10 +14,12 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import thunk from "redux-thunk";
 import { userReducer } from "../reducer/userReducer";
+import { instructorReducer } from "../reducer/instructorReducer";
 
 // root reducer
 const rootReducer = combineReducers({
   user: userReducer,
+  instructor: instructorReducer,
 });
 
 const persistConfig = {

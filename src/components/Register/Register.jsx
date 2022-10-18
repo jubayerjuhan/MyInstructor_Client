@@ -10,7 +10,7 @@ import { registerFields } from "./registerInputs";
 import { useDispatch, useSelector } from "react-redux";
 import { registerLearner } from "../../redux/actions/learner_actions";
 import { toast } from "material-react-toastify";
-import { CLEAR_ERROR } from "../../redux/reducer/userTypings";
+import { CLEAR_ERROR } from "../../redux/reducer/reduxNamings";
 // import { State } from "../../redux/actions/actionTypings";
 
 const Register = () => {
@@ -26,14 +26,14 @@ const Register = () => {
 
   // runs on render
   useEffect(() => {
-    if (user) window.location.replace("/");
+    if (user) window.location.href = "/";
   }, [user]);
 
   const onSubmit = (data) => handleRegister(data);
 
   const handleRegister = async (registerCreds) => {
     const register = dispatch(registerLearner(registerCreds));
-    if (register === true) return window.location.replace("/");
+    if (register === true) return (window.location.href = "/");
   };
   // handling error after submit
   if (error) {

@@ -15,7 +15,7 @@ const HomeCounterComponent = () => {
     <section className="sectionPadding home__counter-wrapper">
       <div className=" home__counter">
         {counterElements.map((element, key) => (
-          <div className="count__card">
+          <div className="count__card" key={key}>
             {element.icon}
             <div className="count__card-text">
               <p className="count">{element.count}</p>

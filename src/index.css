@@ -90,4 +90,10 @@ select:focus,
   margin-top: 8px;
   font-size: 14px;
 }
-/*  */
+/*  input fields design*/
+
+.input__fields-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

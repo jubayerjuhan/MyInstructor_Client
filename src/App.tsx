@@ -1,14 +1,18 @@
 import React from "react";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Register from "./components/Register/Register";
 import NotFoundPage from "./pages/404Page/NotFoundPage";
 import AddToCart from "./pages/AddToCart/AddToCart";
 import BookingPage from "./pages/BookingPage/BookingPage";
+import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import Homepage from "./pages/Homepage/Homepage";
 import InstructorList from "./pages/InstructorList/InstructorList";
 import InstructorProfile from "./pages/InstructorProfile/InstructorProfile";
 import Login from "./pages/Login/Login";
+
+// stripe Promise
 
 function App() {
   return (
@@ -24,8 +28,30 @@ function App() {
           element={<InstructorList />}
         />
         <Route path="/instructor-profile/:id" element={<InstructorProfile />} />
-        <Route path="/add-cart" element={<AddToCart />} />
-        <Route path="/booking" element={<BookingPage />} />
+        <Route
+          path="/add-cart"
+          element={
+            <ProtectedRoute location={"/add-cart"}>
+              <AddToCart />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute location={"/checkout"}>
+              <CheckoutPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/booking"
+          element={
+            <ProtectedRoute location={"/booking"}>
+              <BookingPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

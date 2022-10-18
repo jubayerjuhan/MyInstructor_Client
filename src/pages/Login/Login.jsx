@@ -9,10 +9,12 @@ import Navbar from "../../components/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { loginLearner } from "../../redux/actions/learner_actions";
 import { toast } from "material-react-toastify";
-import { CLEAR_ERROR } from "../../redux/reducer/userTypings";
+import { CLEAR_ERROR } from "../../redux/reducer/reduxNamings";
+import { useLocation } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const { state } = useLocation();
   const { error, user } = useSelector((state) => state.user);
   const {
     register,
@@ -23,7 +25,7 @@ const Login = () => {
   });
 
   useEffect(() => {
-    if (user) window.location.replace("/");
+    if (user) window.location.href = "/";
   }, [user]);
 
   // submit form
@@ -47,7 +49,7 @@ const Login = () => {
   const handleLogin = async (data) => {
     const login = await dispatch(loginLearner(data));
     if (login === true) {
-      window.location.replace("/");
+      window.location.href = state ? state.from.location : "/";
     }
   };
 

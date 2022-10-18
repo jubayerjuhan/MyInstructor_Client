@@ -7,7 +7,7 @@ import {
   LEARNER_SIGN_UP_COMPLETE,
   LEARNER_SIGN_UP_ERROR,
   LEARNER_SIGN_UP_PENDING,
-} from "./userTypings";
+} from "./reduxNamings";
 
 export const userReducer = (state = {}, action: Action) => {
   switch (action.type) {
