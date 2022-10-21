@@ -25,6 +25,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: [],
 };
 
 // created reducer to be persisted at local storage

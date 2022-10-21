@@ -57,3 +57,9 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .add__cart-main .cart__wrapper {
+    grid-template-columns: 1fr;
+  }
+}

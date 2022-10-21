@@ -32,6 +32,11 @@ const PricingCalculator = ({ cart }) => {
       discountPercentage: 10,
     },
   ];
+
+  // handle purchase click
+  const handlePurchaseClick = () => {
+    console.log(totalLessonPrice, typeof totalLessonPrice);
+  };
   return (
     <div className="pricing__calculator">
       <div className="lesson__pricing">
@@ -90,7 +95,11 @@ const PricingCalculator = ({ cart }) => {
       )}
       {cart && (
         <div className="pricing__calculator-buttons">
-          <Button width={"100%"} title={`Continue For $${totalLessonPrice}`} />
+          <Button
+            width={"100%"}
+            title={`Continue For $${totalLessonPrice}`}
+            onClick={handlePurchaseClick}
+          />
         </div>
       )}
     </div>
