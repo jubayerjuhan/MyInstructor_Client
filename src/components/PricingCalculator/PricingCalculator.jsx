@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addToCart } from "../../redux/actions/cart_actions.ts";
 import Button from "../core/Button/Button";
 import "./PricingCalculator.scss";
 
 const PricingCalculator = ({ cart }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const lessonPrice = 80;
+  const [selectedHour, setSelectedHour] = useState(0);
   const hoursArray = Array.from(Array(101).keys());
   const [totalLessonPrice, setTotalLessonPrice] = useState(lessonPrice);
   let discountPercent = 0;
 
   const calculateHoursPrice = (e) => {
     const hours = e.target.value;
+    setSelectedHour(parseFloat(hours));
 
     if (hours > 5) discountPercent = 5;
     if (hours > 9) discountPercent = 10;
@@ -35,7 +43,12 @@ const PricingCalculator = ({ cart }) => {
 
   // handle purchase click
   const handlePurchaseClick = () => {
-    console.log(totalLessonPrice, typeof totalLessonPrice);
+    const cart = {
+      hours: selectedHour,
+      price: totalLessonPrice,
+    };
+    dispatch(addToCart(cart));
+    navigate("/checkout");
   };
   return (
     <div className="pricing__calculator">

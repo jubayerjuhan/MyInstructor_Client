@@ -5,11 +5,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import Button from "../../components/core/Button/Button";
 import { billingInfoSchema } from "../../utils/validation_schemas/billing_schema";
+import { useDispatch } from "react-redux";
+import { addBilling } from "../../redux/actions/cart_actions";
+import { Action } from "../../redux/actions/actionTypings";
 
 interface CheckoutBillingsProps {
   setBillings: React.Dispatch<React.SetStateAction<{}>>;
+  setPaymentAvailable: any;
 }
-const CheckoutBillings = ({ setBillings }: CheckoutBillingsProps) => {
+const CheckoutBillings = ({
+  setBillings,
+  setPaymentAvailable,
+}: CheckoutBillingsProps) => {
+  const dispatch = useDispatch<any>();
   const billingFields = [
     { name: "name", label: "Name", type: "text" },
     { name: "address", label: "Address", type: "text" },
@@ -26,7 +34,11 @@ const CheckoutBillings = ({ setBillings }: CheckoutBillingsProps) => {
     resolver: yupResolver(billingInfoSchema),
   });
 
-  const onSubmit = (data: any) => setBillings(data);
+  const onSubmit = (data: any) => {
+    setBillings(data);
+    dispatch(addBilling(data));
+    setPaymentAvailable(true);
+  };
   return (
     <div className="checkout__billing">
       <p className="title">Billing Address</p>

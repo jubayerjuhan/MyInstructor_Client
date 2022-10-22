@@ -47,7 +47,7 @@ const Login = () => {
   ];
 
   const handleLogin = async (data) => {
-    const login = await dispatch(loginLearner(data));
+    const login = dispatch(loginLearner(data));
     if (login === true) {
       window.location.href = state ? state.from.location : "/";
     }

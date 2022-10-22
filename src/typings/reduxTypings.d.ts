@@ -1,7 +1,12 @@
+import { BillingInfo, Cart } from "./cartTypings";
 import { Instructor } from "./instructorTypings";
 
 export interface State {
   user: UserState;
+  cart: {
+    cart: Cart;
+    billingInfo: BillingInfo;
+  };
   instructor: {
     instructor: Instructor;
   };

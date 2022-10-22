@@ -4,12 +4,14 @@ import "./HeroSection.scss";
 import { client } from "../../client";
 import Button from "../core/Button/Button";
 import { toast } from "material-react-toastify";
+import Spinner from "../Spinner/Spinner";
 interface Suburb {
   suburb: string;
   state: string;
   postcode: number;
 }
 const HeroSection = () => {
+  const [loading, setLoading] = useState(false);
   const [suburbs, setSuburbs] = useState<Suburb[]>([]);
   const [selectedSuburb, setSelectedSuburb] = useState<Suburb>({
     suburb: "",
@@ -46,7 +48,9 @@ const HeroSection = () => {
   const getSuburbs = async () => {
     if (keyWord.length === 0) setSuburbs([]);
     if (keyWord.length < 2) return;
+    setLoading(true);
     const { data } = await client.get(`/search-suburbs/${keyWord}`);
+    setLoading(false);
     setSuburbs(data.suburbs);
   };
 
@@ -104,23 +108,31 @@ const HeroSection = () => {
               onFocus={() => setListOpen(true)}
               onClick={() => console.log("first")}
             >
-              {suburbs.length === 0 && (
-                <p className="suburb__list-name-title">
-                  Enter Suburb Name or Postcode
-                </p>
+              {suburbs.length === 0 && keyWord.length === 0 && (
+                <>
+                  <p className="suburb__list-name-title">
+                    Enter Suburb Name or Postcode
+                  </p>
+                </>
               )}
-              {suburbs.map((suburb, key) => (
-                <p
-                  onClick={() => {
-                    setInputValue(
-                      `${suburb.suburb} ${suburb.state} ${suburb.postcode}`
-                    );
-                    setSelectedSuburb(suburb);
-                  }}
-                  className="suburb__list-name"
-                  key={key}
-                >{`${suburb.suburb} ${suburb.state} ${suburb.postcode}`}</p>
-              ))}
+              {loading && (
+                <div className="spinner__container">
+                  <Spinner size={40} />
+                </div>
+              )}
+              {!loading &&
+                suburbs.map((suburb, key) => (
+                  <p
+                    onClick={() => {
+                      setInputValue(
+                        `${suburb.suburb} ${suburb.state} ${suburb.postcode}`
+                      );
+                      setSelectedSuburb(suburb);
+                    }}
+                    className="suburb__list-name"
+                    key={key}
+                  >{`${suburb.suburb} ${suburb.state} ${suburb.postcode}`}</p>
+                ))}
             </div>
           )}
         </div>

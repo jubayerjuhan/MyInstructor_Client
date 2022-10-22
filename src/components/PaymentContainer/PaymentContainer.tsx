@@ -5,9 +5,12 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import Button from "../core/Button/Button";
+import { useSelector } from "react-redux";
+import { State } from "../../typings/reduxTypings";
 
 const PaymentContainer = () => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const { cart } = useSelector((state: State) => state.cart);
   const stripe = useStripe();
   const elements = useElements();
 

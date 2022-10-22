@@ -13,3 +13,10 @@ export const SET_JWTTOKEN = "SET_JWTTOKEN";
 // instructor naming
 export const SET_INSTRUCTOR = "SET_INSTRUCTOR";
 export const DELETE_INSTRUCTOR = " DELETE_INSTRUCTOR";
+
+// cart namings
+export const SET_CART = "SET_CART";
+export const DELETE_CART = " DELETE_CART";
+
+// set billing
+export const SET_BILLING = "SET_BILLING";

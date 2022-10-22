@@ -6,8 +6,12 @@ import { loadStripe } from "@stripe/stripe-js";
 import { client } from "../../client";
 import Button from "../core/Button/Button";
 import PaymentContainer from "../PaymentContainer/PaymentContainer";
+import { useSelector } from "react-redux";
+import { State } from "../../typings/reduxTypings";
 
 const CheckoutPayment = () => {
+  const { cart } = useSelector((state: State) => state.cart);
+
   const [clientSecret, setClientSecret] = useState();
   const stripePromise = loadStripe(
     "pk_test_51Jk944Kqk54qfeAmqK2cRxVVq122wVq5oMiAHWv0xEHXCjx362GhIJAiCkOCtjnfSVHGzMP7YSeVX6NQX4MuNASY00FJlGLuOo"
@@ -19,7 +23,7 @@ const CheckoutPayment = () => {
 
   const getPaymentIndent = async () => {
     const { data } = await client.post("/payment-indent", {
-      amount: 10,
+      amount: cart.price,
     });
     setClientSecret(data.clientSecret);
   };
