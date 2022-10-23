@@ -18,3 +18,9 @@
     gap: 20px;
   }
 }
+
+@media (max-width: 768px) {
+  .booking__info-main {
+    grid-template-columns: 1fr;
+  }
+}
