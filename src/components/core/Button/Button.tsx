@@ -14,9 +14,12 @@ const Button = ({
 }: any) => {
   return (
     <div
-      onClick={onClick}
+      onClick={loading ? "" : onClick}
       className={`btn-box ${className}`}
-      style={{ width: width ? width : "140px" }}
+      style={{
+        width: width ? width : "140px",
+        cursor: loading ? "not-allowed" : "pointer",
+      }}
     >
       {link ? (
         <a href={link} className="theme-btn btn-one">

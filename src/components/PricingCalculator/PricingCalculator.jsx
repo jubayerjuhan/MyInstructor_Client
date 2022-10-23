@@ -10,7 +10,7 @@ const PricingCalculator = ({ cart }) => {
   const navigate = useNavigate();
 
   const lessonPrice = 80;
-  const [selectedHour, setSelectedHour] = useState(0);
+  const [selectedHour, setSelectedHour] = useState(1);
   const hoursArray = Array.from(Array(101).keys());
   const [totalLessonPrice, setTotalLessonPrice] = useState(lessonPrice);
   let discountPercent = 0;

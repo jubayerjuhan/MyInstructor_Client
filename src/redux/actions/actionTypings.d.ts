@@ -2,7 +2,7 @@ export type Action = userSuccess;
 
 export interface userSuccess {
   type: string;
-  payload: any;
+  payload?: any;
 }
 
 export interface LearnerRegisterCredentials {

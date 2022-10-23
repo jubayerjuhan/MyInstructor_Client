@@ -36,6 +36,7 @@ const CheckoutBillings = ({
 
   const onSubmit = (data: any) => {
     setBillings(data);
+    window.scrollTo(0, 0);
     dispatch(addBilling(data));
     setPaymentAvailable(true);
   };

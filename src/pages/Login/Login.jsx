@@ -10,10 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginLearner } from "../../redux/actions/learner_actions";
 import { toast } from "material-react-toastify";
 import { CLEAR_ERROR } from "../../redux/reducer/reduxNamings";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { state } = useLocation();
   const { error, user } = useSelector((state) => state.user);
   const {
@@ -25,8 +26,8 @@ const Login = () => {
   });
 
   useEffect(() => {
-    if (user) window.location.href = "/";
-  }, [user]);
+    if (user) window.location.href = state ? state.from.location : "/";
+  }, [user, state]);
 
   // submit form
   const onSubmit = (data) => handleLogin(data);
@@ -48,9 +49,9 @@ const Login = () => {
 
   const handleLogin = async (data) => {
     const login = dispatch(loginLearner(data));
-    if (login === true) {
-      window.location.href = state ? state.from.location : "/";
-    }
+    // if (login === true) {
+    //   navigate(state ? state.from.location : "/");
+    // }
   };
 
   if (error) {

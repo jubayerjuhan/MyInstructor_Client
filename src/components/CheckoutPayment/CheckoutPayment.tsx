@@ -8,8 +8,12 @@ import Button from "../core/Button/Button";
 import PaymentContainer from "../PaymentContainer/PaymentContainer";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
+import { BillingInfo } from "../../typings/cartTypings";
 
-const CheckoutPayment = () => {
+interface CheckoutProps {
+  billing: BillingInfo;
+}
+const CheckoutPayment = ({ billing }: CheckoutProps) => {
   const { cart } = useSelector((state: State) => state.cart);
 
   const [clientSecret, setClientSecret] = useState();
@@ -23,7 +27,7 @@ const CheckoutPayment = () => {
 
   const getPaymentIndent = async () => {
     const { data } = await client.post("/payment-indent", {
-      amount: cart.price,
+      amount: cart?.price,
     });
     setClientSecret(data.clientSecret);
   };
@@ -37,7 +41,7 @@ const CheckoutPayment = () => {
         {clientSecret && (
           <>
             <Elements stripe={stripePromise} options={{ clientSecret }}>
-              <PaymentContainer />
+              <PaymentContainer billing={billing} />
             </Elements>
           </>
         )}

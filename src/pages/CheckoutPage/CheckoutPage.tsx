@@ -8,19 +8,20 @@ import CheckoutPayment from "../../components/CheckoutPayment/CheckoutPayment";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 import { toast } from "material-react-toastify";
+import { BillingInfo } from "../../typings/cartTypings";
 const CheckoutPage = () => {
   const { cart } = useSelector((state: State) => state.cart);
-  const [billings, setBillings] = useState({});
+  const [billings, setBillings] = useState<any>({});
   const [paymentAvailable, setPaymentAvailable] = useState(false);
 
   useEffect(() => {
-    if (!cart.hours) {
+    if (!cart?.hours) {
       window.location.replace("/not-found");
       toast.error("Please Select Bookings Hours First");
     }
   }, [cart]);
 
-  if (!cart.hours) return <></>;
+  if (!cart?.hours) return <></>;
   return (
     <>
       <Navbar />
@@ -32,14 +33,14 @@ const CheckoutPage = () => {
               setPaymentAvailable={setPaymentAvailable}
             />
           ) : (
-            <CheckoutPayment />
+            <CheckoutPayment billing={billings} />
           )}
         </div>
         <div className="checkout__cart-details">
           <p className="title">On Your Cart</p>
           <div className="cart__details">
             <AiOutlineShoppingCart />
-            <p className="title">You Have {cart.hours} Hours In The Cart</p>
+            <p className="title">You Have {cart?.hours} Hours In The Cart</p>
           </div>
         </div>
       </div>

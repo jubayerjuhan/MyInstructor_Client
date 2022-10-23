@@ -10,12 +10,19 @@ export interface State {
   instructor: {
     instructor: Instructor;
   };
+  credit: CreditReducer;
 }
 
 export interface UserState {
   loading: boolean;
   error: string;
   user: User;
+}
+
+export interface CreditReducer {
+  loading: boolean;
+  error: string;
+  success: boolean;
 }
 
 export interface User {

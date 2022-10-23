@@ -27,3 +27,9 @@
     @include bigDescription;
   }
 }
+
+@media (max-width: 768px) {
+  .booking-main {
+    grid-template-columns: 1fr;
+  }
+}

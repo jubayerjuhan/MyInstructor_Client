@@ -11,6 +11,7 @@ import Homepage from "./pages/Homepage/Homepage";
 import InstructorList from "./pages/InstructorList/InstructorList";
 import InstructorProfile from "./pages/InstructorProfile/InstructorProfile";
 import Login from "./pages/Login/Login";
+import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
 
 // stripe Promise
 
@@ -49,6 +50,14 @@ function App() {
           element={
             <ProtectedRoute location={"/booking"}>
               <BookingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/payment-success"
+          element={
+            <ProtectedRoute location={"/payment-success"}>
+              <PaymentSuccess />
             </ProtectedRoute>
           }
         />

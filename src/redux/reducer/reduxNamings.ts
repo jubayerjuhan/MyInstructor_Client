@@ -8,6 +8,7 @@ export const OTP_PENDING = "OTP_PENDING";
 export const OTP_VERIFIED = "OTP_VERIFIED";
 export const OTP_ERROR = "OTP_ERROR";
 export const CLEAR_ERROR = "CLEAR_ERROR";
+export const CLEAR_SUCCESS = "CLEAR_SUCCESS";
 export const SET_JWTTOKEN = "SET_JWTTOKEN";
 
 // instructor naming
@@ -20,3 +21,13 @@ export const DELETE_CART = " DELETE_CART";
 
 // set billing
 export const SET_BILLING = "SET_BILLING";
+
+// booking reduer
+export const BOOKING_PENDING = "BOOKING_PENDING";
+export const BOOKING_SUCCESS = "BOOKING_SUCCESS";
+export const BOOKING_FAILED = "BOOKING_FAILED";
+
+// booking reduer
+export const PURCHASE_CREDIT_PENDING = "PURCHASE_CREDIT_PENDING";
+export const PURCHASE_CREDIT_SUCCESS = "PURCHASE_CREDIT_SUCCESS";
+export const PURCHASE_CREDIT_ERROR = "PURCHASE_CREDIT_ERROR";
