@@ -23,6 +23,8 @@ const BookingSelector = () => {
   // handle duration change
   const handleDurationChange = (e) => {
     setDuration(e.target.value);
+    setSelectedDate(null);
+    setTime(null);
   };
 
   // handle date change
@@ -43,6 +45,10 @@ const BookingSelector = () => {
   // handle hour change
   const handleHourChange = (e) => {
     const hour = JSON.parse(e.target.value);
+    hour.endTo = JSON.parse(
+      JSON.stringify(moment(hour.startFrom).add(duration, "hour"))
+    );
+
     setTime(hour);
   };
 
@@ -111,14 +117,13 @@ const BookingSelector = () => {
                 {hours.map((hour, key) => {
                   const fieldValue = {
                     startFrom: hour,
-                    endTo: moment(hour).add(1, "hour"),
+                    // endTo: moment(hour).add(duration, "hour"),
                   };
                   // console.log(fieldValue);
-
                   return (
                     <option value={JSON.stringify(fieldValue)} key={key}>
                       {moment(hour).format("hh:mm A")} to{" "}
-                      {moment(hour).add(1, "hour").format("hh:mm A")}
+                      {moment(hour).add(duration, "hour").format("hh:mm A")}
                     </option>
                   );
                 })}
@@ -127,7 +132,11 @@ const BookingSelector = () => {
           )}
         </div>
         <div className="submitBtn">
-          <Button title="Book Now" width={"100%"} onClick={handleSubmit} />
+          <Button
+            title="Continue Booking"
+            width={"100%"}
+            onClick={handleSubmit}
+          />
         </div>
       </div>
     </div>

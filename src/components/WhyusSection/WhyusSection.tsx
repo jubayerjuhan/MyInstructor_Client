@@ -9,7 +9,7 @@ const WhyusSection = () => {
     <section className="whyus__container sectionPadding">
       <p className="title">Why choose "My Instructor"?</p>
       <p className="description">
-        Unlike a typical driving school, EzLicence is an Australian first
+        Unlike a typical driving school, My Instructor is an Australian first
         platform that allows learner drivers & parents to find, compare and book
         verified driving instructors online. The platform brings transparency,
         choice and efficiency to the selection of a driving instructor and the

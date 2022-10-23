@@ -1,0 +1,20 @@
+@import "../../main.scss";
+
+.booking__info-main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.booking-pickup__details {
+  > .title {
+    @include bigDescription;
+    margin-bottom: 20px;
+  }
+
+  .fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    gap: 20px;
+  }
+}

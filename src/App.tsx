@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Register from "./components/Register/Register";
 import NotFoundPage from "./pages/404Page/NotFoundPage";
 import AddToCart from "./pages/AddToCart/AddToCart";
+import BookingInformation from "./pages/BookingInformation/BookingInformation";
 import BookingPage from "./pages/BookingPage/BookingPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import Homepage from "./pages/Homepage/Homepage";
@@ -50,6 +51,14 @@ function App() {
           element={
             <ProtectedRoute location={"/booking"}>
               <BookingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/booking-info"
+          element={
+            <ProtectedRoute location={"/booking-info"}>
+              <BookingInformation />
             </ProtectedRoute>
           }
         />

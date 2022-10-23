@@ -9,7 +9,7 @@ const Home_Giftcard = () => {
     <section className="home__giftcard sectionPadding">
       <div className="home__giftcard-media">
         <img
-          src="https://www.ezlicence.com.au/assets/image-home-gift-cards-stack.mobile-aa61ad906178d6b3feaa5b295c3377e6a02b25c14d1020d99c2024f0da82097a.png"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuDnoVeM06B9krKu0wLljK6a6H9tAhhIcBng&usqp=CAU"
           alt=""
         />
       </div>

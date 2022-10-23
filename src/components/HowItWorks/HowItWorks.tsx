@@ -2,6 +2,7 @@ import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import Button from "../core/Button/Button";
 import "./HowItWorks.scss";
+import carImage from "../../assets/automobile-1300467__340.webp";
 
 const HowItWorks = () => {
   const bullets = [
@@ -47,11 +48,7 @@ const HowItWorks = () => {
           </div>
         </div>
         <div className="how__works-media">
-          <img
-            className="how__works-media-image"
-            src="https://www.ezlicence.com.au/assets/banner-homepage-hero-vehicle-3465e01fa3d7e5475a9d063682f1e3dd59633afef9753679f0a9a8e47d293bf3.png"
-            alt=""
-          />
+          <img className="how__works-media-image" src={carImage} alt="" />
         </div>
       </div>
       <Button width="30vw" className="bookbutton" title="Book Now" />
