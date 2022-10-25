@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import "./BookingInformation.scss";
@@ -7,50 +7,138 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import Button from "../../components/core/Button/Button";
 import CustomPopupModal from "../../components/CustomPopupModal/CustomPopupModal";
+import { pickupInfoSchema } from "../../utils/validation_schemas/billing_schema";
+import { CartInstructor } from "../AddToCart/AddToCart";
+import { useDispatch, useSelector } from "react-redux";
+import { State, User } from "../../typings/reduxTypings";
+import { BsCalendar2Date } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import moment from "moment";
+import { getCurrentUser } from "../../api_calls/user_api";
+import {
+  CLEAR_SUCCESS,
+  DELETE_BOOKING,
+  SET_PICKUP_DETAILS,
+} from "../../redux/reducer/reduxNamings";
+import { bookLesson } from "../../redux/actions/bookingAction";
 
 const BookingInformation = () => {
+  const [loading, setLoading] = useState(false);
+  const [creditError, setCreditError] = useState(false);
+  const [pickUpInformation, setPickupInfotmation] = useState({});
+  const { instructor } = useSelector((state: State) => state.instructor);
+  const {
+    booking,
+    loading: modalLoading,
+    success,
+    pickupDetails,
+    error,
+  } = useSelector((state: State) => state.booking);
+  const dispatch = useDispatch<any>();
+
+  const navigate = useNavigate();
+
   const [modal, setModal] = useState({
     visible: false,
     title: "",
     description: "",
+    onModalSave: () => {},
   });
   const pickupDetailsField = [
-    { name: "pickup_address", label: " Pickup Address", type: "text" },
+    { name: "address", label: " Pickup Address", type: "text" },
     { name: "suburb", label: "Suburb", type: "text" },
-    { name: "postCode", label: "Post Code", type: "text" },
+    { name: "postcode", label: "Post Code", type: "text" },
     { name: "state", label: "State", type: "select", options: states },
   ];
 
+  useEffect(() => {
+    if (!booking) return navigate("/not-found");
+  }, [booking, navigate]);
+
+  if (success) {
+    navigate("/");
+  }
   // react hook form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    // resolver: yupResolver(billingInfoSchema),
+    resolver: yupResolver(pickupInfoSchema),
   });
 
-  const handleSubmitClick = () => {
+  // =============on submit
+  const onSubmit = (data: any) => {
+    handleSubmitClick(data);
+  };
+
+  const handleSubmitClick = async (data: any) => {
+    // setPickup address
+    dispatch({ type: SET_PICKUP_DETAILS, payload: data });
+    setPickupInfotmation(data);
+
+    setLoading(true);
+    const user: User = await getCurrentUser();
+    setLoading(false);
+
+    if (user.credit < booking.duration) {
+      setModal({
+        ...modal,
+        visible: true,
+        title: "Not Enough Credit On Your Account",
+        description: "Buy Some...",
+      });
+    }
+
     setModal({
       ...modal,
       visible: true,
-      title: "Not Enough Credit On Your Account",
-      description: "Buy Some...",
+      title: "Are You Sure ?",
+      description: `Are You Sure You Want To Book ${
+        booking.duration
+      } Hours Driving Lesson With ${
+        instructor.firstName
+      }, Which Starts From ${moment(booking.time.startFrom).format(
+        "MMM D YYYY, h:mm a"
+      )}`,
     });
   };
 
   // handle modal
-  const onModalCancel = () => {};
-  const onModalClose = () => {};
-  const onModalSave = () => {};
+  const handleModalCancel = () => {};
+
+  const onModalSave = async () => {
+    if (!creditError) {
+      const bookingInfo = {
+        instructor: instructor._id,
+        time: {
+          from: booking.time.startFrom,
+          to: booking.time.endTo,
+        },
+        duration: booking.duration,
+        pickupDetails: pickUpInformation,
+      };
+      return dispatch(bookLesson(bookingInfo));
+    }
+
+    // if credit error handle this
+    console.log("credit error");
+  };
+
+  const handleModalClose = () => {
+    setModal({ ...modal, visible: false });
+  };
+
+  if (!booking) return <></>;
 
   return (
     <>
       <CustomPopupModal
+        loading={modalLoading}
         title={modal.title}
         description={modal.description}
-        handleCancel={onModalCancel}
-        handleClose={onModalClose}
+        handleCancel={handleModalCancel}
+        handleClose={handleModalClose}
         handleSave={onModalSave}
         show={modal.visible}
       />
@@ -63,7 +151,10 @@ const BookingInformation = () => {
               {pickupDetailsField.map((field, key) => {
                 if (field.type === "select")
                   return (
-                    <>
+                    <div>
+                      <p className="fieldLabel">
+                        {field.label} <span>*</span>
+                      </p>
                       <select
                         placeholder={`Enter ${field.label}`}
                         {...register(field.name)}
@@ -71,22 +162,27 @@ const BookingInformation = () => {
                       >
                         <option value="">Select State</option>
                         {field.options?.map((selectOptions, key) => (
-                          <option
-                            value={JSON.stringify(selectOptions)}
-                            key={key}
-                          >
+                          <option value={selectOptions.name} key={key}>
                             {selectOptions.name}
                           </option>
                         ))}
                       </select>
-                    </>
+                      {errors[field.name] && (
+                        <p className="input__errorMessage">
+                          <> {errors[field.name]?.message}</>
+                        </p>
+                      )}
+                    </div>
                   );
                 return (
                   <div>
+                    <p className="fieldLabel">
+                      {field.label} <span>*</span>
+                    </p>
                     <input
                       key={key}
                       type={field.type}
-                      placeholder={`Enter ${field.label}`}
+                      placeholder={`Enter ${field.label} *`}
                       {...register(field.name)}
                       className="form-control input__element login"
                     />
@@ -99,15 +195,34 @@ const BookingInformation = () => {
                 );
               })}
               <Button
+                loading={loading}
                 title={"Submit"}
                 width={"100%"}
-                onClick={handleSubmitClick}
+                onClick={handleSubmit(onSubmit)}
               />
             </div>
           </div>
           <div className="booking-pickup__details"></div>
         </div>
-        <div className="booking__cart"></div>
+        <div className="booking__cart">
+          <CartInstructor instructor={instructor} />
+          <div className="bookingTime">
+            <BsCalendar2Date />
+            <div className="booking__info">
+              <p className="title">
+                You are about to make the following bookings with{" "}
+                {instructor.firstName}
+              </p>
+              <div className="booking__time">
+                <p className="title">Duration: {booking.duration} hours</p>
+                <p className="title">
+                  Start At:{" "}
+                  {moment(booking.time?.startFrom).format("MMM D YYYY, h:mm a")}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <Footer />
     </>

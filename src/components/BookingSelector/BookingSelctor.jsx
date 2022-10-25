@@ -3,8 +3,13 @@ import React, { useState } from "react";
 import Button from "../core/Button/Button";
 import "./BookingSelctor.scss";
 import { toast } from "material-react-toastify";
+import { useDispatch } from "react-redux";
+import { setBookingInfo } from "../../redux/actions/bookingAction";
+import { useNavigate } from "react-router-dom";
 
 const BookingSelector = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState();
   const [hours, setHours] = useState([]);
   const lessonDuration = [1, 2];
@@ -22,7 +27,7 @@ const BookingSelector = () => {
 
   // handle duration change
   const handleDurationChange = (e) => {
-    setDuration(e.target.value);
+    setDuration(parseInt(e.target.value));
     setSelectedDate(null);
     setTime(null);
   };
@@ -53,12 +58,17 @@ const BookingSelector = () => {
   };
 
   // handlesubmit
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!duration) return toast.error("Please Select Duration");
     if (!selectedDate) return toast.error("Please Select Date");
     if (!time) return toast.error("Please Select Time");
-
-    console.log(duration, selectedDate, time);
+    const booking = {
+      duration,
+      date: selectedDate,
+      time,
+    };
+    const setBooking = dispatch(setBookingInfo(booking));
+    if (setBooking) return navigate("/booking-info");
   };
 
   return (

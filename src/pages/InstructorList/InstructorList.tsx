@@ -13,6 +13,7 @@ import { Suburb } from "../../typings/instructorTypings";
 
 const InstructorList = () => {
   const [instructors, setInstructors] = useState([]);
+  const [language, setLanguage] = useState<any>(null);
   const [suburbInfo, setSuburbInfo] = useState<Suburb>({
     _id: "",
     postcode: "",
@@ -69,7 +70,11 @@ const InstructorList = () => {
           </div>
           <div className="language__filter">
             <p className="title">Language</p>
-            <select className="form-select" aria-label="Default select example">
+            <select
+              className="form-select"
+              aria-label="Language"
+              onChange={(e) => setLanguage(e.target.value)}
+            >
               {languages.map((language, key) => (
                 <option value={language.name}>{language.name}</option>
               ))}

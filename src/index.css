@@ -97,3 +97,10 @@ select:focus,
   flex-direction: column;
   gap: 20px;
 }
+
+.fieldLabel {
+  margin-bottom: 10px;
+}
+.fieldLabel > span {
+  color: red;
+}

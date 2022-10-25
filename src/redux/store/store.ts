@@ -16,7 +16,7 @@ import thunk from "redux-thunk";
 import { userReducer } from "../reducer/userReducer";
 import { instructorReducer } from "../reducer/instructorReducer";
 import { cartReducer } from "../reducer/cartReducer";
-import { creditReducer } from "../reducer/bookingReducer";
+import { bookingReducer, creditReducer } from "../reducer/bookingReducer";
 
 // root reducer
 const rootReducer = combineReducers({
@@ -24,6 +24,7 @@ const rootReducer = combineReducers({
   instructor: instructorReducer,
   cart: cartReducer,
   credit: creditReducer,
+  booking: bookingReducer,
 });
 
 const persistConfig = {

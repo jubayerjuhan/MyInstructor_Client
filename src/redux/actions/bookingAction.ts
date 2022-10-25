@@ -1,19 +1,41 @@
 import { Dispatch } from "react";
 import { client } from "../../client";
 import {
+  BOOKING_FAILED,
   BOOKING_PENDING,
+  BOOKING_SUCCESS,
   CLEAR_ERROR,
   CLEAR_SUCCESS,
   PURCHASE_CREDIT_ERROR,
   PURCHASE_CREDIT_PENDING,
   PURCHASE_CREDIT_SUCCESS,
+  SET_BOOKING,
 } from "../reducer/reduxNamings";
 import { Action } from "./actionTypings";
 
-export const bookLesson = () => async (dispatch: Dispatch<Action>) => {
-  dispatch({ type: BOOKING_PENDING });
-  // const booking = await client;
-};
+// book lesson
+export const bookLesson =
+  (bookingInfo: any) => async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({ type: BOOKING_PENDING });
+      const booking = await client.post("/add-booking", bookingInfo);
+      console.log(booking, "booking...");
+      dispatch({ type: BOOKING_SUCCESS });
+    } catch (error) {
+      dispatch({ type: BOOKING_FAILED });
+    }
+  };
+//
+export const setBookingInfo =
+  (bookingInfo: any) => async (dispatch: Dispatch<Action>) => {
+    dispatch({ type: SET_BOOKING, payload: bookingInfo });
+    return true;
+  };
+//
+export const setPickupDetails =
+  (bookingInfo: any) => async (dispatch: Dispatch<Action>) => {
+    dispatch({ type: SET_BOOKING, payload: bookingInfo });
+  };
 
 export const clearError = () => async (dispatch: Dispatch<Action>) => {
   dispatch({ type: CLEAR_ERROR });
@@ -22,6 +44,7 @@ export const clearSuccess = () => async (dispatch: Dispatch<Action>) => {
   dispatch({ type: CLEAR_SUCCESS });
 };
 
+// purchase credit============================
 export const purchaseCredit =
   (hour: number) => async (dispatch: Dispatch<Action>) => {
     console.log(hour, "Booking Hour");

@@ -10,16 +10,35 @@ export interface State {
   instructor: {
     instructor: Instructor;
   };
-  credit: CreditReducer;
+  credit: CreditReducerTypes;
+  booking: BookingReducerTypes;
 }
 
+export interface BookingReducerTypes {
+  loading: boolean;
+  success: boolean;
+  error: string;
+  booking: {
+    duration: number;
+    date: string;
+    time: { startFrom: string; endTo: string };
+  };
+  pickupDetails: PickupDetails;
+}
+
+export interface PickupDetails {
+  address: string;
+  suburb: string;
+  postCode: string;
+  state: string;
+}
 export interface UserState {
   loading: boolean;
   error: string;
   user: User;
 }
 
-export interface CreditReducer {
+export interface CreditReducerTypes {
   loading: boolean;
   error: string;
   success: boolean;
@@ -33,6 +52,6 @@ export interface User {
   phone: string;
   dateOfBirth: string;
   licenseStatus: string;
-  credit: string;
+  credit: number;
   userType: string;
 }
