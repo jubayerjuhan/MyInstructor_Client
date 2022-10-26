@@ -14,10 +14,7 @@ import {
   purchaseCredit,
 } from "../../redux/actions/bookingAction";
 import { toast } from "material-react-toastify";
-import {
-  DELETE_CART,
-  DELETE_INSTRUCTOR,
-} from "../../redux/reducer/reduxNamings";
+
 import { useNavigate } from "react-router-dom";
 import { BillingInfo } from "../../typings/cartTypings";
 

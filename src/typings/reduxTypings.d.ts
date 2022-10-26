@@ -18,12 +18,14 @@ export interface BookingReducerTypes {
   loading: boolean;
   success: boolean;
   error: string;
-  booking: {
-    duration: number;
-    date: string;
-    time: { startFrom: string; endTo: string };
-  };
+  booking: BookingType;
   pickupDetails: PickupDetails;
+}
+
+export interface BookingType {
+  duration: number;
+  date: string;
+  time: { startFrom: string; endTo: string };
 }
 
 export interface PickupDetails {

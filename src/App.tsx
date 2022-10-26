@@ -6,6 +6,7 @@ import NotFoundPage from "./pages/404Page/NotFoundPage";
 import AddToCart from "./pages/AddToCart/AddToCart";
 import BookingInformation from "./pages/BookingInformation/BookingInformation";
 import BookingPage from "./pages/BookingPage/BookingPage";
+import BookingSuccess from "./pages/BookingSuccess/BookingSuccess";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import Homepage from "./pages/Homepage/Homepage";
 import InstructorList from "./pages/InstructorList/InstructorList";
@@ -66,6 +67,14 @@ function App() {
           element={
             <ProtectedRoute location={"/payment-success"}>
               <PaymentSuccess />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/booking-success"
+          element={
+            <ProtectedRoute location={"/booking-success"}>
+              <BookingSuccess />
             </ProtectedRoute>
           }
         />

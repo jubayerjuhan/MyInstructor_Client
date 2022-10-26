@@ -17,7 +17,6 @@ import moment from "moment";
 import { getCurrentUser } from "../../api_calls/user_api";
 import {
   CLEAR_SUCCESS,
-  DELETE_BOOKING,
   SET_PICKUP_DETAILS,
 } from "../../redux/reducer/reduxNamings";
 import { bookLesson } from "../../redux/actions/bookingAction";
@@ -57,7 +56,7 @@ const BookingInformation = () => {
 
   if (success) {
     dispatch({ type: CLEAR_SUCCESS });
-    navigate("/");
+    navigate("/booking-success", { state: { instructor, booking } });
   }
 
   // react hook form

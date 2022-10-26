@@ -3,7 +3,6 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import PricingCalculator from "../../components/PricingCalculator/PricingCalculator";
 import "./AddToCart.scss";
-import avater from "../../assets/reviewavater.jpg";
 import { Instructor } from "../../typings/instructorTypings";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
@@ -15,6 +14,7 @@ const AddToCart = () => {
   const { instructor } = useSelector((state: State) => state.instructor);
   const navigate = useNavigate();
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!instructor) navigate("/");
   }, [instructor, navigate]);
 
