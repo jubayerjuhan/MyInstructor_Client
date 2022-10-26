@@ -7,9 +7,11 @@ import avater from "../../assets/reviewavater.jpg";
 import { Instructor } from "../../typings/instructorTypings";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AddToCart = () => {
+  const { state } = useLocation();
+  console.log(state?.bookForward, "book Forward");
   const { instructor } = useSelector((state: State) => state.instructor);
   const navigate = useNavigate();
   useEffect(() => {
@@ -23,7 +25,7 @@ const AddToCart = () => {
       <p className="title">Add To Cart</p>
       <div className="add__cart-main sectionPadding">
         <div className="cart__wrapper">
-          <PricingCalculator cart />
+          <PricingCalculator cart bookForward={state?.bookForward} />
           <CartInstructor instructor={instructor} />
         </div>
       </div>
@@ -41,10 +43,7 @@ export const CartInstructor = ({ instructor }: CartInstructorProps) => {
       <p className="title">Your Instructor:</p>
       <div className="cart__instructor">
         <div className="image">
-          <img
-            src={`${process.env.REACT_APP_IMAGEURL}/${instructor.avater}`}
-            alt=""
-          />
+          <img src={`${instructor.avater}`} alt="" />
         </div>
         <div className="information">
           <p className="title">

@@ -35,10 +35,7 @@ const InstructorProfile = () => {
           <div className="profile__header-accentColor"></div>
           <div className="instructor__profile-image">
             <div className="profile__picture-wrapper">
-              <img
-                src={`${process.env.REACT_APP_IMAGEURL}/${instructor?.avater}`}
-                alt=""
-              />
+              <img src={`${instructor?.avater}`} alt="" />
             </div>
           </div>
         </div>

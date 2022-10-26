@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import Button from "../../components/core/Button/Button";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import "./PaymentSuccess.scss";
+import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { DELETE_BOOKING, DELETE_CART } from "../../redux/reducer/reduxNamings";
+import { toast } from "material-react-toastify";
 
 const PaymentSuccess = () => {
+  const { state } = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (state?.booking) {
+      dispatch({ type: DELETE_BOOKING });
+      dispatch({ type: DELETE_CART });
+      toast.success("Your Lesson Booking Successful");
+    }
+    if (state?.credit) {
+      dispatch({ type: DELETE_CART });
+      toast.success(`${state?.hours} hours credited to your account`);
+    }
+  }, [state?.hours, state?.booking, state?.credit, dispatch]);
+
   return (
     <>
       <Navbar />

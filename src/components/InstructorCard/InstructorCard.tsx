@@ -20,10 +20,7 @@ const InstructorCard = ({ instructor }: InstructorCardProps) => {
   return (
     <div className="instructor__card">
       <div className="instructor__image">
-        <img
-          src={`${process.env.REACT_APP_IMAGEURL}/${instructor.avater}`}
-          alt=""
-        />
+        <img src={`${instructor.avater}`} alt="" />
       </div>
       <div className="instructor__info">
         <p className="name">

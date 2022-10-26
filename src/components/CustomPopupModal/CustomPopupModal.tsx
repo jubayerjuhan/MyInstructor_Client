@@ -10,11 +10,13 @@ interface ModalProps {
   title: string;
   loading: boolean;
   description: string;
+  saveLabel: string;
 }
 const CustomPopupModal = ({
   handleClose,
   handleSave,
   handleCancel,
+  saveLabel,
   loading,
   description,
   title,
@@ -28,7 +30,11 @@ const CustomPopupModal = ({
       <Modal.Body>{description}</Modal.Body>
       <Modal.Footer>
         <Button revertColor onClick={handleCancel} title={"No"}></Button>
-        <Button onClick={handleSave} title={"Yes"} loading={loading}></Button>
+        <Button
+          onClick={handleSave}
+          title={saveLabel}
+          loading={loading}
+        ></Button>
       </Modal.Footer>
     </Modal>
   );

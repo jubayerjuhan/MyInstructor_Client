@@ -8,8 +8,10 @@ import CheckoutPayment from "../../components/CheckoutPayment/CheckoutPayment";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 import { toast } from "material-react-toastify";
-import { BillingInfo } from "../../typings/cartTypings";
+import { useLocation } from "react-router-dom";
 const CheckoutPage = () => {
+  const { state } = useLocation();
+  console.log(state?.bookForward, "book Forward checkout");
   const { cart } = useSelector((state: State) => state.cart);
   const [billings, setBillings] = useState<any>({});
   const [paymentAvailable, setPaymentAvailable] = useState(false);
@@ -33,7 +35,10 @@ const CheckoutPage = () => {
               setPaymentAvailable={setPaymentAvailable}
             />
           ) : (
-            <CheckoutPayment billing={billings} />
+            <CheckoutPayment
+              billing={billings}
+              checkoutBooking={state?.bookForward}
+            />
           )}
         </div>
         <div className="checkout__cart-details">

@@ -8,6 +8,7 @@ import Button from "../core/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 import {
+  bookLesson,
   clearError,
   clearSuccess,
   purchaseCredit,
@@ -22,8 +23,15 @@ import { BillingInfo } from "../../typings/cartTypings";
 
 interface PaymentProps {
   billing: BillingInfo;
+  checkoutBooking: boolean;
 }
-const PaymentContainer = ({ billing }: PaymentProps) => {
+const PaymentContainer = ({ billing, checkoutBooking }: PaymentProps) => {
+  const { instructor } = useSelector((state: State) => state.instructor);
+  const {
+    booking,
+    pickupDetails,
+    loading: bookLoading,
+  } = useSelector((state: State) => state.booking);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const { cart } = useSelector((state: State) => state.cart);
@@ -33,16 +41,32 @@ const PaymentContainer = ({ billing }: PaymentProps) => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
+  console.log(checkoutBooking, "checkout booking stripe page");
   if (error) {
     toast.error(error);
     dispatch(clearError());
   }
 
   if (success) {
-    dispatch(clearSuccess());
-    console.log("redirect to payment-success");
-    navigate("/payment-success");
-    dispatch({ type: DELETE_CART });
+    if (checkoutBooking) {
+      const bookingInfo = {
+        instructor: instructor._id,
+        time: {
+          from: booking.time.startFrom,
+          to: booking.time.endTo,
+        },
+        duration: booking.duration,
+        pickupDetails,
+      };
+      const booked = dispatch(bookLesson(bookingInfo));
+      if (booked) navigate("/payment-success", { state: { booking: true } });
+    } else {
+      console.log("redirect to payment-success");
+      dispatch(clearSuccess());
+      navigate("/payment-success", {
+        state: { credit: true, hours: cart?.hours },
+      });
+    }
   }
 
   const handlePaymentClick = () => {
@@ -84,7 +108,7 @@ const PaymentContainer = ({ billing }: PaymentProps) => {
       });
 
       if (paymentIntent?.status === "succeeded") {
-        dispatch(purchaseCredit(cart.hours));
+        dispatch(purchaseCredit(cart?.hours));
         setLoading(false);
       }
 
@@ -100,7 +124,7 @@ const PaymentContainer = ({ billing }: PaymentProps) => {
       <Button
         title="Pay Now"
         width={"100%"}
-        loading={loading}
+        loading={loading || bookLoading}
         className="pay__button"
         onClick={handlePaymentClick}
       />

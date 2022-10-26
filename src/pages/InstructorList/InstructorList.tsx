@@ -81,7 +81,7 @@ const InstructorList = () => {
             </select>
           </div>
         </div>
-        <PricingCalculator cart={false} />
+        <PricingCalculator bookForward={false} cart={false} />
       </div>
     </div>
   );

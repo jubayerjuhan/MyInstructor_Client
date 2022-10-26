@@ -21,8 +21,10 @@ export const bookLesson =
       const booking = await client.post("/add-booking", bookingInfo);
       console.log(booking, "booking...");
       dispatch({ type: BOOKING_SUCCESS });
+      return true;
     } catch (error) {
       dispatch({ type: BOOKING_FAILED });
+      return false;
     }
   };
 //

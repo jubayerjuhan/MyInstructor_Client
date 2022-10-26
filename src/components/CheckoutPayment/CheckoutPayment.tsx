@@ -12,8 +12,9 @@ import { BillingInfo } from "../../typings/cartTypings";
 
 interface CheckoutProps {
   billing: BillingInfo;
+  checkoutBooking: boolean;
 }
-const CheckoutPayment = ({ billing }: CheckoutProps) => {
+const CheckoutPayment = ({ billing, checkoutBooking }: CheckoutProps) => {
   const { cart } = useSelector((state: State) => state.cart);
 
   const [clientSecret, setClientSecret] = useState();
@@ -41,7 +42,10 @@ const CheckoutPayment = ({ billing }: CheckoutProps) => {
         {clientSecret && (
           <>
             <Elements stripe={stripePromise} options={{ clientSecret }}>
-              <PaymentContainer billing={billing} />
+              <PaymentContainer
+                checkoutBooking={checkoutBooking}
+                billing={billing}
+              />
             </Elements>
           </>
         )}

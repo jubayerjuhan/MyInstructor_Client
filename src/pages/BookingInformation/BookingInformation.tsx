@@ -56,8 +56,10 @@ const BookingInformation = () => {
   }, [booking, navigate]);
 
   if (success) {
+    dispatch({ type: CLEAR_SUCCESS });
     navigate("/");
   }
+
   // react hook form
   const {
     register,
@@ -73,6 +75,7 @@ const BookingInformation = () => {
   };
 
   const handleSubmitClick = async (data: any) => {
+    setCreditError(false);
     // setPickup address
     dispatch({ type: SET_PICKUP_DETAILS, payload: data });
     setPickupInfotmation(data);
@@ -85,9 +88,10 @@ const BookingInformation = () => {
       setModal({
         ...modal,
         visible: true,
-        title: "Not Enough Credit On Your Account",
-        description: "Buy Some...",
+        title: "Not Enough Credit!",
+        description: `Oops, Not Enough Credit Available On Your Account. To Purchase Credit Please Click "Continue" Button Down Below`,
       });
+      return setCreditError(true);
     }
 
     setModal({
@@ -122,7 +126,7 @@ const BookingInformation = () => {
     }
 
     // if credit error handle this
-    console.log("credit error");
+    navigate("/add-cart", { state: { bookForward: true } });
   };
 
   const handleModalClose = () => {
@@ -140,6 +144,7 @@ const BookingInformation = () => {
         handleCancel={handleModalCancel}
         handleClose={handleModalClose}
         handleSave={onModalSave}
+        saveLabel={creditError ? "Continue" : "Yes"}
         show={modal.visible}
       />
       <Navbar />
