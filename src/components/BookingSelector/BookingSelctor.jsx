@@ -1,21 +1,42 @@
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../core/Button/Button";
 import "./BookingSelctor.scss";
 import { toast } from "material-react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setBookingInfo } from "../../redux/actions/bookingAction";
 import { useNavigate } from "react-router-dom";
+import { getInstructorBookings } from "../../api_calls/instructor_api";
 
 const BookingSelector = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [bookingTimes, setbookingTimes] = useState([]);
+  const [bookingEnd, setbookingEnd] = useState([]);
+  // const bookingTimes = [];
+  const { instructor } = useSelector((state) => state.instructor);
   const [selectedDate, setSelectedDate] = useState();
   const [hours, setHours] = useState([]);
   const lessonDuration = [1, 2];
   const [duration, setDuration] = useState(null);
   const [time, setTime] = useState(null);
   const dates = [];
+
+  useEffect(() => {
+    getBookings();
+  }, []);
+  // get selected Instructor bookings to compare values with time
+  const getBookings = async () => {
+    const bookingTime = [];
+    const bookEnd = [];
+    const bookings = await getInstructorBookings(instructor._id);
+    bookings.forEach((booking) => {
+      bookingTime.push(Date.parse(booking.time.from));
+      bookEnd.push(Date.parse(booking.time.to));
+    });
+    setbookingTimes(bookingTime);
+    setbookingEnd(bookEnd);
+  };
 
   const getDate = async () => {
     for (let index = 0; index < 30; index++) {
@@ -38,12 +59,20 @@ const BookingSelector = () => {
     setSelectedDate(inputDate);
 
     const addHour = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+    const twoAddHour = [7, 9, 11, 13, 15, 17, 19];
     const hrs = [];
     if (inputDate) {
-      addHour.forEach((hour) => {
-        hrs.push(moment(inputDate).add(hour, "hour"));
-      });
-      setHours(hrs);
+      if (duration === 2) {
+        twoAddHour.forEach((hour) => {
+          hrs.push(moment(inputDate).add(hour, "hour"));
+        });
+        setHours(hrs);
+      } else {
+        addHour.forEach((hour) => {
+          hrs.push(moment(inputDate).add(hour, "hour"));
+        });
+        setHours(hrs);
+      }
     }
   };
 
@@ -53,6 +82,7 @@ const BookingSelector = () => {
     hour.endTo = JSON.parse(
       JSON.stringify(moment(hour.startFrom).add(duration, "hour"))
     );
+    console.log(hour);
 
     setTime(hour);
   };
@@ -127,9 +157,26 @@ const BookingSelector = () => {
                 {hours.map((hour, key) => {
                   const fieldValue = {
                     startFrom: hour,
-                    // endTo: moment(hour).add(duration, "hour"),
+                    endTo: moment(hour).add(duration, "hour"),
                   };
-                  // console.log(fieldValue);
+                  if (
+                    bookingTimes.includes(Date.parse(hour)) ||
+                    bookingEnd.includes(
+                      Date.parse(moment(hour).add(duration, "hour"))
+                    )
+                  ) {
+                    return (
+                      <option
+                        value={JSON.stringify(fieldValue)}
+                        key={key}
+                        disabled
+                      >
+                        {moment(hour).format("hh:mm A")} to{" "}
+                        {moment(hour).add(duration, "hour").format("hh:mm A")}{" "}
+                        Booked Out
+                      </option>
+                    );
+                  }
                   return (
                     <option value={JSON.stringify(fieldValue)} key={key}>
                       {moment(hour).format("hh:mm A")} to{" "}
