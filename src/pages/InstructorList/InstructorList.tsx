@@ -16,7 +16,7 @@ const InstructorList = () => {
   const [instructors, setInstructors] = useState([]);
   const [language, setLanguage] = useState<any>(null);
   const [showModal, setShowModal] = useState(false);
-  const [lookupInstructor, setLookupInstructor] = useState("");
+  const [lookupInstructor, setLookupInstructor] = useState({});
   const [suburbInfo, setSuburbInfo] = useState<Suburb>({
     _id: "",
     postcode: "",
@@ -43,15 +43,20 @@ const InstructorList = () => {
   };
 
   //  check availability handle
-  const handleCheckAvailability = (id: any) => {
+  const handleCheckAvailability = (id: any, name: string) => {
+    console.log("id name", id, name);
     setShowModal(true);
-    setLookupInstructor(id);
+    setLookupInstructor({ id, name });
   };
 
   return (
     <>
       {showModal && (
-        <CheckAvailability visible={showModal} instructor={lookupInstructor} />
+        <CheckAvailability
+          visible={showModal}
+          setShowModal={setShowModal}
+          instructor={lookupInstructor}
+        />
       )}
 
       <div className="instructor__list">

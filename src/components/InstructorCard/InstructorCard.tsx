@@ -39,7 +39,9 @@ const InstructorCard = ({
           </p>
           <div
             className="availability"
-            onClick={() => handleCheckAvailability(instructor._id)}
+            onClick={() =>
+              handleCheckAvailability(instructor._id, instructor.firstName)
+            }
           >
             <BiCalendar />
             <p className="title">Check Availability</p>

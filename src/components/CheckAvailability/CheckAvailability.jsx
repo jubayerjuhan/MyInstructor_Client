@@ -3,14 +3,14 @@ import Modal from "@mui/material/Modal";
 import "./CheckAvailability.scss";
 import moment from "moment";
 import { getInstructorBookings } from "../../api_calls/instructor_api";
+import { FaTimes } from "react-icons/fa";
 
-const CheckAvailability = ({ instructor, visible }) => {
+const CheckAvailability = ({ instructor, setShowModal, visible }) => {
   const [dates, setDates] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [bookedHours, setBookedHours] = useState([]);
 
   const hours = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-
   useEffect(() => {
     getDate();
     getBookings();
@@ -18,7 +18,7 @@ const CheckAvailability = ({ instructor, visible }) => {
 
   const getBookings = async () => {
     const unixBookingTime = [];
-    const bookings = await getInstructorBookings(instructor);
+    const bookings = await getInstructorBookings(instructor.id);
     setBookings(bookings);
 
     bookings.forEach((booking) => {
@@ -29,7 +29,6 @@ const CheckAvailability = ({ instructor, visible }) => {
     setBookedHours(unixBookingTime);
   };
 
-  console.log(bookedHours, "booked hours");
   // get next 30 days
   const getDate = async () => {
     const generatedDates = [0];
@@ -39,8 +38,6 @@ const CheckAvailability = ({ instructor, visible }) => {
     }
     setDates(generatedDates);
   };
-
-  console.log(bookings);
 
   return (
     <Modal
@@ -56,6 +53,25 @@ const CheckAvailability = ({ instructor, visible }) => {
       aria-describedby="modal-modal-description"
     >
       <div className="chv__modal">
+        <FaTimes
+          size={30}
+          style={{ cursor: "pointer" }}
+          className={"times__icon"}
+          onClick={() => setShowModal(false)}
+        />
+        <div className="chv__modal-header">
+          <p className="title">Booking Availability Of {instructor?.name}</p>
+          <div className="indicator">
+            <div className="indicator__child">
+              <div className="available"></div>
+              <p>Available</p>
+            </div>
+            <div className="indicator__child">
+              <div className="booked"></div>
+              <p>Booked Out</p>
+            </div>
+          </div>
+        </div>
         <div className="chv__chart">
           {dates.map((date, key) => {
             if (key === 0) {
@@ -64,7 +80,6 @@ const CheckAvailability = ({ instructor, visible }) => {
                   <p className="title">Hours</p>
                   <div className="hours">
                     {hours.map((hour, key) => {
-                      console.log(hour, date, "hhh");
                       return (
                         <p className="hour hourrow" key={key}>
                           {moment()
@@ -87,17 +102,9 @@ const CheckAvailability = ({ instructor, visible }) => {
                   {hours.map((hour, key) => {
                     const uhr = moment(date).add(hour, "hour");
                     if (bookedHours.includes(Date.parse(uhr))) {
-                      return (
-                        <p className="hour booked__hour" key={key}>
-                          {/* {moment(date).add(hour, "hour").format("LT")} */}
-                        </p>
-                      );
+                      return <p className="hour booked__hour" key={key}></p>;
                     }
-                    return (
-                      <p className="hour" key={key}>
-                        {/* {moment(date).add(hour, "hour").format("LT")} */}
-                      </p>
-                    );
+                    return <p className="hour normal__hour" key={key}></p>;
                   })}
                 </div>
               </div>
