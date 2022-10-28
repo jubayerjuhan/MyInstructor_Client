@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./InstructorCard.scss";
 import { BiCalendar } from "react-icons/bi";
 import Button from "../core/Button/Button";
@@ -8,8 +8,12 @@ import { SET_INSTRUCTOR } from "../../redux/reducer/reduxNamings";
 
 interface InstructorCardProps {
   instructor: Instructor;
+  handleCheckAvailability: any;
 }
-const InstructorCard = ({ instructor }: InstructorCardProps) => {
+const InstructorCard = ({
+  instructor,
+  handleCheckAvailability,
+}: InstructorCardProps) => {
   const dispatch = useDispatch();
 
   // handle booking now
@@ -18,43 +22,48 @@ const InstructorCard = ({ instructor }: InstructorCardProps) => {
     window.location.href = "/booking";
   };
   return (
-    <div className="instructor__card">
-      <div className="instructor__image">
-        <img src={`${instructor.avater}`} alt="" />
-      </div>
-      <div className="instructor__info">
-        <p className="name">
-          {instructor.firstName} {instructor.lastName}
-        </p>
-        <p className="language">
-          {instructor.firstName} Speaks
-          {instructor.languages.map((lang, key) => (
-            <span key={key}>{lang}</span>
-          ))}
-        </p>
-        <div className="availability">
-          <BiCalendar />
-          <p className="title">Check Availability</p>
+    <>
+      <div className="instructor__card">
+        <div className="instructor__image">
+          <img src={`${instructor.avater}`} alt="" />
         </div>
-        <div className="buttons">
-          <Button
-            width="100%"
-            smallFont
-            title="View Profile"
-            revertColor
-            onClick={() =>
-              (window.location.href = `/instructor-profile/${instructor._id}`)
-            }
-          />
-          <Button
-            width="100%"
-            smallFont
-            title="Book Now"
-            onClick={handleBookNow}
-          />
+        <div className="instructor__info">
+          <p className="name">
+            {instructor.firstName} {instructor.lastName}
+          </p>
+          <p className="language">
+            {instructor.firstName} Speaks
+            {instructor.languages.map((lang, key) => (
+              <span key={key}>{lang}</span>
+            ))}
+          </p>
+          <div
+            className="availability"
+            onClick={() => handleCheckAvailability(instructor._id)}
+          >
+            <BiCalendar />
+            <p className="title">Check Availability</p>
+          </div>
+          <div className="buttons">
+            <Button
+              width="100%"
+              smallFont
+              title="View Profile"
+              revertColor
+              onClick={() =>
+                (window.location.href = `/instructor-profile/${instructor._id}`)
+              }
+            />
+            <Button
+              width="100%"
+              smallFont
+              title="Book Now"
+              onClick={handleBookNow}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

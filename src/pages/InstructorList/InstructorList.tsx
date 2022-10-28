@@ -10,10 +10,13 @@ import { useParams } from "react-router-dom";
 import { searchInstructor } from "../../api_calls/instructor_list";
 import { client } from "../../client";
 import { Suburb } from "../../typings/instructorTypings";
+import CheckAvailability from "../../components/CheckAvailability/CheckAvailability";
 
 const InstructorList = () => {
   const [instructors, setInstructors] = useState([]);
   const [language, setLanguage] = useState<any>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [lookupInstructor, setLookupInstructor] = useState("");
   const [suburbInfo, setSuburbInfo] = useState<Suburb>({
     _id: "",
     postcode: "",
@@ -39,51 +42,67 @@ const InstructorList = () => {
     setSuburbInfo(data?.suburbs[0]);
   };
 
-  console.log(suburbInfo);
+  //  check availability handle
+  const handleCheckAvailability = (id: any) => {
+    setShowModal(true);
+    setLookupInstructor(id);
+  };
 
   return (
-    <div className="instructor__list">
-      <Navbar />
-      {/* <CustomizedSteppers /> */}
-      <div className="instructors__main sectionPadding">
-        <div className="all__instructors-wrapper">
-          <p className="title">
-            Found {instructors.length} Instructors In{" "}
-            {suburbInfo?.suburb ? suburbInfo?.suburb : "In Your Area"}
-          </p>
-          <div className="all-instructors__list">
-            {instructors.map((instructor, key) => {
-              return <InstructorCard instructor={instructor} key={key} />;
-            })}
+    <>
+      {showModal && (
+        <CheckAvailability visible={showModal} instructor={lookupInstructor} />
+      )}
+
+      <div className="instructor__list">
+        <Navbar />
+        {/* <CustomizedSteppers /> */}
+        <div className="instructors__main sectionPadding">
+          <div className="all__instructors-wrapper">
+            <p className="title">
+              Found {instructors.length} Instructors In{" "}
+              {suburbInfo?.suburb ? suburbInfo?.suburb : "In Your Area"}
+            </p>
+            <div className="all-instructors__list">
+              {instructors.map((instructor, key) => {
+                return (
+                  <InstructorCard
+                    handleCheckAvailability={handleCheckAvailability}
+                    instructor={instructor}
+                    key={key}
+                  />
+                );
+              })}
+            </div>
           </div>
+          <div className="instructors__filters">
+            <div className="time__filter">
+              <p className="title">Time</p>
+              <p className="filter__content active">Any Time</p>
+              <p className="filter__content">AM</p>
+              <p className="filter__content">PM</p>
+            </div>
+            <div className="available__filter">
+              <p className="title">Show Available Only</p>
+              <Switch {...label} checked={true} />
+            </div>
+            <div className="language__filter">
+              <p className="title">Language</p>
+              <select
+                className="form-select"
+                aria-label="Language"
+                onChange={(e) => setLanguage(e.target.value)}
+              >
+                {languages.map((language, key) => (
+                  <option value={language.name}>{language.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <PricingCalculator bookForward={false} cart={false} />
         </div>
-        <div className="instructors__filters">
-          <div className="time__filter">
-            <p className="title">Time</p>
-            <p className="filter__content active">Any Time</p>
-            <p className="filter__content">AM</p>
-            <p className="filter__content">PM</p>
-          </div>
-          <div className="available__filter">
-            <p className="title">Show Available Only</p>
-            <Switch {...label} checked={true} />
-          </div>
-          <div className="language__filter">
-            <p className="title">Language</p>
-            <select
-              className="form-select"
-              aria-label="Language"
-              onChange={(e) => setLanguage(e.target.value)}
-            >
-              {languages.map((language, key) => (
-                <option value={language.name}>{language.name}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <PricingCalculator bookForward={false} cart={false} />
       </div>
-    </div>
+    </>
   );
 };
 

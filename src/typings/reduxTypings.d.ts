@@ -25,7 +25,7 @@ export interface BookingReducerTypes {
 export interface BookingType {
   duration: number;
   date: string;
-  time: { startFrom: string; endTo: string };
+  time: { startFrom?: string; endTo?: string; from?: string; to?: string };
 }
 
 export interface PickupDetails {
