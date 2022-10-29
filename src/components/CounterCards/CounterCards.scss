@@ -23,3 +23,18 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .counter__card {
+    padding: 20px;
+  }
+
+  .counter__card .title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .counter__card .description {
+    font-size: 30px;
+  }
+}

@@ -77,3 +77,39 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .dashboard__instructor-info {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .car__information-model {
+    display: none;
+  }
+  .dashboard__instructor-info .instructor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .dashboard__instructor-info .instructor .information {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .dashboard__instructor-info .instructor .image {
+    height: 80px;
+    width: 80px;
+  }
+
+  .ldash__counters {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard__instructor-info .instructor .information .name {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
