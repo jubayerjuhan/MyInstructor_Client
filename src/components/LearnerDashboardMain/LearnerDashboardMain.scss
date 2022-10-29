@@ -1,0 +1,11 @@
+.ldash__counters {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.dash__bookings-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}

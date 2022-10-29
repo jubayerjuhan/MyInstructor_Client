@@ -1,0 +1,25 @@
+@import "../../main.scss";
+
+.counter__card {
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  min-width: 200px;
+  padding: 10px 15px;
+  justify-content: space-between;
+  background-color: white;
+  .title {
+    @include bigDescription;
+    margin-bottom: 6px;
+  }
+  .description {
+    @include smallTitle;
+    font-size: 30px;
+  }
+
+  .icon {
+    svg {
+      font-size: 50px;
+    }
+  }
+}

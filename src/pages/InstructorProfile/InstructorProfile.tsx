@@ -9,9 +9,16 @@ import InstructorVehical from "../../components/InstructorVehical/InstructorVehi
 import { useParams } from "react-router-dom";
 import { client } from "../../client";
 import { Instructor } from "../../typings/instructorTypings";
+import CheckAvailability from "../../components/CheckAvailability/CheckAvailability";
+import { useDispatch } from "react-redux";
+import { SET_INSTRUCTOR } from "../../redux/reducer/reduxNamings";
 
 const InstructorProfile = () => {
   const [instructor, setInstructor] = useState<Instructor>();
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
+
   const { id } = useParams();
   useEffect(() => {
     getInsttructor();
@@ -26,9 +33,22 @@ const InstructorProfile = () => {
     }
   };
 
+  // handle book now
+  const handleBookNow = () => {
+    dispatch({ type: SET_INSTRUCTOR, payload: instructor });
+    window.location.href = "/booking";
+  };
+
   if (!instructor) return <></>;
   return (
     <>
+      {showModal && (
+        <CheckAvailability
+          visible={showModal}
+          setShowModal={setShowModal}
+          instructor={{ id: instructor._id, name: instructor.firstName }}
+        />
+      )}
       <Navbar />
       <div className="instructor__profile">
         <div className="instructor__profile-header">
@@ -61,8 +81,14 @@ const InstructorProfile = () => {
           </div>
           <div className="instructor__profile-right">
             <div className="instructor__action-buttons">
-              <Button width="100%" smallFont title="Book Now" />
               <Button
+                width="100%"
+                smallFont
+                title="Book Now"
+                onClick={handleBookNow}
+              />
+              <Button
+                onClick={() => setShowModal(true)}
                 width="100%"
                 smallFont
                 title="Check Availability"

@@ -28,6 +28,15 @@ body {
     padding: 6vw 4vw;
   }
 }
+.dashboard__padding {
+  padding: 3vw;
+  padding-bottom: 3vw;
+}
+@media (max-width: 768px) {
+  .dashboard__padding {
+    padding: 2vw 2vw;
+  }
+}
 
 :root {
   --theme-color: #faa41a;

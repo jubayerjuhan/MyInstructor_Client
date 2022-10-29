@@ -9,6 +9,7 @@ const CheckAvailability = ({ instructor, setShowModal, visible }) => {
   const [dates, setDates] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [bookedHours, setBookedHours] = useState([]);
+  const [bookingEndHours, setBookingEndHours] = useState([]);
 
   const hours = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
   useEffect(() => {
@@ -18,15 +19,18 @@ const CheckAvailability = ({ instructor, setShowModal, visible }) => {
 
   const getBookings = async () => {
     const unixBookingTime = [];
+    const unixBookingEndTime = [];
     const bookings = await getInstructorBookings(instructor.id);
     setBookings(bookings);
 
     bookings.forEach((booking) => {
       if (booking?.time?.from) {
         unixBookingTime.push(Date.parse(booking?.time?.from));
+        unixBookingEndTime.push(Date.parse(booking?.time?.to));
       }
     });
     setBookedHours(unixBookingTime);
+    setBookingEndHours(unixBookingEndTime);
   };
 
   // get next 30 days
@@ -101,7 +105,10 @@ const CheckAvailability = ({ instructor, setShowModal, visible }) => {
                 <div className="hours">
                   {hours.map((hour, key) => {
                     const uhr = moment(date).add(hour, "hour");
-                    if (bookedHours.includes(Date.parse(uhr))) {
+                    if (
+                      bookedHours.includes(Date.parse(uhr)) ||
+                      bookingEndHours.includes(Date.parse(uhr))
+                    ) {
                       return <p className="hour booked__hour" key={key}></p>;
                     }
                     return <p className="hour normal__hour" key={key}></p>;

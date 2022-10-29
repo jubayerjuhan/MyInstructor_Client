@@ -11,6 +11,7 @@ import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import Homepage from "./pages/Homepage/Homepage";
 import InstructorList from "./pages/InstructorList/InstructorList";
 import InstructorProfile from "./pages/InstructorProfile/InstructorProfile";
+import LearnerDashboard from "./pages/LearnerDashboard/LearnerDashboard";
 import Login from "./pages/Login/Login";
 import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
 
@@ -75,6 +76,14 @@ function App() {
           element={
             <ProtectedRoute location={"/booking-success"}>
               <BookingSuccess />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/learner/dashboard"
+          element={
+            <ProtectedRoute location={"/learner-dashboard"}>
+              <LearnerDashboard />
             </ProtectedRoute>
           }
         />
