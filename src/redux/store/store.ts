@@ -17,6 +17,7 @@ import { userReducer } from "../reducer/userReducer";
 import { instructorReducer } from "../reducer/instructorReducer";
 import { cartReducer } from "../reducer/cartReducer";
 import { bookingReducer, creditReducer } from "../reducer/bookingReducer";
+import { activeBooking } from "../reducer/active_bookingReducer";
 
 // root reducer
 const rootReducer = combineReducers({
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   credit: creditReducer,
   booking: bookingReducer,
+  activeBooking: activeBooking,
 });
 
 const persistConfig = {

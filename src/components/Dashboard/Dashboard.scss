@@ -8,6 +8,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 40px;
+  z-index: 10;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   .dash__sidebar-hamburger {
     color: var(--text-sec);

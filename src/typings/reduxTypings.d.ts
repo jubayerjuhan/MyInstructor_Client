@@ -1,3 +1,4 @@
+import { BookingTypeBack } from "./bookingsType";
 import { BillingInfo, Cart } from "./cartTypings";
 import { Instructor } from "./instructorTypings";
 
@@ -12,6 +13,9 @@ export interface State {
   };
   credit: CreditReducerTypes;
   booking: BookingReducerTypes;
+  activeBooking: {
+    booking: BookingTypeBack;
+  };
 }
 
 export interface BookingReducerTypes {

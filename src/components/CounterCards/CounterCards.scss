@@ -15,11 +15,13 @@
   .description {
     @include smallTitle;
     font-size: 30px;
+    // color: var(--theme-color);
   }
 
   .icon {
     svg {
       font-size: 50px;
+      color: var(--theme-color);
     }
   }
 }

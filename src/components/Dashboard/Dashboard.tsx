@@ -7,6 +7,7 @@ import { DashboardLinksTypes } from "../../pages/LearnerDashboard/LearnerDashboa
 import { AiOutlineDashboard } from "react-icons/ai";
 import NotFoundPage from "../../pages/404Page/NotFoundPage";
 import { FaHamburger } from "react-icons/fa";
+import LearnerDashboardMain from "../LearnerDashboardMain/LearnerDashboardMain";
 
 export interface DashboardProps {
   links: Link[];
@@ -28,7 +29,7 @@ const Dashboard = ({ links }: DashboardProps) => {
     label: "Dashboard",
     link: "dashboard",
     icon: AiOutlineDashboard,
-    component: NotFoundPage,
+    component: LearnerDashboardMain,
   });
 
   console.log(activeRoute, "Ac route");
@@ -43,7 +44,7 @@ const Dashboard = ({ links }: DashboardProps) => {
       />
       <DashboardTopBar setSidebar={setSidebar} />
       <div className="dashboard__content">
-        <activeRoute.component />
+        <activeRoute.component setActiveRoute={setActiveRoute} />
       </div>
     </div>
   );

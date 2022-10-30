@@ -1,6 +1,8 @@
 import React from "react";
 import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 import avater from "../../assets/reviewavater.jpg";
+import { SET_INSTRUCTOR } from "../../redux/reducer/reduxNamings";
 import { Instructor } from "../../typings/instructorTypings";
 import Button from "../core/Button/Button";
 
@@ -9,6 +11,12 @@ interface LdashInstructorProps {
   instructor: Instructor;
 }
 const LdashInstructor = ({ instructor }: LdashInstructorProps) => {
+  const dispatch = useDispatch();
+  // handle booking now
+  const handleBookNow = () => {
+    dispatch({ type: SET_INSTRUCTOR, payload: instructor });
+    window.location.href = "/booking";
+  };
   return (
     <div className="instructor__ldash">
       <p className="title">Your Instructor</p>
@@ -26,7 +34,7 @@ const LdashInstructor = ({ instructor }: LdashInstructorProps) => {
                 <BsGenderFemale />
               )}
             </p>
-            <Button title={"Book Now"} />
+            <Button title={"Book Now"} onClick={handleBookNow} />
           </div>
         </div>
         <div className="car__information-model">

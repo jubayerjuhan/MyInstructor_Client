@@ -1,0 +1,19 @@
+@import "../../main.scss";
+
+.view__booking-main {
+  margin-top: 20px;
+}
+
+.dash-booking__informations {
+  margin-bottom: 20px;
+  .title {
+    @include smallTitle;
+    color: var(--text-sec);
+    margin-bottom: 10px;
+  }
+
+  .info__field {
+    margin-bottom: 5px;
+    @include descriptionFont;
+  }
+}

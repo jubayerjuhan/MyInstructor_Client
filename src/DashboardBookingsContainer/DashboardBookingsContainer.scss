@@ -56,3 +56,12 @@
     }
   }
 }
+
+.booking__list-empty {
+  padding: 30px 20px;
+
+  > .title {
+    text-align: center;
+    @include descriptionFont;
+  }
+}
