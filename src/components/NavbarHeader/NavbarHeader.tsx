@@ -22,7 +22,7 @@ const NavbarHeader = () => {
       {user && (
         <>
           {user.userType === "learner" ? (
-            <a className="navbar__header-link" href="/learner-dashboard">
+            <a className="navbar__header-link" href="/learner/dashboard">
               Learner Dashboard
             </a>
           ) : (

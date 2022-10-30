@@ -82,7 +82,7 @@ function App() {
         <Route
           path="/learner/dashboard"
           element={
-            <ProtectedRoute location={"/learner-dashboard"}>
+            <ProtectedRoute location={"/learner/dashboard"}>
               <LearnerDashboard />
             </ProtectedRoute>
           }
