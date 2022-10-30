@@ -8,6 +8,8 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import NotFoundPage from "../../pages/404Page/NotFoundPage";
 import { FaHamburger } from "react-icons/fa";
 import LearnerDashboardMain from "../LearnerDashboardMain/LearnerDashboardMain";
+import { useSelector } from "react-redux";
+import { State } from "../../typings/reduxTypings";
 
 export interface DashboardProps {
   links: Link[];
@@ -53,17 +55,21 @@ const Dashboard = ({ links }: DashboardProps) => {
 export default Dashboard;
 
 const DashboardTopBar = ({ setSidebar }: any) => {
+  const { user } = useSelector((state: State) => state.user);
   return (
     <div className="dashboard__bar">
       <div>
         <FaHamburger
           className="dash__sidebar-hamburger"
-          onClick={() => setSidebar(true)}
+          onClick={() => {
+            setSidebar(true);
+            window.scroll(0, 0);
+          }}
         />
       </div>
       <div className="user__icon">
-        <img src={user} alt="" />
-        <p className="user__name">Jubayer </p>
+        <img src={user.avater} alt="" />
+        <p className="user__name">{user.firstName}</p>
       </div>
     </div>
   );

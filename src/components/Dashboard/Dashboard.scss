@@ -42,8 +42,12 @@
     padding: 15px;
   }
 
+  .dashboard__bar .user__icon {
+    gap: 10px;
+  }
+
   .dashboard__bar .user__icon img {
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
   }
 }

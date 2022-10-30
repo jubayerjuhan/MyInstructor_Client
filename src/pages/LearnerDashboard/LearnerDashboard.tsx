@@ -5,6 +5,7 @@ import { AiOutlineDashboard, AiOutlineUser } from "react-icons/ai";
 import NotFoundPage from "../404Page/NotFoundPage";
 import { IconType } from "react-icons/lib";
 import LearnerDashboardMain from "../../components/LearnerDashboardMain/LearnerDashboardMain";
+import Profile from "../ProfilePage/Profile";
 
 export interface DashboardLinksTypes {
   label: string;
@@ -24,7 +25,7 @@ const LearnerDashboard = () => {
       label: "Profile",
       link: "profile",
       icon: AiOutlineUser,
-      component: NotFoundPage,
+      component: Profile,
     },
   ];
   return <Dashboard links={navLinks} />;

@@ -1,3 +1,9 @@
+export const licenseStatusOptions = [
+  "I Don't Have A Learner Liscense",
+  "I Have a Learner Card",
+  "Yes, I Have License",
+];
+
 export const registerFields = [
   {
     name: "firstName",
@@ -34,11 +40,7 @@ export const registerFields = [
     label: "Liscense Status",
     placeholder: "Licence Status",
     type: "select",
-    options: [
-      "I Don't Have A Learner Liscense",
-      "I Have a Learner Card",
-      "Yes, I Have License",
-    ],
+    options: licenseStatusOptions,
   },
   {
     name: "dateOfBirth",
