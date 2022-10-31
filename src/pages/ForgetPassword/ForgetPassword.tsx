@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { sendForgetPasswordReq } from "../../api_calls/password_api";
 import Button from "../../components/core/Button/Button";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import { toast } from "material-react-toastify";
 import "./ForgetPassword.scss";
+import { useSelector } from "react-redux";
+import { State } from "../../typings/reduxTypings";
 
 interface ForgetPasswordProps {
   instructor?: boolean;
 }
 const ForgetPassword = ({ instructor }: ForgetPasswordProps) => {
+  const { user } = useSelector((state: State) => state.user);
+
   const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const field = {
@@ -17,10 +21,15 @@ const ForgetPassword = ({ instructor }: ForgetPasswordProps) => {
     label: "Email Address",
     placeholder: "Enter Your Email Address",
   };
-
+  useEffect(() => {
+    if (user) window.location.href = "/";
+  }, [user]);
   const handleSubmit = async () => {
     setLoading(true);
-    const res = await sendForgetPasswordReq(email);
+    const res = await sendForgetPasswordReq(
+      email,
+      instructor ? instructor : false
+    );
     if (!res.success) {
       toast.error(res.message);
       return setLoading(false);

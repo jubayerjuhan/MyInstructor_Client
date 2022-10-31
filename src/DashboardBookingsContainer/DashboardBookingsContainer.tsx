@@ -34,6 +34,7 @@ const DashboardBookingsContainer = ({
       <p className="title">{title}</p>
       <div className="bookings__list">
         {bookings.map((booking, key) => {
+          console.log(booking, "booking");
           return (
             <div
               className="dash__booking"

@@ -1,10 +1,16 @@
 import { client } from "../client";
 
-export const sendForgetPasswordReq = async (email: string) => {
+export const sendForgetPasswordReq = async (
+  email: string,
+  instructor: boolean
+) => {
   try {
-    const { data } = await client.post(`/forgot-password/instructor`, {
-      email,
-    });
+    const { data } = await client.post(
+      `/forgot-password${instructor ? "/instructor" : ""}`,
+      {
+        email,
+      }
+    );
 
     return data;
   } catch (error: any) {
@@ -17,14 +23,18 @@ export const sendForgetPasswordReq = async (email: string) => {
 
 export const sendPasswordResetReq = async (
   token: string,
-  newPassword: string
+  newPassword: string,
+  instructor: boolean
 ) => {
   console.log(token);
   try {
-    const { data } = await client.post(`/reset-password/instructor`, {
-      token,
-      newPassword,
-    });
+    const { data } = await client.post(
+      `/reset-password${instructor ? "/instructor" : ""}`,
+      {
+        token,
+        newPassword,
+      }
+    );
 
     return {
       success: data.success,

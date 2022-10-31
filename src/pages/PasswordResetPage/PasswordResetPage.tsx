@@ -1,14 +1,17 @@
 import { toast } from "material-react-toastify";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { sendPasswordResetReq } from "../../api_calls/password_api";
 import Button from "../../components/core/Button/Button";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
+import { State } from "../../typings/reduxTypings";
 import "./PasswordResetPage.scss";
 
 const PasswordResetPage = ({ instructor }: any) => {
   const { token } = useParams();
+  const { user } = useSelector((state: State) => state.user);
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState({
     newPassword: "",
@@ -18,6 +21,10 @@ const PasswordResetPage = ({ instructor }: any) => {
     { name: "newPassword", Label: "New Password" },
     { name: "confirmNewPassword", Label: " Confirm New Password" },
   ];
+
+  useEffect(() => {
+    if (user) window.location.href = "/";
+  }, [user]);
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword({ ...password, [e.target.name]: e.target.value });
@@ -33,7 +40,11 @@ const PasswordResetPage = ({ instructor }: any) => {
 
     setLoading(true);
 
-    const data = await sendPasswordResetReq(token, password.newPassword);
+    const data = await sendPasswordResetReq(
+      token,
+      password.newPassword,
+      instructor ? instructor : false
+    );
     if (!data.success) {
       toast.error(data.message);
       return setLoading(false);
