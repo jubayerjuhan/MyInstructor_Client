@@ -5,5 +5,8 @@ export const storeAtLocalStorage = (key, value) => {
 
 export const getLocalStorageData = (key) => {
   const value = localStorage.getItem(key);
-  return JSON.parse(value);
+  if (value) {
+    return JSON.parse(value);
+  }
+  return null;
 };

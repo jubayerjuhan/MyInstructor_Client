@@ -8,11 +8,14 @@ import BookingInformation from "./pages/BookingInformation/BookingInformation";
 import BookingPage from "./pages/BookingPage/BookingPage";
 import BookingSuccess from "./pages/BookingSuccess/BookingSuccess";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import Homepage from "./pages/Homepage/Homepage";
 import InstructorList from "./pages/InstructorList/InstructorList";
+import InstructorLogin from "./pages/InstructorLogin/InstructorLogin";
 import InstructorProfile from "./pages/InstructorProfile/InstructorProfile";
 import LearnerDashboard from "./pages/LearnerDashboard/LearnerDashboard";
 import Login from "./pages/Login/Login";
+import PasswordResetPage from "./pages/PasswordResetPage/PasswordResetPage";
 import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
 
 // stripe Promise
@@ -24,7 +27,18 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<Homepage />} />
         <Route path="/not-found" element={<NotFoundPage />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/forget-password" element={<ForgetPassword />} />
+        <Route path="/reset-password/:token" element={<PasswordResetPage />} />
+        <Route
+          path="/reset-password/instructor/:token"
+          element={<PasswordResetPage instructor />}
+        />
+        <Route
+          path="/forget-password/instructor"
+          element={<ForgetPassword instructor={true} />}
+        />
+        <Route path="/login" element={<Login instructor={false} />} />
+        <Route path="/instructor-login" element={<InstructorLogin />} />
         <Route path="/register" element={<Register />} />
         <Route
           path="/instructors-list/:postCode/:transmission/:suburb"

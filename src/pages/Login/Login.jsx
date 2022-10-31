@@ -11,12 +11,13 @@ import { loginLearner } from "../../redux/actions/learner_actions";
 import { toast } from "material-react-toastify";
 import { CLEAR_ERROR } from "../../redux/reducer/reduxNamings";
 import { useLocation, useNavigate } from "react-router-dom";
+import { loginInstructor } from "../../redux/actions/instructor_actions";
 
-const Login = () => {
+const Login = ({ instructor }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { error, user } = useSelector((state) => state.user);
+  const { error, user, loading } = useSelector((state) => state.user);
   const {
     register,
     handleSubmit,
@@ -48,10 +49,11 @@ const Login = () => {
   ];
 
   const handleLogin = async (data) => {
-    const login = dispatch(loginLearner(data));
-    // if (login === true) {
-    //   navigate(state ? state.from.location : "/");
-    // }
+    if (instructor) {
+      const instructorLogin = dispatch(loginInstructor(data));
+    } else {
+      const learnerLogin = dispatch(loginLearner(data));
+    }
   };
 
   if (error) {
@@ -73,11 +75,24 @@ const Login = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="login__form-header">
-            <p className="title">Learner's Login</p>
-            <p className="description">
-              If You Don't Have Any Account.{" "}
-              <a href="/register">Register Here</a>
+            <p className="title">
+              {instructor ? "Instructor" : "Learner's"} Login
             </p>
+            {instructor ? (
+              <p className="description">
+                <a href="/forget-password/instructor">Forgot Password?</a>
+              </p>
+            ) : (
+              <>
+                <p className="description">
+                  If You Don't Have Any Account.{" "}
+                  <a href="/register">Register Here</a>
+                </p>
+                <p className="description">
+                  <a href="/forget-password">Forgot Password?</a>
+                </p>
+              </>
+            )}
           </div>{" "}
           {inputFields.map((field, key) => {
             return (
@@ -97,7 +112,12 @@ const Login = () => {
               </div>
             );
           })}
-          <Button width="100%" onClick={handleSubmit(onSubmit)} />
+          <Button
+            width="100%"
+            title={"Login"}
+            loading={loading}
+            onClick={handleSubmit(onSubmit)}
+          />
         </form>
       </div>
     </>
