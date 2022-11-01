@@ -7,7 +7,6 @@ import { DashboardLinksTypes } from "../../pages/LearnerDashboard/LearnerDashboa
 import { AiOutlineDashboard } from "react-icons/ai";
 import NotFoundPage from "../../pages/404Page/NotFoundPage";
 import { FaHamburger } from "react-icons/fa";
-import LearnerDashboardMain from "../LearnerDashboardMain/LearnerDashboardMain";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 
@@ -23,16 +22,12 @@ type Link = {
   label: string;
   icon: IconType;
   link: string;
+  component: any;
 };
 
 const Dashboard = ({ links }: DashboardProps) => {
   const [sidebar, setSidebar] = useState(false);
-  const [activeRoute, setActiveRoute] = useState<DashboardLinksTypes>({
-    label: "Dashboard",
-    link: "dashboard",
-    icon: AiOutlineDashboard,
-    component: LearnerDashboardMain,
-  });
+  const [activeRoute, setActiveRoute] = useState<DashboardLinksTypes>(links[0]);
 
   console.log(activeRoute, "Ac route");
 

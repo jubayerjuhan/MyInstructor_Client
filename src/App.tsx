@@ -10,6 +10,7 @@ import BookingSuccess from "./pages/BookingSuccess/BookingSuccess";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import Homepage from "./pages/Homepage/Homepage";
+import InstructorDashboard from "./pages/InstructorDashboard/InstructorDashboard";
 import InstructorList from "./pages/InstructorList/InstructorList";
 import InstructorLogin from "./pages/InstructorLogin/InstructorLogin";
 import InstructorProfile from "./pages/InstructorProfile/InstructorProfile";
@@ -98,6 +99,14 @@ function App() {
           element={
             <ProtectedRoute location={"/learner/dashboard"}>
               <LearnerDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/instructor/dashboard"
+          element={
+            <ProtectedRoute location={"/instructor/dashboard"}>
+              <InstructorDashboard />
             </ProtectedRoute>
           }
         />

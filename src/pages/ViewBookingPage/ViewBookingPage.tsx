@@ -1,17 +1,45 @@
 import moment from "moment";
-import React from "react";
+import React, { useEffect } from "react";
+import { BsArrowLeft } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import LdashInstructor from "../../components/LdashInstructor/LdashInstructor";
 import { State } from "../../typings/reduxTypings";
 import "./ViewBookingPage.scss";
 
 const ViewBookingPage = () => {
+  const navigate = useNavigate();
   const { booking } = useSelector((state: State) => state.activeBooking);
+  const { user } = useSelector((state: State) => state.user);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   return (
     <div className="view__booking-page dashboard__padding">
-      <LdashInstructor instructor={booking?.instructor} />
+      <div
+        className="backButton"
+        onClick={() =>
+          (window.location.href =
+            user.userType === "instructor"
+              ? "/instructor/dashboard"
+              : "/learner/dashboard")
+        }
+      >
+        <BsArrowLeft />
+      </div>
+      {user.userType === "learner" && (
+        <LdashInstructor instructor={booking?.instructor} />
+      )}
       <div className="view__booking-main">
+        <InformationFields
+          title={"Learner Information"}
+          child1={`Name : ${booking.user.firstName} ${booking.user.lastName}`}
+          child2={`License Status : ${booking.user.licenseStatus} `}
+          child3={`Phone : ${booking.user.phone} `}
+          child4={`Email : ${booking.user.email} `}
+        />
         <InformationFields
           title={"Booking Time"}
           child1={`Starts From : ${moment(booking.time.from).format(

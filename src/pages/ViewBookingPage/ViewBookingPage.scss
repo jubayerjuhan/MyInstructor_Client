@@ -4,6 +4,19 @@
   margin-top: 20px;
 }
 
+.view__booking-page {
+  .backButton {
+    background-color: white;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+}
+
 .dash-booking__informations {
   margin-bottom: 20px;
   .title {

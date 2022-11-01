@@ -61,4 +61,5 @@ export interface User {
   credit: number;
   userType: string;
   avater?: string;
+  bio?: string;
 }

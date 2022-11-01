@@ -28,12 +28,19 @@ const InstructorList = () => {
   const { postCode, transmission, suburb } = useParams();
 
   useEffect(() => {
-    getInstructors();
     getSuburbInfo();
   }, []);
 
+  useEffect(() => {
+    getInstructors();
+  }, [language]);
+
   const getInstructors = async () => {
-    const instructors = await searchInstructor(postCode, transmission);
+    const instructors = await searchInstructor(
+      postCode,
+      transmission,
+      language
+    );
     setInstructors(instructors);
   };
 
@@ -98,6 +105,7 @@ const InstructorList = () => {
                 aria-label="Language"
                 onChange={(e) => setLanguage(e.target.value)}
               >
+                <option value={"all"}>Select Language</option>
                 {languages.map((language, key) => (
                   <option value={language.name}>{language.name}</option>
                 ))}

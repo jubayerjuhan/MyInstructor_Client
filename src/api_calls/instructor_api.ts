@@ -1,4 +1,5 @@
 import { client } from "../client";
+import { User } from "../typings/reduxTypings";
 
 export const getInstructorBookings = async (id: string) => {
   try {
@@ -6,6 +7,25 @@ export const getInstructorBookings = async (id: string) => {
     return data.bookings;
   } catch (error) {
     console.log(error);
+    return false;
+  }
+};
+
+export const editInstructor = async (user: User) => {
+  try {
+    const { data } = await client.put("/edit-instructor", user);
+    return data.instructor;
+  } catch (error) {
+    return false;
+  }
+};
+
+// update avater
+export const instructorUpdateAvater = async (avater: any) => {
+  try {
+    const { data } = await client.put("/instructor/update-avater", avater);
+    return data.instructor;
+  } catch (error) {
     return false;
   }
 };

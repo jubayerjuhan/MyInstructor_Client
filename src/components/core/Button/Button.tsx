@@ -1,6 +1,6 @@
 import React from "react";
 import "./Button.scss";
-import { InfinitySpin, RotatingLines } from "react-loader-spinner";
+import { RotatingLines } from "react-loader-spinner";
 
 const Button = ({
   smallFont,

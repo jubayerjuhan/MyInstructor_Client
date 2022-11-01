@@ -1,7 +1,6 @@
 import React from "react";
 import { AiOutlineOrderedList } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import avater from "../assets/reviewavater.jpg";
 import ViewBookingPage from "../pages/ViewBookingPage/ViewBookingPage";
 import { SET_ACTIVE_BOOKING } from "../redux/reducer/reduxNamings";
 import { BookingTypeBack } from "../typings/bookingsType";
@@ -11,11 +10,13 @@ export interface DashboadsBookingListProps {
   title: string;
   bookings: BookingTypeBack[];
   setActiveRoute?: any;
+  instructor?: boolean;
 }
 const DashboardBookingsContainer = ({
   title,
   bookings,
   setActiveRoute,
+  instructor,
 }: DashboadsBookingListProps) => {
   const dispatch = useDispatch();
 
@@ -34,7 +35,6 @@ const DashboardBookingsContainer = ({
       <p className="title">{title}</p>
       <div className="bookings__list">
         {bookings.map((booking, key) => {
-          console.log(booking, "booking");
           return (
             <div
               className="dash__booking"
@@ -42,11 +42,19 @@ const DashboardBookingsContainer = ({
               onClick={() => handleOrderClick(booking)}
             >
               <div className="avater">
-                <img src={booking.instructor.avater} alt="" />
+                <img
+                  src={
+                    instructor ? booking.user.avater : booking.instructor.avater
+                  }
+                  alt=""
+                />
               </div>
               <div className="dash__booking-body">
                 <p className="title">
-                  Booking With {booking.instructor.firstName}
+                  Booking With{" "}
+                  {instructor
+                    ? booking.instructor.firstName
+                    : booking.user.firstName}
                 </p>
                 <div className="booking__desc">
                   <p className="time">Time: 3:00PM</p>

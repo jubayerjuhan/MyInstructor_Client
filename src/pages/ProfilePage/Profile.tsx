@@ -9,6 +9,10 @@ import { LEARNER_LOGIN_COMPLETE } from "../../redux/reducer/reduxNamings";
 import { State, User } from "../../typings/reduxTypings";
 import { toast } from "material-react-toastify";
 import "./Profile.scss";
+import {
+  editInstructor,
+  instructorUpdateAvater,
+} from "../../api_calls/instructor_api";
 
 interface ProfileField {
   name: string;
@@ -69,6 +73,13 @@ const Profile = () => {
         defaultValue: profile.licenseStatus,
         options: licenseStatusOptions,
       },
+      {
+        name: "bio",
+        label: "Bio",
+        placeHolder: "Your Bio",
+        type: "textarea",
+        defaultValue: profile.bio || "",
+      },
     ]);
   }, [profile]);
 
@@ -83,13 +94,18 @@ const Profile = () => {
     if (!editMode || e.target.name === "email") return;
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
+  console.log(profile);
 
   // handle edit user
   const handleEditUser = async () => {
     setLoading(true);
-    const user = await editUser(profile);
-    if (user) {
-      dispatch({ type: LEARNER_LOGIN_COMPLETE, payload: user });
+    const newUser =
+      user.userType === "instructor"
+        ? await editInstructor(profile)
+        : await editUser(profile);
+
+    if (newUser) {
+      dispatch({ type: LEARNER_LOGIN_COMPLETE, payload: newUser });
       toast.success("Profile Updated Successfully");
     }
     setLoading(false);
@@ -115,9 +131,14 @@ const Profile = () => {
   const handleUpdateProfilepic = async () => {
     const formdata = new FormData();
     formdata.append("avater", newProfileImage.upload);
-    const user = await updateAvater(formdata);
-    if (user) {
-      dispatch({ type: LEARNER_LOGIN_COMPLETE, payload: user });
+
+    const newUser =
+      user.userType === "instructor"
+        ? await instructorUpdateAvater(formdata)
+        : await updateAvater(formdata);
+
+    if (newUser) {
+      dispatch({ type: LEARNER_LOGIN_COMPLETE, payload: newUser });
       toast.success("Avater Updated Successfully");
     }
   };
@@ -150,38 +171,58 @@ const Profile = () => {
       <div className="profile__inputs">
         <p className="title">Your Profile</p>
         {profileFields?.map((field, key) => {
+          if (field.name === "bio" && user.userType !== "instructor")
+            return <></>;
+          if (field.name === "bio")
+            return (
+              <div className="input__wrapper_w-header" key={key}>
+                <p className="title">{field.label}</p>
+                <textarea
+                  name={field.name}
+                  onChange={handleChange}
+                  value={field.defaultValue}
+                  className="form-control input__element login"
+                  cols={30}
+                  rows={10}
+                ></textarea>
+              </div>
+            );
           if (field.type === "select")
             return (
               <>
-                <div className="input__wrapper_w-header" key={key}>
-                  <p className="title">{field.label}</p>
-                  <select
-                    name={field.name}
-                    id=""
-                    onChange={handleChange}
-                    value={field.defaultValue}
-                    className="form-control input__element login"
-                  >
-                    {field.options?.map((opt) => (
-                      <option value={opt}>{opt}</option>
-                    ))}
-                  </select>
-                </div>
+                {user.userType === "learner" && (
+                  <div className="input__wrapper_w-header" key={key}>
+                    <p className="title">{field.label}</p>
+                    <select
+                      name={field.name}
+                      id=""
+                      onChange={handleChange}
+                      value={field.defaultValue}
+                      className="form-control input__element login"
+                    >
+                      {field.options?.map((opt) => (
+                        <option value={opt}>{opt}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
               </>
             );
           return (
             <>
-              <div className="input__wrapper_w-header" key={key}>
-                <p className="title">{field.label}</p>
-                <input
-                  name={field.name}
-                  onChange={handleChange}
-                  value={field.defaultValue}
-                  placeholder={field.placeHolder}
-                  type={field.type}
-                  className="form-control input__element login"
-                />
-              </div>
+              {
+                <div className="input__wrapper_w-header" key={key}>
+                  <p className="title">{field.label}</p>
+                  <input
+                    name={field.name}
+                    onChange={handleChange}
+                    value={field.defaultValue}
+                    placeholder={field.placeHolder}
+                    type={field.type}
+                    className="form-control input__element login"
+                  />
+                </div>
+              }
             </>
           );
         })}

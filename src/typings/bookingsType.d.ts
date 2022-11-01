@@ -1,7 +1,8 @@
 import { Instructor } from "./instructorTypings";
+import { User } from "./reduxTypings";
 
 export interface BookingTypeBack {
-  user: string;
+  user: User;
   instructor: Instructor;
   time: {
     from: string;
