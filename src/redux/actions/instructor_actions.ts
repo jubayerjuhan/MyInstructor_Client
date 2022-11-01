@@ -22,6 +22,7 @@ export const loginInstructor =
 
       return true;
     } catch (error: any) {
+      console.log(error);
       dispatch({
         type: INSTRUCTOR_LOGIN_ERROR,
         payload: error.response.data.message
