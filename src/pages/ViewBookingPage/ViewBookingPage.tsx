@@ -10,6 +10,7 @@ import {
 } from "../../api_calls/bookings_api";
 import ConfirmBooking from "../../components/ConfirmBooking/ConfirmBooking";
 import Button from "../../components/core/Button/Button";
+import FullPageSpinner from "../../components/FullPageSpinner/FullPageSpinner";
 import LdashInstructor from "../../components/LdashInstructor/LdashInstructor";
 import { BookingTypeBack } from "../../typings/bookingsType";
 import { State } from "../../typings/reduxTypings";
@@ -24,6 +25,7 @@ const ViewBookingPage = () => {
   const { user } = useSelector((state: State) => state.user);
   const [statusChanged, setStatusChanged] = useState(false);
   const [timeOver, setBookingTimeOver] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -31,14 +33,18 @@ const ViewBookingPage = () => {
   }, [statusChanged]);
 
   const getBooking = async () => {
+    setLoading(true);
     const data = await findBooking(activeBooking._id);
-    if (!data.success) return toast.error(data.message);
-    console.log(data.booking, "booking 34");
+    if (!data.success) {
+      setLoading(false);
+      return toast.error(data.message);
+    }
 
     if (Date.parse(data.booking?.time.to) < Date.now()) {
       setBookingTimeOver(true);
     }
     setBooking(data.booking);
+    setLoading(false);
   };
 
   // change booking status
@@ -66,91 +72,100 @@ const ViewBookingPage = () => {
     setStatusChanged(!statusChanged);
   };
 
-  if (!booking) return <></>;
+  if (!booking)
+    return (
+      <>
+        <FullPageSpinner />
+      </>
+    );
 
   return (
-    <div className="view__booking-page dashboard__padding">
-      <div
-        className="backButton"
-        onClick={() =>
-          (window.location.href =
-            user.userType === "instructor"
-              ? "/instructor/dashboard"
-              : "/learner/dashboard")
-        }
-      >
-        <BsArrowLeft />
-      </div>
-      <p className="title">Booking Infromation</p>
+    <>
+      {loading && <FullPageSpinner />}
+      <div className="view__booking-page dashboard__padding">
+        <div
+          className="backButton"
+          onClick={() =>
+            (window.location.href =
+              user.userType === "instructor"
+                ? "/instructor/dashboard"
+                : "/learner/dashboard")
+          }
+        >
+          <BsArrowLeft />
+        </div>
+        <p className="title">Booking Infromation</p>
 
-      {/* change booking status */}
-      {booking.status === "Pending" && user.userType === "instructor" && (
-        <ConfirmBooking
-          title={`Do You Want To Confirm Booking With ${booking?.user?.firstName} ?`}
-          booking={booking}
-          changeBookingStatus={changeBookingStatus}
-        />
-      )}
-      {booking.status === "Approved" &&
-        timeOver &&
-        user.userType === "instructor" && (
+        {/* change booking status */}
+        {booking.status === "Pending" && user.userType === "instructor" && (
           <ConfirmBooking
-            title={`End Booking Successfully! ${booking?.user?.firstName} ?`}
+            title={`Do You Want To Confirm Booking With ${booking?.user?.firstName} ?`}
             booking={booking}
-            changeBookingStatus={endBooking}
+            changeBookingStatus={changeBookingStatus}
           />
         )}
-      {user.userType === "learner" && (
-        <LdashInstructor instructor={booking?.instructor} />
-      )}
-      <div className="view__booking-main">
-        <InformationFields
-          title={"Learner Information"}
-          child1={`Name : ${booking?.user.firstName} ${booking?.user.lastName}`}
-          child2={`License Status : ${booking?.user.licenseStatus} `}
-          child3={`Phone : ${booking?.user.phone} `}
-          child4={`Email : ${booking?.user.email} `}
-        />
+        {booking.status === "Approved" &&
+          timeOver &&
+          user.userType === "instructor" && (
+            <ConfirmBooking
+              title={`End Booking Successfully! ${booking?.user?.firstName} ?`}
+              booking={booking}
+              changeBookingStatus={endBooking}
+            />
+          )}
+        {user.userType === "learner" && (
+          <LdashInstructor instructor={booking?.instructor} />
+        )}
+        <div className="view__booking-main">
+          <InformationFields
+            title={"Learner Information"}
+            child1={`Name : ${booking?.user.firstName} ${booking?.user.lastName}`}
+            child2={`License Status : ${booking?.user.licenseStatus} `}
+            child3={`Phone : ${booking?.user.phone} `}
+            child4={`Email : ${booking?.user.email} `}
+          />
 
-        <InformationFields
-          title={"Booking Time"}
-          child1={`Starts From : ${moment(booking?.time.from).format(
-            "MMMM Do YYYY, h:mm:ss a"
-          )}`}
-          child2={`End To : ${moment(booking?.time.to).format(
-            "MMMM Do YYYY, h:mm:ss a"
-          )}`}
-        />
-        <InformationFields
-          title={"Booking Duration"}
-          child1={`Duration: ${booking?.duration} hrs`}
-        />
-        <InformationFields
-          title={"Booking Status"}
-          child1={
-            <>
-              Status :{" "}
-              <span
-                style={{
-                  fontWeight: "bold",
-                  color: booking?.status === "Pending" ? "#faa41a" : "#429E01",
-                }}
-              >
-                {booking?.status}
-              </span>
-            </>
-          }
-        />
+          <InformationFields
+            title={"Booking Time"}
+            child1={`Starts From : ${moment(booking?.time.from).format(
+              "MMMM Do YYYY, h:mm:ss a"
+            )}`}
+            child2={`End To : ${moment(booking?.time.to).format(
+              "MMMM Do YYYY, h:mm:ss a"
+            )}`}
+          />
+          <InformationFields
+            title={"Booking Duration"}
+            child1={`Duration: ${booking?.duration} hrs`}
+          />
+          <InformationFields
+            title={"Booking Status"}
+            child1={
+              <>
+                Status :{" "}
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    color:
+                      booking?.status === "Pending" ? "#faa41a" : "#429E01",
+                  }}
+                >
+                  {booking?.status}
+                </span>
+              </>
+            }
+          />
 
-        <InformationFields
-          title={"Pickup Details"}
-          child1={`Address: ${booking?.pickupDetails.address}`}
-          child2={`Suburb: ${booking?.pickupDetails.suburb}`}
-          child3={`Post Code: ${booking?.pickupDetails.postcode}`}
-          child4={`State: ${booking?.pickupDetails.state}`}
-        />
+          <InformationFields
+            title={"Pickup Details"}
+            child1={`Address: ${booking?.pickupDetails.address}`}
+            child2={`Suburb: ${booking?.pickupDetails.suburb}`}
+            child3={`Post Code: ${booking?.pickupDetails.postcode}`}
+            child4={`State: ${booking?.pickupDetails.state}`}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

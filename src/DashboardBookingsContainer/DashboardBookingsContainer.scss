@@ -21,6 +21,11 @@
   }
 }
 
+.dash__booking-body {
+  cursor: pointer;
+  // width: 100%;
+}
+
 .dash__booking {
   padding: 10px 0px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.39);
@@ -60,6 +65,8 @@
 
 .booking__list-empty {
   padding: 30px 20px;
+  display: flex;
+  justify-content: center;
 
   > .title {
     text-align: center;

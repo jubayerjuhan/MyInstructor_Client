@@ -13,6 +13,7 @@ const InstructorDashboardMain = ({ setActiveRoute }: any) => {
   const [bookings, setBookings] = useState<BookingTypeBack[]>([]);
   const [upcomingBookings, setUpcomingBookings] = useState<BookingTypeBack[]>();
   const [pendingBookings, setPendingBookings] = useState<BookingTypeBack[]>();
+  const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state: State) => state.user);
   useEffect(() => {
@@ -23,8 +24,10 @@ const InstructorDashboardMain = ({ setActiveRoute }: any) => {
   }, [bookings]);
 
   const getBookingsByInstructor = async () => {
+    setLoading(true);
     const bookings = await getInstructorBookings(user._id);
     setBookings(bookings);
+    setLoading(false);
   };
 
   // count upcoming bookings
@@ -68,12 +71,14 @@ const InstructorDashboardMain = ({ setActiveRoute }: any) => {
         </div>
         <div className="dash__bookings-list">
           <DashboardBookingsContainer
+            loading={loading}
             instructor
             setActiveRoute={setActiveRoute}
             title={"Upcoming Bookings"}
             bookings={upcomingBookings ? upcomingBookings : []}
           />
           <DashboardBookingsContainer
+            loading={loading}
             instructor
             setActiveRoute={setActiveRoute}
             title={"Bookings History Bookings"}

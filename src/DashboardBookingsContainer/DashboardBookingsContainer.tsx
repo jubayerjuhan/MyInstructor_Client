@@ -1,9 +1,11 @@
+import moment from "moment";
 import React from "react";
 import { AiOutlineOrderedList } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import ViewBookingPage from "../pages/ViewBookingPage/ViewBookingPage";
 import { SET_ACTIVE_BOOKING } from "../redux/reducer/reduxNamings";
 import { BookingTypeBack } from "../typings/bookingsType";
+import BeatLoader from "react-spinners/BeatLoader";
 import "./DashboardBookingsContainer.scss";
 
 export interface DashboadsBookingListProps {
@@ -11,8 +13,10 @@ export interface DashboadsBookingListProps {
   bookings: BookingTypeBack[];
   setActiveRoute?: any;
   instructor?: boolean;
+  loading?: boolean;
 }
 const DashboardBookingsContainer = ({
+  loading,
   title,
   bookings,
   setActiveRoute,
@@ -57,7 +61,9 @@ const DashboardBookingsContainer = ({
                     : booking.instructor.firstName}
                 </p>
                 <div className="booking__desc">
-                  <p className="time">Time: 3:00PM</p>
+                  <p className="time">
+                    {moment(booking.time.from).format("MMM Do YY h:mm a ")}
+                  </p>
                   <p
                     className="time bookingStatus"
                     style={{
@@ -73,9 +79,14 @@ const DashboardBookingsContainer = ({
             </div>
           );
         })}
+
         {bookings.length <= 0 && (
           <div className="booking__list-empty">
-            <p className="title">No Bookings Available</p>
+            {loading ? (
+              <BeatLoader color="#faa41a" />
+            ) : (
+              <p className="title">No Bookings Available</p>
+            )}
           </div>
         )}
       </div>
