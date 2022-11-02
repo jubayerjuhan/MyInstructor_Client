@@ -53,12 +53,21 @@ const DashboardBookingsContainer = ({
                 <p className="title">
                   Booking With{" "}
                   {instructor
-                    ? booking.instructor.firstName
-                    : booking.user.firstName}
+                    ? booking.user.firstName
+                    : booking.instructor.firstName}
                 </p>
                 <div className="booking__desc">
                   <p className="time">Time: 3:00PM</p>
-                  <p className="time">Status: {booking.status}</p>
+                  <p
+                    className="time bookingStatus"
+                    style={{
+                      fontWeight: "bold",
+                      color:
+                        booking?.status === "Pending" ? "#faa41a" : "#429E01",
+                    }}
+                  >
+                    Status: {booking.status}
+                  </p>
                 </div>
               </div>
             </div>

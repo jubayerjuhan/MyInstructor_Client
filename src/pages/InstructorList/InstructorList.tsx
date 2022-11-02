@@ -72,11 +72,11 @@ const InstructorList = () => {
         <div className="instructors__main sectionPadding">
           <div className="all__instructors-wrapper">
             <p className="title">
-              Found {instructors.length} Instructors In{" "}
+              Found {instructors?.length} Instructors In{" "}
               {suburbInfo?.suburb ? suburbInfo?.suburb : "In Your Area"}
             </p>
             <div className="all-instructors__list">
-              {instructors.map((instructor, key) => {
+              {instructors?.map((instructor, key) => {
                 return (
                   <InstructorCard
                     handleCheckAvailability={handleCheckAvailability}
