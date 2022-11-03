@@ -29,3 +29,30 @@ export const instructorUpdateAvater = async (avater: any) => {
     return false;
   }
 };
+
+// get single instructor
+
+export const getSingleInstructor = async (id: string) => {
+  try {
+    const { data } = await client.get(`/instructor/${id}`);
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response.data.message,
+    };
+  }
+};
+
+// add review
+export const addReview = async (review: object) => {
+  try {
+    const { data } = await client.post(`/instructor/review`, review);
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response.data.message,
+    };
+  }
+};

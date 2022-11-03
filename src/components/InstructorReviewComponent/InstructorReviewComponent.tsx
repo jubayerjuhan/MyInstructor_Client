@@ -1,26 +1,19 @@
 import React from "react";
 import Rating from "@mui/material/Rating";
 import "./InstructorReviewComponent.scss";
+import { Review } from "../../typings/instructorTypings";
 
-const InstructorReviewComponent = () => {
+interface Props {
+  review: Review;
+}
+const InstructorReviewComponent = ({ review }: Props) => {
   return (
     <div className="instructor__review">
-      <p className="title">Sophie</p>
+      <p className="title">{review.user}</p>
       <div className="rating">
-        <Rating
-          name="read-only"
-          readOnly
-          value={5}
-          // onChange={(event, newValue) => {
-          //   setValue(newValue);
-          // }}
-        />
+        <Rating name="read-only" readOnly value={review.rating} />
       </div>
-      <p className="description">
-        Thank you, Juhan, for all your help! Gave me massive confidence and
-        motivational boost and helped me pass my licence test. Also, super
-        friendly very easy going and get along with and awesome sense of humour!
-      </p>
+      <p className="description">{review.message}</p>
     </div>
   );
 };

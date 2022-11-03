@@ -4,20 +4,27 @@ import "../LearnerDashboardMain/LearnerDashboardMain.scss";
 import CounterCards from "../CounterCards/CounterCards";
 import { BsCurrencyDollar } from "react-icons/bs";
 import DashboardBookingsContainer from "../../DashboardBookingsContainer/DashboardBookingsContainer";
-import { getInstructorBookings } from "../../api_calls/instructor_api";
+import {
+  getInstructorBookings,
+  getSingleInstructor,
+} from "../../api_calls/instructor_api";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 import { BookingTypeBack } from "../../typings/bookingsType";
+import { Instructor } from "../../typings/instructorTypings";
+import { toast } from "material-react-toastify";
 
 const InstructorDashboardMain = ({ setActiveRoute }: any) => {
   const [bookings, setBookings] = useState<BookingTypeBack[]>([]);
   const [upcomingBookings, setUpcomingBookings] = useState<BookingTypeBack[]>();
   const [pendingBookings, setPendingBookings] = useState<BookingTypeBack[]>();
   const [loading, setLoading] = useState(false);
+  const [fetchedInstructor, setFetchedInstructor] = useState<Instructor>();
 
-  const { user } = useSelector((state: State) => state.user);
+  const { user: instructor } = useSelector((state: State) => state.user);
   useEffect(() => {
     getBookingsByInstructor();
+    fetchInstructor();
   }, []);
   useEffect(() => {
     countUpcomingBookings();
@@ -25,8 +32,20 @@ const InstructorDashboardMain = ({ setActiveRoute }: any) => {
 
   const getBookingsByInstructor = async () => {
     setLoading(true);
-    const bookings = await getInstructorBookings(user._id);
+    const bookings = await getInstructorBookings(instructor._id);
     setBookings(bookings);
+    setLoading(false);
+  };
+
+  // fetch instructor from backend
+  const fetchInstructor = async () => {
+    setLoading(true);
+    const data = await getSingleInstructor(instructor._id);
+    if (!data.success) {
+      setLoading(false);
+      return toast.error(data?.message);
+    }
+    setFetchedInstructor(data?.instructor);
     setLoading(false);
   };
 
@@ -54,18 +73,21 @@ const InstructorDashboardMain = ({ setActiveRoute }: any) => {
         <p className="title">Dashboard Information</p>
         <div className="ldash__counters">
           <CounterCards
+            loading={loading}
             title={"Pending Bookings"}
             count={pendingBookings ? pendingBookings.length : 0}
             icon={<BsCurrencyDollar />}
           />
           <CounterCards
+            loading={loading}
             title={"Upcoming Bookings"}
             count={upcomingBookings ? upcomingBookings.length : 0}
             icon={<BsCurrencyDollar />}
           />
           <CounterCards
+            loading={loading}
             title={"Withdraw Available"}
-            count={`0 hr`}
+            count={`${fetchedInstructor?.credit || 0} hr`}
             icon={<BsCurrencyDollar />}
           />
         </div>

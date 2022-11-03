@@ -24,6 +24,14 @@
   }
 }
 
+.show__all-btn {
+  cursor: pointer;
+  margin-top: 15px;
+  @include descriptionFont;
+  text-decoration: underline;
+  color: var(--theme-color);
+}
+
 .instructor__all-reviews {
   margin-top: 25px;
   display: flex;

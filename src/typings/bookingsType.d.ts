@@ -4,6 +4,7 @@ import { User } from "./reduxTypings";
 export interface BookingTypeBack {
   _id: string;
   user: User;
+  reviewed: boolean;
   instructor: Instructor;
   time: {
     from: string;

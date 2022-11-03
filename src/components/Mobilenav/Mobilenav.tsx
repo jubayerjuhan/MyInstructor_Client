@@ -6,7 +6,9 @@ const Mobilenav = ({ onClick }: any) => {
   return (
     <nav className="mobileNav">
       <div className="mobileNav__image">
-        <img src={Logo} alt="" />
+        <a href="/">
+          <img src={Logo} alt="" />
+        </a>
       </div>
       <div className="mobileNav__button">
         <GiHamburgerMenu

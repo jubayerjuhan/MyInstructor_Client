@@ -21,7 +21,7 @@
 
 .view__booking-page {
   position: absolute;
-  width: 100%;
+  width: 85%;
   > .title {
     @include smallTitle;
     margin-bottom: 10px;
@@ -51,5 +51,11 @@
   .info__field {
     margin-bottom: 5px;
     @include descriptionFont;
+  }
+}
+
+@media (max-width: 768px) {
+  .view__booking-page {
+    width: 100%;
   }
 }

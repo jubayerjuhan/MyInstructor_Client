@@ -63,20 +63,12 @@ const InstructorProfile = () => {
           <div className="instructor__profile-left">
             <InstructorProfileInfo instructor={instructor} />
             {/* <InstructorProfilePolicies /> */}
-            <div className="instructor__bio">
-              <div className="title">Bio</div>
-              <p className="description">
-                Hi, my name is Glenn. My career has been diverse! I was a Tour
-                Guide for 13yrs, operating camping safaris around Australia for
-                international and local clients. This involved countless dirt
-                roads and highways and driving a range of vehicles from 4WD to
-                53 seat coaches. Following this, I moved onto the Australian
-                Defence Force where I was a transport specialist. Driving and
-                educating employees in cars, buses and trucks, including
-                operating specialized equipment for loading and unloading of
-                mili...
-              </p>
-            </div>
+            {instructor.bio && (
+              <div className="instructor__bio">
+                <div className="title">Bio</div>
+                <p className="description">{instructor.bio}</p>
+              </div>
+            )}
             <InstructorVehical instructor={instructor} />
           </div>
           <div className="instructor__profile-right">
@@ -95,7 +87,7 @@ const InstructorProfile = () => {
                 revertColor
               />
             </div>
-            <InstructorReviews />
+            <InstructorReviews reviews={instructor.reviews} />
           </div>
         </div>
       </div>

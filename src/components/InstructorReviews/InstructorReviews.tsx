@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
+import { Review } from "../../typings/instructorTypings";
 import InstructorReviewComponent from "../InstructorReviewComponent/InstructorReviewComponent";
 import "./InstructorReviews.scss";
 
-const InstructorReviews = () => {
+interface InstructorReviewsProps {
+  reviews: Review[];
+}
+const InstructorReviews = ({ reviews }: InstructorReviewsProps) => {
+  const [showAll, setShowAll] = useState(false);
+
   return (
     <div className="instructor__reviews">
       <div className="title">
@@ -15,10 +21,14 @@ const InstructorReviews = () => {
       </div>
       <p className="description">37 ratings</p>
       <div className="instructor__all-reviews">
-        <InstructorReviewComponent />
-        <InstructorReviewComponent />
-        <InstructorReviewComponent />
+        {reviews.map((review, key) => {
+          if (!showAll && key > 4) return <></>;
+          return <InstructorReviewComponent review={review} />;
+        })}
       </div>
+      <p className="show__all-btn" onClick={() => setShowAll(!showAll)}>
+        Show {showAll ? "Less" : "All"}
+      </p>
     </div>
   );
 };

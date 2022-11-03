@@ -4,15 +4,12 @@ export interface Instructor {
   dateOfBirth: date;
   email: string;
   firstName: string;
-
+  credit: number;
   gender: string;
-
   languages: string[];
-
   lastName: string;
-
   phone: string;
-
+  bio: string;
   reviews: [];
   serviceSuburbs: {
     suburbs: Suburb[];
@@ -20,6 +17,7 @@ export interface Instructor {
   createdAt: Date;
   transmissionType: string;
   _id: string;
+  reviews: Review[];
 }
 
 export type Suburb = {
@@ -32,4 +30,10 @@ type Car = {
   name: string;
   numberPlate: string;
   transmissionType: string;
+};
+
+export type Review = {
+  rating: number;
+  message: string;
+  user: string;
 };

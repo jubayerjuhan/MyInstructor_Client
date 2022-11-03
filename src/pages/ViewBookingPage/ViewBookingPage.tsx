@@ -12,6 +12,7 @@ import ConfirmBooking from "../../components/ConfirmBooking/ConfirmBooking";
 import Button from "../../components/core/Button/Button";
 import FullPageSpinner from "../../components/FullPageSpinner/FullPageSpinner";
 import LdashInstructor from "../../components/LdashInstructor/LdashInstructor";
+import WriteReviewComponent from "../../components/WriteReviewComponent/WriteReviewComponent";
 import { BookingTypeBack } from "../../typings/bookingsType";
 import { State } from "../../typings/reduxTypings";
 import "./ViewBookingPage.scss";
@@ -115,6 +116,12 @@ const ViewBookingPage = () => {
           )}
         {user.userType === "learner" && (
           <LdashInstructor instructor={booking?.instructor} />
+        )}
+        {user.userType === "learner" && (
+          <WriteReviewComponent
+            instructor={booking.instructor}
+            booking={booking}
+          />
         )}
         <div className="view__booking-main">
           <InformationFields

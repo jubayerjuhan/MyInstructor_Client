@@ -19,6 +19,7 @@ const LearnerDashboardMain = ({ setActiveRoute }: any) => {
   const { instructor } = useSelector((state: State) => state.instructor);
   const [bookings, setBookings] = useState<BookingTypeBack[]>();
   const [upcomingBookings, setUpcomingBookings] = useState<BookingTypeBack[]>();
+  const [loading, setLoading] = useState(false);
 
   const [user, setUser] = useState<User>({
     _id: "",
@@ -40,6 +41,7 @@ const LearnerDashboardMain = ({ setActiveRoute }: any) => {
   }, [bookings]);
 
   const getUserAndBookings = async () => {
+    setLoading(true);
     const user = await getCurrentUser();
     if (user) setUser(user);
 
@@ -47,6 +49,7 @@ const LearnerDashboardMain = ({ setActiveRoute }: any) => {
     if (bookingsFromBack) {
       setBookings(bookingsFromBack);
     }
+    setLoading(false);
   };
 
   // count upcoming bookings
@@ -66,16 +69,19 @@ const LearnerDashboardMain = ({ setActiveRoute }: any) => {
       {instructor && <LdashInstructor instructor={instructor} />}
       <div className="ldash__counters">
         <CounterCards
+          loading={loading}
           title={"Credits"}
           count={user.credit}
           icon={<BsCurrencyDollar />}
         />
         <CounterCards
+          loading={loading}
           title={"Bookings"}
           count={bookings ? bookings.length : 0}
           icon={<MdFormatListBulleted />}
         />
         <CounterCards
+          loading={loading}
           title={"Upcoming Bookings"}
           count={upcomingBookings ? upcomingBookings.length : 0}
           icon={<MdFormatListBulleted />}
@@ -83,11 +89,13 @@ const LearnerDashboardMain = ({ setActiveRoute }: any) => {
       </div>
       <div className="dash__bookings-list">
         <DashboardBookingsContainer
+          loading={loading}
           setActiveRoute={setActiveRoute}
           title={"Upcoming Bookings"}
           bookings={upcomingBookings ? upcomingBookings : []}
         />
         <DashboardBookingsContainer
+          loading={loading}
           setActiveRoute={setActiveRoute}
           title={"Bookings History Bookings"}
           bookings={bookings ? bookings : []}

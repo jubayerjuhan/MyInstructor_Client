@@ -22,9 +22,11 @@ const DashboardSidebar = ({
       >
         <FaTimes className="mobile__times" onClick={() => setSidebar(false)} />
         <div className="dashboard__sidebar-header">
-          <div className="logo">
-            <img src={logo} alt="" />
-          </div>
+          <a href="/">
+            <div className="logo">
+              <img src={logo} alt="" />
+            </div>
+          </a>
         </div>
         <div className="dashboard__nav-links">
           {links.map((link) => (
