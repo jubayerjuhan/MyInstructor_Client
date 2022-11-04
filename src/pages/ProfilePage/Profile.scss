@@ -55,6 +55,11 @@
   }
 }
 
+.profile__available-indicator {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
 .image__edit-btn {
   height: 30px;
   width: 30px;

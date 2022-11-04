@@ -1,6 +1,7 @@
 export interface Instructor {
   avater: string;
   car: Car;
+  available: boolean;
   dateOfBirth: date;
   email: string;
   firstName: string;

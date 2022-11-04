@@ -9,10 +9,14 @@ import { LEARNER_LOGIN_COMPLETE } from "../../redux/reducer/reduxNamings";
 import { State, User } from "../../typings/reduxTypings";
 import { toast } from "material-react-toastify";
 import "./Profile.scss";
+import Switch from "@mui/material/Switch";
+
 import {
+  changeAvailability,
   editInstructor,
   instructorUpdateAvater,
 } from "../../api_calls/instructor_api";
+import FullPageSpinner from "../../components/FullPageSpinner/FullPageSpinner";
 
 interface ProfileField {
   name: string;
@@ -127,6 +131,14 @@ const Profile = () => {
     });
   };
 
+  // change instructor availability
+  const changeInstructorAvailability = async (e: any) => {
+    setLoading(true);
+    const data = await changeAvailability(e.target?.checked, user._id);
+    setLoading(false);
+    dispatch({ type: LEARNER_LOGIN_COMPLETE, payload: data.instructor });
+  };
+
   // handle update profile pic
   const handleUpdateProfilepic = async () => {
     const formdata = new FormData();
@@ -145,103 +157,116 @@ const Profile = () => {
 
   console.log(newProfileImage, "profile Image");
   return (
-    <div className="profile__page dashboard__padding">
-      <div className="profileImage">
-        <img src={newProfileImage.preview || user.avater || avater} alt="" />
-        <input
-          type="file"
-          id="file"
-          ref={inputFile}
-          onChange={handleImageSelect}
-          style={{ display: "none" }}
-        />
-        {newProfileImage.preview ? (
-          <div
-            className="image__edit-btn tick__button-submit_profile-pic"
-            onClick={handleUpdateProfilepic}
-          >
-            <AiOutlineCheck />
-          </div>
-        ) : (
-          <div className="image__edit-btn" onClick={handleSelectProfilePic}>
-            <AiOutlineEdit />
-          </div>
-        )}
-      </div>
-      <div className="profile__inputs">
-        <p className="title">Your Profile</p>
-        {profileFields?.map((field, key) => {
-          if (field.name === "bio" && user.userType !== "instructor")
-            return <></>;
-          if (field.name === "bio")
-            return (
-              <div className="input__wrapper_w-header" key={key}>
-                <p className="title">{field.label}</p>
-                <textarea
-                  name={field.name}
-                  onChange={handleChange}
-                  value={field.defaultValue}
-                  className="form-control input__element login"
-                  cols={30}
-                  rows={10}
-                ></textarea>
-              </div>
-            );
-          if (field.type === "select")
-            return (
-              <>
-                {user.userType === "learner" && (
-                  <div className="input__wrapper_w-header" key={key}>
-                    <p className="title">{field.label}</p>
-                    <select
-                      name={field.name}
-                      id=""
-                      onChange={handleChange}
-                      value={field.defaultValue}
-                      className="form-control input__element login"
-                    >
-                      {field.options?.map((opt) => (
-                        <option value={opt}>{opt}</option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-              </>
-            );
-          return (
-            <>
-              {
+    <>
+      {loading && <FullPageSpinner />}
+      <div className="profile__page dashboard__padding">
+        <div className="profileImage">
+          <img src={newProfileImage.preview || user.avater || avater} alt="" />
+          <input
+            type="file"
+            id="file"
+            ref={inputFile}
+            onChange={handleImageSelect}
+            style={{ display: "none" }}
+          />
+          {newProfileImage.preview ? (
+            <div
+              className="image__edit-btn tick__button-submit_profile-pic"
+              onClick={handleUpdateProfilepic}
+            >
+              <AiOutlineCheck />
+            </div>
+          ) : (
+            <div className="image__edit-btn" onClick={handleSelectProfilePic}>
+              <AiOutlineEdit />
+            </div>
+          )}
+        </div>
+        <div className="profile__inputs">
+          <p className="title">Your Profile</p>
+          {user.userType === "instructor" && (
+            <div className="profile__available-indicator">
+              <p className="title">Available To Take Booking ? </p>
+              <Switch
+                size="medium"
+                checked={user.available}
+                onChange={changeInstructorAvailability}
+              />
+            </div>
+          )}
+          {profileFields?.map((field, key) => {
+            if (field.name === "bio" && user.userType !== "instructor")
+              return <></>;
+            if (field.name === "bio")
+              return (
                 <div className="input__wrapper_w-header" key={key}>
                   <p className="title">{field.label}</p>
-                  <input
+                  <textarea
                     name={field.name}
                     onChange={handleChange}
                     value={field.defaultValue}
-                    placeholder={field.placeHolder}
-                    type={field.type}
                     className="form-control input__element login"
-                  />
+                    cols={30}
+                    rows={10}
+                  ></textarea>
                 </div>
-              }
-            </>
-          );
-        })}
-        {editMode ? (
-          <div className="profile__buttons">
-            <Button
-              loading={loading}
-              title={"Save Profile"}
-              width={"100%"}
-              onClick={handleEditUser}
-            />
-          </div>
-        ) : (
-          <div className="edit__button-profile" onClick={handleEditClick}>
-            <AiOutlineEdit />
-          </div>
-        )}
+              );
+            if (field.type === "select")
+              return (
+                <>
+                  {user.userType === "learner" && (
+                    <div className="input__wrapper_w-header" key={key}>
+                      <p className="title">{field.label}</p>
+                      <select
+                        name={field.name}
+                        id=""
+                        onChange={handleChange}
+                        value={field.defaultValue}
+                        className="form-control input__element login"
+                      >
+                        {field.options?.map((opt) => (
+                          <option value={opt}>{opt}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                </>
+              );
+            return (
+              <>
+                {
+                  <div className="input__wrapper_w-header" key={key}>
+                    <p className="title">{field.label}</p>
+                    <input
+                      name={field.name}
+                      onChange={handleChange}
+                      value={field.defaultValue}
+                      placeholder={field.placeHolder}
+                      type={field.type}
+                      className="form-control input__element login"
+                    />
+                  </div>
+                }
+              </>
+            );
+          })}
+          {editMode ? (
+            <div className="profile__buttons">
+              <Button
+                loading={loading}
+                title={"Save Profile"}
+                width={"100%"}
+                onClick={handleEditUser}
+              />
+            </div>
+          ) : (
+            <div className="edit__button-profile" onClick={handleEditClick}>
+              <AiOutlineEdit />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

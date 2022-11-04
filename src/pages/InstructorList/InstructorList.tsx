@@ -9,11 +9,11 @@ import "./InstructorList.scss";
 import { useParams } from "react-router-dom";
 import { searchInstructor } from "../../api_calls/instructor_list";
 import { client } from "../../client";
-import { Suburb } from "../../typings/instructorTypings";
+import { Instructor, Suburb } from "../../typings/instructorTypings";
 import CheckAvailability from "../../components/CheckAvailability/CheckAvailability";
 
 const InstructorList = () => {
-  const [instructors, setInstructors] = useState([]);
+  const [instructors, setInstructors] = useState<Instructor[]>([]);
   const [language, setLanguage] = useState<any>(null);
   const [showModal, setShowModal] = useState(false);
   const [lookupInstructor, setLookupInstructor] = useState({});
@@ -77,6 +77,7 @@ const InstructorList = () => {
             </p>
             <div className="all-instructors__list">
               {instructors?.map((instructor, key) => {
+                if (!instructor.available) return <></>;
                 return (
                   <InstructorCard
                     handleCheckAvailability={handleCheckAvailability}

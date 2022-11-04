@@ -62,4 +62,5 @@ export interface User {
   userType: string;
   avater?: string;
   bio?: string;
+  available?: boolean;
 }

@@ -56,3 +56,22 @@ export const addReview = async (review: object) => {
     };
   }
 };
+
+// change instructor availability
+
+export const changeAvailability = async (available: boolean, id: string) => {
+  try {
+    const { data } = await client.post(
+      `/instructor/change-availability/${id}`,
+      {
+        available,
+      }
+    );
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      error: error.response.data.message,
+    };
+  }
+};

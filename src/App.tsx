@@ -4,6 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Register from "./components/Register/Register";
 import NotFoundPage from "./pages/404Page/NotFoundPage";
 import AddToCart from "./pages/AddToCart/AddToCart";
+import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import BookingInformation from "./pages/BookingInformation/BookingInformation";
 import BookingPage from "./pages/BookingPage/BookingPage";
 import BookingSuccess from "./pages/BookingSuccess/BookingSuccess";
@@ -107,6 +108,16 @@ function App() {
           element={
             <ProtectedRoute location={"/instructor/dashboard"}>
               <InstructorDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* admin routes */}
+        <Route
+          path="/admin/login"
+          element={
+            <ProtectedRoute location={"/admin/login"}>
+              <AdminLogin />
             </ProtectedRoute>
           }
         />
