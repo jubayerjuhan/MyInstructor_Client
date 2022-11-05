@@ -7,8 +7,12 @@ import Button from "../../components/core/Button/Button";
 import { BsCalendar2Date } from "react-icons/bs";
 import BookingSelector from "../../components/BookingSelector/BookingSelctor";
 import { useSelector } from "react-redux";
+import TestPackageSelector from "../../components/TestPackageSelector/TestPackageSelector.jsx";
 const BookingPage = () => {
-  const [bookDrivingLesson, setBookDrivingLesson] = useState(false);
+  const [bookDrivingLesson, setBookDrivingLesson] = useState({
+    visible: null,
+    type: "",
+  });
   const { instructor } = useSelector((state) => state.instructor);
   useEffect(() => {
     if (!instructor) window.location.href = "/";
@@ -27,15 +31,30 @@ const BookingPage = () => {
             </div>
             <p>Book Now</p>
           </div>
-          {bookDrivingLesson ? (
-            <BookingSelector />
+          {bookDrivingLesson.visible ? (
+            <>
+              {bookDrivingLesson.type === "booking" && <BookingSelector />}
+              {bookDrivingLesson.type === "test-package" && (
+                <TestPackageSelector />
+              )}
+            </>
           ) : (
             <div className="booking__buttons">
               <Button
                 revertColor
                 width={"100%"}
                 title={"Book Driving Lesson"}
-                onClick={() => setBookDrivingLesson(true)}
+                onClick={() =>
+                  setBookDrivingLesson({ visible: true, type: "booking" })
+                }
+              />
+              <Button
+                revertColor
+                width={"100%"}
+                title={"Book Test Package"}
+                onClick={() =>
+                  setBookDrivingLesson({ visible: true, type: "test-package" })
+                }
               />
               <Button
                 width={"100%"}

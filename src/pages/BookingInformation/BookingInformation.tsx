@@ -34,7 +34,6 @@ const BookingInformation = () => {
     error,
   } = useSelector((state: State) => state.booking);
   const dispatch = useDispatch<any>();
-
   const navigate = useNavigate();
 
   const [modal, setModal] = useState({
@@ -118,9 +117,11 @@ const BookingInformation = () => {
           from: booking.time.startFrom,
           to: booking.time.endTo,
         },
+        type: booking?.type,
         duration: booking.duration,
         pickupDetails: pickUpInformation,
       };
+
       return dispatch(bookLesson(bookingInfo));
     }
 

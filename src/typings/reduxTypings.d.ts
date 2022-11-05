@@ -29,6 +29,7 @@ export interface BookingReducerTypes {
 export interface BookingType {
   duration: number;
   date: string;
+  type?: string;
   time: { startFrom?: string; endTo?: string; from?: string; to?: string };
 }
 
