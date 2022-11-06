@@ -6,9 +6,9 @@ const jwtToken = getLocalStorageData("jwtToken");
 export const client = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
-      ? "https://first-energy-364305.ts.r.appspot.com/api"
+      ? "https://my-instructor-server.ts.r.appspot.com/"
       : "http://localhost:5000/api",
-  // baseURL: "https://first-energy-364305.ts.r.appspot.com/api",
+  // baseURL: "https://my-instructor-server.ts.r.appspot.com/",
   headers: {
     authorization: `Bearer ${jwtToken}`,
   },
