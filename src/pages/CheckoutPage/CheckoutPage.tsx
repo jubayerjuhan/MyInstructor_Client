@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 import { toast } from "material-react-toastify";
 import { useLocation } from "react-router-dom";
+import { BookingInfoProps } from "../BookingInformation/BookingInformation";
 const CheckoutPage = () => {
   const { state } = useLocation();
   console.log(state?.bookForward, "book Forward checkout");
@@ -17,13 +18,15 @@ const CheckoutPage = () => {
   const [paymentAvailable, setPaymentAvailable] = useState(false);
 
   useEffect(() => {
-    if (!cart?.hours) {
+    window.scroll(0, 0);
+    if (!cart?.hours && !state?.testPackage) {
+      console.log("Hello");
       window.location.replace("/not-found");
       toast.error("Please Select Bookings Hours First");
     }
   }, [cart]);
 
-  if (!cart?.hours) return <></>;
+  if (!cart?.hours && !state?.testPackage) return <></>;
   return (
     <>
       <Navbar />
@@ -36,6 +39,7 @@ const CheckoutPage = () => {
             />
           ) : (
             <CheckoutPayment
+              testPackage={state?.testPackage}
               billing={billings}
               checkoutBooking={state?.bookForward}
             />
@@ -45,7 +49,11 @@ const CheckoutPage = () => {
           <p className="title">On Your Cart</p>
           <div className="cart__details">
             <AiOutlineShoppingCart />
-            <p className="title">You Have {cart?.hours} Hours In The Cart</p>
+            {state?.testPackage ? (
+              <p className="title">You Have Test Package On Your Cart ($199)</p>
+            ) : (
+              <p className="title">You Have {cart?.hours} Hours In The Cart</p>
+            )}
           </div>
         </div>
       </div>

@@ -89,7 +89,7 @@ const InstructorList = () => {
             </div>
           </div>
           <div className="instructors__filters">
-            <div className="time__filter">
+            {/* <div className="time__filter">
               <p className="title">Time</p>
               <p className="filter__content active">Any Time</p>
               <p className="filter__content">AM</p>
@@ -98,7 +98,7 @@ const InstructorList = () => {
             <div className="available__filter">
               <p className="title">Show Available Only</p>
               <Switch {...label} checked={true} />
-            </div>
+            </div> */}
             <div className="language__filter">
               <p className="title">Language</p>
               <select

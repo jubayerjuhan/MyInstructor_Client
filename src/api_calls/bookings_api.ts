@@ -30,3 +30,30 @@ export const changeStatusOfBooking = async (status: string, id: string) => {
     return false;
   }
 };
+
+export const bookTestPackage = async (
+  instructor: any,
+  booking: any,
+  pickupDetails: any
+) => {
+  const bookingInfo = {
+    instructor: instructor._id,
+    time: {
+      from: booking.time.startFrom,
+      to: booking.time.endTo,
+    },
+    duration: booking.duration,
+    pickupDetails,
+    type: "Test Package",
+  };
+
+  try {
+    const { data } = await client.post("/add-booking", bookingInfo);
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response.data.message,
+    };
+  }
+};

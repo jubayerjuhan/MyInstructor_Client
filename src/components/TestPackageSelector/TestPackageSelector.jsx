@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBookingInfo } from "../../redux/actions/bookingAction";
 import { useNavigate } from "react-router-dom";
 import { getInstructorBookings } from "../../api_calls/instructor_api";
+import TestPackageBanner from "../TestPackageBanner/TestPackageBanner";
 
 const TestPackageSelector = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const TestPackageSelector = () => {
   const [selectedDate, setSelectedDate] = useState();
   const [hours, setHours] = useState([]);
   const lessonDuration = [1, 2];
-  const [duration, setDuration] = useState(null);
+  const [duration, setDuration] = useState(2);
   const [time, setTime] = useState(null);
   const dates = [];
 
@@ -99,11 +100,13 @@ const TestPackageSelector = () => {
     };
     console.log(booking);
     const setBooking = dispatch(setBookingInfo(booking));
-    if (setBooking) return navigate("/booking-info");
+    if (setBooking)
+      return navigate("/booking-info", { state: { testPackage: true } });
   };
 
   return (
     <div className="booking__selector">
+      <TestPackageBanner />
       <div className="lesson__duration">
         <div className="booking__date-time">
           <div className="available__date">

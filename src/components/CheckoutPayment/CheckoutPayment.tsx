@@ -13,8 +13,13 @@ import { BillingInfo } from "../../typings/cartTypings";
 interface CheckoutProps {
   billing: BillingInfo;
   checkoutBooking: boolean;
+  testPackage: boolean;
 }
-const CheckoutPayment = ({ billing, checkoutBooking }: CheckoutProps) => {
+const CheckoutPayment = ({
+  billing,
+  checkoutBooking,
+  testPackage,
+}: CheckoutProps) => {
   const { cart } = useSelector((state: State) => state.cart);
 
   const [clientSecret, setClientSecret] = useState();
@@ -28,7 +33,7 @@ const CheckoutPayment = ({ billing, checkoutBooking }: CheckoutProps) => {
 
   const getPaymentIndent = async () => {
     const { data } = await client.post("/payment-indent", {
-      amount: cart?.price,
+      amount: testPackage ? 199 : cart?.price,
     });
     setClientSecret(data.clientSecret);
   };
@@ -43,6 +48,8 @@ const CheckoutPayment = ({ billing, checkoutBooking }: CheckoutProps) => {
           <>
             <Elements stripe={stripePromise} options={{ clientSecret }}>
               <PaymentContainer
+                testPackage={testPackage}
+                price={testPackage ? 199 : cart?.price}
                 checkoutBooking={checkoutBooking}
                 billing={billing}
               />

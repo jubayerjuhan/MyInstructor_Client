@@ -12,7 +12,7 @@ import { CartInstructor } from "../AddToCart/AddToCart";
 import { useDispatch, useSelector } from "react-redux";
 import { State, User } from "../../typings/reduxTypings";
 import { BsCalendar2Date } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import { getCurrentUser } from "../../api_calls/user_api";
 import {
@@ -20,6 +20,12 @@ import {
   SET_PICKUP_DETAILS,
 } from "../../redux/reducer/reduxNamings";
 import { bookLesson } from "../../redux/actions/bookingAction";
+
+export interface BookingInfoProps {
+  state: {
+    testPackage?: boolean;
+  };
+}
 
 const BookingInformation = () => {
   const [loading, setLoading] = useState(false);
@@ -33,6 +39,7 @@ const BookingInformation = () => {
     pickupDetails,
     error,
   } = useSelector((state: State) => state.booking);
+  const { state }: BookingInfoProps = useLocation();
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
@@ -121,7 +128,9 @@ const BookingInformation = () => {
         duration: booking.duration,
         pickupDetails: pickUpInformation,
       };
-
+      if (state.testPackage) {
+        return navigate("/checkout", { state: { testPackage: true } });
+      }
       return dispatch(bookLesson(bookingInfo));
     }
 

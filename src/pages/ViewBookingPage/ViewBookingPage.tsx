@@ -80,6 +80,7 @@ const ViewBookingPage = () => {
       </>
     );
 
+  console.log(booking, "booking 83");
   return (
     <>
       {loading && <FullPageSpinner />}
@@ -124,6 +125,11 @@ const ViewBookingPage = () => {
           />
         )}
         <div className="view__booking-main">
+          <InformationFields
+            title={`Booking Type: ${
+              booking.type ? booking.type : "Regular Booking"
+            }`}
+          />
           <InformationFields
             title={"Learner Information"}
             child1={`Name : ${booking?.user.firstName} ${booking?.user.lastName}`}

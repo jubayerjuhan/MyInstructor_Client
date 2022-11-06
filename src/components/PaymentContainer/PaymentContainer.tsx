@@ -17,12 +17,20 @@ import { toast } from "material-react-toastify";
 
 import { useNavigate } from "react-router-dom";
 import { BillingInfo } from "../../typings/cartTypings";
+import { bookTestPackage } from "../../api_calls/bookings_api";
 
 interface PaymentProps {
   billing: BillingInfo;
   checkoutBooking: boolean;
+  price: number;
+  testPackage: boolean;
 }
-const PaymentContainer = ({ billing, checkoutBooking }: PaymentProps) => {
+const PaymentContainer = ({
+  billing,
+  checkoutBooking,
+  testPackage,
+  price,
+}: PaymentProps) => {
   const { instructor } = useSelector((state: State) => state.instructor);
   const {
     booking,
@@ -105,6 +113,22 @@ const PaymentContainer = ({ billing, checkoutBooking }: PaymentProps) => {
       });
 
       if (paymentIntent?.status === "succeeded") {
+        if (testPackage) {
+          const data = await bookTestPackage(
+            instructor,
+            booking,
+            pickupDetails
+          );
+          if (!data.success) {
+            setLoading(false);
+            return toast.warn(
+              "There Was Problem Booking Your test package, But The Payment Was Successs"
+            );
+          }
+          setLoading(false);
+          toast.success("Test Package Booking Successfull");
+          return navigate("/payment-success", { state: { booking: true } });
+        }
         dispatch(purchaseCredit(cart?.hours));
         setLoading(false);
       }
@@ -119,7 +143,7 @@ const PaymentContainer = ({ billing, checkoutBooking }: PaymentProps) => {
     <>
       <PaymentElement />
       <Button
-        title="Pay Now"
+        title={`Pay Now $${price}`}
         width={"100%"}
         loading={loading || bookLoading}
         className="pay__button"
