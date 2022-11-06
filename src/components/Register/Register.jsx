@@ -15,7 +15,7 @@ import { CLEAR_ERROR } from "../../redux/reducer/reduxNamings";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const { error, user } = useSelector((state) => state.user);
+  const { error, user, loading } = useSelector((state) => state.user);
   const {
     register,
     handleSubmit,
@@ -110,7 +110,12 @@ const Register = () => {
               </div>
             );
           })}
-          <Button width="100%" onClick={handleSubmit(onSubmit)} />
+          <Button
+            title={"Register"}
+            loading={loading}
+            width="100%"
+            onClick={handleSubmit(onSubmit)}
+          />
         </form>
       </div>
     </>
