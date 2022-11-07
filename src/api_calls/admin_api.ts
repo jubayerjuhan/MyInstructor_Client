@@ -1,10 +1,19 @@
 import { Dispatch } from "redux";
-import { client } from "../client";
+import { admin, client } from "../client";
 import { Action } from "../redux/actions/actionTypings";
 import {
+  ADMIN_BOOKINGS_ERROR,
+  ADMIN_BOOKINGS_PENDING,
+  ADMIN_BOOKINGS_SUCCESS,
+  ADMIN_INSTRUCTORS_ERROR,
+  ADMIN_INSTRUCTORS_PENDING,
+  ADMIN_INSTRUCTORS_SUCCESS,
   ADMIN_LOGIN_COMPLETE,
   ADMIN_LOGIN_ERROR,
   ADMIN_LOGIN_PENDING,
+  ADMIN_USERS_ERROR,
+  ADMIN_USERS_PENDING,
+  ADMIN_USERS_SUCCESS,
 } from "../redux/reducer/reduxNamings";
 import { storeAtLocalStorage } from "../utils/localstorage";
 
@@ -19,6 +28,44 @@ export const adminLogin = (cred: any) => async (dispatch: Dispatch<Action>) => {
   } catch (error: any) {
     dispatch({
       type: ADMIN_LOGIN_ERROR,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getAllUsers = () => async (dispatch: Dispatch<Action>) => {
+  try {
+    dispatch({ type: ADMIN_USERS_PENDING });
+
+    const { data } = await admin.get("/all-users");
+    dispatch({ type: ADMIN_USERS_SUCCESS, payload: data.users });
+  } catch (error: any) {
+    dispatch({ type: ADMIN_USERS_ERROR, payload: error.response.data.message });
+  }
+};
+export const getAllInstructors = () => async (dispatch: Dispatch<Action>) => {
+  try {
+    dispatch({ type: ADMIN_INSTRUCTORS_PENDING });
+
+    const { data } = await admin.get("/all-instructors");
+    dispatch({ type: ADMIN_INSTRUCTORS_SUCCESS, payload: data.instructors });
+  } catch (error: any) {
+    dispatch({
+      type: ADMIN_INSTRUCTORS_ERROR,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getAllBookings = () => async (dispatch: Dispatch<Action>) => {
+  try {
+    dispatch({ type: ADMIN_BOOKINGS_PENDING });
+
+    const { data } = await admin.get("/all-bookings");
+    dispatch({ type: ADMIN_BOOKINGS_SUCCESS, payload: data.bookings });
+  } catch (error: any) {
+    dispatch({
+      type: ADMIN_BOOKINGS_ERROR,
       payload: error.response.data.message,
     });
   }

@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminProtected from "./components/AdminProtected/AdminProtected";
 
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Register from "./components/Register/Register";
 import NotFoundPage from "./pages/404Page/NotFoundPage";
 import AddToCart from "./pages/AddToCart/AddToCart";
+import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import BookingInformation from "./pages/BookingInformation/BookingInformation";
 import BookingPage from "./pages/BookingPage/BookingPage";
@@ -113,12 +115,14 @@ function App() {
         />
 
         {/* admin routes */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+
         <Route
-          path="/admin/login"
+          path={"/admin/dashboard"}
           element={
-            <ProtectedRoute location={"/admin/login"}>
-              <AdminLogin />
-            </ProtectedRoute>
+            <AdminProtected location={"/admin/dashboard"}>
+              <AdminDashboard />
+            </AdminProtected>
           }
         />
       </Routes>

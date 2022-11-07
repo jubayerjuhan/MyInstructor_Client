@@ -4,6 +4,13 @@ import { Instructor } from "./instructorTypings";
 
 export interface State {
   user: UserState;
+  admin: {
+    admin: {
+      _id: string;
+      name: string;
+      email: string;
+    };
+  };
   cart: {
     cart: Cart;
     billingInfo: BillingInfo;
@@ -16,6 +23,7 @@ export interface State {
   activeBooking: {
     booking: BookingTypeBack;
   };
+  adminData: AdminDataReducerType;
 }
 
 export interface BookingReducerTypes {
@@ -64,4 +72,25 @@ export interface User {
   avater?: string;
   bio?: string;
   available?: boolean;
+}
+
+interface AdminDataReducerType {
+  instructors: {
+    loading: boolean;
+    error: string;
+    instructors: Instructor[];
+    success: boolean;
+  };
+  users: {
+    success: boolean;
+    loading: boolean;
+    error: string;
+    users: User[];
+  };
+  bookings: {
+    success: boolean;
+    loading: boolean;
+    error: string;
+    bookings: BookingTypeBack[];
+  };
 }
