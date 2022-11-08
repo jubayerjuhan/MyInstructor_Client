@@ -86,6 +86,10 @@ select:focus,
   outline: 0 none !important;
 }
 
+.MuiTextField-root > input[type="text"]:focus {
+  border-color: none;
+}
+
 .input__element {
   height: 45px;
 }

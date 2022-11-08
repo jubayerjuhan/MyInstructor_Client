@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/404Page/NotFoundPage";
 import AddToCart from "./pages/AddToCart/AddToCart";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
+import AdminUsers from "./pages/AdminUsers/AdminUsers";
 import BookingInformation from "./pages/BookingInformation/BookingInformation";
 import BookingPage from "./pages/BookingPage/BookingPage";
 import BookingSuccess from "./pages/BookingSuccess/BookingSuccess";
@@ -122,6 +123,14 @@ function App() {
           element={
             <AdminProtected location={"/admin/dashboard"}>
               <AdminDashboard />
+            </AdminProtected>
+          }
+        />
+        <Route
+          path={"/admin/users"}
+          element={
+            <AdminProtected location={"/admin/users"}>
+              <AdminUsers />
             </AdminProtected>
           }
         />

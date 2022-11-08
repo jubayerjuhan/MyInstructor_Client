@@ -17,6 +17,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import logo from "../../assets/logo.png";
 
+//
+import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
+import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
+import LibraryBooksOutlinedIcon from "@mui/icons-material/LibraryBooksOutlined";
+import CreditCardOffOutlinedIcon from "@mui/icons-material/CreditCardOffOutlined";
+import { Link } from "react-router-dom";
+
 const drawerWidth = 240;
 
 interface Props {
@@ -26,19 +34,43 @@ interface Props {
    */
   window?: () => Window;
   component: React.ReactNode;
+  className?: string;
 }
 
 export default function AdminSidebar(props: Props) {
   const { window, component } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const adminSidebarLinks = [
+    {
+      label: "Dashboard",
+      link: "/dashboard",
+      icon: <DashboardOutlinedIcon />,
+    },
+    { label: "Users", link: "/users", icon: <GroupOutlinedIcon /> },
+    {
+      label: "Instructors",
+      link: "/instructors",
+      icon: <DirectionsCarFilledOutlinedIcon />,
+    },
+    {
+      label: "Bookings",
+      link: "/bookings",
+      icon: <LibraryBooksOutlinedIcon />,
+    },
+    {
+      label: "Expired License",
+      link: "/expired-license",
+      icon: <CreditCardOffOutlinedIcon />,
+    },
+  ];
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const drawer = (
     <div>
-      <a href="/">
+      <Link to={"/admin/dashboard"}>
         <img
           src={logo}
           alt=""
@@ -47,17 +79,21 @@ export default function AdminSidebar(props: Props) {
             padding: "25px",
           }}
         />
-      </a>
+      </Link>
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
+        {adminSidebarLinks.map((text, index) => (
+          <ListItem key={index} disablePadding>
+            <Link
+              to={`/admin${text.link}`}
+              style={{ textDecoration: "none", color: "unset", width: "100%" }}
+            >
+              <ListItemButton>
+                {" "}
+                <ListItemIcon>{text.icon}</ListItemIcon>
+                <ListItemText primary={text?.label} />
+              </ListItemButton>
+            </Link>
           </ListItem>
         ))}
       </List>
@@ -154,7 +190,9 @@ export default function AdminSidebar(props: Props) {
         }}
       >
         <Toolbar />
-        {component}
+        <div className={props.className && "dashbaord__content-wrapper"}>
+          {component}
+        </div>
       </Box>
     </Box>
   );

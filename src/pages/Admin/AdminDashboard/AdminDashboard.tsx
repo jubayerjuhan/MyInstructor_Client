@@ -7,8 +7,10 @@ import {
 } from "../../../api_calls/admin_api";
 import AdminPageWrapper from "../../../components/AdminPageWrapper/AdminPageWrapper";
 import DashboardInfoCard from "../../../components/Dashboard_Infocard/Dashboard_Infocard";
-import { State } from "../../../typings/reduxTypings";
+import { State, User } from "../../../typings/reduxTypings";
 import "./AdminDashboard.scss";
+import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
+import DataGridActionButtons from "../../../components/DataGridActionButtons/DataGridActionButtons";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch<any>();
@@ -40,6 +42,12 @@ const AdminDashboard = () => {
     dispatch(getAllBookings());
   };
 
+  const rows: User[] = [];
+  users?.forEach((user) => {
+    user.id = user._id;
+    rows.push(user);
+  });
+
   return (
     <AdminPageWrapper>
       <div className="dashboard__quick-info">
@@ -58,6 +66,17 @@ const AdminDashboard = () => {
           count={bookings?.length}
           loading={bookLoading}
         />
+      </div>
+      <div className="dashboard__table">
+        {/* <DataGrid
+          sx={{ height: 400, marginTop: 5 }}
+          rows={rows}
+          columns={userColumns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          disableSelectionOnClick
+          experimentalFeatures={{ newEditingApi: true }}
+        /> */}
       </div>
     </AdminPageWrapper>
   );
