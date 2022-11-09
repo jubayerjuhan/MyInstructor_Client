@@ -19,66 +19,11 @@ import "./dashboardListPage.scss";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AdminListEdit from "../../components/AdminListEdit/AdminListEdit";
+import { userColumns } from "../../utils/grid_columns/user_gridColumns";
 
 const AdminUsers = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<GridRowId>();
-  const userColumns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 90 },
-    {
-      field: "firstName",
-      headerName: "First name",
-      flex: 1,
-    },
-    {
-      field: "lastName",
-      headerName: "Last name",
-      flex: 1,
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      flex: 1,
-    },
-    {
-      field: "phone",
-      headerName: "Phone",
-      type: "number",
-      flex: 1,
-    },
-    {
-      field: "createdAt",
-      headerName: "Joined On",
-      type: "string",
-      flex: 1,
-      valueGetter: (params: GridValueGetterParams) =>
-        `${moment(params.row.createdAt)}`,
-    },
-    {
-      field: "actions",
-      headerName: "Actions",
-      flex: 1,
-      renderCell: (params: GridCellParams) => {
-        return (
-          <Box>
-            <Button
-              startIcon={<EditIcon />}
-              sx={{ marginRight: 3 }}
-              onClick={() => {
-                setSelected(params.id);
-                setOpen(true);
-              }}
-            />
-            <Button
-              startIcon={<DeleteIcon />}
-              color="error"
-              onClick={() => setOpen(false)}
-            />
-          </Box>
-        );
-      },
-    },
-  ];
 
   // actual code starts here
   const { users, loading } = useSelector(
@@ -99,11 +44,9 @@ const AdminUsers = () => {
     });
   }
 
-  console.log(userColumns);
   return (
     <>
-      <AdminListEdit open={open} id={selected} type={"user"} />
-
+      {/* <AdminListEdit /> */}
       <AdminPageWrapper className={"dashbaord__content-wrapper"}>
         <Box>
           <p className="title">Users</p>

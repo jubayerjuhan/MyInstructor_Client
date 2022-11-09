@@ -99,7 +99,7 @@ const HeroSection = () => {
               }, 500);
             }}
             type="text"
-            className="subrub__input"
+            className="subrub__input input__element"
             placeholder="Enter Your Subrub"
           />
           {listOpen && (

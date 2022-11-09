@@ -75,7 +75,7 @@ const AdminLogin = () => {
                   type={field.type}
                   placeholder={field.placeholder}
                   {...register(field.name)}
-                  className="form-control input__element login"
+                  className="form-control input__element login "
                 />
               </div>
             );

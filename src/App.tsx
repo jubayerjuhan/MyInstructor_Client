@@ -6,6 +6,7 @@ import Register from "./components/Register/Register";
 import NotFoundPage from "./pages/404Page/NotFoundPage";
 import AddToCart from "./pages/AddToCart/AddToCart";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
+import AdminCars from "./pages/AdminCars/AdminCars";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import AdminUsers from "./pages/AdminUsers/AdminUsers";
 import BookingInformation from "./pages/BookingInformation/BookingInformation";
@@ -131,6 +132,14 @@ function App() {
           element={
             <AdminProtected location={"/admin/users"}>
               <AdminUsers />
+            </AdminProtected>
+          }
+        />
+        <Route
+          path={"/admin/cars"}
+          element={
+            <AdminProtected location={"/admin/cars"}>
+              <AdminCars />
             </AdminProtected>
           }
         />

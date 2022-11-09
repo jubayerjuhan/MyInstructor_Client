@@ -13,7 +13,7 @@ const Button = ({
     <input
       type={"submit"}
       onClick={onClick}
-      className={`heme-btn btn-one ${className}`}
+      className={`heme-btn btn-one ${className} input__element`}
       style={{ width: width ? width : "140px" }}
     ></input>
   );

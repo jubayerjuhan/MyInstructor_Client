@@ -19,6 +19,7 @@ import logo from "../../assets/logo.png";
 
 //
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import CarIcon from "@mui/icons-material/DirectionsCarFilled";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import LibraryBooksOutlinedIcon from "@mui/icons-material/LibraryBooksOutlined";
@@ -63,6 +64,11 @@ export default function AdminSidebar(props: Props) {
       link: "/expired-license",
       icon: <CreditCardOffOutlinedIcon />,
     },
+    {
+      label: "Cars",
+      link: "/cars",
+      icon: <CarIcon />,
+    },
   ];
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -98,18 +104,6 @@ export default function AdminSidebar(props: Props) {
         ))}
       </List>
       <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
     </div>
   );
 
