@@ -6,7 +6,9 @@ import Register from "./components/Register/Register";
 import NotFoundPage from "./pages/404Page/NotFoundPage";
 import AddToCart from "./pages/AddToCart/AddToCart";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
+import AdminBookings from "./pages/AdminBookings/AdminBookings";
 import AdminCars from "./pages/AdminCars/AdminCars";
+import AdminInstructor from "./pages/AdminInstructor/AdminInstructor";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import AdminUsers from "./pages/AdminUsers/AdminUsers";
 import BookingInformation from "./pages/BookingInformation/BookingInformation";
@@ -23,6 +25,7 @@ import LearnerDashboard from "./pages/LearnerDashboard/LearnerDashboard";
 import Login from "./pages/Login/Login";
 import PasswordResetPage from "./pages/PasswordResetPage/PasswordResetPage";
 import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
+import ViewItemsPage from "./pages/ViewItemsPage";
 
 // stripe Promise
 
@@ -140,6 +143,30 @@ function App() {
           element={
             <AdminProtected location={"/admin/cars"}>
               <AdminCars />
+            </AdminProtected>
+          }
+        />
+        <Route
+          path={"/admin/bookings"}
+          element={
+            <AdminProtected location={"/admin/bookings"}>
+              <AdminBookings />
+            </AdminProtected>
+          }
+        />
+        <Route
+          path={"/admin/instructors"}
+          element={
+            <AdminProtected location={"/admin/instructors"}>
+              <AdminInstructor />
+            </AdminProtected>
+          }
+        />
+        <Route
+          path={"/admin/user/:id"}
+          element={
+            <AdminProtected location={"/admin/user/:id"}>
+              <ViewItemsPage type={"user"} />
             </AdminProtected>
           }
         />

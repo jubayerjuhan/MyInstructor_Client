@@ -8,3 +8,11 @@ export const addCar = async (car: any) => {
     return false;
   }
 };
+export const getAllCars = async () => {
+  try {
+    const { data } = await admin.get("/all-cars");
+    return data;
+  } catch (error: any) {
+    return { success: false, message: error.response.data.message };
+  }
+};

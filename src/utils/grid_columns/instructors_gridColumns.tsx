@@ -7,18 +7,18 @@ import {
 import moment from "moment";
 import { Link } from "react-router-dom";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import { Box } from "@mui/system";
+import { Box } from "@mui/material";
 
-export const userColumns: GridColDef[] = [
+export const instructorColumns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 90 },
   {
     field: "firstName",
-    headerName: "First name",
+    headerName: "First Name",
     flex: 1,
   },
   {
     field: "lastName",
-    headerName: "Last name",
+    headerName: "Last Name",
     flex: 1,
   },
   {
@@ -27,18 +27,9 @@ export const userColumns: GridColDef[] = [
     flex: 1,
   },
   {
-    field: "phone",
-    headerName: "Phone",
-    type: "number",
+    field: "gender",
+    headerName: "Gender",
     flex: 1,
-  },
-  {
-    field: "createdAt",
-    headerName: "Joined On",
-    type: "string",
-    flex: 1,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${moment(params.row.createdAt)}`,
   },
   {
     field: "action",
@@ -47,7 +38,7 @@ export const userColumns: GridColDef[] = [
     flex: 1,
     renderCell: (params: GridRenderCellParams) => (
       <Link
-        to={`/admin/user/${params.id}`}
+        to={`/admin/car/${params.id}`}
         style={{ display: "flex", justifyContent: "center" }}
       >
         <RemoveRedEyeIcon />
