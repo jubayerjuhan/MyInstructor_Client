@@ -170,6 +170,22 @@ function App() {
             </AdminProtected>
           }
         />
+        <Route
+          path={"/admin/instructor/:id"}
+          element={
+            <AdminProtected location={"/admin/instructor/:id"}>
+              <ViewItemsPage type={"instructor"} />
+            </AdminProtected>
+          }
+        />
+        <Route
+          path={"/admin/booking/:id"}
+          element={
+            <AdminProtected location={"/admin/booking/:id"}>
+              <ViewItemsPage type={"booking"} />
+            </AdminProtected>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

@@ -126,10 +126,10 @@ const ViewBookingPage = () => {
         )}
         <div className="view__booking-main">
           <InformationFields
-            title={`Booking Type: ${
-              booking.type ? booking.type : "Regular Booking"
-            }`}
+            title={`Booking Type : `}
+            child1={booking.type ? booking.type : "Regular Booking"}
           />
+          <InformationFields title={"Booking Id :"} child1={booking?._id} />
           <InformationFields
             title={"Learner Information"}
             child1={`Name : ${booking?.user.firstName} ${booking?.user.lastName}`}

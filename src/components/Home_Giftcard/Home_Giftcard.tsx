@@ -3,15 +3,12 @@ import Button from "../core/Button/Button";
 import "./Home_Giftcard.scss";
 import { ImTicket } from "react-icons/im";
 import { BsGift } from "react-icons/bs";
-
+import giftCardImage from "../../assets/Gift card-pana.png";
 const Home_Giftcard = () => {
   return (
     <section className="home__giftcard sectionPadding">
       <div className="home__giftcard-media">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuDnoVeM06B9krKu0wLljK6a6H9tAhhIcBng&usqp=CAU"
-          alt=""
-        />
+        <img src={giftCardImage} alt="" />
       </div>
       <div className="home__giftcard-information">
         <p className="title">The gift of life long skills</p>

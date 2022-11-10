@@ -2,7 +2,7 @@ import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import Button from "../core/Button/Button";
 import "./HowItWorks.scss";
-import carImage from "../../assets/automobile-1300467__340.webp";
+import carImage from "../../assets/carinstructor.jpg";
 
 const HowItWorks = () => {
   const bullets = [

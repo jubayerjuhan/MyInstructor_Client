@@ -179,7 +179,7 @@ export default function AdminSidebar(props: Props) {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          background: "#f7f7f7",
+          // background: "#f7f7f7",
           height: "100%",
         }}
       >

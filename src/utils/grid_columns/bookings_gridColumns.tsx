@@ -38,7 +38,7 @@ export const bookingColumns: GridColDef[] = [
     flex: 1,
     renderCell: (params: GridRenderCellParams) => (
       <Link
-        to={`/admin/car/${params.id}`}
+        to={`/admin/booking/${params.id}`}
         style={{ display: "flex", justifyContent: "center" }}
       >
         <RemoveRedEyeIcon />

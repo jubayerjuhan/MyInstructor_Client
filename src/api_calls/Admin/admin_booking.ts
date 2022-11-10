@@ -11,3 +11,15 @@ export const getAllBookingsAdmin = async () => {
     };
   }
 };
+
+export const adminEditBooking = async (id: string, edits: any) => {
+  try {
+    const { data } = await admin.put(`booking/${id}`, edits);
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response.data.message,
+    };
+  }
+};

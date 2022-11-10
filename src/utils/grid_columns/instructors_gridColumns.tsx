@@ -38,7 +38,7 @@ export const instructorColumns: GridColDef[] = [
     flex: 1,
     renderCell: (params: GridRenderCellParams) => (
       <Link
-        to={`/admin/car/${params.id}`}
+        to={`/admin/instructor/${params.id}`}
         style={{ display: "flex", justifyContent: "center" }}
       >
         <RemoveRedEyeIcon />
