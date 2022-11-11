@@ -29,3 +29,16 @@ export const updateAvater = async (avater: any) => {
     return false;
   }
 };
+
+// get subrubs
+export const getSuburbs = async () => {
+  try {
+    const { data } = await client.get("/suburbs");
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response.data.success,
+    };
+  }
+};

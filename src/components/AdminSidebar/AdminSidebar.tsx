@@ -18,6 +18,7 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/logo.png";
 
 //
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import CarIcon from "@mui/icons-material/DirectionsCarFilled";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
@@ -58,6 +59,11 @@ export default function AdminSidebar(props: Props) {
       label: "Bookings",
       link: "/bookings",
       icon: <LibraryBooksOutlinedIcon />,
+    },
+    {
+      label: "Instructor Applicants",
+      link: "/instructor-applicants",
+      icon: <ReceiptLongIcon />,
     },
     {
       label: "Expired License",

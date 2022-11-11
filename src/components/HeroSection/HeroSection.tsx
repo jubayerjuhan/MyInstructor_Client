@@ -10,7 +10,11 @@ interface Suburb {
   state: string;
   postcode: number;
 }
-const HeroSection = () => {
+
+interface Props {
+  title?: string;
+}
+const HeroSection = ({ title }: Props) => {
   const [loading, setLoading] = useState(false);
   const [suburbs, setSuburbs] = useState<Suburb[]>([]);
   const [selectedSuburb, setSelectedSuburb] = useState<Suburb>({
@@ -65,7 +69,7 @@ const HeroSection = () => {
     <section className="heroSection sectionPadding">
       <div className="heroSection__textContainer">
         <p className="heroSection__title">
-          Where do you need a driving instructor?
+          {title ? title : "Where do you need a driving instructor?"}
         </p>
         <ul className="heroSection__bullets">
           <li>Choose from 800+ verified instructors</li>

@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AddInstructor from "./components/AddInstructor/AddInstructor";
 import AdminProtected from "./components/AdminProtected/AdminProtected";
 
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
@@ -6,11 +7,13 @@ import Register from "./components/Register/Register";
 import NotFoundPage from "./pages/404Page/NotFoundPage";
 import AddToCart from "./pages/AddToCart/AddToCart";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
+import AdminApplicants from "./pages/AdminApplicantsInstructor/AdminApplicants";
 import AdminBookings from "./pages/AdminBookings/AdminBookings";
 import AdminCars from "./pages/AdminCars/AdminCars";
 import AdminInstructor from "./pages/AdminInstructor/AdminInstructor";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import AdminUsers from "./pages/AdminUsers/AdminUsers";
+import ApplyInstructor from "./pages/ApplyInstructor/ApplyInstructor";
 import BookingInformation from "./pages/BookingInformation/BookingInformation";
 import BookingPage from "./pages/BookingPage/BookingPage";
 import BookingSuccess from "./pages/BookingSuccess/BookingSuccess";
@@ -28,6 +31,11 @@ import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
 import ViewItemsPage from "./pages/ViewItemsPage";
 
 // stripe Promise
+const title = {
+  test_package: "Where Do You Want To Book Your Test Package?",
+  pricing: "Check Pricing of Your Nearby Instructors",
+  driving_lesson: "Where Do You Need A Driving Lesson?",
+};
 
 function App() {
   return (
@@ -35,6 +43,17 @@ function App() {
       <Routes>
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<Homepage />} />
+        <Route path="/apply-instructor" element={<ApplyInstructor />} />
+        <Route
+          path="/driving-lessons"
+          element={<Homepage title={title.driving_lesson} />}
+        />
+        <Route path="/driving-lessons/:city" element={<Homepage />} />
+        <Route
+          path="/test-package"
+          element={<Homepage title={title.test_package} />}
+        />
+        <Route path="/pricing" element={<Homepage title={title.pricing} />} />
         <Route path="/not-found" element={<NotFoundPage />} />
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/reset-password/:token" element={<PasswordResetPage />} />
@@ -159,6 +178,22 @@ function App() {
           element={
             <AdminProtected location={"/admin/instructors"}>
               <AdminInstructor />
+            </AdminProtected>
+          }
+        />
+        <Route
+          path={"/admin/add-instructor"}
+          element={
+            <AdminProtected location={"/admin/add-instructor"}>
+              <AddInstructor />
+            </AdminProtected>
+          }
+        />
+        <Route
+          path={"/admin/instructor-applicants"}
+          element={
+            <AdminProtected location={"/admin/instructor-applicants"}>
+              <AdminApplicants />
             </AdminProtected>
           }
         />

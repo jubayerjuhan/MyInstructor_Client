@@ -6,8 +6,15 @@ import { Instructor } from "../../typings/instructorTypings";
 import { getAllInstructorsAdmin } from "../../api_calls/Admin/admin_instructors";
 import { toast } from "material-react-toastify";
 import { instructorColumns } from "../../utils/grid_columns/instructors_gridColumns";
+import { Button } from "@mui/material";
+import AddInstructor from "../../components/AddInstructor/AddInstructor";
+import { useNavigate } from "react-router-dom";
+
 const AdminInstructor = () => {
   const [instructors, setInstructors] = useState<Instructor[]>([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
     getDatas();
   }, []);
@@ -31,8 +38,17 @@ const AdminInstructor = () => {
 
   return (
     <AdminPageWrapper className={"dashbaord__content-wrapper"}>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <p className="title">Instructors</p>
+        <Button onClick={() => navigate("/admin/add-instructor")}>
+          Add Instructor
+        </Button>
       </Box>
       <DataGrid
         rows={rows}

@@ -4,7 +4,7 @@ import "./Footer.scss";
 
 const Footer = () => {
   const cities = [
-    "Sydeny",
+    "Sydney",
     "Melbourne",
     "Brisbane",
     "Perth",
@@ -17,7 +17,7 @@ const Footer = () => {
     { name: "Blog", link: "/blog" },
     { name: "About", link: "/about" },
     { name: "Contact", link: "/contact" },
-    { name: "Become and Instructor", link: "/apply-instructor" },
+    { name: "Become an Instructor", link: "/apply-instructor" },
   ];
 
   const driveLinks = [

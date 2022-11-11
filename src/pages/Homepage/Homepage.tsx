@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Advantage from "../../components/Advantage/Advantage";
 import FaqSection from "../../components/FaqSection/FaqSection";
 import Footer from "../../components/Footer/Footer";
@@ -12,11 +13,38 @@ import Navbar from "../../components/Navbar/Navbar";
 import ReviewSlider from "../../components/ReviewSlider/ReviewSlider";
 import WhyusSection from "../../components/WhyusSection/WhyusSection";
 
-const Homepage = () => {
+interface Props {
+  title?: string;
+}
+const cities = [
+  "melbourne",
+  "sydney",
+  "brisbane",
+  "perth",
+  "adelade",
+  "hobert",
+  "canaberra",
+];
+const Homepage = ({ title }: Props) => {
+  const { city } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (city && !cities.includes(city)) return navigate("not-found");
+  }, [city, navigate]);
+
   return (
     <div>
       <Navbar />
-      <HeroSection />
+      <HeroSection
+        title={
+          city
+            ? `Find Driving Instructor In ${
+                city.charAt(0).toUpperCase() + city.slice(1)
+              }`
+            : title
+        }
+      />
       <HomeCounterComponent />
       <HowItWorks />
       <FourIconComponent />
