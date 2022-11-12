@@ -1,38 +1,107 @@
 import {
   Autocomplete,
   Box,
+  Button,
+  IconButton,
   InputLabel,
   MenuItem,
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { addInstructorFields } from "../../utils/InputFieldsDetail/InputFieldsDetail";
 import AdminPageWrapper from "../AdminPageWrapper/AdminPageWrapper";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import { getAllCars } from "../../api_calls/Admin/admin_car";
-import { getSuburbs } from "../../api_calls/user_api";
-import { toast } from "material-react-toastify";
 import { client } from "../../client";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { addInstructorAdmin } from "../../api_calls/Admin/admin_instructors";
+import { toast } from "material-react-toastify";
 
 const AddInstructor = () => {
+  const ref = useRef<HTMLDivElement>();
   const [cars, setCars] = useState<any[]>([]);
   const [suburbs, setSuburbs] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [multiValue, setMultiValue] = useState({
+    languages: [],
+    car: {},
+    serviceSuburbs: [],
+  });
+
+  const {
+    register,
+
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data: any) => {
+    const instructorLanguage: string[] = [];
+    let instructor = { ...data };
+    instructor.avater = data.avater[0];
+    // pushing language
+    multiValue.languages?.forEach((language: any) => {
+      instructorLanguage.push(language.name);
+    });
+    // adding language on instrucotr
+    instructor.languages = instructorLanguage;
+    console.log(instructor, "instructor");
+
+    // car
+    instructor.car = { ...multiValue.car, numberPlate: instructor.numberPlate };
+    console.log(instructor);
+
+    // suburbs
+    const suburbs: any[] = [];
+    multiValue.serviceSuburbs.forEach((suburb: any) => {
+      suburbs.push({ name: suburb.suburb, postCode: suburb.postcode });
+    });
+
+    // pushing suburbs to instructor
+    instructor.serviceSuburbs = {};
+    instructor.serviceSuburbs.suburbs = suburbs;
+    console.log(instructor, "Instructor");
+
+    const formData = new FormData();
+    Object.keys(instructor).forEach((key, index) => {
+      if (key === "car") return;
+      if (key === "serviceSuburbs") return;
+      formData.append(key, instructor[key]);
+    });
+
+    formData.append(
+      "car",
+      JSON.stringify({ ...multiValue.car, numberPlate: instructor.numberPlate })
+    );
+    formData.append(
+      "serviceSuburbs",
+      JSON.stringify(instructor.serviceSuburbs)
+    );
+
+    saveInstructor(formData);
+  };
+
+  const saveInstructor = async (formData: any) => {
+    setLoading(true);
+    const { success, message } = await addInstructorAdmin(formData);
+    if (!success) {
+      setLoading(false);
+      return toast.error(message);
+    }
+    toast.success("Instructor Added Successfully");
+    setLoading(false);
+  };
+
   useEffect(() => {
     getCars();
-    getAllSuburbs();
   }, []);
 
   const getCars = async () => {
     const data = await getAllCars();
     setCars(data?.cars);
-  };
-
-  const getAllSuburbs = async () => {
-    // const { success, message, suburbs } = await getSuburbs();
-    // if (!success) return toast.error(message);
-    // setSuburbs(suburbs);
   };
 
   const handleSubrubSearch = async (e: any) => {
@@ -43,7 +112,6 @@ const AddInstructor = () => {
     setLoading(false);
     setSuburbs(data.suburbs);
   };
-  console.log(suburbs, "suburbs");
 
   return (
     <AdminPageWrapper>
@@ -59,6 +127,7 @@ const AddInstructor = () => {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
+                  {...register(field.name)}
                 >
                   {field?.options &&
                     field.options.map((option: any, key: number) => (
@@ -71,16 +140,46 @@ const AddInstructor = () => {
             );
           }
 
+          // file upload
+          if (field.type === "file") {
+            return (
+              <>
+                <InputLabel id="demo-simple-select-label">
+                  {field.label}
+                </InputLabel>
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="label"
+                >
+                  <Box>
+                    <input
+                      hidden
+                      accept="image/*"
+                      type="file"
+                      {...register(field.name)}
+                    />
+                    image
+                  </Box>
+                  <PhotoCamera />
+                </IconButton>
+              </>
+            );
+          }
+
           // car field
           if (field.name === "car") {
             return (
               <Autocomplete
-                multiple
-                onChange={(e, value) => console.log(e, value)}
+                onChange={(e, value) =>
+                  setMultiValue({ ...multiValue, [field.name]: value })
+                }
                 id="tags-standard"
+                ref={ref}
+                className="movies"
                 options={cars}
                 getOptionLabel={(option: any) =>
-                  option.name ? option.name : "Nai"
+                  option.name ? option.name : "Select Car"
                 }
                 renderInput={(params) => (
                   <>
@@ -107,7 +206,10 @@ const AddInstructor = () => {
               <>
                 <Autocomplete
                   multiple
-                  onChange={(e, value) => console.log(value)}
+                  {...register(field.name)}
+                  onChange={(e, value) =>
+                    setMultiValue({ ...multiValue, [field.name]: value })
+                  }
                   id="tags-standard"
                   options={field.options ? field.options : []}
                   getOptionLabel={(option: any) =>
@@ -129,8 +231,12 @@ const AddInstructor = () => {
             return (
               <>
                 <Autocomplete
+                  {...register(field.name)}
                   multiple
-                  onChange={(e, value) => console.log(value)}
+                  loading={loading}
+                  onChange={(e, value) =>
+                    setMultiValue({ ...multiValue, [field.name]: value })
+                  }
                   id="tags-standard"
                   options={suburbs}
                   getOptionLabel={(option: any) =>
@@ -153,6 +259,7 @@ const AddInstructor = () => {
           // text field
           return (
             <TextField
+              {...register(field.name)}
               name={field.name}
               id="outlined-basic"
               label={field.label}
@@ -161,6 +268,8 @@ const AddInstructor = () => {
             />
           );
         })}
+
+        <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
       </Box>
     </AdminPageWrapper>
   );

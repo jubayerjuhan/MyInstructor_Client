@@ -120,6 +120,12 @@ export const addInstructorFields = [
     placeholder: "Car",
   },
   {
+    name: "numberPlate",
+    label: "Car Number (Number Plate)",
+    placeholder: "Car Number",
+    type: "text",
+  },
+  {
     name: "serviceSuburbs",
     label: "Service Suburb",
     placeholder: "Service Suburb",
