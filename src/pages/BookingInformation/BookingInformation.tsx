@@ -117,6 +117,7 @@ const BookingInformation = () => {
   const handleModalCancel = () => {};
 
   const onModalSave = async () => {
+    console.log("clicked");
     if (!creditError) {
       const bookingInfo = {
         instructor: instructor._id,
@@ -128,7 +129,7 @@ const BookingInformation = () => {
         duration: booking.duration,
         pickupDetails: pickUpInformation,
       };
-      if (state.testPackage) {
+      if (state?.testPackage) {
         return navigate("/checkout", { state: { testPackage: true } });
       }
       return dispatch(bookLesson(bookingInfo));

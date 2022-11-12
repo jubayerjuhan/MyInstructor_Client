@@ -24,6 +24,9 @@ const AddInstructor = () => {
   const ref = useRef<HTMLDivElement>();
   const [cars, setCars] = useState<any[]>([]);
   const [suburbs, setSuburbs] = useState<any[]>([]);
+  const [image, setImage] = useState({
+    name: "",
+  });
   const [loading, setLoading] = useState<boolean>(false);
   const [multiValue, setMultiValue] = useState({
     languages: [],
@@ -33,7 +36,7 @@ const AddInstructor = () => {
 
   const {
     register,
-
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -48,7 +51,6 @@ const AddInstructor = () => {
     });
     // adding language on instrucotr
     instructor.languages = instructorLanguage;
-    console.log(instructor, "instructor");
 
     // car
     instructor.car = { ...multiValue.car, numberPlate: instructor.numberPlate };
@@ -63,12 +65,13 @@ const AddInstructor = () => {
     // pushing suburbs to instructor
     instructor.serviceSuburbs = {};
     instructor.serviceSuburbs.suburbs = suburbs;
-    console.log(instructor, "Instructor");
 
     const formData = new FormData();
     Object.keys(instructor).forEach((key, index) => {
       if (key === "car") return;
       if (key === "serviceSuburbs") return;
+      if (key === "languages")
+        return formData.append(key, JSON.stringify(instructor[key]));
       formData.append(key, instructor[key]);
     });
 
@@ -151,6 +154,7 @@ const AddInstructor = () => {
                   color="primary"
                   aria-label="upload picture"
                   component="label"
+                  sx={{ width: "fit-content" }}
                 >
                   <Box>
                     <input
@@ -159,10 +163,12 @@ const AddInstructor = () => {
                       type="file"
                       {...register(field.name)}
                     />
-                    image
                   </Box>
                   <PhotoCamera />
                 </IconButton>
+                <Typography>
+                  {watch("avater") ? watch("avater")[0]?.name : ""}
+                </Typography>
               </>
             );
           }
@@ -256,6 +262,10 @@ const AddInstructor = () => {
             );
           }
 
+          if (field.type === "dataPicker") {
+            return <></>;
+          }
+
           // text field
           return (
             <TextField
@@ -269,7 +279,13 @@ const AddInstructor = () => {
           );
         })}
 
-        <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
+        <Button
+          onClick={handleSubmit(onSubmit)}
+          variant={"contained"}
+          disabled={loading}
+        >
+          {loading ? "Loading..." : "Submit"}
+        </Button>
       </Box>
     </AdminPageWrapper>
   );

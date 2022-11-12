@@ -8,6 +8,7 @@ interface Props {
   item: Instructor;
 }
 const InstructorDetailCard = ({ item }: Props) => {
+  console.log(item, "instructor item");
   return (
     <Box
       sx={{
@@ -58,6 +59,19 @@ const InstructorDetailCard = ({ item }: Props) => {
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Car Transmission Type : {item.car.transmissionType}
           </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            Driving License Expire :{" "}
+            {moment(item?.drivingLicenseExpire).format("MMM DD YYYY")}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            Instructor License Expire :{" "}
+            {moment(item?.instructorLicenseExpire).format("MMM DD YYYY")}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            Children Check License Expire :{" "}
+            {moment(item?.childrenCheckLicenseExpire).format("MMM DD YYYY")}
+          </Typography>
+
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Language :
             {item.languages.map((language) => (

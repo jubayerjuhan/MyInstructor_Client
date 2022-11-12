@@ -17,6 +17,11 @@ export interface Instructor {
   };
   createdAt: Date;
   transmissionType: string;
+  drivingLicenseExpire: string;
+  instructorLicenseExpire?: string;
+  instructorLicenseExpire?: string;
+  childrenCheckLicenseExpire?: string;
+
   _id: string;
   reviews: Review[];
 }

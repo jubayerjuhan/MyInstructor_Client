@@ -66,6 +66,11 @@ export default function AdminSidebar(props: Props) {
       icon: <ReceiptLongIcon />,
     },
     {
+      label: "Expired Instructors",
+      link: "/expired-instructors",
+      icon: <ReceiptLongIcon />,
+    },
+    {
       label: "Expired License",
       link: "/expired-license",
       icon: <CreditCardOffOutlinedIcon />,

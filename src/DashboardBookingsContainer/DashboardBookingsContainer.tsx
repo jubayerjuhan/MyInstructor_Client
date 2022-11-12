@@ -48,7 +48,9 @@ const DashboardBookingsContainer = ({
               <div className="avater">
                 <img
                   src={
-                    instructor ? booking.user.avater : booking.instructor.avater
+                    instructor
+                      ? booking?.user?.avater
+                      : booking?.instructor?.avater
                   }
                   alt=""
                 />
@@ -57,8 +59,8 @@ const DashboardBookingsContainer = ({
                 <p className="title">
                   Booking With{" "}
                   {instructor
-                    ? booking.user.firstName
-                    : booking.instructor.firstName}
+                    ? booking.user?.firstName
+                    : booking?.instructor?.firstName}
                 </p>
                 <div className="booking__desc">
                   <p className="time">

@@ -110,7 +110,7 @@ const BookingSelector = () => {
             return (
               <div key={key}>
                 <input
-                  className="form-check-input input__element"
+                  className="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault1"

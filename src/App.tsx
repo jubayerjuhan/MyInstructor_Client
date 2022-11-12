@@ -10,6 +10,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import AdminApplicants from "./pages/AdminApplicantsInstructor/AdminApplicants";
 import AdminBookings from "./pages/AdminBookings/AdminBookings";
 import AdminCars from "./pages/AdminCars/AdminCars";
+import AdminExpiredInstructor from "./pages/AdminExpiredUser/AdminExpiredUser";
 import AdminInstructor from "./pages/AdminInstructor/AdminInstructor";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import AdminUsers from "./pages/AdminUsers/AdminUsers";
@@ -178,6 +179,14 @@ function App() {
           element={
             <AdminProtected location={"/admin/instructors"}>
               <AdminInstructor />
+            </AdminProtected>
+          }
+        />
+        <Route
+          path={"/admin/expired-instructors"}
+          element={
+            <AdminProtected location={"/admin/expired-instructors"}>
+              <AdminExpiredInstructor />
             </AdminProtected>
           }
         />

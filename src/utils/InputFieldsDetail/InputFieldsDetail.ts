@@ -138,6 +138,24 @@ export const addInstructorFields = [
     type: "password",
   },
   {
+    name: "drivingLicenseExpire",
+    label: "Driving License Expire",
+    placeholder: "Driving License Expire",
+    type: "date",
+  },
+  {
+    name: "instructorLicenseExpire",
+    label: "Instructor License Expire",
+    placeholder: "Instructor License Expire",
+    type: "date",
+  },
+  {
+    name: "childrenCheckLicenseExpire",
+    label: "Children Check License Expire",
+    placeholder: "Children Check License Expire",
+    type: "date",
+  },
+  {
     name: "avater",
     label: "Avater",
     placeholder: "Avater",

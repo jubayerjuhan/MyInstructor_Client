@@ -38,14 +38,14 @@ const BookingSuccess = () => {
           <BsFillCheckCircleFill />
         </div>
         <div className="payment__success-information">
-          <p className="title">Booking Successfull ✅</p>
+          <p className="title">Booking Successful✅</p>
           <p className="description">
             Your Booking With{" "}
             <span>
               {instructor.firstName} {instructor.lastName}
             </span>{" "}
             from {moment(booking.time.startFrom).format("lll")} to{" "}
-            {moment(booking.time.endTo).format("LT")} is Successfull. Please
+            {moment(booking.time.endTo).format("LT")} is Successful. Please
             Check Your Email or Go To Your Learner Dashboard To See More
             Information, Thank You.
           </p>
