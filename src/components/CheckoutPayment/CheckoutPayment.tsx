@@ -14,10 +14,15 @@ interface CheckoutProps {
   checkoutBooking: boolean;
   testPackage: boolean;
   giftcard?: any;
+  giftCardInfo: {
+    _id: string;
+    amount: number;
+  };
 }
 const CheckoutPayment = ({
   giftcard,
   billing,
+  giftCardInfo,
   checkoutBooking,
   testPackage,
 }: CheckoutProps) => {
@@ -35,19 +40,19 @@ const CheckoutPayment = ({
 
   const getPrice = () => {
     if (testPackage) {
-      setPrice(199);
-      return getPaymentIndent(199);
+      setPrice(199 - giftCardInfo.amount);
+      return getPaymentIndent(199 - giftCardInfo.amount);
     }
     if (giftcard) {
-      setPrice(giftcard?.amount);
-      return getPaymentIndent(giftcard?.amount);
+      setPrice(giftcard?.amount - giftCardInfo.amount);
+      return getPaymentIndent(giftcard?.amount - giftCardInfo.amount);
     }
-    setPrice(cart?.price);
-    getPaymentIndent(cart?.price);
+    setPrice(cart?.price - giftCardInfo.amount);
+    getPaymentIndent(cart?.price - giftCardInfo.amount);
   };
   const getPaymentIndent = async (amount: any) => {
     const { data } = await client.post("/payment-indent", {
-      amount,
+      amount: amount,
     });
     setClientSecret(data.clientSecret);
   };

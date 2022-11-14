@@ -13,3 +13,14 @@ export const createGiftCard = async (amount: any, from: any, to: any) => {
     };
   }
 };
+export const validateGiftCard = async (code: string) => {
+  try {
+    const { data } = await client.get(`/validate-giftcard/${code}`);
+    if (data.success) return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response.data.message,
+    };
+  }
+};

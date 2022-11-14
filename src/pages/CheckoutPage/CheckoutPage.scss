@@ -40,6 +40,17 @@
       @include descriptionFont;
     }
   }
+  .coupon__section {
+    margin-top: 25px;
+    display: flex;
+
+    .submit-btn {
+      background-color: var(--theme-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 
 @media (max-width: 768px) {

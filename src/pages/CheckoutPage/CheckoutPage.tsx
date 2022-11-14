@@ -10,11 +10,19 @@ import { State } from "../../typings/reduxTypings";
 import { toast } from "material-react-toastify";
 import { useLocation } from "react-router-dom";
 import { BookingInfoProps } from "../BookingInformation/BookingInformation";
+import Button from "../../components/core/Button/Button";
+import { validateGiftCard } from "../../api_calls/giftcard_api";
 const CheckoutPage = () => {
   const { state } = useLocation();
   console.log(state?.bookForward, "book Forward checkout");
   const { cart } = useSelector((state: State) => state.cart);
   const [billings, setBillings] = useState<any>({});
+  const [loading, setLoading] = useState<boolean>(false);
+  const [coupon, setCoupon] = useState<any>("");
+  const [giftCardInfo, setGiftCardInfo] = useState<any>({
+    _id: "",
+    amount: 0,
+  });
   const [paymentAvailable, setPaymentAvailable] = useState(false);
 
   useEffect(() => {
@@ -26,6 +34,23 @@ const CheckoutPage = () => {
   }, [cart]);
 
   if (!cart?.hours && !state?.testPackage && !state.giftcard) return <></>;
+
+  const submitCoupon = async () => {
+    setLoading(true);
+    const data = await validateGiftCard(coupon);
+    console.log(data);
+    if (!data.success) {
+      setLoading(false);
+      return toast.error(data.message);
+    }
+    if (!state?.testPackage && cart.hours < data.giftcard[0]?.amount) {
+      setLoading(false);
+      return toast.error("Giftcard Value Is Greater Than Selected Hour");
+    }
+    setLoading(false);
+    setGiftCardInfo(data?.giftcard[0]);
+    toast.success("Giftcard Added Successfully");
+  };
   return (
     <>
       <Navbar />
@@ -42,6 +67,7 @@ const CheckoutPage = () => {
               billing={billings}
               giftcard={state?.giftcard}
               checkoutBooking={state?.bookForward}
+              giftCardInfo={giftCardInfo}
             />
           )}
         </div>
@@ -53,7 +79,7 @@ const CheckoutPage = () => {
               <p className="title">You Have Test Package On Your Cart ($199)</p>
             ) : (
               <>
-                {state.giftcard ? (
+                {state?.giftcard ? (
                   <p className="title">
                     You Have ${state?.giftcard?.amount} Gift Card In The Cart
                   </p>
@@ -63,8 +89,27 @@ const CheckoutPage = () => {
                   </p>
                 )}
               </>
+            )}{" "}
+            {giftCardInfo?.amount > 0 && (
+              <p className="title">Giftcard : -{giftCardInfo?.amount} Hours</p>
             )}
           </div>
+          {!paymentAvailable && (
+            <div className="coupon__section">
+              <input
+                onChange={(e) => setCoupon(e.target.value)}
+                type={"text"}
+                placeholder={"Enter Gift Card Number"}
+                className="form-control input__element login"
+              />
+              <Button
+                loading={loading}
+                title={"Apply"}
+                onClick={submitCoupon}
+                className={"submit-btn"}
+              ></Button>
+            </div>
+          )}
         </div>
       </div>
       <Footer />
