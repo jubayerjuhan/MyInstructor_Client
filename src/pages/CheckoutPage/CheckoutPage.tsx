@@ -19,14 +19,13 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     window.scroll(0, 0);
-    if (!cart?.hours && !state?.testPackage) {
-      console.log("Hello");
+    if (!cart?.hours && !state?.testPackage && !state.giftcard) {
       window.location.replace("/not-found");
       toast.error("Please Select Bookings Hours First");
     }
   }, [cart]);
 
-  if (!cart?.hours && !state?.testPackage) return <></>;
+  if (!cart?.hours && !state?.testPackage && !state.giftcard) return <></>;
   return (
     <>
       <Navbar />
@@ -41,6 +40,7 @@ const CheckoutPage = () => {
             <CheckoutPayment
               testPackage={state?.testPackage}
               billing={billings}
+              giftcard={state?.giftcard}
               checkoutBooking={state?.bookForward}
             />
           )}
@@ -52,7 +52,17 @@ const CheckoutPage = () => {
             {state?.testPackage ? (
               <p className="title">You Have Test Package On Your Cart ($199)</p>
             ) : (
-              <p className="title">You Have {cart?.hours} Hours In The Cart</p>
+              <>
+                {state.giftcard ? (
+                  <p className="title">
+                    You Have ${state?.giftcard?.amount} Gift Card In The Cart
+                  </p>
+                ) : (
+                  <p className="title">
+                    You Have {cart?.hours} Hours In The Cart
+                  </p>
+                )}
+              </>
             )}
           </div>
         </div>

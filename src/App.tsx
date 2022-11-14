@@ -20,6 +20,8 @@ import BookingPage from "./pages/BookingPage/BookingPage";
 import BookingSuccess from "./pages/BookingSuccess/BookingSuccess";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
+import GiftcardCheckout from "./pages/GiftCardCheckout/GiftcardCheckout";
+import GiftCardPage from "./pages/GiftCardPage/GiftCardPage";
 import Homepage from "./pages/Homepage/Homepage";
 import InstructorDashboard from "./pages/InstructorDashboard/InstructorDashboard";
 import InstructorList from "./pages/InstructorList/InstructorList";
@@ -83,10 +85,26 @@ function App() {
           }
         />
         <Route
+          path="/gift-card"
+          element={
+            <ProtectedRoute location={"/add-cart"}>
+              <GiftCardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/checkout"
           element={
             <ProtectedRoute location={"/checkout"}>
               <CheckoutPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/gift-checkout"
+          element={
+            <ProtectedRoute location={"/gift-checkout"}>
+              <GiftcardCheckout />
             </ProtectedRoute>
           }
         />

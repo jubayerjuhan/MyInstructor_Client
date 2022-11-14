@@ -20,3 +20,17 @@ export const registerValidationSchema = yup
     password: yup.string().required("Field Required"),
   })
   .required();
+
+export const giftCardValidationSchema = yup
+  .object({
+    recieverMail: yup
+      .string()
+      .email("Enter a valid email")
+      .required("Field Required"),
+    amount: yup
+      .number()
+      .typeError("Please Enter A Valid Number")
+      .required("Field Required"),
+    message: yup.string(),
+  })
+  .required();

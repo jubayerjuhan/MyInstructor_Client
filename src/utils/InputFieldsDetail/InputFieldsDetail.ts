@@ -21,6 +21,27 @@ export const carFields = [
   },
 ];
 
+export const giftCardFields = [
+  {
+    name: "recieverMail",
+    label: "Reciever Email",
+    placeholder: "Reciever Email",
+    type: "email",
+  },
+  {
+    name: "amount",
+    label: "Amount",
+    placeholder: "Amount",
+    type: "number",
+  },
+  {
+    name: "message",
+    label: "Message",
+    placeholder: "Message",
+    type: "text",
+  },
+];
+
 export const applyInstructorFields = [
   {
     name: "firstName",

@@ -18,14 +18,17 @@ import { toast } from "material-react-toastify";
 import { useNavigate } from "react-router-dom";
 import { BillingInfo } from "../../typings/cartTypings";
 import { bookTestPackage } from "../../api_calls/bookings_api";
+import { createGiftCard } from "../../api_calls/giftcard_api";
 
 interface PaymentProps {
   billing: BillingInfo;
   checkoutBooking: boolean;
   price: number;
   testPackage: boolean;
+  giftcard: any;
 }
 const PaymentContainer = ({
+  giftcard,
   billing,
   checkoutBooking,
   testPackage,
@@ -41,6 +44,7 @@ const PaymentContainer = ({
   const [loading, setLoading] = useState(false);
   const { cart } = useSelector((state: State) => state.cart);
   const { error, success } = useSelector((state: State) => state.credit);
+  const { user } = useSelector((state: State) => state.user);
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch<any>();
@@ -128,6 +132,13 @@ const PaymentContainer = ({
           setLoading(false);
           toast.success("Test Package Booking Successfull");
           return navigate("/payment-success", { state: { booking: true } });
+        }
+        if (giftcard) {
+          return createGiftCard(
+            giftcard.amount,
+            user._id,
+            giftcard.recieverMail
+          );
         }
         dispatch(purchaseCredit(cart?.hours));
         setLoading(false);
