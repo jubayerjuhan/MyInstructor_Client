@@ -26,8 +26,10 @@ interface PaymentProps {
   price: number;
   testPackage: boolean;
   giftcard: any;
+  giftCardInfo: any;
 }
 const PaymentContainer = ({
+  giftCardInfo,
   giftcard,
   billing,
   checkoutBooking,
@@ -140,7 +142,7 @@ const PaymentContainer = ({
             giftcard.recieverMail
           );
         }
-        dispatch(purchaseCredit(cart?.hours));
+        dispatch(purchaseCredit(cart?.hours + giftCardInfo.amount));
         setLoading(false);
       }
 

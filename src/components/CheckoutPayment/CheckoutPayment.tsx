@@ -40,15 +40,15 @@ const CheckoutPayment = ({
 
   const getPrice = () => {
     if (testPackage) {
-      setPrice(199 - giftCardInfo.amount);
-      return getPaymentIndent(199 - giftCardInfo.amount);
+      setPrice(199);
+      return getPaymentIndent(199);
     }
     if (giftcard) {
-      setPrice(giftcard?.amount - giftCardInfo.amount);
-      return getPaymentIndent(giftcard?.amount - giftCardInfo.amount);
+      setPrice(giftcard?.amount);
+      return getPaymentIndent(giftcard?.amount);
     }
-    setPrice(cart?.price - giftCardInfo.amount);
-    getPaymentIndent(cart?.price - giftCardInfo.amount);
+    setPrice(cart?.price);
+    getPaymentIndent(cart?.price);
   };
   const getPaymentIndent = async (amount: any) => {
     const { data } = await client.post("/payment-indent", {
@@ -72,6 +72,7 @@ const CheckoutPayment = ({
                 checkoutBooking={checkoutBooking}
                 billing={billing}
                 giftcard={giftcard}
+                giftCardInfo={giftCardInfo}
               />
             </Elements>
           </>

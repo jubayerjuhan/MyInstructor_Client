@@ -43,10 +43,6 @@ const CheckoutPage = () => {
       setLoading(false);
       return toast.error(data.message);
     }
-    if (!state?.testPackage && cart.hours < data.giftcard[0]?.amount) {
-      setLoading(false);
-      return toast.error("Giftcard Value Is Greater Than Selected Hour");
-    }
     setLoading(false);
     setGiftCardInfo(data?.giftcard[0]);
     toast.success("Giftcard Added Successfully");
@@ -90,11 +86,24 @@ const CheckoutPage = () => {
                 )}
               </>
             )}{" "}
-            {giftCardInfo?.amount > 0 && (
-              <p className="title">Giftcard : -{giftCardInfo?.amount} Hours</p>
-            )}
           </div>
-          {!paymentAvailable && (
+          {giftCardInfo._id && (
+            <div className="checkout__coupon-added">
+              <div className="coupon_info">
+                <p className="title">Gift Card : </p>
+                {giftCardInfo?.amount > 0 && (
+                  <p className="title"> {giftCardInfo?.amount} Hours</p>
+                )}
+              </div>
+              <div className="coupon_info">
+                <p className="title">Code : </p>
+                {giftCardInfo?.amount > 0 && (
+                  <p className="title">{giftCardInfo?.code}</p>
+                )}
+              </div>
+            </div>
+          )}
+          {!paymentAvailable && !giftCardInfo._id && (
             <div className="coupon__section">
               <input
                 onChange={(e) => setCoupon(e.target.value)}

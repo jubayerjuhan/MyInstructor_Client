@@ -53,6 +53,26 @@
   }
 }
 
+.checkout__coupon-added {
+  display: inline-block;
+  gap: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  margin-top: 20px;
+  width: fit-content;
+  padding: 15px 20px;
+  border-radius: 15px;
+  // gap: ;
+
+  .coupon_info {
+    display: flex;
+    gap: 10px;
+
+    > .title {
+      @include descriptionFont;
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .checkout__page-main {
     display: flex;
