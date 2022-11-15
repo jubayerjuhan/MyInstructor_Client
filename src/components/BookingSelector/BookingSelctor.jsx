@@ -159,6 +159,19 @@ const BookingSelector = () => {
                     startFrom: hour,
                     endTo: moment(hour).add(duration, "hour"),
                   };
+                  if (Date.parse(hour) < Date.now()) {
+                    return (
+                      <option
+                        value={JSON.stringify(fieldValue)}
+                        key={key}
+                        disabled
+                      >
+                        {moment(hour).format("hh:mm A")} to{" "}
+                        {moment(hour).add(duration, "hour").format("hh:mm A")}{" "}
+                        Booked Out
+                      </option>
+                    );
+                  }
                   if (
                     bookingTimes.includes(Date.parse(hour)) ||
                     bookingEnd.includes(
