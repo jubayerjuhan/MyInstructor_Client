@@ -1,5 +1,4 @@
 import React from "react";
-import VehicalImage from "../../assets/reviewavater.jpg";
 import { InstructorProfileProps } from "../InstructorProfileInfo/InstructorProfileInfo";
 import "./InstructorVehical.scss";
 
@@ -9,13 +8,13 @@ const InstructorVehical = ({ instructor }: InstructorProfileProps) => {
       <p className="title">Vehical Information</p>
       <div className="vehical__info">
         <div className="image">
-          <img src={VehicalImage} alt="" />
+          <img src={instructor.car.image} alt="" />
         </div>
         <div className="information">
           <p className="name">{instructor.car.name}</p>
-          <p className="transmission">
+          {/* <p className="transmission">
             {instructor.car.transmissionType} Transmission
-          </p>
+          </p> */}
           <p className="numberPlate">{instructor.car.numberPlate}</p>
         </div>
       </div>

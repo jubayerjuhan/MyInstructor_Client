@@ -1,11 +1,8 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import DashboardSidebar from "../DashboardSidebar/DashboardSidebar";
-import user from "../../assets/reviewavater.jpg";
 import "./Dashboard.scss";
 import { IconType } from "react-icons/lib";
 import { DashboardLinksTypes } from "../../pages/LearnerDashboard/LearnerDashboard";
-import { AiOutlineDashboard } from "react-icons/ai";
-import NotFoundPage from "../../pages/404Page/NotFoundPage";
 import { FaHamburger } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";

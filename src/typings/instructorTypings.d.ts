@@ -35,7 +35,8 @@ export type Suburb = {
 type Car = {
   name: string;
   numberPlate: string;
-  transmissionType: string;
+  image: string;
+  transmissionType?: string;
 };
 
 export type Review = {

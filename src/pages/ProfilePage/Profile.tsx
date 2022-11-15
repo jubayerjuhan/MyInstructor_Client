@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineCheck, AiOutlineEdit } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { editUser, updateAvater } from "../../api_calls/user_api";
-import avater from "../../assets/reviewavater.jpg";
 import Button from "../../components/core/Button/Button";
 import { licenseStatusOptions } from "../../components/Register/registerInputs";
 import { LEARNER_LOGIN_COMPLETE } from "../../redux/reducer/reduxNamings";
@@ -161,7 +160,7 @@ const Profile = () => {
       {loading && <FullPageSpinner />}
       <div className="profile__page dashboard__padding">
         <div className="profileImage">
-          <img src={newProfileImage.preview || user.avater || avater} alt="" />
+          <img src={newProfileImage.preview || user.avater} alt="" />
           <input
             type="file"
             id="file"

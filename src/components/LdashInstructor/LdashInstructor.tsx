@@ -1,7 +1,6 @@
 import React from "react";
 import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import avater from "../../assets/reviewavater.jpg";
 import { SET_INSTRUCTOR } from "../../redux/reducer/reduxNamings";
 import { Instructor } from "../../typings/instructorTypings";
 import Button from "../core/Button/Button";
@@ -12,6 +11,7 @@ interface LdashInstructorProps {
 }
 const LdashInstructor = ({ instructor }: LdashInstructorProps) => {
   const dispatch = useDispatch();
+  console.log(instructor, "Instructor 15");
   // handle booking now
   const handleBookNow = () => {
     dispatch({ type: SET_INSTRUCTOR, payload: instructor });
@@ -23,12 +23,12 @@ const LdashInstructor = ({ instructor }: LdashInstructorProps) => {
       <div className="dashboard__instructor-info">
         <div className="instructor">
           <div className="image">
-            <img src={instructor.avater} alt="" />
+            <img src={instructor?.avater} alt="" />
           </div>
           <div className="information">
             <p className="name">
-              {instructor.firstName} {instructor.lastName}{" "}
-              {instructor.gender === "Male" ? (
+              {instructor?.firstName} {instructor?.lastName}{" "}
+              {instructor?.gender === "Male" ? (
                 <BsGenderMale />
               ) : (
                 <BsGenderFemale />
@@ -39,11 +39,11 @@ const LdashInstructor = ({ instructor }: LdashInstructorProps) => {
         </div>
         <div className="car__information-model">
           <div className="image">
-            <img src={avater} alt="" />
+            <img src={instructor?.car?.image} alt="" />
           </div>
           <div className="car__info">
-            <p className="car__name">{instructor.car.name}</p>
-            <p className="car__number">{instructor.car.numberPlate}</p>
+            <p className="car__name">{instructor?.car.name}</p>
+            <p className="car__number">{instructor?.car.numberPlate}</p>
           </div>
         </div>
       </div>
