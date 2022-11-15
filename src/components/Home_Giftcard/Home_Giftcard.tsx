@@ -17,18 +17,19 @@ const Home_Giftcard = () => {
             <div className="icon">
               <ImTicket />
             </div>
-            <p className="title">Pick a voucher</p>
+            <p className="title">Select a coupon</p>
             <p className="description">
-              Choose the number of lessons that you want to purchase
+              Select how many classes you want to buy
             </p>
           </div>
           <div className="giftcard__option">
             <div className="icon">
               <BsGift />
             </div>
-            <p className="title">Send your gift</p>
+            <p className="title">Give a present</p>
             <p className="description">
-              Enter the recipients info and the gift is on the way.
+              The gift will be delivered by your loved one after providing the
+              information.
             </p>
           </div>
         </div>
@@ -36,7 +37,8 @@ const Home_Giftcard = () => {
           <Button
             className="bookbutton"
             width="100%"
-            title="Gift A Voucher Now"
+            title="BUY GIFT COUPON"
+            onClick={() => (window.location.href = "/gift-card")}
           />
         </div>
       </div>

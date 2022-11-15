@@ -72,10 +72,14 @@ const HeroSection = ({ title }: Props) => {
           {title ? title : "Where do you need a driving instructor?"}
         </p>
         <ul className="heroSection__bullets">
-          <li>Choose from 800+ verified instructors</li>
-          <li>100,000+ new learners per year</li>
+          <li>
+            from a huge quantity of credible instructors and a wide range of new
+            students every year 24/7 online scheduling & booking,You may swap
+            instructors at any moment
+          </li>
+          {/* <li>100,000+ new learners per year</li>
           <li>24/7 online booking & rescheduling</li>
-          <li>Change your instructor anytime</li>
+          <li>Change your instructor anytime</li> */}
         </ul>
       </div>
       <div className="heroSection__selector">

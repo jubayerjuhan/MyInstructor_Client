@@ -4,16 +4,28 @@ import Button from "../core/Button/Button";
 import "./WhyusSection.scss";
 
 const WhyusSection = () => {
-  const reasons = [1, 2, 3, 4, 5, 6, 6, 5, 3, 2, 2, 2, 1, 2, 3, 3];
+  const reasons = [
+    "Reviews, ratings, and profiles of driving instructors",
+    "Online management of your driving lesson reservations",
+    "Online changes to your driving instructor",
+    "Flexible scheduling for driving lessons",
+    "Driving instructors with licences and accreditation",
+    "Use your own vehicle or choose from the auto or manual options!",
+    "Your very own personal driving instructor",
+    "Examine each driving school in your neighbourhood",
+    "Nice and understanding male and female driving instructors",
+  ];
   return (
     <section className="whyus__container sectionPadding">
-      <p className="title">Why choose "My Instructor"?</p>
+      <p className="title"> What Makes You Pick "My Instructor"?</p>
       <p className="description">
-        Unlike a typical driving school, My Instructor is an Australian first
-        platform that allows learner drivers & parents to find, compare and book
-        verified driving instructors online. The platform brings transparency,
-        choice and efficiency to the selection of a driving instructor and the
-        ongoing management of driving lessons.
+        My Instructor, an Australian exclusive platform, allows trainee drivers
+        and parents to search, compare, and book certified driving instructors
+        online, unlike a normal driving school. This platform makes the process
+        of choosing a driving coach and managing driving lessons continuous,
+        transparent, flexible, and efficient. Choose your own individual driving
+        instructor from the most options available in Australia. Online
+        real-time driving lesson reservations
       </p>
       <div className="whyus__reasons">
         {reasons.map((reason, key) => (
@@ -21,9 +33,7 @@ const WhyusSection = () => {
             <div className="icon">
               <TiChevronRight />
             </div>
-            <p className="title">
-              Largest choice of driving instructors in Australia
-            </p>
+            <p className="title">{reason}</p>
           </div>
         ))}
       </div>

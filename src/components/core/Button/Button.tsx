@@ -14,7 +14,13 @@ const Button = ({
 }: any) => {
   return (
     <div
-      onClick={loading ? "" : onClick}
+      onClick={
+        loading
+          ? ""
+          : onClick
+          ? onClick
+          : () => (window.location.href = "/driving-lessons")
+      }
       className={`btn-box ${className}`}
       style={{
         width: width ? width : "140px",

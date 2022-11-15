@@ -30,21 +30,18 @@ const Footer = () => {
       <div className="footer__intro">
         <p className="footer__title">Who is My Instructor?</p>
         <p className="description">
-          My Instructor takes the hassle out of choosing a driving school by
-          helping learner drivers find, compare and book verified driving
-          instructors online. The My Instructor online platform brings
-          transparency, choice and efficiency to booking and managing driving
-          instructors and driving lessons in Sydney, Melbourne, Brisbane, Perth,
-          Adelaide, Hobart, Gold Coast, Sunshine Coast, Newcastle, Central
-          Coast, Geelong, Toowoomba, Wollongong, Cairns, Coffs Harbour, Bendigo,
-          Canberra.
+          By assisting new drivers in finding, comparing, and booking verified
+          driving instructors online, My Instructor eliminates the headache of
+          selecting a driving school. The My Instructor online platform
+          streamlines the scheduling, management, and administration of driving
+          instructors and driving classes across the Australia.
         </p>
       </div>
       <div className="footer__tests">
-        <p className="footer__title">Learners Tests Online</p>
+        {/* <p className="footer__title">Learners Tests Online</p>
         <a href="/knowledge-test" className="footer__link">
           Free Knowledge Test
-        </a>
+        </a> */}
         <div className="footer__instructor-city">
           <p className="footer__title">Driving Instructors by City</p>
           <div className="footer__instructor-cities">

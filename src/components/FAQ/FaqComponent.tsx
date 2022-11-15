@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { BsArrowRight, BsArrowDown } from "react-icons/bs";
 import "./FaqComponent.scss";
 
-const FaqComponent = ({ icon }: any) => {
+const FaqComponent = ({ icon, faq }: any) => {
   const [open, setOpen] = useState(false);
+  console.log(faq);
+  // return <></>;
   return (
     <div className="faq__component">
       <div
@@ -12,20 +14,14 @@ const FaqComponent = ({ icon }: any) => {
       >
         <div className="faq__title">
           {icon && <div className="icon">{icon} </div>}{" "}
-          <p className="title">
-            How many lessons will I need to learn to drive?
-          </p>
+          <p className="title">{faq?.qs}</p>
         </div>
         <div className="chevron__icon">
           {open ? <BsArrowDown /> : <BsArrowRight />}
         </div>
       </div>
       <div className={`faq__body ${open ? "active " : ""}`}>
-        <p className="description">
-          Lorem ipsum dolor sit amet consec tetur adipisicing elit. Quisquam sit
-          laborum est aliquam. Dicta fuga soluta eius exercitationem porro modi.
-          Exercitationem eveniet aliquam repudiandae sequi.
-        </p>
+        <p className="description">{faq?.ans}</p>
       </div>
     </div>
   );

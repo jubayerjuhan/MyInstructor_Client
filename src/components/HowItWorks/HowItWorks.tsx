@@ -7,32 +7,27 @@ import carImage from "../../assets/carinstructor.jpg";
 const HowItWorks = () => {
   const bullets = [
     {
-      title: "Find Your Driving Instructors",
+      title: "Choose Your Driving Instructor",
       description:
-        "Choose from a wide variety of instructors in your area. Check rating & reviews from real learners.  ",
+        "Select from a wide range of local instructors. View ratings and reviews left by actual students.  ",
     },
     {
-      title: "Book Your Driving Lessons",
+      title: "Register for Driving Lessons",
       description:
-        "Book online with instant confirmation. Easily manage your lesson schedule via our online dashboard.        ",
+        "Make bookings and get confirmation right away. Utilising our web dashboard, you can easily manage your lesson plan.",
     },
     {
-      title: "Learn to Drive      ",
+      title: "Know How To Drive ",
       description:
-        "Your instructor picks you up from your chosen address and you're on your way 🚗        ",
+        "You are picked up by your instructor and driven to the address of your choice.",
     },
   ];
   return (
     <section className="how__works-wrapper sectionPadding">
       <div className="how__works">
         <div className="how__works-text">
-          <p className="title">How "My Instructor" Works</p>
-          <p className="description">
-            There are many variations of passages of Lorem Ipsum amet avoilble
-            but majority have suffered alteration in some form, by injected
-            humur or randomise words which don't sure amet sit dolor quras solo
-            dolor.
-          </p>
+          <p className="title">How "My Instructor" Operates</p>
+          <p className="description">Flexible & easy to use booking system</p>
           <div className="how__works-bullets">
             {bullets.map((elem, key) => (
               <div className="how__works-bullet" key={key}>
