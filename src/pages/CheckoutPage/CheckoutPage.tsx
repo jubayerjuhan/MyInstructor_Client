@@ -12,6 +12,7 @@ import { useLocation } from "react-router-dom";
 import { BookingInfoProps } from "../BookingInformation/BookingInformation";
 import Button from "../../components/core/Button/Button";
 import { validateGiftCard } from "../../api_calls/giftcard_api";
+import { lessonPrice } from "../../components/PricingCalculator/PricingCalculator";
 const CheckoutPage = () => {
   const { state } = useLocation();
   console.log(state?.bookForward, "book Forward checkout");
@@ -77,7 +78,11 @@ const CheckoutPage = () => {
               <>
                 {state?.giftcard ? (
                   <p className="title">
-                    You Have ${state?.giftcard?.amount} Gift Card In The Cart
+                    You Have {state.giftcard?.amount} Hours Gift Card In The
+                    Cart <br />1 Hour = ${lessonPrice}
+                    <br />
+                    {console.log(state?.giftcard?.amount, "amount")}
+                    Total: ${lessonPrice * state?.giftcard?.amount}
                   </p>
                 ) : (
                   <p className="title">
@@ -103,22 +108,25 @@ const CheckoutPage = () => {
               </div>
             </div>
           )}
-          {!paymentAvailable && !giftCardInfo._id && (
-            <div className="coupon__section">
-              <input
-                onChange={(e) => setCoupon(e.target.value)}
-                type={"text"}
-                placeholder={"Enter Gift Card Number"}
-                className="form-control input__element login"
-              />
-              <Button
-                loading={loading}
-                title={"Apply"}
-                onClick={submitCoupon}
-                className={"submit-btn"}
-              ></Button>
-            </div>
-          )}
+          {!paymentAvailable &&
+            !giftCardInfo._id &&
+            !state?.giftcard &&
+            !state?.testPackage && (
+              <div className="coupon__section">
+                <input
+                  onChange={(e) => setCoupon(e.target.value)}
+                  type={"text"}
+                  placeholder={"Enter Gift Card Number"}
+                  className="form-control input__element login"
+                />
+                <Button
+                  loading={loading}
+                  title={"Apply"}
+                  onClick={submitCoupon}
+                  className={"submit-btn"}
+                ></Button>
+              </div>
+            )}
         </div>
       </div>
       <Footer />

@@ -5,11 +5,11 @@ import { addToCart } from "../../redux/actions/cart_actions.ts";
 import Button from "../core/Button/Button";
 import "./PricingCalculator.scss";
 
+export const lessonPrice = 80;
 const PricingCalculator = ({ cart, bookForward }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const lessonPrice = 80;
   const [selectedHour, setSelectedHour] = useState(1);
   const hoursArray = Array.from(Array(101).keys());
   const [totalLessonPrice, setTotalLessonPrice] = useState(lessonPrice);
@@ -51,8 +51,8 @@ const PricingCalculator = ({ cart, bookForward }) => {
     dispatch(addToCart(cart));
     if (bookForward) {
       navigate("/checkout", { state: { bookForward } });
-    }else{
-      navigate("/checkout")
+    } else {
+      navigate("/checkout");
     }
   };
   return (

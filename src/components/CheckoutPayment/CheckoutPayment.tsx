@@ -8,6 +8,7 @@ import PaymentContainer from "../PaymentContainer/PaymentContainer";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 import { BillingInfo } from "../../typings/cartTypings";
+import { lessonPrice } from "../PricingCalculator/PricingCalculator";
 
 interface CheckoutProps {
   billing: BillingInfo;
@@ -44,8 +45,8 @@ const CheckoutPayment = ({
       return getPaymentIndent(199);
     }
     if (giftcard) {
-      setPrice(giftcard?.amount);
-      return getPaymentIndent(giftcard?.amount);
+      setPrice(giftcard?.amount * lessonPrice);
+      return getPaymentIndent(giftcard?.amount * lessonPrice);
     }
     setPrice(cart?.price);
     getPaymentIndent(cart?.price);

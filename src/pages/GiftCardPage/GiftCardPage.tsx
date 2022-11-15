@@ -34,7 +34,7 @@ const GiftCardPage = () => {
           <img src={image} alt="" />
         </div>
         <div className="gift__card-info">
-          <p className="title">Send Gift Card</p>
+          <p className="title">Send Gift Card </p>
           {giftCardFields.map((field, key) => {
             return (
               <div>

@@ -31,7 +31,7 @@ export const giftCardFields = [
   {
     name: "amount",
     label: "Amount",
-    placeholder: "Amount",
+    placeholder: "Enter How Many Hour You Want To Give",
     type: "number",
   },
   {
