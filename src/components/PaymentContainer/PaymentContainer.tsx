@@ -18,7 +18,7 @@ import { toast } from "material-react-toastify";
 import { useNavigate } from "react-router-dom";
 import { BillingInfo } from "../../typings/cartTypings";
 import { bookTestPackage } from "../../api_calls/bookings_api";
-import { createGiftCard } from "../../api_calls/giftcard_api";
+import { createGiftCard, deleteGiftCard } from "../../api_calls/giftcard_api";
 
 interface PaymentProps {
   billing: BillingInfo;
@@ -72,6 +72,13 @@ const PaymentContainer = ({
       const booked = dispatch(bookLesson(bookingInfo));
       if (booked) navigate("/payment-success", { state: { booking: true } });
     } else {
+      if (giftCardInfo?._id) {
+        const deletegcard = async () => {
+          await deleteGiftCard(giftCardInfo._id);
+        };
+
+        deletegcard();
+      }
       console.log("redirect to payment-success");
       dispatch(clearSuccess());
       navigate("/payment-success", {

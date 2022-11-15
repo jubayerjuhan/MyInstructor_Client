@@ -24,3 +24,11 @@ export const validateGiftCard = async (code: string) => {
     };
   }
 };
+export const deleteGiftCard = async (id: string) => {
+  try {
+    const { data } = await client.delete(`/delete-giftcard/${id}`);
+    if (data.success) return true;
+  } catch (error: any) {
+    return false;
+  }
+};

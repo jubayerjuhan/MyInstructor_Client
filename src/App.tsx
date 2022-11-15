@@ -31,6 +31,7 @@ import LearnerDashboard from "./pages/LearnerDashboard/LearnerDashboard";
 import Login from "./pages/Login/Login";
 import PasswordResetPage from "./pages/PasswordResetPage/PasswordResetPage";
 import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import ViewItemsPage from "./pages/ViewItemsPage";
 
 // stripe Promise
@@ -76,6 +77,9 @@ function App() {
           element={<InstructorList />}
         />
         <Route path="/instructor-profile/:id" element={<InstructorProfile />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
+        {/* protected routes */}
         <Route
           path="/add-cart"
           element={

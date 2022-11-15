@@ -67,6 +67,22 @@
 }
 
 @media (max-width: 800px) {
+  .nav__header-links {
+    a {
+      font-size: 12px !important;
+    }
+  }
+  .nav__header-links {
+    padding: 0px 15px;
+  }
+
+  .navbar__header-wrapper {
+    gap: 10px;
+  }
+
+  .nav__header-links .navbar__header-link {
+    font-size: 12px;
+  }
   .navbar {
     padding: 40px !important;
     padding-top: 20px !important;
