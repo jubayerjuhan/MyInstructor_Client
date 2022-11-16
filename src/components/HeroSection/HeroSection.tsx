@@ -69,7 +69,7 @@ const HeroSection = ({ title }: Props) => {
     <section className="heroSection sectionPadding">
       <div className="heroSection__textContainer">
         <p className="heroSection__title">
-          {title ? title : "Where do you need a driving instructor?"}
+          {title ? title : "Find Which Area You Need a Driving Instructor"}
         </p>
         <ul className="heroSection__bullets">
           <li>

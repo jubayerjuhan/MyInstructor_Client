@@ -11,11 +11,17 @@ const FaqSection = () => {
     },
     {
       qs: "Do You Provide Special Lessons to Help Students Get Ready for the Driving Test?",
-      ans: `For $199, we provides a driving test bundle that includes:\n
-      • Pickup from the location of your choice \n
-      • Pre-test driving instruction for 45 minutes ${"\n"}
-      • Taking your driving test in your instructor's car ${"\n"}
-      • Drop to the destination of your choice`,
+      ans: `For $189= 1 lesson 45min & test,  
+      $199= 1lesson 60 min & test. 
+   we provides a driving test bundle that includes:
+  
+  • Pickup from the location of your choice
+  
+  •  Taking your driving test in your instructor's car
+  
+  • Drop to the destination of your choice
+  
+  Emergency  test booking need enquiry`,
     },
     {
       qs: "How many driving lessons will I need to take?",
