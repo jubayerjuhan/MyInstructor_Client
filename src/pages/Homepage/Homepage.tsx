@@ -45,7 +45,7 @@ const Homepage = ({ title }: Props) => {
             : title
         }
       />
-      <HomeCounterComponent />
+      {/* <HomeCounterComponent /> */}
       <HowItWorks />
       <FourIconComponent />
       <HomeGiftcard />
