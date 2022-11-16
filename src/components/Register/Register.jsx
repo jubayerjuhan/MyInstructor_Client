@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Button from "../core/Button/Button";
-import loginImage from "../../assets/undraw_Login_re_4vu2.png";
+import loginImage from "../../assets/7327894.jpg";
 import { useForm } from "react-hook-form";
 import "./register.scss";
 import { yupResolver } from "@hookform/resolvers/yup";

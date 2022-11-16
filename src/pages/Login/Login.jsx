@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Button from "../../components/core/Button/Button";
-import loginImage from "../../assets/undraw_Login_re_4vu2.png";
+import loginImage from "../../assets/7327894.jpg";
+import instructorLoginImage from "../../assets/20908709_6382323.jpg";
 import { useForm } from "react-hook-form";
 import "./Login.scss";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -64,14 +65,17 @@ const Login = ({ instructor }) => {
   return (
     <>
       <Navbar></Navbar>
-      <div className="login__component">
+      <div className="login__component sectionPadding">
         <div className="login__graphics">
-          <img src={loginImage} alt="Login Graphics Vector" />
+          <img
+            src={instructor ? instructorLoginImage : loginImage}
+            alt="Login Graphics Vector"
+          />
         </div>
 
         <form
           action=""
-          className="login__form sectionPadding"
+          className="login__form "
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="login__form-header">
