@@ -23,7 +23,11 @@ const Footer = () => {
   const driveLinks = [
     { name: "Driving Lessons", link: "/driving-lessons" },
     { name: "Test Packages", link: "/test-package" },
-    { name: "Gift Vouchers", link: "/gift-vouchers" },
+    { name: "Gift Vouchers", link: "/gift-card" },
+    {
+      name: "International Driving License Conversion",
+      link: "https://www.vicroads.vic.gov.au/licences/new-to-victoria/convert-your-overseas-licence",
+    },
   ];
   return (
     <div className="footer__component sectionPadding">
@@ -73,7 +77,12 @@ const Footer = () => {
         <Button title="Book now" />
         <div className="footer__drive-links">
           {driveLinks.map((driveLink, key) => (
-            <a href={driveLink.link} className="footer__link" key={key}>
+            <a
+              href={driveLink.link}
+              target={"_blank"}
+              className="footer__link"
+              key={key}
+            >
               {driveLink.name}
             </a>
           ))}
