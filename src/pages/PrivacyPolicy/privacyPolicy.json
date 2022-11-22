@@ -5,7 +5,8 @@
       "We are dedicated to making sure that your information is handled professionally and safely. We are devoted to abiding by privacy regulations that concern us",
       "The Australian Privacy Principles (APPs), which are protected by the Privacy Act, must be followed."
     ],
-    "list": []
+    "list": [],
+    "links": []
   },
   {
     "title": "You acknowledge and accept our and the Company's by using this website and purchasing anything from us :",
@@ -15,8 +16,12 @@
         "link": "/privacy-policy"
       },
       {
-        "label": "Terms and Conditions",
-        "link": "/terms-and-condition"
+        "label": "Terms and Conditions (Learner)",
+        "link": "/terms/learner"
+      },
+      {
+        "label": "Terms and Conditions (Instructor)",
+        "link": "/terms/instructor"
       }
     ],
     "list": []

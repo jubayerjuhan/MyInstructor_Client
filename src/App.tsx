@@ -5,6 +5,7 @@ import AdminProtected from "./components/AdminProtected/AdminProtected";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Register from "./components/Register/Register";
 import NotFoundPage from "./pages/404Page/NotFoundPage";
+import AboutUs from "./pages/AboutUs/AboutUs";
 import AddToCart from "./pages/AddToCart/AddToCart";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import AdminApplicants from "./pages/AdminApplicantsInstructor/AdminApplicants";
@@ -22,6 +23,7 @@ import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import GiftcardCheckout from "./pages/GiftCardCheckout/GiftcardCheckout";
 import GiftCardPage from "./pages/GiftCardPage/GiftCardPage";
+import GiftcardSuccess from "./pages/GiftCardSuccess/GiftcardSuccess";
 import Homepage from "./pages/Homepage/Homepage";
 import InstructorDashboard from "./pages/InstructorDashboard/InstructorDashboard";
 import InstructorList from "./pages/InstructorList/InstructorList";
@@ -32,6 +34,7 @@ import Login from "./pages/Login/Login";
 import PasswordResetPage from "./pages/PasswordResetPage/PasswordResetPage";
 import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
+import TermsAndCondition from "./pages/TermsAndCondtion/TermsAndCondition";
 import ViewItemsPage from "./pages/ViewItemsPage";
 
 // stripe Promise
@@ -78,6 +81,9 @@ function App() {
         />
         <Route path="/instructor-profile/:id" element={<InstructorProfile />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/terms/instructor" element={<TermsAndCondition />} />
+        <Route path="/terms/learner" element={<TermsAndCondition />} />
 
         {/* protected routes */}
         <Route
@@ -133,6 +139,14 @@ function App() {
           element={
             <ProtectedRoute location={"/payment-success"}>
               <PaymentSuccess />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/giftcard-success"
+          element={
+            <ProtectedRoute location={"/giftcard-success"}>
+              <GiftcardSuccess />
             </ProtectedRoute>
           }
         />

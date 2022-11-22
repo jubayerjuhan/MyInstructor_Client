@@ -1,11 +1,18 @@
 import { toast } from "material-react-toastify";
 import { client } from "../client";
 
-export const createGiftCard = async (amount: any, from: any, to: any) => {
+export const createGiftCard = async (
+  amount: any,
+  from: any,
+  to: any,
+  navigate: any
+) => {
   const giftcard = { amount, from, to };
   try {
     const { data } = await client.post("/create-giftcard", giftcard);
-    if (data.success) return (window.location.href = "/giftcard-success");
+    if (data.success)
+      return navigate("/giftcard-success", { state: { giftcard } });
+    // (window.location.href = );
   } catch (error: any) {
     toast.error(error.response.data.message);
     return {

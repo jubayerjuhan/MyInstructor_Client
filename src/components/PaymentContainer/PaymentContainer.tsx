@@ -146,7 +146,8 @@ const PaymentContainer = ({
           return createGiftCard(
             giftcard.amount,
             user._id,
-            giftcard.recieverMail
+            giftcard.recieverMail,
+            navigate
           );
         }
         dispatch(purchaseCredit(cart?.hours + giftCardInfo.amount));

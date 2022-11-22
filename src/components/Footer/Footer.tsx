@@ -14,10 +14,14 @@ const Footer = () => {
   ];
 
   const resources = [
-    { name: "Blog", link: "/blog" },
-    { name: "About", link: "/about" },
-    { name: "Contact", link: "/contact" },
+    // { name: "Blog", link: "/blog" },
+    { name: "About Us", link: "/about-us" },
+    { name: "Privacy Policy", link: "/privacy-policy" },
     { name: "Become an Instructor", link: "/apply-instructor" },
+    {
+      name: "Email : admin@myinstructor.com.au",
+      link: "mailto:admin@myinstructor.com.au",
+    },
   ];
 
   const driveLinks = [
