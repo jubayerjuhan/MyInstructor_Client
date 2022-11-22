@@ -83,7 +83,7 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/terms/instructor" element={<TermsAndCondition />} />
-        <Route path="/terms/learner" element={<TermsAndCondition />} />
+        <Route path="/terms/learner" element={<TermsAndCondition learner />} />
 
         {/* protected routes */}
         <Route

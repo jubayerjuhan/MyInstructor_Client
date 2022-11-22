@@ -17,6 +17,8 @@ const Footer = () => {
     // { name: "Blog", link: "/blog" },
     { name: "About Us", link: "/about-us" },
     { name: "Privacy Policy", link: "/privacy-policy" },
+    { name: "Terms and Condition (Learner)", link: "/terms/learner" },
+    { name: "Terms and Condition (Instructor)", link: "/terms/instructor" },
     { name: "Become an Instructor", link: "/apply-instructor" },
     {
       name: "Email : admin@myinstructor.com.au",
