@@ -53,7 +53,7 @@ const Homepage = ({ title }: Props) => {
       <WhyusSection />
       <Advantage />
       <GetReady />
-      <ReviewSlider />
+      {/* <ReviewSlider /> */}
       <Footer />
     </div>
   );
