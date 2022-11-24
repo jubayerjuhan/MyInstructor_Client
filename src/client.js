@@ -20,7 +20,7 @@ export const admin = axios.create({
   //   process.env.NODE_ENV === "production"
   //     ? "https://my-instructor-server.ts.r.appspot.com/api/admin"
   //     : "http://localhost:5000/api/admin",
-  baseURL: "https://api.myinstructor.com.au/api",
+  baseURL: "https://api.myinstructor.com.au/api/admin",
   headers: {
     authorization: `Bearer ${adminJwtToken}`,
   },
