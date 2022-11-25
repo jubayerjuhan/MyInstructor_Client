@@ -70,3 +70,12 @@ export const getAllBookings = () => async (dispatch: Dispatch<Action>) => {
     });
   }
 };
+
+export const setPriceAdmin = async (price: any) => {
+  try {
+    const { data } = await admin.post("/set-price", price);
+    return data;
+  } catch (error) {
+    return error;
+  }
+};

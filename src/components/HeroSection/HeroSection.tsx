@@ -5,7 +5,9 @@ import { client } from "../../client";
 import Button from "../core/Button/Button";
 import { toast } from "material-react-toastify";
 import Spinner from "../Spinner/Spinner";
-interface Suburb {
+import { useDispatch } from "react-redux";
+import { SET_SUBURBS } from "../../redux/reducer/reduxNamings";
+export interface Suburb {
   suburb: string;
   state: string;
   postcode: number;
@@ -16,6 +18,7 @@ interface Props {
 }
 const HeroSection = ({ title }: Props) => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const [suburbs, setSuburbs] = useState<Suburb[]>([]);
   const [selectedSuburb, setSelectedSuburb] = useState<Suburb>({
     suburb: "",
@@ -135,7 +138,9 @@ const HeroSection = ({ title }: Props) => {
                       setInputValue(
                         `${suburb.suburb} ${suburb.state} ${suburb.postcode}`
                       );
+
                       setSelectedSuburb(suburb);
+                      dispatch({ type: SET_SUBURBS, payload: suburb });
                     }}
                     className="suburb__list-name"
                     key={key}

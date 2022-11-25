@@ -9,10 +9,9 @@ import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 import { toast } from "material-react-toastify";
 import { useLocation } from "react-router-dom";
-import { BookingInfoProps } from "../BookingInformation/BookingInformation";
 import Button from "../../components/core/Button/Button";
 import { validateGiftCard } from "../../api_calls/giftcard_api";
-import { lessonPrice } from "../../components/PricingCalculator/PricingCalculator";
+
 const CheckoutPage = () => {
   const { state } = useLocation();
   console.log(state?.bookForward, "book Forward checkout");
@@ -20,6 +19,7 @@ const CheckoutPage = () => {
   const [billings, setBillings] = useState<any>({});
   const [loading, setLoading] = useState<boolean>(false);
   const [coupon, setCoupon] = useState<any>("");
+  const { price } = useSelector((state: State) => state.lessonPrice);
   const [giftCardInfo, setGiftCardInfo] = useState<any>({
     _id: "",
     amount: 0,
@@ -73,16 +73,18 @@ const CheckoutPage = () => {
           <div className="cart__details">
             <AiOutlineShoppingCart />
             {state?.testPackage ? (
-              <p className="title">You Have Test Package On Your Cart ($199)</p>
+              <p className="title">
+                You Have Test Package On Your Cart (${price.testPrice})
+              </p>
             ) : (
               <>
                 {state?.giftcard ? (
                   <p className="title">
                     You Have {state.giftcard?.amount} Hours Gift Card In The
-                    Cart <br />1 Hour = ${lessonPrice}
+                    Cart <br />1 Hour = ${price.outsidePrice}
                     <br />
                     {console.log(state?.giftcard?.amount, "amount")}
-                    Total: ${lessonPrice * state?.giftcard?.amount}
+                    Total: ${price.outsidePrice * state?.giftcard?.amount}
                   </p>
                 ) : (
                   <p className="title">

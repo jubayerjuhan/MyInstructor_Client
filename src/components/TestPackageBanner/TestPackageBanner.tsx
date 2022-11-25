@@ -1,8 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import image from "../../assets/learner.png";
+import { State } from "../../typings/reduxTypings";
 import "./TestPackageBanner.scss";
 
-const TestPackageBanner = () => {
+const TestPackageBanner = ({ price }: any) => {
+  const { price: lessonPrice } = useSelector(
+    (state: State) => state.lessonPrice
+  );
   return (
     <div className="test__package-banner-wrapper">
       <p className="title">Test Package</p>
@@ -21,7 +26,7 @@ const TestPackageBanner = () => {
               Drop-off after the test result is received
             </li>
           </ul>
-          <p className="title">Price: $199</p>
+          <p className="title">Price: ${lessonPrice.testPrice}</p>
         </div>
       </div>
     </div>

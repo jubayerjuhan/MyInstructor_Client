@@ -24,8 +24,8 @@ const GiftcardSuccess = () => {
         <div className="payment__success-information">
           <p className="title">Giftcard Purchase Successfull Successful✅</p>
           <p className="description">
-            Your giftcard worth ${state?.giftcard?.amount} has been sent to{" "}
-            {state?.giftcard?.to}
+            Your giftcard worth {state?.giftcard?.amount} hour's has been sent
+            to {state?.giftcard?.to}
           </p>
           <Button
             title={"Go To Home"}

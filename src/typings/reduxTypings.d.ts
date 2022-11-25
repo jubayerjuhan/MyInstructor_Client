@@ -1,6 +1,6 @@
 import { BookingTypeBack } from "./bookingsType";
 import { BillingInfo, Cart } from "./cartTypings";
-import { Instructor } from "./instructorTypings";
+import { Instructor, Suburb } from "./instructorTypings";
 
 export interface State {
   user: UserState;
@@ -24,8 +24,17 @@ export interface State {
     booking: BookingTypeBack;
   };
   adminData: AdminDataReducerType;
+  lessonPrice: {
+    price: PriceReducerPrpos;
+  };
+  suburb: { suburb: Suburb };
 }
 
+export interface PriceReducerPrpos {
+  insidePrice: number;
+  outsidePrice: number;
+  testPrice: number;
+}
 export interface BookingReducerTypes {
   loading: boolean;
   success: boolean;

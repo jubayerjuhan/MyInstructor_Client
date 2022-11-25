@@ -30,6 +30,14 @@ export const SET_JWTTOKEN = "SET_JWTTOKEN";
 export const SET_INSTRUCTOR = "SET_INSTRUCTOR";
 export const DELETE_INSTRUCTOR = " DELETE_INSTRUCTOR";
 
+// suburbs naming
+export const SET_SUBURBS = "SET_SUBURBS";
+export const DELETE_SUBURBS = "DELETE_SUBURBS";
+
+// lesson price namings
+export const SET_LESSON_PRICE = "SET_LESSON_PRICE";
+export const DELETE_LESSON_PRICE = "DELETE_LESSON_PRICE";
+
 // cart namings
 export const SET_CART = "SET_CART";
 export const DELETE_CART = " DELETE_CART";
