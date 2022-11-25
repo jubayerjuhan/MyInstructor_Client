@@ -42,8 +42,8 @@ const CheckoutPayment = ({
 
   const getPrice = () => {
     if (testPackage) {
-      setPrice(199);
-      return getPaymentIndent(199);
+      setPrice(tripPrice?.testPrice);
+      return getPaymentIndent(tripPrice?.testPrice);
     }
     if (giftcard) {
       setPrice(

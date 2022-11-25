@@ -73,7 +73,9 @@ const CheckoutPage = () => {
           <div className="cart__details">
             <AiOutlineShoppingCart />
             {state?.testPackage ? (
-              <p className="title">You Have Test Package On Your Cart ($199)</p>
+              <p className="title">
+                You Have Test Package On Your Cart (${price.testPrice})
+              </p>
             ) : (
               <>
                 {state?.giftcard ? (

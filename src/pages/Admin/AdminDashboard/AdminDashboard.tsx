@@ -15,6 +15,7 @@ import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
 import DataGridActionButtons from "../../../components/DataGridActionButtons/DataGridActionButtons";
 import { Button } from "@mui/material";
 import { toast } from "material-react-toastify";
+import { SET_LESSON_PRICE } from "../../../redux/reducer/reduxNamings";
 
 const AdminDashboard = () => {
   const priceFields = [
@@ -61,12 +62,14 @@ const AdminDashboard = () => {
 
   console.log(lessonPrice);
   const setPrice = async () => {
-    const success = await setPriceAdmin(lessonPrice);
-    if (!success)
+    const data = await setPriceAdmin(lessonPrice);
+
+    if (!data.success)
       return toast.error(
         "There Was Problem Setting Price Check Twice If The Value Smaller Than 0"
       );
     toast.success("New Price Set Successfull");
+    dispatch({ type: SET_LESSON_PRICE, payload: data.price });
   };
   return (
     <AdminPageWrapper>
