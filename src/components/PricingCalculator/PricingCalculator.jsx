@@ -1,18 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import UseLessonPrice, { getRandomNumber } from "../../hooks/UseLessonPrice";
 import { addToCart } from "../../redux/actions/cart_actions.ts";
 import Button from "../core/Button/Button";
 import "./PricingCalculator.scss";
 
 export const lessonPrice = 80;
 const PricingCalculator = ({ cart, bookForward }) => {
+  const [lessonPrice, setLessonPrice] = useState(0);
+  const { price } = useSelector((state) => state.lessonPrice);
+  const { suburb } = useSelector((state) => state.suburb);
+  console.log(suburb.state, price, "state");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getPrices();
+  }, []);
+
+  const getPrices = async () => {
+    setLessonPrice(
+      suburb.state === "VIC" ? price?.insidePrice : price.outsidePrice
+    );
+  };
+  console.log(lessonPrice, "loadmoad 69");
 
   const [selectedHour, setSelectedHour] = useState(1);
   const hoursArray = Array.from(Array(101).keys());
   const [totalLessonPrice, setTotalLessonPrice] = useState(lessonPrice);
+
   let discountPercent = 0;
 
   const calculateHoursPrice = (e) => {
@@ -21,6 +39,8 @@ const PricingCalculator = ({ cart, bookForward }) => {
 
     if (hours > 5) discountPercent = 5;
     if (hours > 9) discountPercent = 10;
+
+    console.log(lessonPrice, "kp");
 
     const price = lessonPrice - (discountPercent / 100) * lessonPrice;
     setTotalLessonPrice(hours * price);
@@ -55,6 +75,7 @@ const PricingCalculator = ({ cart, bookForward }) => {
       navigate("/checkout");
     }
   };
+
   return (
     <div className="pricing__calculator">
       <div className="lesson__pricing">
@@ -86,7 +107,7 @@ const PricingCalculator = ({ cart, bookForward }) => {
         <div className="calculator__select">
           <select name="" id="" onChange={calculateHoursPrice}>
             {hoursArray.map((hour, key) => {
-              if (hour <= 0) return null;
+              // if (hour <= 0) return null;
               return (
                 <option value={hour} key={key}>
                   {hour}
@@ -114,6 +135,7 @@ const PricingCalculator = ({ cart, bookForward }) => {
       {cart && (
         <div className="pricing__calculator-buttons">
           <Button
+            disabled={totalLessonPrice === 0 ? true : false}
             width={"100%"}
             title={`Continue For $${totalLessonPrice}`}
             onClick={handlePurchaseClick}

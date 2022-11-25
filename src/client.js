@@ -9,7 +9,7 @@ export const client = axios.create({
   //   process.env.NODE_ENV === "production"
   //     ? "https://my-instructor-server.ts.r.appspot.com/api"
   //     : "http://localhost:5000/api",
-  baseURL: "https://api.myinstructor.com.au/api",
+  baseURL: "https://portfolio-368819.uc.r.appspot.com/api",
   headers: {
     authorization: `Bearer ${jwtToken}`,
   },
@@ -20,7 +20,7 @@ export const admin = axios.create({
   //   process.env.NODE_ENV === "production"
   //     ? "https://my-instructor-server.ts.r.appspot.com/api/admin"
   //     : "http://localhost:5000/api/admin",
-  baseURL: "https://api.myinstructor.com.au/api/admin",
+  baseURL: "https://portfolio-368819.uc.r.appspot.com/api/admin",
   headers: {
     authorization: `Bearer ${adminJwtToken}`,
   },

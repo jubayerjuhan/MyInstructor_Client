@@ -8,7 +8,6 @@ import PaymentContainer from "../PaymentContainer/PaymentContainer";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 import { BillingInfo } from "../../typings/cartTypings";
-import { lessonPrice } from "../PricingCalculator/PricingCalculator";
 
 interface CheckoutProps {
   billing: BillingInfo;
@@ -28,12 +27,14 @@ const CheckoutPayment = ({
   testPackage,
 }: CheckoutProps) => {
   const { cart } = useSelector((state: State) => state.cart);
-
   const [clientSecret, setClientSecret] = useState();
   const [price, setPrice] = useState(0);
   const stripePromise = loadStripe(
     "pk_test_51Jk944Kqk54qfeAmqK2cRxVVq122wVq5oMiAHWv0xEHXCjx362GhIJAiCkOCtjnfSVHGzMP7YSeVX6NQX4MuNASY00FJlGLuOo"
   );
+
+  const { price: tripPrice } = useSelector((state: State) => state.lessonPrice);
+  const { suburb } = useSelector((state: State) => state.suburb);
 
   useEffect(() => {
     getPrice();
@@ -45,8 +46,18 @@ const CheckoutPayment = ({
       return getPaymentIndent(199);
     }
     if (giftcard) {
-      setPrice(giftcard?.amount * lessonPrice);
-      return getPaymentIndent(giftcard?.amount * lessonPrice);
+      setPrice(
+        giftcard?.amount *
+          (suburb.state === "VIC"
+            ? tripPrice.insidePrice
+            : tripPrice.outsidePrice)
+      );
+      return getPaymentIndent(
+        giftcard?.amount *
+          (suburb.state === "VIC"
+            ? tripPrice.insidePrice
+            : tripPrice.outsidePrice)
+      );
     }
     setPrice(cart?.price);
     getPaymentIndent(cart?.price);

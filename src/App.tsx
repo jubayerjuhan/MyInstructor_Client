@@ -1,4 +1,7 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { client } from "./client";
 import AddInstructor from "./components/AddInstructor/AddInstructor";
 import AdminProtected from "./components/AdminProtected/AdminProtected";
 
@@ -36,6 +39,8 @@ import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import TermsAndCondition from "./pages/TermsAndCondtion/TermsAndCondition";
 import ViewItemsPage from "./pages/ViewItemsPage";
+import { SET_LESSON_PRICE } from "./redux/reducer/reduxNamings";
+import { State } from "./typings/reduxTypings";
 
 // stripe Promise
 const title = {
@@ -45,6 +50,17 @@ const title = {
 };
 
 function App() {
+  const { price } = useSelector((state: State) => state.lessonPrice);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getLessonPrices();
+  }, []);
+
+  const getLessonPrices = async () => {
+    const { data } = await client.get("/lesson-price");
+    dispatch({ type: SET_LESSON_PRICE, payload: data?.price });
+  };
+
   return (
     <BrowserRouter>
       <Routes>

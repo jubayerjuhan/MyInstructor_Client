@@ -3,6 +3,7 @@ import "./Button.scss";
 import { RotatingLines } from "react-loader-spinner";
 
 const Button = ({
+  disabled,
   smallFont,
   loading,
   revertColor,
@@ -15,7 +16,7 @@ const Button = ({
   return (
     <div
       onClick={
-        loading
+        loading || disabled
           ? ""
           : onClick
           ? onClick
