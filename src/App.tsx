@@ -33,6 +33,7 @@ import InstructorList from "./pages/InstructorList/InstructorList";
 import InstructorLogin from "./pages/InstructorLogin/InstructorLogin";
 import InstructorProfile from "./pages/InstructorProfile/InstructorProfile";
 import LearnerDashboard from "./pages/LearnerDashboard/LearnerDashboard";
+import LiveChat from "./pages/LiveChat/LiveChat";
 import Login from "./pages/Login/Login";
 import PasswordResetPage from "./pages/PasswordResetPage/PasswordResetPage";
 import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
@@ -164,6 +165,14 @@ function App() {
             <ProtectedRoute location={"/giftcard-success"}>
               <GiftcardSuccess />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/livechat"
+          element={
+            // <ProtectedRoute location={"/livechat"}>
+            <LiveChat />
+            // </ProtectedRoute>
           }
         />
         <Route
