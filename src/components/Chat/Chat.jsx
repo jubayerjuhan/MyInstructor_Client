@@ -1,27 +1,74 @@
-import React, { useEffect, useState } from "react";
-import io from "socket.io-client";
+import React, { useState } from "react";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
+import CloseIcon from "@mui/icons-material/Close";
+import SendIcon from "@mui/icons-material/Send";
+
+import "./Chat.scss";
 
 const Chat = () => {
-  const [message, setMessage] = useState("");
-  const [socket, setSocket] = useState();
-
-  useEffect(() => {
-    const socket = io.connect("http://192.168.12.77:5000");
-    socket.auth = { userName: "juhan" };
-    setSocket(socket);
-    socket.on("connection", (data) => {
-      console.log("data", data);
-    });
-  }, []);
-
-  const sendText = () => {
-    socket.emit("send_message", { message });
-  };
-
+  const [open, setOpen] = useState(false);
   return (
-    <div>
-      <input type="text" onChange={(e) => setMessage(e.target.value)} />
-      <button onClick={sendText}>Send Text</button>
+    <div className="chat__app">
+      <div className="chat__app-main">
+        <div className="header">
+          <p className="title">Chat With Us</p>
+        </div>
+        <div className="chat__app-box">
+          <div className="chat-sent">
+            <p>Hello</p>
+          </div>
+          <div className="chat-sent">
+            <p>Hello</p>
+          </div>
+          <div className="chat-sent">
+            <p>Hello</p>
+          </div>
+          <div className="chat-sent">
+            <p>Hello</p>
+          </div>
+          <div className="chat-sent">
+            <p>Hello</p>
+          </div>
+          <div className="chat-sent">
+            <p>Hello</p>
+          </div>
+          <div className="chat-sent">
+            <p>Hello</p>
+          </div>
+          <div className="chat-sent">
+            <p>Hello</p>
+          </div>
+          <div className="chat-sent">
+            <p>Hello</p>
+          </div>
+          <div className="chat-sent">
+            <p>Hello</p>
+          </div>
+          <div className="chat-rec">
+            <p>Hello</p>
+          </div>
+        </div>
+        <div className="chat__inputs">
+          <form
+            action=""
+            onSubmit={(e) => {
+              e.preventDefault();
+              console.log("hello");
+            }}
+          >
+            <input type="text" name="message" id="" className="message" />
+            <label for="upload">
+              <AttachFileIcon />
+              <input type="file" id="upload" className="fileupload" />
+            </label>
+            <SendIcon />
+          </form>
+        </div>
+      </div>
+      <div className="chat__icon" onClick={() => setOpen(!open)}>
+        {open ? <CloseIcon /> : <ChatBubbleOutlineIcon />}
+      </div>
     </div>
   );
 };

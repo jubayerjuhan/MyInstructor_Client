@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { client } from "./client";
 import AddInstructor from "./components/AddInstructor/AddInstructor";
 import AdminProtected from "./components/AdminProtected/AdminProtected";
+import Chat from "./components/Chat/Chat";
 
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Register from "./components/Register/Register";
@@ -63,244 +64,256 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="*" element={<NotFoundPage />} />
-        <Route path="/" element={<Homepage />} />
-        <Route path="/apply-instructor" element={<ApplyInstructor />} />
-        <Route
-          path="/driving-lessons"
-          element={<Homepage title={title.driving_lesson} />}
-        />
-        <Route path="/driving-lessons/:city" element={<Homepage />} />
-        <Route
-          path="/test-package"
-          element={<Homepage title={title.test_package} />}
-        />
-        <Route path="/pricing" element={<Homepage title={title.pricing} />} />
-        <Route path="/not-found" element={<NotFoundPage />} />
-        <Route path="/forget-password" element={<ForgetPassword />} />
-        <Route path="/reset-password/:token" element={<PasswordResetPage />} />
-        <Route
-          path="/reset-password/instructor/:token"
-          element={<PasswordResetPage instructor />}
-        />
-        <Route
-          path="/forget-password/instructor"
-          element={<ForgetPassword instructor={true} />}
-        />
-        <Route path="/login" element={<Login instructor={false} />} />
-        <Route path="/instructor-login" element={<InstructorLogin />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/instructors-list/:postCode/:transmission/:suburb"
-          element={<InstructorList />}
-        />
-        <Route path="/instructor-profile/:id" element={<InstructorProfile />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/terms/instructor" element={<TermsAndCondition />} />
-        <Route path="/terms/learner" element={<TermsAndCondition learner />} />
+    <>
+      <Chat />
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/" element={<Homepage />} />
+          <Route path="/apply-instructor" element={<ApplyInstructor />} />
+          <Route
+            path="/driving-lessons"
+            element={<Homepage title={title.driving_lesson} />}
+          />
+          <Route path="/driving-lessons/:city" element={<Homepage />} />
+          <Route
+            path="/test-package"
+            element={<Homepage title={title.test_package} />}
+          />
+          <Route path="/pricing" element={<Homepage title={title.pricing} />} />
+          <Route path="/not-found" element={<NotFoundPage />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route
+            path="/reset-password/:token"
+            element={<PasswordResetPage />}
+          />
+          <Route
+            path="/reset-password/instructor/:token"
+            element={<PasswordResetPage instructor />}
+          />
+          <Route
+            path="/forget-password/instructor"
+            element={<ForgetPassword instructor={true} />}
+          />
+          <Route path="/login" element={<Login instructor={false} />} />
+          <Route path="/instructor-login" element={<InstructorLogin />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/instructors-list/:postCode/:transmission/:suburb"
+            element={<InstructorList />}
+          />
+          <Route
+            path="/instructor-profile/:id"
+            element={<InstructorProfile />}
+          />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/terms/instructor" element={<TermsAndCondition />} />
+          <Route
+            path="/terms/learner"
+            element={<TermsAndCondition learner />}
+          />
 
-        {/* protected routes */}
-        <Route
-          path="/add-cart"
-          element={
-            <ProtectedRoute location={"/add-cart"}>
-              <AddToCart />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/gift-card"
-          element={
-            <ProtectedRoute location={"/add-cart"}>
-              <GiftCardPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/checkout"
-          element={
-            <ProtectedRoute location={"/checkout"}>
-              <CheckoutPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/gift-checkout"
-          element={
-            <ProtectedRoute location={"/gift-checkout"}>
-              <GiftcardCheckout />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/booking"
-          element={
-            <ProtectedRoute location={"/booking"}>
-              <BookingPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/booking-info"
-          element={
-            <ProtectedRoute location={"/booking-info"}>
-              <BookingInformation />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/payment-success"
-          element={
-            <ProtectedRoute location={"/payment-success"}>
-              <PaymentSuccess />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/giftcard-success"
-          element={
-            <ProtectedRoute location={"/giftcard-success"}>
-              <GiftcardSuccess />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/livechat"
-          element={
-            // <ProtectedRoute location={"/livechat"}>
-            <LiveChat />
-            // </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/booking-success"
-          element={
-            <ProtectedRoute location={"/booking-success"}>
-              <BookingSuccess />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/learner/dashboard"
-          element={
-            <ProtectedRoute location={"/learner/dashboard"}>
-              <LearnerDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/instructor/dashboard"
-          element={
-            <ProtectedRoute location={"/instructor/dashboard"}>
-              <InstructorDashboard />
-            </ProtectedRoute>
-          }
-        />
+          {/* protected routes */}
+          <Route
+            path="/add-cart"
+            element={
+              <ProtectedRoute location={"/add-cart"}>
+                <AddToCart />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/gift-card"
+            element={
+              <ProtectedRoute location={"/add-cart"}>
+                <GiftCardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute location={"/checkout"}>
+                <CheckoutPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/gift-checkout"
+            element={
+              <ProtectedRoute location={"/gift-checkout"}>
+                <GiftcardCheckout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/booking"
+            element={
+              <ProtectedRoute location={"/booking"}>
+                <BookingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/booking-info"
+            element={
+              <ProtectedRoute location={"/booking-info"}>
+                <BookingInformation />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/payment-success"
+            element={
+              <ProtectedRoute location={"/payment-success"}>
+                <PaymentSuccess />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/giftcard-success"
+            element={
+              <ProtectedRoute location={"/giftcard-success"}>
+                <GiftcardSuccess />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/livechat"
+            element={
+              // <ProtectedRoute location={"/livechat"}>
+              <LiveChat />
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/booking-success"
+            element={
+              <ProtectedRoute location={"/booking-success"}>
+                <BookingSuccess />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/learner/dashboard"
+            element={
+              <ProtectedRoute location={"/learner/dashboard"}>
+                <LearnerDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/instructor/dashboard"
+            element={
+              <ProtectedRoute location={"/instructor/dashboard"}>
+                <InstructorDashboard />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* admin routes */}
-        <Route path="/admin/login" element={<AdminLogin />} />
+          {/* admin routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
 
-        <Route
-          path={"/admin/dashboard"}
-          element={
-            <AdminProtected location={"/admin/dashboard"}>
-              <AdminDashboard />
-            </AdminProtected>
-          }
-        />
-        <Route
-          path={"/admin/users"}
-          element={
-            <AdminProtected location={"/admin/users"}>
-              <AdminUsers />
-            </AdminProtected>
-          }
-        />
-        <Route
-          path={"/admin/cars"}
-          element={
-            <AdminProtected location={"/admin/cars"}>
-              <AdminCars />
-            </AdminProtected>
-          }
-        />
-        <Route
-          path={"/admin/bookings"}
-          element={
-            <AdminProtected location={"/admin/bookings"}>
-              <AdminBookings />
-            </AdminProtected>
-          }
-        />
-        <Route
-          path={"/admin/instructors"}
-          element={
-            <AdminProtected location={"/admin/instructors"}>
-              <AdminInstructor />
-            </AdminProtected>
-          }
-        />
-        <Route
-          path={"/admin/suburbs"}
-          element={
-            <AdminProtected location={"/admin/suburbs"}>
-              <AdminSuburbs />
-            </AdminProtected>
-          }
-        />
-        <Route
-          path={"/admin/expired-instructors"}
-          element={
-            <AdminProtected location={"/admin/expired-instructors"}>
-              <AdminExpiredInstructor />
-            </AdminProtected>
-          }
-        />
-        <Route
-          path={"/admin/add-instructor"}
-          element={
-            <AdminProtected location={"/admin/add-instructor"}>
-              <AddInstructor />
-            </AdminProtected>
-          }
-        />
-        <Route
-          path={"/admin/instructor-applicants"}
-          element={
-            <AdminProtected location={"/admin/instructor-applicants"}>
-              <AdminApplicants />
-            </AdminProtected>
-          }
-        />
-        <Route
-          path={"/admin/user/:id"}
-          element={
-            <AdminProtected location={"/admin/user/:id"}>
-              <ViewItemsPage type={"user"} />
-            </AdminProtected>
-          }
-        />
-        <Route
-          path={"/admin/instructor/:id"}
-          element={
-            <AdminProtected location={"/admin/instructor/:id"}>
-              <ViewItemsPage type={"instructor"} />
-            </AdminProtected>
-          }
-        />
-        <Route
-          path={"/admin/booking/:id"}
-          element={
-            <AdminProtected location={"/admin/booking/:id"}>
-              <ViewItemsPage type={"booking"} />
-            </AdminProtected>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+          <Route
+            path={"/admin/dashboard"}
+            element={
+              <AdminProtected location={"/admin/dashboard"}>
+                <AdminDashboard />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/users"}
+            element={
+              <AdminProtected location={"/admin/users"}>
+                <AdminUsers />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/cars"}
+            element={
+              <AdminProtected location={"/admin/cars"}>
+                <AdminCars />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/bookings"}
+            element={
+              <AdminProtected location={"/admin/bookings"}>
+                <AdminBookings />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/instructors"}
+            element={
+              <AdminProtected location={"/admin/instructors"}>
+                <AdminInstructor />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/suburbs"}
+            element={
+              <AdminProtected location={"/admin/suburbs"}>
+                <AdminSuburbs />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/expired-instructors"}
+            element={
+              <AdminProtected location={"/admin/expired-instructors"}>
+                <AdminExpiredInstructor />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/add-instructor"}
+            element={
+              <AdminProtected location={"/admin/add-instructor"}>
+                <AddInstructor />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/instructor-applicants"}
+            element={
+              <AdminProtected location={"/admin/instructor-applicants"}>
+                <AdminApplicants />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/user/:id"}
+            element={
+              <AdminProtected location={"/admin/user/:id"}>
+                <ViewItemsPage type={"user"} />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/instructor/:id"}
+            element={
+              <AdminProtected location={"/admin/instructor/:id"}>
+                <ViewItemsPage type={"instructor"} />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/booking/:id"}
+            element={
+              <AdminProtected location={"/admin/booking/:id"}>
+                <ViewItemsPage type={"booking"} />
+              </AdminProtected>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
