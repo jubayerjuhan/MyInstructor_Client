@@ -7,7 +7,6 @@ import { getAllInstructorsAdmin } from "../../api_calls/Admin/admin_instructors"
 import { toast } from "material-react-toastify";
 import { instructorColumns } from "../../utils/grid_columns/instructors_gridColumns";
 import { Button } from "@mui/material";
-import AddInstructor from "../../components/AddInstructor/AddInstructor";
 import { useNavigate } from "react-router-dom";
 
 const AdminInstructor = () => {

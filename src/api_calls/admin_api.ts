@@ -14,6 +14,9 @@ import {
   ADMIN_USERS_ERROR,
   ADMIN_USERS_PENDING,
   ADMIN_USERS_SUCCESS,
+  GET_SUBURBS_ERROR,
+  GET_SUBURBS_PENDING,
+  GET_SUBURBS_SUCCESS,
 } from "../redux/reducer/reduxNamings";
 import { storeAtLocalStorage } from "../utils/localstorage";
 
@@ -66,6 +69,18 @@ export const getAllBookings = () => async (dispatch: Dispatch<Action>) => {
   } catch (error: any) {
     dispatch({
       type: ADMIN_BOOKINGS_ERROR,
+      payload: error.response.data.message,
+    });
+  }
+};
+export const getAllSuburbs = () => async (dispatch: Dispatch<Action>) => {
+  try {
+    dispatch({ type: GET_SUBURBS_PENDING });
+    const { data } = await client.get("/suburbs");
+    dispatch({ type: GET_SUBURBS_SUCCESS, payload: data.suburbs });
+  } catch (error: any) {
+    dispatch({
+      type: GET_SUBURBS_ERROR,
       payload: error.response.data.message,
     });
   }

@@ -16,6 +16,7 @@ const CheckoutPage = () => {
   const { state } = useLocation();
   console.log(state?.bookForward, "book Forward checkout");
   const { cart } = useSelector((state: State) => state.cart);
+  const { suburb } = useSelector((state: State) => state.suburb);
   const [billings, setBillings] = useState<any>({});
   const [loading, setLoading] = useState<boolean>(false);
   const [coupon, setCoupon] = useState<any>("");
@@ -81,7 +82,7 @@ const CheckoutPage = () => {
                 {state?.giftcard ? (
                   <p className="title">
                     You Have {state.giftcard?.amount} Hours Gift Card In The
-                    Cart <br />1 Hour = ${price.outsidePrice}
+                    Cart <br />1 Hour = ${suburb.price}
                     <br />
                     {console.log(state?.giftcard?.amount, "amount")}
                     Total: ${price.outsidePrice * state?.giftcard?.amount}

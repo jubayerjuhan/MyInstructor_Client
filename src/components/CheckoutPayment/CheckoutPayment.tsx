@@ -46,18 +46,9 @@ const CheckoutPayment = ({
       return getPaymentIndent(tripPrice?.testPrice);
     }
     if (giftcard) {
-      setPrice(
-        giftcard?.amount *
-          (suburb.state === "VIC"
-            ? tripPrice.insidePrice
-            : tripPrice.outsidePrice)
-      );
-      return getPaymentIndent(
-        giftcard?.amount *
-          (suburb.state === "VIC"
-            ? tripPrice.insidePrice
-            : tripPrice.outsidePrice)
-      );
+      setPrice(giftcard?.amount * tripPrice.outsidePrice);
+
+      return getPaymentIndent(giftcard?.amount * suburb.price);
     }
     setPrice(cart?.price);
     getPaymentIndent(cart?.price);

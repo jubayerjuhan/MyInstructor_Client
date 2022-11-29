@@ -71,6 +71,11 @@ export default function AdminSidebar(props: Props) {
       icon: <CreditCardOffOutlinedIcon />,
     },
     {
+      label: "suburbs",
+      link: "/suburbs",
+      icon: <CreditCardOffOutlinedIcon />,
+    },
+    {
       label: "Cars",
       link: "/cars",
       icon: <CarIcon />,

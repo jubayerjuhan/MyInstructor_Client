@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllBookings,
   getAllInstructors,
+  getAllSuburbs,
   getAllUsers,
   setPriceAdmin,
 } from "../../../api_calls/admin_api";
@@ -11,17 +12,14 @@ import AdminPageWrapper from "../../../components/AdminPageWrapper/AdminPageWrap
 import DashboardInfoCard from "../../../components/Dashboard_Infocard/Dashboard_Infocard";
 import { State, User } from "../../../typings/reduxTypings";
 import "./AdminDashboard.scss";
-import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
-import DataGridActionButtons from "../../../components/DataGridActionButtons/DataGridActionButtons";
 import { Button } from "@mui/material";
 import { toast } from "material-react-toastify";
 import { SET_LESSON_PRICE } from "../../../redux/reducer/reduxNamings";
 
 const AdminDashboard = () => {
   const priceFields = [
-    { name: "insidePrice", label: "Lesson Price (inside VICTORIA)" },
-    { name: "outsidePrice", label: "Lesson Price (Outside VICTORIA)" },
     { name: "testPrice", label: "Test Package Price" },
+    { name: "outsidePrice", label: "Gift Card Price" },
   ];
   const dispatch = useDispatch<any>();
   const { price } = useSelector((state: State) => state.lessonPrice);
@@ -52,6 +50,7 @@ const AdminDashboard = () => {
     dispatch(getAllUsers());
     dispatch(getAllInstructors());
     dispatch(getAllBookings());
+    dispatch(getAllSuburbs());
   };
 
   const rows: User[] = [];

@@ -17,12 +17,7 @@ const InstructorList = () => {
   const [language, setLanguage] = useState<any>(null);
   const [showModal, setShowModal] = useState(false);
   const [lookupInstructor, setLookupInstructor] = useState({});
-  const [suburbInfo, setSuburbInfo] = useState<Suburb>({
-    _id: "",
-    postcode: "",
-    suburb: "",
-    state: "",
-  });
+  const [suburbInfo, setSuburbInfo] = useState<Suburb>();
 
   const label = { inputProps: { "aria-label": "Switch demo" } };
   const { postCode, transmission, suburb } = useParams();
