@@ -17,6 +17,7 @@ import AdminCars from "./pages/AdminCars/AdminCars";
 import AdminExpiredInstructor from "./pages/AdminExpiredUser/AdminExpiredUser";
 import AdminInstructor from "./pages/AdminInstructor/AdminInstructor";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
+import AdminSuburbs from "./pages/AdminSuburbs/AdminSuburbs";
 import AdminUsers from "./pages/AdminUsers/AdminUsers";
 import ApplyInstructor from "./pages/ApplyInstructor/ApplyInstructor";
 import BookingInformation from "./pages/BookingInformation/BookingInformation";
@@ -33,6 +34,7 @@ import InstructorList from "./pages/InstructorList/InstructorList";
 import InstructorLogin from "./pages/InstructorLogin/InstructorLogin";
 import InstructorProfile from "./pages/InstructorProfile/InstructorProfile";
 import LearnerDashboard from "./pages/LearnerDashboard/LearnerDashboard";
+import LiveChat from "./pages/LiveChat/LiveChat";
 import Login from "./pages/Login/Login";
 import PasswordResetPage from "./pages/PasswordResetPage/PasswordResetPage";
 import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
@@ -50,7 +52,6 @@ const title = {
 };
 
 function App() {
-  const { price } = useSelector((state: State) => state.lessonPrice);
   const dispatch = useDispatch();
   useEffect(() => {
     getLessonPrices();
@@ -167,6 +168,14 @@ function App() {
           }
         />
         <Route
+          path="/livechat"
+          element={
+            // <ProtectedRoute location={"/livechat"}>
+            <LiveChat />
+            // </ProtectedRoute>
+          }
+        />
+        <Route
           path="/booking-success"
           element={
             <ProtectedRoute location={"/booking-success"}>
@@ -231,6 +240,14 @@ function App() {
           element={
             <AdminProtected location={"/admin/instructors"}>
               <AdminInstructor />
+            </AdminProtected>
+          }
+        />
+        <Route
+          path={"/admin/suburbs"}
+          element={
+            <AdminProtected location={"/admin/suburbs"}>
+              <AdminSuburbs />
             </AdminProtected>
           }
         />

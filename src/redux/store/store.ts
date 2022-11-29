@@ -20,7 +20,7 @@ import { bookingReducer, creditReducer } from "../reducer/bookingReducer";
 import { activeBooking } from "../reducer/active_bookingReducer";
 import { adminReducer } from "../reducer/admin_reducer";
 import { adminDataReducer } from "../reducer/admin_dataReducer";
-import { suburbReducer } from "../reducer/suburbs_reducer";
+import { adminSuburbs, suburbReducer } from "../reducer/suburbs_reducer";
 import { priceReducer } from "../reducer/price_reducer";
 
 // root reducer
@@ -35,6 +35,7 @@ const rootReducer = combineReducers({
   adminData: adminDataReducer,
   suburb: suburbReducer,
   lessonPrice: priceReducer,
+  adminSuburbs: adminSuburbs,
 });
 
 const persistConfig = {

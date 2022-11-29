@@ -27,9 +27,11 @@ export interface Instructor {
 }
 
 export type Suburb = {
+  id?: string;
   suburb: string;
   postcode: string;
   state: string;
+  price: number;
   _id: string;
 };
 type Car = {

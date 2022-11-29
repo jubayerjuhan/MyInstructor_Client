@@ -27,6 +27,11 @@ export interface State {
   lessonPrice: {
     price: PriceReducerPrpos;
   };
+  adminSuburbs: {
+    loading: boolean;
+    error: string;
+    suburbs: Suburb[];
+  };
   suburb: { suburb: Suburb };
 }
 

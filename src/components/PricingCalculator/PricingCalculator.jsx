@@ -21,9 +21,7 @@ const PricingCalculator = ({ cart, bookForward }) => {
   }, []);
 
   const getPrices = async () => {
-    setLessonPrice(
-      suburb.state === "VIC" ? price?.insidePrice : price.outsidePrice
-    );
+    setLessonPrice(suburb?.price);
   };
   console.log(lessonPrice, "loadmoad 69");
 
@@ -43,7 +41,7 @@ const PricingCalculator = ({ cart, bookForward }) => {
     console.log(lessonPrice, "kp");
 
     const price = lessonPrice - (discountPercent / 100) * lessonPrice;
-    setTotalLessonPrice(hours * price);
+    setTotalLessonPrice(hours * suburb?.price);
   };
 
   const lessons = [
