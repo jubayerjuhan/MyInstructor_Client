@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { client } from "./client";
 import AddInstructor from "./components/AddInstructor/AddInstructor";
+import AdminChat from "./components/AdminChat/AdminChat";
 import AdminProtected from "./components/AdminProtected/AdminProtected";
 import Chat from "./components/Chat/Chat";
 
@@ -308,6 +309,14 @@ function App() {
             element={
               <AdminProtected location={"/admin/booking/:id"}>
                 <ViewItemsPage type={"booking"} />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/chat"}
+            element={
+              <AdminProtected location={"/admin/chat"}>
+                <AdminChat />
               </AdminProtected>
             }
           />

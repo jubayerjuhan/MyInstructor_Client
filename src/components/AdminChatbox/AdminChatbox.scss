@@ -1,0 +1,84 @@
+@import "../../main.scss";
+
+.admin__chatbox {
+  position: relative;
+  overflow-x: hidden;
+  height: calc(100vh - 10px);
+  .chatbox__header {
+    height: 70px;
+    padding: 10px 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: var(--theme-color);
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+    }
+    .title {
+      @include bigDescription;
+      color: white;
+    }
+  }
+
+  .chatbox__main {
+    padding: 10px;
+
+    .chat-sent {
+      margin-bottom: 10px;
+      p {
+        background-color: rgba(138, 138, 138, 0.253);
+        padding: 10px 15px;
+        border-radius: 5px;
+        width: fit-content;
+        max-width: 70%;
+      }
+    }
+    .chat-rec {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: flex-end;
+      p {
+        background-color: var(--theme-color);
+        padding: 10px 15px;
+        border-radius: 5px;
+        width: fit-content;
+        max-width: 70%;
+      }
+    }
+  }
+}
+
+.chat__send-opts {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  .chat__inputs {
+    display: flex;
+    padding: 5px 10px;
+    align-items: center;
+    gap: 10px;
+    .fileupload {
+      display: none;
+    }
+    .message {
+      width: 100%;
+      flex: 1;
+      flex-grow: 1;
+      height: 40px;
+      outline: none;
+      padding: 0 5px;
+    }
+    .sendIcon {
+      cursor: pointer;
+      color: var(--theme-color);
+    }
+    .upload {
+      cursor: pointer;
+      svg {
+        color: var(--theme-color);
+      }
+    }
+  }
+}

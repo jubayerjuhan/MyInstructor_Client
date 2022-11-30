@@ -25,6 +25,7 @@
   border-radius: 5px;
   min-width: 350px;
   background-color: white;
+  margin-bottom: 15px;
 
   .header {
     border-radius: 5px 5px 0px 0px;
@@ -71,12 +72,28 @@
   .chat__inputs {
     display: flex;
     padding: 5px 10px;
+    align-items: center;
+    gap: 10px;
     .fileupload {
       display: none;
     }
     .message {
+      width: 100%;
       flex: 1;
+      flex-grow: 1;
       height: 40px;
+      outline: none;
+      padding: 0 5px;
+    }
+    .sendIcon {
+      cursor: pointer;
+      color: var(--theme-color);
+    }
+    .upload {
+      cursor: pointer;
+      svg {
+        color: var(--theme-color);
+      }
     }
   }
 }

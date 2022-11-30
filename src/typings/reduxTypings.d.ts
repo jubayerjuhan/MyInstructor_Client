@@ -109,3 +109,5 @@ interface AdminDataReducerType {
     bookings: BookingTypeBack[];
   };
 }
+
+export type Conversation = User;
