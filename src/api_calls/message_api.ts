@@ -9,13 +9,28 @@ export const getMessages = async (id: string) => {
   }
 };
 
-export const sendMessageToServer = async (text: string, from: string) => {
+export const sendMessageToServer = async (
+  text: string,
+  from: string,
+  to: string
+) => {
   try {
     const { data } = await client.post(`convo/add-message`, {
       text,
       from,
-      to: "admin",
+      to,
     });
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response.data.message,
+    };
+  }
+};
+export const getConversationMessages = async (id: string) => {
+  try {
+    const { data } = await client.get(`convo/get-messages/${id}`);
     return data;
   } catch (error: any) {
     alert(error.message);
@@ -27,7 +42,23 @@ export const getConversations = async () => {
     const { data } = await client.get("convo/get-conversations");
     return data;
   } catch (error: any) {
-    console.log(error.message);
-    alert(error.message);
+    return {
+      success: false,
+      message: error.response.data.message,
+    };
+  }
+};
+
+export const addConversation = async (currentConvo: string) => {
+  try {
+    const { data } = await client.post("convo/add-conversation", {
+      currentConvo,
+    });
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response.data.message,
+    };
   }
 };

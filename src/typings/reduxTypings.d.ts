@@ -111,3 +111,10 @@ interface AdminDataReducerType {
 }
 
 export type Conversation = User;
+
+export interface Message {
+  from: string;
+  to: string;
+  text: string;
+  _id: string;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Advantage from "../../components/Advantage/Advantage";
+import Chat from "../../components/Chat/Chat";
 import FaqSection from "../../components/FaqSection/FaqSection";
 import Footer from "../../components/Footer/Footer";
 import FourIconComponent from "../../components/FourIconComponent/FourIconComponent";
@@ -35,6 +36,7 @@ const Homepage = ({ title }: Props) => {
 
   return (
     <div>
+      <Chat />
       <Navbar />
       <HeroSection
         title={

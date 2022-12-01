@@ -3,7 +3,7 @@
 .admin__chatbox {
   position: relative;
   overflow-x: hidden;
-  height: calc(100vh - 10px);
+  // height: calc(100vh - 10px);
   .chatbox__header {
     height: 70px;
     padding: 10px 20px;
@@ -24,7 +24,9 @@
 
   .chatbox__main {
     padding: 10px;
-
+    height: calc(100vh - 70px);
+    overflow: scroll;
+    padding-bottom: 50px;
     .chat-sent {
       margin-bottom: 10px;
       p {
@@ -51,9 +53,11 @@
 }
 
 .chat__send-opts {
+  height: 50px;
   position: absolute;
   width: 100%;
   bottom: 0px;
+  background-color: white;
   .chat__inputs {
     display: flex;
     padding: 5px 10px;
@@ -80,5 +84,16 @@
         color: var(--theme-color);
       }
     }
+  }
+}
+
+.no__convo__selected {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .title {
+    @include smallTitle;
   }
 }

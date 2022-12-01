@@ -66,7 +66,6 @@ function App() {
 
   return (
     <>
-      <Chat />
       <BrowserRouter>
         <Routes>
           <Route path="*" element={<NotFoundPage />} />

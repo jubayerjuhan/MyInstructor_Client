@@ -4,7 +4,7 @@ import "./FaqComponent.scss";
 
 const FaqComponent = ({ icon, faq }: any) => {
   const [open, setOpen] = useState(false);
-  console.log(faq);
+  // console.log(faq);
   // return <></>;
   return (
     <div className="faq__component">
