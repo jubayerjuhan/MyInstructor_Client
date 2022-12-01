@@ -9,14 +9,15 @@ import {
 } from "../../api_calls/message_api";
 import { toast } from "material-react-toastify";
 
-const ChatBoxClient = ({ handleSendMessage }) => {
+const ChatBoxClient = ({ handleSendMessage, adminSocket, socket }) => {
   const scrollRef = useRef();
+  const [newMessageFromAdmin, setNewMessageFromAdmin] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const { user } = useSelector((state) => state.user);
   const [messages, setMessages] = useState([]);
   useEffect(() => {
     loadMessage();
-  }, [user]);
+  }, [user, newMessageFromAdmin]);
 
   const loadMessage = async () => {
     const data = await getMessages(user?._id);
@@ -27,6 +28,14 @@ const ChatBoxClient = ({ handleSendMessage }) => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  useEffect(() => {
+    socket?.on("recieve_message_user", (data) => {
+      setNewMessageFromAdmin([...newMessageFromAdmin, data]);
+    });
+  }, [socket]);
+
+  console.log(newMessageFromAdmin);
+
   const sendMessage = async (e) => {
     e.preventDefault();
     const data = await sendMessageToServer(newMessage, user?._id, "admin");
@@ -35,6 +44,13 @@ const ChatBoxClient = ({ handleSendMessage }) => {
 
     // sending current conversation to top
     await addConversation(user?._id);
+
+    // send message wih socket
+    socket?.emit("send_message_to_admin", {
+      message: newMessage,
+      from: user?._id,
+      to: adminSocket,
+    });
   };
   return (
     <div>

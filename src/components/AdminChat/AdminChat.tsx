@@ -1,24 +1,58 @@
 import { toast } from "material-react-toastify";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Socket } from "socket.io-client";
 import { getConversations } from "../../api_calls/message_api";
 import logo from "../../assets/logo.png";
-import { Conversation } from "../../typings/reduxTypings";
+import { Conversation, State } from "../../typings/reduxTypings";
 import AdminChatbox from "../AdminChatbox/AdminChatbox";
+import { io } from "socket.io-client";
 import "./AdminChat.scss";
 
 const AdminChat = () => {
   const [convos, setConvos] = useState<Conversation[]>();
+  const { admin } = useSelector((state: State) => state.admin);
+  const [socket, setSocket] = useState<Socket>();
   const [selectedConvo, setSetSelectedConvo] = useState<any>("");
+  const [adminSocketId, setAdminSocketId] = useState<string>("");
+  const [userSockets, setUserSockets] = useState<any[]>([]);
+  const [newAdminMessage, setNewAdminMessage] = useState<any>({});
   useEffect(() => {
-    getConvos();
+    const socket = io("ws://localhost:5000");
+    setSocket(socket);
   }, []);
 
+  useEffect(() => {
+    getConvos();
+  }, [newAdminMessage]);
+
+  // adding admin to the user
+  useEffect(() => {
+    socket?.emit("add_user", { type: "admin", userId: admin?._id });
+
+    // getting connected sockets
+    socket?.on("connected_users", (data) => {
+      data?.forEach((connectedSocket: any) => {
+        if (connectedSocket.type === "admin")
+          setAdminSocketId(connectedSocket?.socketId);
+      });
+      setUserSockets(data);
+    });
+
+    // recieve message
+    socket?.on("recieve_message_admin", (data) => {
+      setNewAdminMessage(data);
+      console.log(data, "recieved message");
+    });
+  }, [admin, socket]);
+
+  // console.log()
   const getConvos = async () => {
     const data = await getConversations();
     if (data.success) return setConvos(data?.conversations);
   };
 
-  console.log(selectedConvo, "selectedConvo");
+  console.log(userSockets, "all user sockets 55");
   return (
     <div className="adminChat__main">
       <div className="adminChat__sidebar">
@@ -39,7 +73,12 @@ const AdminChat = () => {
       </div>
       <div className="adminChat__chatcontainers">
         {selectedConvo ? (
-          <AdminChatbox selectedConvo={selectedConvo} />
+          <AdminChatbox
+            socket={socket ? socket : ""}
+            userSockets={userSockets}
+            selectedConvo={selectedConvo}
+            newAdminMessage={newAdminMessage}
+          />
         ) : (
           <div className="no__convo__selected">
             <p className="title">Please Select a Conversation...</p>

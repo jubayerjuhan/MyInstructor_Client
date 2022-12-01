@@ -12,23 +12,31 @@ import { io, Socket } from "socket.io-client";
 import { Message } from "../../typings/reduxTypings";
 interface Props {
   selectedConvo: string;
+  newAdminMessage: any;
+  userSockets: any;
+  socket: any;
 }
-const AdminChatbox = ({ selectedConvo }: Props) => {
+const AdminChatbox = ({
+  selectedConvo,
+  newAdminMessage,
+  userSockets,
+  socket,
+}: Props) => {
   const [serverMessages, setServerMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState<string>(" ");
   const [sending, setSending] = useState<boolean>(false);
-  const [socket, setSocket] = useState<Socket>();
+  // const [socket, setSocket] = useState<Socket>();
   const scrollRef = useRef<any>();
   console.log(selectedConvo);
 
-  console.log(socket, "socket information");
+  // console.log(socket, "socket information");
   useEffect(() => {
     scrollRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, [serverMessages]);
 
   useEffect(() => {
     getServerMessages();
-  }, [selectedConvo, sending]);
+  }, [selectedConvo, newAdminMessage, sending]);
 
   const getServerMessages = async () => {
     const data = await getConversationMessages(selectedConvo);
@@ -39,7 +47,21 @@ const AdminChatbox = ({ selectedConvo }: Props) => {
 
   const sendMessage = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+
     await sendMessageToDb();
+    // send message wih socket
+    const userToSend = userSockets.find(
+      (socket: any) => socket.userId === selectedConvo
+    );
+
+    console.log(userToSend, userSockets, "user");
+
+    socket?.emit("send__message", {
+      // hello: "world",
+      message: newMessage,
+      from: "admin",
+      to: userToSend?.socketId,
+    });
   };
   const sendMessageToDb = async () => {
     setNewMessage("");

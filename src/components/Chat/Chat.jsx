@@ -10,6 +10,8 @@ import ChatBoxClient from "../ChatBoxClient/ChetBoxClient.jsx";
 import { useSelector } from "react-redux";
 
 const Chat = () => {
+  const [adminSocketId, setAdminSocketId] = useState("");
+  const [userSockets, setUserSockets] = useState([]);
   const [open, setOpen] = useState(false);
   const { user } = useSelector((state) => state.user);
   const [socket, setSocket] = useState();
@@ -22,10 +24,17 @@ const Chat = () => {
 
   useEffect(() => {
     socket?.emit("add_user", { type: "user", userId: user?._id });
+
     socket?.on("connected_users", (data) => {
-      console.log("data from socket 24 chat", data);
+      data?.forEach((connectedSocket) => {
+        if (connectedSocket.type === "admin")
+          return setAdminSocketId(connectedSocket?.socketId);
+        setUserSockets([...userSockets, connectedSocket]);
+      });
     });
   }, [user, socket]);
+
+  console.log(userSockets, "all sockets");
 
   return (
     <div className="chat__app">
@@ -34,7 +43,7 @@ const Chat = () => {
           <div className="header">
             <p className="title">Chat With Us</p>
           </div>
-          <ChatBoxClient />
+          <ChatBoxClient socket={socket} adminSocket={adminSocketId} />
         </div>
       ) : (
         <></>
