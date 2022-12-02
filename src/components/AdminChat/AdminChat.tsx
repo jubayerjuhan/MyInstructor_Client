@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
 import { getConversations } from "../../api_calls/message_api";
 import logo from "../../assets/logo.png";
+import Avatar from "@mui/material/Avatar";
 import { Conversation, State } from "../../typings/reduxTypings";
 import AdminChatbox from "../AdminChatbox/AdminChatbox";
 import { io } from "socket.io-client";
@@ -18,7 +19,7 @@ const AdminChat = () => {
   const [userSockets, setUserSockets] = useState<any[]>([]);
   const [newAdminMessage, setNewAdminMessage] = useState<any>({});
   useEffect(() => {
-    const socket = io("ws://localhost:5000");
+    const socket = io("ws://portfolio-368819.uc.r.appspot.com");
     setSocket(socket);
   }, []);
 
@@ -42,7 +43,6 @@ const AdminChat = () => {
     // recieve message
     socket?.on("recieve_message_admin", (data) => {
       setNewAdminMessage(data);
-      console.log(data, "recieved message");
     });
   }, [admin, socket]);
 
@@ -64,9 +64,15 @@ const AdminChat = () => {
               onClick={() => setSetSelectedConvo(convo._id)}
             >
               <div className="image">
-                <img src={convo.avater} alt="" />
+                {convo?.avater ? (
+                  <img src={convo.avater} alt="" />
+                ) : (
+                  <Avatar>{convo?.firstName?.charAt(0)}</Avatar>
+                )}
               </div>
-              <p className="name">Jubayer Juhan</p>
+              <p className="name">
+                {convo?.firstName} {convo?.lastName}
+              </p>
             </div>
           ))}
         </div>
