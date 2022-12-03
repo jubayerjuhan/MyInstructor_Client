@@ -9,7 +9,9 @@ import {
 } from "../../api_calls/message_api";
 import { toast } from "material-react-toastify";
 import { io, Socket } from "socket.io-client";
-import { Message } from "../../typings/reduxTypings";
+import { Message, User } from "../../typings/reduxTypings";
+import InfoIcon from "@mui/icons-material/Info";
+import { getSingleUserAdmin } from "../../api_calls/Admin/admin_userapi";
 interface Props {
   selectedConvo: string;
   newAdminMessage: any;
@@ -23,6 +25,7 @@ const AdminChatbox = ({
   socket,
 }: Props) => {
   const [serverMessages, setServerMessages] = useState<Message[]>([]);
+  const [userInformation, setUserInformation] = useState<User>();
   const [newMessage, setNewMessage] = useState<string>(" ");
   const [sending, setSending] = useState<boolean>(false);
   // const [socket, setSocket] = useState<Socket>();
@@ -33,6 +36,17 @@ const AdminChatbox = ({
   useEffect(() => {
     scrollRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, [serverMessages]);
+
+  // get current user information
+  useEffect(() => {
+    getuserInformation();
+  }, [selectedConvo]);
+
+  // get single user
+  const getuserInformation = async () => {
+    const data = await getSingleUserAdmin(selectedConvo);
+    setUserInformation(data?.user);
+  };
 
   useEffect(() => {
     getServerMessages();
@@ -82,13 +96,26 @@ const AdminChatbox = ({
   return (
     <div className="admin__chatbox">
       <div className="chatbox__header">
-        <img
-          src={
-            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-          }
-          alt=""
-        />
-        <p className="title">Jubayer Hossain</p>
+        <div className="chatbox__header-user">
+          <img
+            src={
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+            }
+            alt=""
+          />
+          <p className="title">
+            {userInformation?.firstName} {userInformation?.lastName}
+          </p>
+        </div>
+        <div className="chatbox__header-userInfo">
+          <a
+            href={`/admin/user/${selectedConvo}`}
+            target={"_blank"}
+            rel={"noopener"}
+          >
+            <InfoIcon />
+          </a>
+        </div>
       </div>
       <div className="chatbox__main">
         {serverMessages?.map((message, key) => (

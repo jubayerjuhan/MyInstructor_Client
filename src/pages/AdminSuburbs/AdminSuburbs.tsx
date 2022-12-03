@@ -36,7 +36,7 @@ const AdminSuburbs = () => {
   }, [dispatch]);
   useEffect(() => {
     const editedSuburbs: Suburb[] = [];
-    suburbs.forEach((suburb, key) => {
+    suburbs?.forEach((suburb, key) => {
       suburb.id = suburb._id;
       editedSuburbs.push(suburb);
     });

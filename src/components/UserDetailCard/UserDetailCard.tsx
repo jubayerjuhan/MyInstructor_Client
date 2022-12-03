@@ -32,6 +32,9 @@ const UserDetailCard = ({ item }: Props) => {
           sx={{ display: "flex", flexDirection: "column", mt: 2, gap: "5px" }}
         >
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            User Id : {item._id}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Email : {item.email}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">

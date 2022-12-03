@@ -8,17 +8,23 @@
     height: 70px;
     padding: 10px 20px;
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--theme-color);
-    img {
-      height: 50px;
-      width: 50px;
-      border-radius: 50%;
-    }
-    .title {
-      @include bigDescription;
-      color: white;
+
+    .chatbox__header-user {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      img {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+      }
+      .title {
+        @include bigDescription;
+        color: white;
+      }
     }
   }
 

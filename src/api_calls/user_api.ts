@@ -42,3 +42,14 @@ export const getSuburbs = async () => {
     };
   }
 };
+export const getSingleUser = async (id: string) => {
+  try {
+    const { data } = await client.get(`/user/${id}`);
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response.data.success,
+    };
+  }
+};
