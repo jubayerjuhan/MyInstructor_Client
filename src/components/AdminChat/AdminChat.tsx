@@ -19,7 +19,7 @@ const AdminChat = () => {
   const [userSockets, setUserSockets] = useState<any[]>([]);
   const [newAdminMessage, setNewAdminMessage] = useState<any>({});
   useEffect(() => {
-    const socket = io("ws://portfolio-368819.uc.r.appspot.com");
+    const socket = io("https://portfolio-368819.uc.r.appspot.com");
     setSocket(socket);
   }, []);
 
