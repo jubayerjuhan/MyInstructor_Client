@@ -1,0 +1,99 @@
+.chat__app {
+  z-index: 12;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  .chat__icon {
+    cursor: pointer;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 50%;
+    background-color: var(--theme-color);
+    svg {
+      color: white;
+      font-size: 30px;
+    }
+  }
+}
+
+.chat__app-main {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: 5px;
+  min-width: 350px;
+  background-color: white;
+  margin-bottom: 15px;
+
+  .header {
+    border-radius: 5px 5px 0px 0px;
+    padding: 15px;
+    background-color: var(--theme-color);
+  }
+}
+
+.chat__app-box {
+  padding: 15px;
+  height: 400px;
+  overflow-y: scroll;
+  position: relative;
+
+  .chat-sent {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-end;
+    > p {
+      padding: 8px 12px;
+      border: 5px;
+      background-color: var(--theme-color);
+      max-width: 80%;
+      text-align: right;
+      font-size: 14px;
+      border-radius: 5px;
+    }
+  }
+  .chat-rec {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    > p {
+      padding: 8px 12px;
+      border-radius: 5px;
+      background-color: rgb(229, 226, 226);
+      max-width: 80%;
+      font-size: 14px;
+    }
+  }
+}
+
+.chat__app-main {
+  .chat__inputs {
+    display: flex;
+    padding: 5px 10px;
+    align-items: center;
+    gap: 10px;
+    .fileupload {
+      display: none;
+    }
+    .message {
+      width: 100%;
+      flex: 1;
+      flex-grow: 1;
+      height: 40px;
+      outline: none;
+      padding: 0 5px;
+    }
+    .sendIcon {
+      cursor: pointer;
+      color: var(--theme-color);
+    }
+    .upload {
+      cursor: pointer;
+      svg {
+        color: var(--theme-color);
+      }
+    }
+  }
+}
