@@ -18,7 +18,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const socket = io("ws://portfolio-368819.uc.r.appspot.com");
+    const socket = io("https://portfolio-368819.uc.r.appspot.com");
 
     setSocket(socket);
   }, []);
