@@ -9,6 +9,7 @@ import { Conversation, State } from "../../typings/reduxTypings";
 import AdminChatbox from "../AdminChatbox/AdminChatbox";
 import { io } from "socket.io-client";
 import "./AdminChat.scss";
+import { WEBSOCKET_URL } from "../../client";
 
 const AdminChat = () => {
   const [convos, setConvos] = useState<Conversation[]>();
@@ -19,7 +20,7 @@ const AdminChat = () => {
   const [userSockets, setUserSockets] = useState<any[]>([]);
   const [newAdminMessage, setNewAdminMessage] = useState<any>({});
   useEffect(() => {
-    const socket = io("https://portfolio-368819.uc.r.appspot.com");
+    const socket = io(WEBSOCKET_URL);
     setSocket(socket);
   }, []);
 

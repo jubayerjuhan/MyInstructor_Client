@@ -9,12 +9,22 @@ import {
 } from "../../api_calls/message_api";
 import { toast } from "material-react-toastify";
 
-const ChatBoxClient = ({ handleSendMessage, adminSocket, socket }) => {
+const ChatBoxClient = ({
+  setNewMessageRecived,
+  newMessageRecived,
+  adminSocket,
+  socket,
+}) => {
   const scrollRef = useRef();
   const [newMessageFromAdmin, setNewMessageFromAdmin] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const { user } = useSelector((state) => state.user);
   const [messages, setMessages] = useState([]);
+  // check new incoming message and send status after render
+  useEffect(() => {
+    setNewMessageRecived(false);
+    console.log(newMessageRecived, "new Message status");
+  }, [socket]);
   useEffect(() => {
     loadMessage();
   }, [user, newMessageFromAdmin]);
@@ -31,6 +41,7 @@ const ChatBoxClient = ({ handleSendMessage, adminSocket, socket }) => {
   useEffect(() => {
     socket?.on("recieve_message_user", (data) => {
       setNewMessageFromAdmin([...newMessageFromAdmin, data]);
+      if (data) setNewMessageRecived(true);
     });
   }, [socket]);
 
@@ -69,11 +80,14 @@ const ChatBoxClient = ({ handleSendMessage, adminSocket, socket }) => {
       <div>
         <form className="chat__inputs" action="" onSubmit={sendMessage}>
           <input
+            onClick={() => setNewMessageRecived(false)}
             type="text"
             name="message"
             id=""
             className="message"
-            onChange={(e) => setNewMessage(e.target.value)}
+            onChange={(e) => {
+              setNewMessage(e.target.value);
+            }}
           />
           <label for="upload" className="upload">
             <AttachFileIcon />

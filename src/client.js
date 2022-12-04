@@ -25,3 +25,5 @@ export const admin = axios.create({
     authorization: `Bearer ${adminJwtToken}`,
   },
 });
+
+export const WEBSOCKET_URL = "wss://portfolio-368819.uc.r.appspot.com/";
