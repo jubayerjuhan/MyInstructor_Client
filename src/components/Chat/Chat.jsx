@@ -13,19 +13,19 @@ import { Button } from "@mui/material";
 import NotificationSound from "../../assets/mixkit-positive-notification-951.wav";
 const Chat = () => {
   const [newMessageRecived, setNewMessageRecived] = useState(false);
+  const [recivedMessage, setRecivedMessage] = useState("");
   const [adminSocketId, setAdminSocketId] = useState("");
   const [userSockets, setUserSockets] = useState([]);
   const [open, setOpen] = useState(false);
   const { user } = useSelector((state) => state.user);
   const [socket, setSocket] = useState();
-  const [messages, setMessages] = useState([]);
 
   // notification sound when message arrive
   const audioPlayer = useRef(null);
-
-  if (newMessageRecived) {
-    audioPlayer.current.play();
-  }
+  const buttonRef = useRef(null);
+  const audio = new Audio(NotificationSound);
+  audio.muted = true;
+  audio.autoplay = false;
 
   useEffect(() => {
     if (!user || user?.type === "learner")
@@ -33,6 +33,7 @@ const Chat = () => {
     const socket = io(WEBSOCKET_URL);
 
     setSocket(socket);
+    console.log(socket, "connected socket");
   }, [user]);
 
   useEffect(() => {
@@ -47,41 +48,57 @@ const Chat = () => {
         setUserSockets([...userSockets, connectedSocket]);
       });
     });
+
+    socket?.on("recieve_message_user", (data) => {
+      setRecivedMessage(data?.message);
+      console.log(data.message, "message...");
+    });
   }, [user, socket]);
 
-  console.log(userSockets, "all sockets", newMessageRecived);
-
   return (
-    <div className="chat__app">
-      <audio ref={audioPlayer} src={NotificationSound} />
-      {open ? (
-        <div className="chat__app-main">
-          <div className="header">
-            <p className="title">Chat With Us</p>
-          </div>
-          {!user || user?.type === "learner" ? (
-            <div className="user__not-available">
-              <p className="title">Please Login To Send Chat</p>
-              <Button
-                title={"Login"}
-                style={{ color: "#faa41a" }}
-                onClick={() => (window.location.href = "/login")}
-              >
-                Login
-              </Button>
-            </div>
-          ) : (
-            <ChatBoxClient
-              socket={socket}
-              newMessageRecived={newMessageRecived}
-              adminSocket={adminSocketId}
-              setNewMessageRecived={setNewMessageRecived}
-            />
-          )}
+    <div className="chat__app" style={{ width: open ? "300px" : "unset" }}>
+      <audio
+        ref={audioPlayer}
+        src={NotificationSound}
+        muted={false}
+        autoPlay={true}
+      />
+      {recivedMessage && (
+        <div className="chat__outer-bubble">
+          <p className="title">{recivedMessage.substring(0, 30) + "..."}</p>
         </div>
-      ) : (
-        <></>
       )}
+      <div
+        className="chat__app-main"
+        style={{ display: !open ? "none" : "block" }}
+      >
+        <div className="header">
+          <p className="title">Chat With Us</p>
+        </div>
+        {!user || user?.type === "learner" ? (
+          <div className="user__not-available">
+            <p className="title">Please Login To Send Chat</p>
+            <Button
+              title={"Login"}
+              style={{ color: "#faa41a" }}
+              onClick={() => (window.location.href = "/login")}
+            >
+              Login
+            </Button>
+          </div>
+        ) : (
+          <ChatBoxClient
+            open={open}
+            recivedMessage={recivedMessage}
+            setRecivedMessage={setRecivedMessage}
+            socket={socket}
+            newMessageRecived={newMessageRecived}
+            adminSocket={adminSocketId}
+            setNewMessageRecived={setNewMessageRecived}
+          />
+        )}
+      </div>
+
       <div className="chat__icon" onClick={() => setOpen(!open)}>
         {newMessageRecived && <div className="new__message-bubble"></div>}
         {open ? <CloseIcon /> : <ChatBubbleOutlineIcon />}

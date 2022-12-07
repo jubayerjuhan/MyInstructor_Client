@@ -117,4 +117,6 @@ export interface Message {
   to: string;
   text: string;
   _id: string;
+  messageType: string;
+  fileName: string;
 }

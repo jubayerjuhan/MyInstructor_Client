@@ -7,11 +7,15 @@ import {
   getConversationMessages,
   sendMessageToServer,
 } from "../../api_calls/message_api";
+import { FaTimesCircle } from "react-icons/fa";
+
 import { toast } from "material-react-toastify";
 import { io, Socket } from "socket.io-client";
 import { Message, User } from "../../typings/reduxTypings";
 import InfoIcon from "@mui/icons-material/Info";
 import { getSingleUserAdmin } from "../../api_calls/Admin/admin_userapi";
+import { uploadFileToCloud } from "../../api_calls/user_api";
+import { Avatar, CircularProgress } from "@mui/material";
 interface Props {
   selectedConvo: string;
   newAdminMessage: any;
@@ -24,6 +28,8 @@ const AdminChatbox = ({
   userSockets,
   socket,
 }: Props) => {
+  const [uploading, setUploading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<any>();
   const [serverMessages, setServerMessages] = useState<Message[]>([]);
   const [userInformation, setUserInformation] = useState<User>();
   const [newMessage, setNewMessage] = useState<string>(" ");
@@ -62,7 +68,18 @@ const AdminChatbox = ({
   const sendMessage = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    await sendMessageToDb();
+    if (selectedFile) {
+      setUploading(true);
+      const { success, message, file } = await uploadFileToCloud(selectedFile);
+      setUploading(false);
+      // if error in uploading file
+      if (!success) return alert(message);
+
+      await sendMessageToDb(file, selectedFile?.type, selectedFile.name);
+      setSelectedFile(null);
+    } else {
+      await sendMessageToDb();
+    }
     // send message wih socket
     const userToSend = userSockets.find(
       (socket: any) => socket.userId === selectedConvo
@@ -77,10 +94,23 @@ const AdminChatbox = ({
       to: userToSend?.socketId,
     });
   };
-  const sendMessageToDb = async () => {
+
+  // send message to database function
+  const sendMessageToDb = async (
+    message = newMessage,
+    type = "text",
+    name = ""
+  ) => {
     setNewMessage("");
     setSending(true);
-    const data = await sendMessageToServer(newMessage, "admin", selectedConvo);
+    // ----------------------------------------------
+    const data = await sendMessageToServer(
+      message,
+      "admin",
+      type,
+      name,
+      selectedConvo
+    );
 
     if (!data?.success) {
       toast.error(data?.message);
@@ -97,12 +127,11 @@ const AdminChatbox = ({
     <div className="admin__chatbox">
       <div className="chatbox__header">
         <div className="chatbox__header-user">
-          <img
-            src={
-              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-            }
-            alt=""
-          />
+          {userInformation?.avater ? (
+            <img src={userInformation?.avater} alt="" />
+          ) : (
+            <Avatar>{userInformation?.firstName?.charAt(0)}</Avatar>
+          )}
           <p className="title">
             {userInformation?.firstName} {userInformation?.lastName}
           </p>
@@ -117,30 +146,63 @@ const AdminChatbox = ({
           </a>
         </div>
       </div>
+      {uploading && (
+        <div className="uploading__spinner-main">
+          <CircularProgress size={20} />
+          <p className="title">Uploading Your File</p>
+        </div>
+      )}
       <div className="chatbox__main">
-        {serverMessages?.map((message, key) => (
-          <div
-            ref={scrollRef}
-            className={`${message?.to === "admin" ? "chat-sent" : "chat-rec"}`}
-          >
-            <p className="title">{message?.text}</p>
-          </div>
-        ))}
+        {serverMessages?.map((message, key) => {
+          return (
+            <div
+              ref={scrollRef}
+              className={`${
+                message.from === "admin" ? "chat-rec" : "chat-sent"
+              }`}
+            >
+              {message?.messageType !== "text" ? (
+                <p className={"message__with-attachment"}>
+                  <AttachFileIcon />
+                  <a target={"_blank"} href={message?.text}>
+                    {message?.fileName}
+                  </a>
+                </p>
+              ) : (
+                <p>{message?.text}</p>
+              )}
+            </div>
+          );
+        })}
         <div className="chat__send-opts">
           <form className="chat__inputs" action="" onSubmit={sendMessage}>
-            <input
-              type="text"
-              name="message"
-              id=""
-              value={newMessage}
-              className="message"
-              onChange={(e) => setNewMessage(e.target.value)}
-            />
+            {selectedFile && (
+              <div className={"selected__file-name"}>
+                <p className={"title"}>{selectedFile?.name.slice(0, 15)}</p>
+                <FaTimesCircle onClick={() => setSelectedFile("")} />
+              </div>
+            )}
+
+            {
+              <input
+                type="text"
+                name="message"
+                id=""
+                value={newMessage}
+                className="message"
+                onChange={(e) => setNewMessage(e.target.value)}
+              />
+            }
             <label htmlFor="upload" className="upload">
               <AttachFileIcon />
-              <input type="file" id="upload" className="fileupload" />
+              <input
+                type="file"
+                id="upload"
+                className="fileupload"
+                onChange={(e: any) => setSelectedFile(e.target?.files[0])}
+              />
             </label>
-            <SendIcon className="sendIcon" />
+            <SendIcon className="sendIcon" onClick={sendMessage} />
           </form>
         </div>
       </div>

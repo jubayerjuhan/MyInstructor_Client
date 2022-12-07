@@ -12,12 +12,16 @@ export const getMessages = async (id: string) => {
 export const sendMessageToServer = async (
   text: string,
   from: string,
+  type: string,
+  fileName: string,
   to: string
 ) => {
   try {
     const { data } = await client.post(`convo/add-message`, {
       text,
       from,
+      messageType: type,
+      fileName,
       to,
     });
     return data;
