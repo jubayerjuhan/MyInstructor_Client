@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Advantage from "../../components/Advantage/Advantage";
 import Chat from "../../components/Chat/Chat";
@@ -13,6 +14,7 @@ import HowItWorks from "../../components/HowItWorks/HowItWorks";
 import Navbar from "../../components/Navbar/Navbar";
 import ReviewSlider from "../../components/ReviewSlider/ReviewSlider";
 import WhyusSection from "../../components/WhyusSection/WhyusSection";
+import { State } from "../../typings/reduxTypings";
 
 interface Props {
   title?: string;
@@ -28,6 +30,7 @@ const cities = [
 ];
 const Homepage = ({ title }: Props) => {
   const { city } = useParams();
+  const { user } = useSelector((state: State) => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +39,7 @@ const Homepage = ({ title }: Props) => {
 
   return (
     <div>
-      <Chat />
+      {!user || user?.userType !== "instructor" ? <Chat></Chat> : <></>}
       <Navbar />
       <HeroSection
         title={

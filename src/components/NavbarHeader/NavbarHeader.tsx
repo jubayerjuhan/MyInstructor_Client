@@ -4,6 +4,7 @@ import { State } from "../../typings/reduxTypings";
 
 const NavbarHeader = () => {
   const { user } = useSelector((state: State) => state.user);
+  const { admin } = useSelector((state: State) => state.admin);
   return (
     <div className="nav__header-links">
       <div>
@@ -16,6 +17,7 @@ const NavbarHeader = () => {
           <a className="navbar__header-link" href="/login">
             Learner Login
           </a>
+
           <a className="navbar__header-link" href="/instructor-login">
             Instructor Login
           </a>
@@ -30,6 +32,11 @@ const NavbarHeader = () => {
           ) : (
             <a className="navbar__header-link" href="/instructor/dashboard">
               Instructor Dashboard
+            </a>
+          )}
+          {admin && (
+            <a className="navbar__header-link" href="/admin/dashboard">
+              Admin Dashboard
             </a>
           )}
         </div>

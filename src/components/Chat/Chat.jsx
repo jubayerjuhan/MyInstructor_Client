@@ -10,7 +10,7 @@ import ChatBoxClient from "../ChatBoxClient/ChetBoxClient.jsx";
 import { useSelector } from "react-redux";
 import { WEBSOCKET_URL } from "../../client.js";
 import { Button } from "@mui/material";
-import NotificationSound from "../../assets/mixkit-positive-notification-951.wav";
+// import NotificationSound from "../../assets/mixkit-positive-notification-951.wav";
 const Chat = () => {
   const [newMessageRecived, setNewMessageRecived] = useState(false);
   const [recivedMessage, setRecivedMessage] = useState("");
@@ -21,12 +21,7 @@ const Chat = () => {
   const [socket, setSocket] = useState();
 
   // notification sound when message arrive
-  const audioPlayer = useRef(null);
   const buttonRef = useRef(null);
-  const audio = new Audio(NotificationSound);
-  audio.muted = true;
-  audio.autoplay = false;
-
   useEffect(() => {
     if (!user || user?.type === "learner")
       return console.log("No User Available...");
@@ -51,18 +46,11 @@ const Chat = () => {
 
     socket?.on("recieve_message_user", (data) => {
       setRecivedMessage(data?.message);
-      console.log(data.message, "message...");
     });
   }, [user, socket]);
 
   return (
     <div className="chat__app" style={{ width: open ? "300px" : "unset" }}>
-      <audio
-        ref={audioPlayer}
-        src={NotificationSound}
-        muted={false}
-        autoPlay={true}
-      />
       {recivedMessage && (
         <div className="chat__outer-bubble">
           <p className="title">{recivedMessage.substring(0, 30) + "..."}</p>
