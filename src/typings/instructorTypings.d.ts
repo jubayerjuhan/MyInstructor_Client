@@ -35,9 +35,9 @@ export type Suburb = {
   _id: string;
 };
 type Car = {
-  name: string;
-  numberPlate: string;
-  image: string;
+  name?: string;
+  numberPlate?: string;
+  image?: string;
   transmissionType?: string;
 };
 

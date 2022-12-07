@@ -16,6 +16,9 @@ import {
   instructorUpdateAvater,
 } from "../../api_calls/instructor_api";
 import FullPageSpinner from "../../components/FullPageSpinner/FullPageSpinner";
+import { Autocomplete, TextField } from "@mui/material";
+import { getAllCars } from "../../api_calls/Admin/admin_car";
+import { Car } from "../../typings/instructorTypings";
 
 interface ProfileField {
   name: string;
@@ -35,8 +38,10 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useSelector((state: State) => state.user);
   const [profile, setProfile] = useState<User>(user);
+  const [cars, setCars] = useState<Car[]>([]);
   const [profileFields, setProfileFields] = useState<ProfileField[]>();
   const [editMode, setEditMode] = useState<boolean>(false);
+  console.log(profile, "user... 44..");
 
   useEffect(() => {
     setProfileFields([
@@ -83,8 +88,24 @@ const Profile = () => {
         type: "textarea",
         defaultValue: profile.bio || "",
       },
+      {
+        name: "car",
+        label: "Car",
+        placeHolder: "Car",
+        type: "searchAndSelect",
+        defaultValue: "",
+      },
     ]);
   }, [profile]);
+
+  useEffect(() => {
+    getCars();
+  }, []);
+
+  const getCars = async () => {
+    const data = await getAllCars();
+    setCars(data?.cars);
+  };
 
   // handle edit click
   const handleEditClick = () => {
@@ -97,7 +118,6 @@ const Profile = () => {
     if (!editMode || e.target.name === "email") return;
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
-  console.log(profile);
 
   // handle edit user
   const handleEditUser = async () => {
@@ -231,6 +251,36 @@ const Profile = () => {
                   )}
                 </>
               );
+            if (field.name === "car") {
+              if (user.userType !== "instructor") return <></>;
+              if (!editMode) return <p>Your Car : {user.car?.name}</p>;
+              return (
+                <Autocomplete
+                  onChange={(e, value) => {
+                    if (value) setProfile({ ...profile, car: value });
+                  }}
+                  id="tags-standard"
+                  className="movies"
+                  options={cars}
+                  getOptionLabel={(option: any) =>
+                    option.name ? option.name : "Select Car"
+                  }
+                  defaultValue={profile?.car}
+                  renderInput={(params) => (
+                    <>
+                      <TextField
+                        {...params}
+                        defaultValue={profile.car?.name}
+                        onChange={(e) => console.log(e)}
+                        variant="outlined"
+                        label={field.label}
+                        placeholder={field.label}
+                      />
+                    </>
+                  )}
+                />
+              );
+            }
             return (
               <>
                 {

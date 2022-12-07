@@ -68,11 +68,11 @@
     display: flex;
     justify-content: flex-end;
     > p {
+      text-align: left;
       padding: 8px 12px;
       border: 5px;
       background-color: var(--theme-color);
       max-width: 80%;
-      text-align: right;
       font-size: 14px;
       border-radius: 5px;
     }

@@ -46,12 +46,14 @@
     padding-bottom: 50px;
     .chat-sent {
       margin-bottom: 10px;
+
       p {
         background-color: rgba(138, 138, 138, 0.253);
         padding: 10px 15px;
         border-radius: 5px;
         width: fit-content;
         max-width: 70%;
+        text-align: left;
       }
     }
     .chat-rec {

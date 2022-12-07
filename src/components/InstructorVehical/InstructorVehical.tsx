@@ -15,7 +15,9 @@ const InstructorVehical = ({ instructor }: InstructorProfileProps) => {
           {/* <p className="transmission">
             {instructor.car.transmissionType} Transmission
           </p> */}
-          <p className="numberPlate">{instructor.car.numberPlate}</p>
+          {instructor.car.numberPlate && (
+            <p className="numberPlate">{instructor.car.numberPlate}</p>
+          )}
         </div>
       </div>
     </div>

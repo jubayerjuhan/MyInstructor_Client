@@ -1,6 +1,6 @@
 import { BookingTypeBack } from "./bookingsType";
 import { BillingInfo, Cart } from "./cartTypings";
-import { Instructor, Suburb } from "./instructorTypings";
+import { Car, Instructor, Suburb } from "./instructorTypings";
 
 export interface State {
   user: UserState;
@@ -32,6 +32,7 @@ export interface State {
     error: string;
     suburbs: Suburb[];
   };
+  car: Car;
   suburb: { suburb: Suburb };
 }
 
@@ -87,6 +88,7 @@ export interface User {
   avater?: string;
   bio?: string;
   available?: boolean;
+  car?: Car;
 }
 
 interface AdminDataReducerType {

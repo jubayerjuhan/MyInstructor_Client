@@ -5,17 +5,16 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import List from "@mui/material/List";
+import MailOutlinedIcon from '@mui/icons-material/MailOutlined';import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import logo from "../../assets/logo.png";
+import AltRouteIcon from "@mui/icons-material/AltRoute";
 
 //
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
@@ -49,6 +48,11 @@ export default function AdminSidebar(props: Props) {
       link: "/dashboard",
       icon: <DashboardOutlinedIcon />,
     },
+    {
+      label: "Live Chat",
+      link: "/chat",
+      icon: <MailOutlinedIcon />,
+    },
     { label: "Users", link: "/users", icon: <GroupOutlinedIcon /> },
     {
       label: "Instructors",
@@ -71,9 +75,9 @@ export default function AdminSidebar(props: Props) {
       icon: <CreditCardOffOutlinedIcon />,
     },
     {
-      label: "suburbs",
+      label: "Suburbs",
       link: "/suburbs",
-      icon: <CreditCardOffOutlinedIcon />,
+      icon: <AltRouteIcon />,
     },
     {
       label: "Cars",

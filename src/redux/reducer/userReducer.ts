@@ -68,6 +68,12 @@ export const userReducer = (state = {}, action: Action) => {
         error: action.payload,
         loading: false,
       };
+    case "LOGOUT":
+      return {
+        ...state,
+        user: null,
+      };
+
     case CLEAR_ERROR:
       return {
         ...state,

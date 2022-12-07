@@ -30,7 +30,7 @@ const CheckoutPayment = ({
   const [clientSecret, setClientSecret] = useState();
   const [price, setPrice] = useState(0);
   const stripePromise = loadStripe(
-    "pk_test_51Jk944Kqk54qfeAmqK2cRxVVq122wVq5oMiAHWv0xEHXCjx362GhIJAiCkOCtjnfSVHGzMP7YSeVX6NQX4MuNASY00FJlGLuOo"
+    "pk_test_51Lw6rGLGvcb0YzQkg35iKfntof6nBErDNYfP7mWXaozs6dLwqJsiCrWGISICkprAo7pjwC1XdNKzPxHaVBX5IW1100HUQxmArx"
   );
 
   const { price: tripPrice } = useSelector((state: State) => state.lessonPrice);

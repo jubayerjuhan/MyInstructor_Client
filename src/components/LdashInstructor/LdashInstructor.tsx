@@ -43,7 +43,9 @@ const LdashInstructor = ({ instructor }: LdashInstructorProps) => {
           </div>
           <div className="car__info">
             <p className="car__name">{instructor?.car.name}</p>
-            <p className="car__number">{instructor?.car.numberPlate}</p>
+            {instructor?.car.numberPlate && (
+              <p className="car__number">{instructor?.car.numberPlate}</p>
+            )}
           </div>
         </div>
       </div>
