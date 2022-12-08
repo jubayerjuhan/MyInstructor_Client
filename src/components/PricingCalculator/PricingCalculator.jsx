@@ -122,11 +122,11 @@ const PricingCalculator = ({ cart, bookForward }) => {
       {!cart && (
         <div className="test__package">
           <p className="title">Test Package</p>
-          <p className="price">$120</p>
+          <p className="price">${price?.testPrice}</p>
           <ul className="feature__list">
             <li className="feature">Pick up & drop off</li>
-            <li className="feature">Pre-test lesson</li>
-            <li className="feature">Use of car for test</li>
+            <li className="feature">Pre-test lesson (60 mins)</li>
+            <li className="feature">Use of car for test with instructor</li>
           </ul>
         </div>
       )}
