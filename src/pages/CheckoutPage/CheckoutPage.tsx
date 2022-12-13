@@ -11,6 +11,7 @@ import { toast } from "material-react-toastify";
 import { useLocation } from "react-router-dom";
 import Button from "../../components/core/Button/Button";
 import { validateGiftCard } from "../../api_calls/giftcard_api";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 const CheckoutPage = () => {
   const { state } = useLocation();
@@ -51,6 +52,8 @@ const CheckoutPage = () => {
   };
   return (
     <>
+      <HelmetTitle title={`Checkout - My Instructor`} />
+
       <Navbar />
       <div className="checkout__page-main sectionPadding">
         <div className="checkout__information">

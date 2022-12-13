@@ -15,6 +15,7 @@ import "./AdminDashboard.scss";
 import { Button } from "@mui/material";
 import { toast } from "material-react-toastify";
 import { SET_LESSON_PRICE } from "../../../redux/reducer/reduxNamings";
+import HelmetTitle from "../../../components/HelmetTitle/HelmetTitle";
 
 const AdminDashboard = () => {
   const priceFields = [
@@ -72,6 +73,8 @@ const AdminDashboard = () => {
   };
   return (
     <AdminPageWrapper>
+      <HelmetTitle title={`Admin Dashboard - My Instructor`} />
+
       <div className="dashboard__quick-info">
         <DashboardInfoCard
           title={"Users"}

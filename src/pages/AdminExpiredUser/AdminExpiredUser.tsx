@@ -7,6 +7,7 @@ import { getAllExpiredInstructors } from "../../api_calls/Admin/admin_instructor
 import { toast } from "material-react-toastify";
 import { instructorColumns } from "../../utils/grid_columns/instructors_gridColumns";
 import { useNavigate } from "react-router-dom";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 const AdminExpiredInstructor = () => {
   const [instructors, setInstructors] = useState<Instructor[]>([]);
@@ -36,6 +37,8 @@ const AdminExpiredInstructor = () => {
 
   return (
     <AdminPageWrapper className={"dashbaord__content-wrapper"}>
+      <HelmetTitle title={`License Expired Instructors - Admin`} />
+
       <Box
         sx={{
           display: "flex",

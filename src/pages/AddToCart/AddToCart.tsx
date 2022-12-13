@@ -7,6 +7,7 @@ import { Instructor } from "../../typings/instructorTypings";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 import { useLocation, useNavigate } from "react-router-dom";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 const AddToCart = () => {
   const { state } = useLocation();
@@ -21,6 +22,8 @@ const AddToCart = () => {
   if (!instructor) return <></>;
   return (
     <div className="add__cart-page">
+      <HelmetTitle title={`Add To Cart - My Instructor`} />
+
       <Navbar />
       <p className="title">Add To Cart</p>
       <div className="add__cart-main sectionPadding">

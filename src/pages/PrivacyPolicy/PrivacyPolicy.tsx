@@ -3,10 +3,13 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import "./PrivacyPolicy.scss";
 import privacyPolicies from "./privacyPolicy.json";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 const PrivacyPolicy = () => {
   return (
     <>
+      <HelmetTitle title={`Privacy Policy`} />
+
       <Navbar></Navbar>
       <div className={"privacy__policy-main sectionPadding"}>
         <p className="title">Privacy Policy</p>

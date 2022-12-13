@@ -9,6 +9,7 @@ import { giftCardValidationSchema } from "../../utils/validation_schemas/login_s
 import Button from "../../components/core/Button/Button";
 import "./GiftCardPage.scss";
 import { useNavigate } from "react-router-dom";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 const GiftCardPage = () => {
   const navigate = useNavigate();
 
@@ -28,7 +29,10 @@ const GiftCardPage = () => {
 
   return (
     <div>
+      <HelmetTitle title={`Gift Card - My Instructor`} />
+
       <Navbar></Navbar>
+
       <div className="gift__card-main sectionPadding">
         <div className="gift__card-image">
           <img src={image} alt="" />

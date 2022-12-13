@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { getAppliedInstructors } from "../../api_calls/Admin/admin_applicants";
 
 import AdminPageWrapper from "../../components/AdminPageWrapper/AdminPageWrapper";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import { BookingTypeBack } from "../../typings/bookingsType";
 import { applicantColumns } from "../../utils/grid_columns/applicants_gridColumns";
 
@@ -33,6 +34,8 @@ const AdminApplicants = () => {
 
   return (
     <AdminPageWrapper className={"dashbaord__content-wrapper"}>
+      <HelmetTitle title={`Instructor Applicants - Admin`} />
+
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <p className="title">Instructor Applicants</p>
       </Box>

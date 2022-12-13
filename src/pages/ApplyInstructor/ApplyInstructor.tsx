@@ -10,6 +10,7 @@ import "./ApplyInstructor.scss";
 import Button from "../../components/core/Button/Button";
 import { applyAsInstructor } from "../../api_calls/apply_api";
 import { toast } from "material-react-toastify";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 const ApplyInstructor = () => {
   const [loading, setLoading] = useState(false);
   const {
@@ -39,6 +40,7 @@ const ApplyInstructor = () => {
 
   return (
     <>
+      <HelmetTitle title={"Apply As Instructor"} />
       <Navbar />
       <div className="apply__instructor-main sectionPadding">
         <div className="apply__image">

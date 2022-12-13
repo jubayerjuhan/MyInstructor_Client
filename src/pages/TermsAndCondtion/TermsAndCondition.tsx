@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import "../PrivacyPolicy/PrivacyPolicy.scss";
 import termsAndConditionLearner from "./termsAndConditionLearners.json";
 import termsAndConditionInstructor from "./termsAndConditionInstructors.json";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 interface Props {
   learner?: boolean;
@@ -12,6 +13,12 @@ interface Props {
 const TermsAndCondition = ({ learner }: Props) => {
   return (
     <>
+      <HelmetTitle
+        title={`${
+          learner ? "Learner" : "Instructor"
+        }Terms and Conditions - My Instructor`}
+      />
+
       <Navbar></Navbar>
       <div className={"privacy__policy-main sectionPadding"}>
         <p className="title">

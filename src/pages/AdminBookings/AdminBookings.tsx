@@ -6,6 +6,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { getAllBookingsAdmin } from "../../api_calls/Admin/admin_booking";
 import AdminPageWrapper from "../../components/AdminPageWrapper/AdminPageWrapper";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import { BookingTypeBack } from "../../typings/bookingsType";
 import { bookingColumns } from "../../utils/grid_columns/bookings_gridColumns";
 
@@ -36,6 +37,8 @@ const AdminBookings = () => {
 
   return (
     <AdminPageWrapper className={"dashbaord__content-wrapper"}>
+      <HelmetTitle title={`Bookings List - Admin`} />
+
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <p className="title">Bookings</p>
       </Box>

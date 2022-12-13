@@ -11,6 +11,7 @@ import { searchInstructor } from "../../api_calls/instructor_list";
 import { client } from "../../client";
 import { Instructor, Suburb } from "../../typings/instructorTypings";
 import CheckAvailability from "../../components/CheckAvailability/CheckAvailability";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 const InstructorList = () => {
   const [instructors, setInstructors] = useState<Instructor[]>([]);
@@ -53,6 +54,7 @@ const InstructorList = () => {
 
   return (
     <>
+      <HelmetTitle title={`Instructors - My Instructor`} />
       {showModal && (
         <CheckAvailability
           visible={showModal}

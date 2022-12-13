@@ -8,6 +8,7 @@ import { Suburb } from "../../typings/instructorTypings";
 import { getAllSuburbs } from "../../api_calls/admin_api";
 import { editSuburb } from "../../api_calls/Admin/suburb_api";
 import { toast } from "material-react-toastify";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 const style = {
   position: "absolute" as "absolute",
@@ -89,6 +90,8 @@ const AdminSuburbs = () => {
 
   return (
     <AdminPageWrapper className={"dashbaord__content-wrapper"}>
+      <HelmetTitle title={`Suburbs - Admin`} />
+
       <Box
         sx={{
           display: "flex",

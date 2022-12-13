@@ -3,6 +3,7 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/core/Button/Button";
 import Footer from "../../components/Footer/Footer";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import Navbar from "../../components/Navbar/Navbar";
 import "../PaymentSuccess/PaymentSuccess.scss";
 
@@ -16,6 +17,8 @@ const GiftcardSuccess = () => {
   }
   return (
     <>
+      <HelmetTitle title={`Giftcard Successful - My Instructor`} />
+
       <Navbar></Navbar>
       <div className=" sectionPadding payment__success">
         <div className="check__icon">

@@ -7,6 +7,7 @@ import FaqSection from "../../components/FaqSection/FaqSection";
 import Footer from "../../components/Footer/Footer";
 import FourIconComponent from "../../components/FourIconComponent/FourIconComponent";
 import GetReady from "../../components/GetReady/GetReady";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import HeroSection from "../../components/HeroSection/HeroSection";
 import HomeCounterComponent from "../../components/HomeCounterComponent/HomeCounterComponent";
 import HomeGiftcard from "../../components/Home_Giftcard/Home_Giftcard";
@@ -39,6 +40,8 @@ const Homepage = ({ title }: Props) => {
 
   return (
     <div>
+      <HelmetTitle title={"My Instructor - Find Driving Instructor"} />
+
       {!user || user?.userType !== "instructor" ? <Chat></Chat> : <></>}
       <Navbar />
       <HeroSection

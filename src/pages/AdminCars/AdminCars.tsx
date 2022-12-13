@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { getAllCars } from "../../api_calls/Admin/admin_car";
 import AdminAddItems from "../../components/AdminAddItems/AdminAddItems";
 import AdminPageWrapper from "../../components/AdminPageWrapper/AdminPageWrapper";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import { Car } from "../../typings/carTypings";
 import { carColumns } from "../../utils/grid_columns/cars_gridColumns";
 
@@ -30,6 +31,8 @@ const AdminCars = () => {
 
   return (
     <AdminPageWrapper className={"dashbaord__content-wrapper"}>
+      <HelmetTitle title={`Cars List - Admin`} />
+
       <AdminAddItems type={"car"} open={showModal} handleOpen={setShowModal} />
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <p className="title">Cars</p>

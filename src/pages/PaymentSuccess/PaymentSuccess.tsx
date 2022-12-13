@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { DELETE_BOOKING, DELETE_CART } from "../../redux/reducer/reduxNamings";
 import { toast } from "material-react-toastify";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 const PaymentSuccess = () => {
   const { state } = useLocation();
@@ -27,6 +28,8 @@ const PaymentSuccess = () => {
 
   return (
     <>
+      <HelmetTitle title={`Payment Successful - My Instructor`} />
+
       <Navbar />
       <div className=" sectionPadding payment__success">
         <div className="check__icon">

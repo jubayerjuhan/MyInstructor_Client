@@ -13,6 +13,7 @@ import { toast } from "material-react-toastify";
 import { CLEAR_ERROR } from "../../redux/reducer/reduxNamings";
 import { useLocation, useNavigate } from "react-router-dom";
 import { loginInstructor } from "../../redux/actions/instructor_actions";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle.jsx";
 
 const Login = ({ instructor }) => {
   const dispatch = useDispatch();
@@ -64,6 +65,8 @@ const Login = ({ instructor }) => {
   if (user) return <></>;
   return (
     <>
+      <HelmetTitle title={instructor ? "Instructor Login" : "Learner Login"} />
+
       <Navbar></Navbar>
       <div className="login__component sectionPadding">
         <div className="login__graphics">

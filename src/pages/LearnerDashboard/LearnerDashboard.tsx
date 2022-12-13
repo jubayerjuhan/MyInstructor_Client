@@ -9,6 +9,7 @@ import Profile from "../ProfilePage/Profile";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 import { useNavigate } from "react-router-dom";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 export interface DashboardLinksTypes {
   label: string;
@@ -37,7 +38,13 @@ const LearnerDashboard = () => {
       component: Profile,
     },
   ];
-  return <Dashboard links={navLinks} />;
+  return (
+    <>
+      <HelmetTitle title={`Learner Dashboard - My Instructor`} />
+
+      <Dashboard links={navLinks} />
+    </>
+  );
 };
 
 export default LearnerDashboard;

@@ -19,6 +19,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { addInstructorAdmin } from "../../api_calls/Admin/admin_instructors";
 import { toast } from "material-react-toastify";
+import HelmetTitle from "../HelmetTitle/HelmetTitle";
 
 const AddInstructor = () => {
   const ref = useRef<HTMLDivElement>();
@@ -118,6 +119,8 @@ const AddInstructor = () => {
 
   return (
     <AdminPageWrapper>
+      <HelmetTitle title={`Add Instructor - Admin`} />
+
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         {addInstructorFields.map((field: any, key: number) => {
           // select field

@@ -9,7 +9,7 @@ export const client = axios.create({
   //   process.env.NODE_ENV === "production"
   //     ? "https://my-instructor-server.ts.r.appspot.com/api"
   //     : "http://localhost:5000/api",
-  baseURL: "https://my-instructor-server.ts.r.appspot.com/api",
+  baseURL: "https://api.myinstructor.com.au/api",
   headers: {
     authorization: `Bearer ${jwtToken}`,
   },
@@ -20,10 +20,10 @@ export const admin = axios.create({
   //   process.env.NODE_ENV === "production"
   //     ? "https://my-instructor-server.ts.r.appspot.com/api/admin"
   //     : "http://localhost:5000/api/admin",
-  baseURL: "https://my-instructor-server.ts.r.appspot.com/api/admin",
+  baseURL: "https://api.myinstructor.com.au/api/admin",
   headers: {
     authorization: `Bearer ${adminJwtToken}`,
   },
 });
 
-export const WEBSOCKET_URL = "wss://my-instructor-server.ts.r.appspot.com";
+export const WEBSOCKET_URL = "wss://api.myinstructor.com.au";

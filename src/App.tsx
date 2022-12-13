@@ -139,14 +139,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/gift-checkout"
-            element={
-              <ProtectedRoute location={"/gift-checkout"}>
-                <GiftcardCheckout />
-              </ProtectedRoute>
-            }
-          />
+
           <Route
             path="/booking"
             element={
@@ -179,14 +172,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/livechat"
-            element={
-              // <ProtectedRoute location={"/livechat"}>
-              <LiveChat />
-              // </ProtectedRoute>
-            }
-          />
+
           <Route
             path="/booking-success"
             element={

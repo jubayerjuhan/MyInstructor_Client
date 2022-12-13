@@ -13,6 +13,7 @@ import BookingsDetailCard from "../components/BookingsDetailCard/BookingsDetailC
 import Fab from "@mui/material/Fab";
 import EditIcon from "@mui/icons-material/Edit";
 import AdminListEdit from "../components/AdminListEdit/AdminListEdit";
+import HelmetTitle from "../components/HelmetTitle/HelmetTitle";
 
 interface Props {
   type: string;
@@ -47,6 +48,10 @@ const ViewItemsPage = ({ type }: Props) => {
 
   return (
     <>
+      <HelmetTitle
+        title={`View ${type.charAt(0).toUpperCase() + type.slice(1)}`}
+      />
+
       <AdminListEdit
         item={item}
         type={type}

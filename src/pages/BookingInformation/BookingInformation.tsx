@@ -20,6 +20,7 @@ import {
   SET_PICKUP_DETAILS,
 } from "../../redux/reducer/reduxNamings";
 import { bookLesson } from "../../redux/actions/bookingAction";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 export interface BookingInfoProps {
   state: {
@@ -147,6 +148,8 @@ const BookingInformation = () => {
 
   return (
     <>
+      <HelmetTitle title={`Booking Informations - My Instructor`} />
+
       <CustomPopupModal
         loading={modalLoading}
         title={modal.title}

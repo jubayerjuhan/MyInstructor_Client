@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { sendPasswordResetReq } from "../../api_calls/password_api";
 import Button from "../../components/core/Button/Button";
 import Footer from "../../components/Footer/Footer";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import Navbar from "../../components/Navbar/Navbar";
 import { State } from "../../typings/reduxTypings";
 import "./PasswordResetPage.scss";
@@ -58,6 +59,7 @@ const PasswordResetPage = ({ instructor }: any) => {
   };
   return (
     <>
+      <HelmetTitle title={"Password Reset"} />
       <Navbar></Navbar>
       <div className="reset__password-main sectionPadding">
         <p className="title">

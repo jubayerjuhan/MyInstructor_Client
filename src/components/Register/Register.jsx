@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerLearner } from "../../redux/actions/learner_actions";
 import { toast } from "material-react-toastify";
 import { CLEAR_ERROR } from "../../redux/reducer/reduxNamings";
+import HelmetTitle from "../HelmetTitle/HelmetTitle.jsx";
 // import { State } from "../../redux/actions/actionTypings";
 
 const Register = () => {
@@ -45,6 +46,8 @@ const Register = () => {
 
   return (
     <>
+      <HelmetTitle title={"Register Learner"} />
+
       <Navbar></Navbar>
       <div className="register__component">
         <div className="register__graphics">

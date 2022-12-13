@@ -1,11 +1,14 @@
 import React from "react";
 import Footer from "../../components/Footer/Footer";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import Navbar from "../../components/Navbar/Navbar";
 import "./AboutUs.scss";
 
 const AboutUs = () => {
   return (
     <div>
+      <HelmetTitle title={`About Us - My Instructor`} />
+
       <Navbar></Navbar>
       <div className="about__us-main sectionPadding">
         <p className="title">About Us</p>

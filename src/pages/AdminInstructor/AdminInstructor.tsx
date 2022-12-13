@@ -8,6 +8,7 @@ import { toast } from "material-react-toastify";
 import { instructorColumns } from "../../utils/grid_columns/instructors_gridColumns";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 const AdminInstructor = () => {
   const [instructors, setInstructors] = useState<Instructor[]>([]);
@@ -37,6 +38,8 @@ const AdminInstructor = () => {
 
   return (
     <AdminPageWrapper className={"dashbaord__content-wrapper"}>
+      <HelmetTitle title={`Instructors - Admin`} />
+
       <Box
         sx={{
           display: "flex",

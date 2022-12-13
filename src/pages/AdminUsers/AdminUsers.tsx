@@ -20,6 +20,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AdminListEdit from "../../components/AdminListEdit/AdminListEdit";
 import { userColumns } from "../../utils/grid_columns/user_gridColumns";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 const AdminUsers = () => {
   const [open, setOpen] = useState(false);
@@ -46,6 +47,8 @@ const AdminUsers = () => {
 
   return (
     <>
+      <HelmetTitle title={`Users List - Admin`} />
+
       {/* <AdminListEdit /> */}
       <AdminPageWrapper className={"dashbaord__content-wrapper"}>
         <Box>

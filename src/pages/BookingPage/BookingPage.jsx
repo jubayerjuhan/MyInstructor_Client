@@ -8,6 +8,7 @@ import { BsCalendar2Date } from "react-icons/bs";
 import BookingSelector from "../../components/BookingSelector/BookingSelctor";
 import { useSelector } from "react-redux";
 import TestPackageSelector from "../../components/TestPackageSelector/TestPackageSelector.jsx";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle.jsx";
 const BookingPage = () => {
   const [bookDrivingLesson, setBookDrivingLesson] = useState({
     visible: null,
@@ -22,6 +23,8 @@ const BookingPage = () => {
   if (!instructor) return <></>;
   return (
     <div className="booking-page">
+      <HelmetTitle title={`Booking - My Instructor`} />
+
       <Navbar />
       <div className="booking-main sectionPadding">
         <div className="booking__wrapper">

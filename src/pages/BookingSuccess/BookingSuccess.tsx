@@ -10,6 +10,7 @@ import { BookingType } from "../../typings/reduxTypings";
 import { useDispatch } from "react-redux";
 import { DELETE_BOOKING } from "../../redux/reducer/reduxNamings";
 import moment from "moment";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 interface BookingSuccessState {
   state: {
@@ -32,6 +33,8 @@ const BookingSuccess = () => {
   if (!instructor || !booking) return <></>;
   return (
     <>
+      <HelmetTitle title={`Booking Success - My Instructor`} />
+
       <Navbar />
       <div className=" sectionPadding payment__success">
         <div className="check__icon">

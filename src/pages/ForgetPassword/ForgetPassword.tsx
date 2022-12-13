@@ -7,6 +7,7 @@ import { toast } from "material-react-toastify";
 import "./ForgetPassword.scss";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 interface ForgetPasswordProps {
   instructor?: boolean;
@@ -43,6 +44,8 @@ const ForgetPassword = ({ instructor }: ForgetPasswordProps) => {
   };
   return (
     <>
+      <HelmetTitle title={"Forget Password"} />
+
       <Navbar></Navbar>
       <div className="forget__password-main sectionPadding">
         <p className="title">

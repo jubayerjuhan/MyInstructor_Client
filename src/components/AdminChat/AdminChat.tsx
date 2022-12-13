@@ -10,6 +10,7 @@ import AdminChatbox from "../AdminChatbox/AdminChatbox";
 import { io } from "socket.io-client";
 import "./AdminChat.scss";
 import { WEBSOCKET_URL } from "../../client";
+import HelmetTitle from "../HelmetTitle/HelmetTitle";
 
 const AdminChat = () => {
   const [convos, setConvos] = useState<Conversation[]>();
@@ -56,7 +57,14 @@ const AdminChat = () => {
   console.log(userSockets, "all user sockets 55");
   return (
     <div className="adminChat__main">
+      <HelmetTitle title={`Live Chat - Admin`} />
+
       <div className="adminChat__sidebar">
+        <div className="adminChat__logo">
+          <a href="/">
+            <img src={logo} alt="" />
+          </a>
+        </div>
         <div className="adminChat__conversations">
           {convos?.map((convo, key) => (
             <div

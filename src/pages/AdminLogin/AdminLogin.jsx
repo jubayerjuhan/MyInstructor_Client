@@ -9,6 +9,7 @@ import { adminLogin } from "../../api_calls/admin_api";
 import { useDispatch, useSelector } from "react-redux";
 import { CLEAR_ERROR, CLEAR_SUCCESS } from "../../redux/reducer/reduxNamings";
 import { toast } from "material-react-toastify";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle.jsx";
 
 const inputFields = [
   {
@@ -53,7 +54,8 @@ const AdminLogin = () => {
   }
   return (
     <>
-      {" "}
+      <HelmetTitle title={`Admin Login - My Instructor`} />
+
       <Navbar></Navbar>
       <div className="login__component">
         <div className="login__graphics">

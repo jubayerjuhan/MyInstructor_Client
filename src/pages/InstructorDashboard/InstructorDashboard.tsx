@@ -3,6 +3,7 @@ import { AiOutlineDashboard, AiOutlineUser } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../../components/Dashboard/Dashboard";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import InstructorDashboardMain from "../../components/InstructorDashboardMain/InstructorDashboardMain";
 import LearnerDashboardMain from "../../components/LearnerDashboardMain/LearnerDashboardMain";
 import { State } from "../../typings/reduxTypings";
@@ -29,7 +30,13 @@ const InstructorDashboard = () => {
       component: Profile,
     },
   ];
-  return <Dashboard links={navLinks} />;
+  return (
+    <>
+      <HelmetTitle title={`Instructor Dashboard - My Instructor`} />
+
+      <Dashboard links={navLinks} />
+    </>
+  );
 };
 
 export default InstructorDashboard;

@@ -12,6 +12,7 @@ import { Instructor } from "../../typings/instructorTypings";
 import CheckAvailability from "../../components/CheckAvailability/CheckAvailability";
 import { useDispatch } from "react-redux";
 import { SET_INSTRUCTOR } from "../../redux/reducer/reduxNamings";
+import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 
 const InstructorProfile = () => {
   const [instructor, setInstructor] = useState<Instructor>();
@@ -42,6 +43,8 @@ const InstructorProfile = () => {
   if (!instructor) return <></>;
   return (
     <>
+      <HelmetTitle title={`Instructor Profile`} />
+
       {showModal && (
         <CheckAvailability
           visible={showModal}
