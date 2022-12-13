@@ -37,6 +37,7 @@ const Chat = () => {
     socket?.emit("add_user", { type: "user", userId: user?._id });
 
     socket?.on("connected_users", (data) => {
+      console.log(data, "connected users...");
       data?.forEach((connectedSocket) => {
         if (connectedSocket.type === "admin")
           return setAdminSocketId(connectedSocket?.socketId);

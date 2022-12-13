@@ -17,9 +17,11 @@ const InstructorReviews = ({ reviews }: InstructorReviewsProps) => {
         <div className="icon">
           <AiFillStar />
         </div>
-        <p className="text">4.5</p>
+        <p className="text">
+          {reviews.length > 0 ? "Rating" : "Not Yet Rated"}
+        </p>
       </div>
-      <p className="description">37 ratings</p>
+      <p className="description">{reviews.length} Reviews</p>
       <div className="instructor__all-reviews">
         {reviews.map((review, key) => {
           if (!showAll && key > 4) return <></>;
