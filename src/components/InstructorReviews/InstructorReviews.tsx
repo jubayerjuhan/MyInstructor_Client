@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { Review } from "../../typings/instructorTypings";
 import InstructorReviewComponent from "../InstructorReviewComponent/InstructorReviewComponent";
@@ -10,6 +10,21 @@ interface InstructorReviewsProps {
 const InstructorReviews = ({ reviews }: InstructorReviewsProps) => {
   const [showAll, setShowAll] = useState(false);
 
+  const [overallRating, setOverallRating] = useState(0);
+
+  useEffect(() => {
+    countOverallRating();
+  }, []);
+
+  const countOverallRating = () => {
+    let totalRating = 0;
+
+    reviews.forEach((review) => {
+      totalRating += review?.rating;
+    });
+    setOverallRating(totalRating / reviews?.length);
+  };
+
   return (
     <div className="instructor__reviews">
       <div className="title">
@@ -18,7 +33,7 @@ const InstructorReviews = ({ reviews }: InstructorReviewsProps) => {
           <AiFillStar />
         </div>
         <p className="text">
-          {reviews.length > 0 ? "Rating" : "Not Yet Rated"}
+          {reviews.length > 0 ? `${overallRating}` : "Not Yet Rated"}
         </p>
       </div>
       <p className="description">{reviews.length} Reviews</p>
