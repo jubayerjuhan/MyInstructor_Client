@@ -13,12 +13,12 @@ import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 const PaymentSuccess = () => {
   const { state } = useLocation();
   const dispatch = useDispatch();
-
+  console.log(state, "state...");
   useEffect(() => {
     if (state?.booking) {
       dispatch({ type: DELETE_BOOKING });
       dispatch({ type: DELETE_CART });
-      toast.success("Your Lesson Booking Successful");
+      // toast.success("Your Lesson Booking Successful");
     }
     if (state?.credit) {
       dispatch({ type: DELETE_CART });

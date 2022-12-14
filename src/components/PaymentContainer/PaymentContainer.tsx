@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { BillingInfo } from "../../typings/cartTypings";
 import { bookTestPackage } from "../../api_calls/bookings_api";
 import { createGiftCard, deleteGiftCard } from "../../api_calls/giftcard_api";
+import { CLEAR_SUCCESS } from "../../redux/reducer/reduxNamings";
 
 interface PaymentProps {
   billing: BillingInfo;
@@ -63,14 +64,17 @@ const PaymentContainer = ({
       const bookingInfo = {
         instructor: instructor._id,
         time: {
-          from: booking.time.startFrom,
-          to: booking.time.endTo,
+          from: booking?.time.startFrom,
+          to: booking?.time.endTo,
         },
-        duration: booking.duration,
+        duration: booking?.duration,
         pickupDetails,
       };
       const booked = dispatch(bookLesson(bookingInfo));
-      if (booked) navigate("/payment-success", { state: { booking: true } });
+      if (booked) {
+        dispatch({ type: CLEAR_SUCCESS });
+        navigate("/payment-success", { state: { booking: true } });
+      }
     } else {
       if (giftCardInfo?._id) {
         const deletegcard = async () => {

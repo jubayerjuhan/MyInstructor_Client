@@ -52,6 +52,7 @@ const ChatBoxClient = ({
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  console.log(adminSocket, "admin socket...");
   useEffect(() => {
     socket?.on("recieve_message_user", (data) => {
       setNewMessageFromAdmin([...newMessageFromAdmin, data]);
