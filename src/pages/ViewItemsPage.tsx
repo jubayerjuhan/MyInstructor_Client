@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
+  deleteUserAdmin,
   getSingleBookingAdmin,
   getSingleInstructorAdmin,
   getSingleUserAdmin,
@@ -14,6 +15,9 @@ import Fab from "@mui/material/Fab";
 import EditIcon from "@mui/icons-material/Edit";
 import AdminListEdit from "../components/AdminListEdit/AdminListEdit";
 import HelmetTitle from "../components/HelmetTitle/HelmetTitle";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteInstructorAdmin } from "../api_calls/Admin/admin_instructors";
+import { toast } from "material-react-toastify";
 
 interface Props {
   type: string;
@@ -35,6 +39,12 @@ const ViewItemsPage = ({ type }: Props) => {
     booking: <BookingsDetailCard item={item} />,
   };
 
+  const deleteMethods = {
+    user: deleteUserAdmin,
+    instructor: deleteInstructorAdmin,
+    booking: () => {},
+  };
+
   useEffect(() => {
     getDatas();
   }, [editVisible]);
@@ -43,8 +53,12 @@ const ViewItemsPage = ({ type }: Props) => {
     const data = await getItem[type as keyof typeof getItem](id);
     setItem(data[type]);
   };
-
-  console.log(item);
+  // delete item
+  const deleteItem = async () => {
+    const data = await deleteMethods[type as keyof typeof deleteMethods](id);
+    if (!data?.success) return toast.error(data?.message);
+    toast.success(`${type} deleted successfully`);
+  };
 
   return (
     <>
@@ -76,6 +90,17 @@ const ViewItemsPage = ({ type }: Props) => {
           <EditIcon sx={{ mr: 1 }} />
           Edit
         </Fab>
+        {type !== "booking" && (
+          <Fab
+            variant="extended"
+            color={"error"}
+            sx={{ marginLeft: 2 }}
+            onClick={deleteItem}
+          >
+            <DeleteIcon sx={{ mr: 1 }} />
+            Delete
+          </Fab>
+        )}
       </AdminPageWrapper>
     </>
   );

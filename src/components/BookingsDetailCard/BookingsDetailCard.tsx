@@ -24,12 +24,12 @@ const BookingsDetailCard = ({ item }: Props) => {
             Reviewed : {item.reviewed ? "Yes" : "No"}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Booked By : {item.user.firstName} {item.user.lastName} (
-            {item.user._id})
+            Booked By : {item.user?.firstName} {item.user?.lastName} (
+            {item.user?._id})
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Instructor : {item.instructor.firstName} {item.instructor.lastName}{" "}
-            ({item.instructor._id})
+            Instructor : {item.instructor?.firstName}{" "}
+            {item.instructor?.lastName} ({item.instructor?._id})
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Duration : {item.duration}

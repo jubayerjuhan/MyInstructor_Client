@@ -36,9 +36,21 @@ export const adminEditInstructor = async (id: string, edits: any) => {
     };
   }
 };
+
 export const addInstructorAdmin = async (instructor: any) => {
   try {
     const { data } = await admin.post(`add-instructor`, instructor);
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response.data.message,
+    };
+  }
+};
+export const deleteInstructorAdmin = async (instructor: any) => {
+  try {
+    const { data } = await admin.delete(`instructor/${instructor}`);
     return data;
   } catch (error: any) {
     return {

@@ -45,3 +45,14 @@ export const adminEditUser = async (id: string, edits: any) => {
     };
   }
 };
+export const deleteUserAdmin = async (id: any) => {
+  try {
+    const { data } = await admin.delete(`user/${id}`);
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response.data.message,
+    };
+  }
+};
