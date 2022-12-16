@@ -5,7 +5,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import MailOutlinedIcon from '@mui/icons-material/MailOutlined';import List from "@mui/material/List";
+import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -17,6 +18,7 @@ import logo from "../../assets/logo.png";
 import AltRouteIcon from "@mui/icons-material/AltRoute";
 
 //
+import LogoutIcon from "@mui/icons-material/Logout";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import CarIcon from "@mui/icons-material/DirectionsCarFilled";
@@ -25,6 +27,8 @@ import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFi
 import LibraryBooksOutlinedIcon from "@mui/icons-material/LibraryBooksOutlined";
 import CreditCardOffOutlinedIcon from "@mui/icons-material/CreditCardOffOutlined";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ADMIN_LOGOUT } from "../../redux/reducer/reduxNamings";
 
 const drawerWidth = 240;
 
@@ -41,6 +45,7 @@ interface Props {
 export default function AdminSidebar(props: Props) {
   const { window, component } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const dispatch = useDispatch<any>();
 
   const adminSidebarLinks = [
     {
@@ -89,6 +94,11 @@ export default function AdminSidebar(props: Props) {
     setMobileOpen(!mobileOpen);
   };
 
+  // admin logout
+  const adminLogout = () => {
+    dispatch({ type: ADMIN_LOGOUT });
+  };
+
   const drawer = (
     <div>
       <Link to={"/admin/dashboard"}>
@@ -117,6 +127,14 @@ export default function AdminSidebar(props: Props) {
             </Link>
           </ListItem>
         ))}
+        <ListItem disablePadding onClick={adminLogout}>
+          <ListItemButton>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Logout"} />
+          </ListItemButton>
+        </ListItem>
       </List>
       <Divider />
     </div>
