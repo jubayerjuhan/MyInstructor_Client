@@ -17,10 +17,11 @@ const InstructorProfileInfo = ({ instructor }: InstructorProfileProps) => {
   console.log();
   const instructorQualities = [
     { label: " Driving Instructor's Licence ", icon: <AiOutlineIdcard /> },
-    {
-      label: `Started Instructing ${moment(instructor.createdAt).fromNow()}`,
-      icon: <AiOutlineCar />,
-    },
+    { label: " Children Check Licence ", icon: <AiOutlineIdcard /> },
+    // {
+    //   label: `Started Instructing ${moment(instructor.createdAt).fromNow()}`,
+    //   icon: <AiOutlineCar />,
+    // },
     {
       label: "  Spoken language(s)     ",
       icon: <IoLanguage />,
