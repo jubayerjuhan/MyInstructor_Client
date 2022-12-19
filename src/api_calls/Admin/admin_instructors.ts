@@ -1,4 +1,5 @@
 import { admin } from "../../client";
+import { Instructor, Suburb } from "../../typings/instructorTypings";
 
 export const getAllInstructorsAdmin = async () => {
   try {
@@ -25,7 +26,37 @@ export const getAllExpiredInstructors = async () => {
   }
 };
 
-export const adminEditInstructor = async (id: string, edits: any) => {
+export const adminEditInstructor = async (
+  id: string,
+  edits: any,
+  editedSuburbs: any,
+  item: Instructor
+) => {
+  let suburbs: any[] = [];
+  // return console.log(edits, editedSuburbs, "admin edits...");
+  if (edits.carNumber)
+    edits = {
+      ...edits,
+      car: {
+        ...item.car,
+        numberPlate: edits.carNumber,
+      },
+    };
+
+  editedSuburbs.suburbs.forEach((suburb: Suburb) => {
+    console.log(suburb, "sub...");
+    const customisedSuburb = { name: suburb.suburb, postCode: suburb.postcode };
+    suburbs.push(customisedSuburb);
+  });
+
+  if (editedSuburbs)
+    edits = {
+      ...edits,
+      serviceSuburbs: {
+        suburbs,
+      },
+    };
+
   try {
     const { data } = await admin.put(`instructor/${id}`, edits);
     return data;

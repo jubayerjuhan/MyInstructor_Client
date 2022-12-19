@@ -133,6 +133,7 @@ const AddInstructor = () => {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
+                  placeholder={field.label}
                   {...register(field.name)}
                 >
                   {field?.options &&
@@ -272,8 +273,10 @@ const AddInstructor = () => {
           // text field
           return (
             <TextField
+              InputLabelProps={{ shrink: true }}
               {...register(field.name)}
               name={field.name}
+              placeholder={field.label}
               id="outlined-basic"
               label={field.label}
               variant="outlined"

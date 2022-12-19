@@ -97,6 +97,36 @@ export const instructorInput = [
     type: "select",
     options: transmission,
   },
+  {
+    name: "drivingLicenseExpire",
+    label: "Driving License Expire",
+    placeholder: "Driving License Expire",
+    type: "date",
+  },
+  {
+    name: "instructorLicenseExpire",
+    label: "Instructor License Expire",
+    placeholder: "Instructor License Expire",
+    type: "date",
+  },
+  {
+    name: "childrenCheckLicenseExpire",
+    label: "Children Check License Expire",
+    placeholder: "Children Check License Expire",
+    type: "date",
+  },
+  {
+    name: "carNumber",
+    label: "Car Number Plate",
+    placeholder: "Car Number Plate",
+    type: "text",
+  },
+  {
+    name: "suburbs",
+    label: "Suburbs",
+    placeholder: "Suburbs",
+    type: "autocomplete",
+  },
 ];
 
 export const bookingsField = [
