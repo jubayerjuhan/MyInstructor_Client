@@ -82,6 +82,13 @@ const InstructorDetailCard = ({ item }: Props) => {
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Bio : {item.bio}
           </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            Suburbs :{" "}
+            {item.serviceSuburbs?.suburbs.map((suburb) => {
+              console.log(suburb, "suburb...");
+              return <>{suburb?.name + "," + "\n"}</>;
+            })}
+          </Typography>
         </Box>
       </CardContent>
     </Box>

@@ -11,6 +11,16 @@ import Button from "../../components/core/Button/Button";
 import { applyAsInstructor } from "../../api_calls/apply_api";
 import { toast } from "material-react-toastify";
 import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
+import TextField from "@mui/material/TextField";
+import { AllLanguages } from "../../json_data/languages";
+import {
+  Autocomplete,
+  InputLabel,
+  MenuItem,
+  NativeSelect,
+  Select,
+} from "@mui/material";
+
 const ApplyInstructor = () => {
   const [loading, setLoading] = useState(false);
   const {
@@ -33,7 +43,6 @@ const ApplyInstructor = () => {
       setLoading(false);
       return toast.error(message);
     }
-
     toast.success("Successfully Submitted Your Information");
     setLoading(false);
   };
@@ -44,7 +53,7 @@ const ApplyInstructor = () => {
       <Navbar />
       <div className="apply__instructor-main sectionPadding">
         <div className="apply__image">
-          <img src={image} alt="" />
+          <img src={image} alt="apply as instructor hero img" />
         </div>
         <div className="apply__instructor">
           <p className="title">Apply As Instructor</p>
@@ -63,14 +72,60 @@ const ApplyInstructor = () => {
                     ></textarea>
                   </div>
                 );
+              if (field.type === "autocomplete") {
+                return (
+                  <Autocomplete
+                    multiple={true}
+                    id="tags-standard"
+                    options={AllLanguages}
+                    getOptionLabel={(option: any) =>
+                      field.name === "languages" ? option.name : option.suburb
+                    }
+                    renderInput={(params) => (
+                      <>
+                        <TextField
+                          {...params}
+                          InputLabelProps={{
+                            shrink: field.type === "date" ? true : true,
+                          }}
+                          onChange={(e) => console.log(e)}
+                          variant="outlined"
+                          label={field.label + " *"}
+                          placeholder={field.label}
+                        />
+                      </>
+                    )}
+                  />
+                );
+              }
+              // if field type is select
+              if (field.type === "select")
+                return (
+                  <>
+                    <select name="" className="select__field">
+                      <option value={""}>{field.placeholder}</option>
+                      {field.options?.map((opt: string | any) => (
+                        <option
+                          value={field.name === "languages" ? opt?.name : opt}
+                        >
+                          {field.name === "languages" ? opt?.name : opt}
+                        </option>
+                      ))}
+                    </select>
+                  </>
+                );
               return (
-                <div>
-                  <input
-                    key={key}
+                <div className="input__wrapper">
+                  <TextField
                     type={field.type}
+                    id="outlined-basic"
+                    label={field.label + " *"}
                     placeholder={field.placeholder}
-                    {...register(field.name)}
-                    className="form-control input__element login"
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: field.type === "date" ? true : true,
+                    }}
+                    sx={{ width: "100%" }}
                   />
                   {errors[field.name] && (
                     <p className="input__errorMessage">

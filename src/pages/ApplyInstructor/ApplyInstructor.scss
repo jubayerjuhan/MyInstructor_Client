@@ -26,6 +26,13 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  .select__field {
+    border-radius: 5px;
+    color: rgba(0, 0, 0, 0.87);
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px 10px;
+  }
 }
 
 @media (max-width: 768px) {

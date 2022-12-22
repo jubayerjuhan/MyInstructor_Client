@@ -33,6 +33,7 @@ export type Suburb = {
   state: string;
   price: number;
   _id: string;
+  name?: string;
 };
 type Car = {
   name?: string;

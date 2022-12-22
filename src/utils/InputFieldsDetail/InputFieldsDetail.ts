@@ -3,6 +3,7 @@ import {
   genders,
   transmission,
 } from "../../components/Register/registerInputs";
+import { AllLanguages } from "../../json_data/languages";
 
 import languages from "../../json_data/languages.json";
 
@@ -46,35 +47,109 @@ export const applyInstructorFields = [
   {
     name: "firstName",
     label: "First Name",
-    placeholder: "First Name",
+    placeholder: "Enter Your First Name",
     type: "text",
+    required: true,
   },
   {
     name: "lastName",
     label: "Last Name",
-    placeholder: "Last Name",
+    placeholder: "Enter Your Last Name",
     type: "text",
+    required: true,
   },
   {
     name: "email",
     label: "Email",
-    placeholder: "Enter Email",
+    placeholder: "Enter Your Best Email",
     type: "email",
+    required: true,
   },
 
   {
     name: "phone",
     label: "Phone",
-    placeholder: "Phone Number",
+    placeholder: "Phone Your Number",
     type: "tel",
+    required: true,
+  },
+  {
+    name: "dateOfBirth",
+    label: "Date Of Birth",
+    placeholder: "Select Your Date Of Birth",
+    type: "date",
+    required: true,
   },
 
   {
-    name: "postCode",
-    label: "Post Code",
-    placeholder: "Post Code",
-    type: "text",
+    name: "serviceSuburbs",
+    label: "Service Suburbs",
+    placeholder: "Select Suburbs You Like To Cover",
+    type: "autocomplete",
+    options: [],
+    required: true,
   },
+  {
+    name: "car",
+    label: "Car",
+    placeholder: "Let Us Know Your Car Name",
+    type: "text",
+    required: true,
+  },
+  {
+    name: "drivingLicenseExpire",
+    label: "Driving License Expire",
+    placeholder: "When Your Driving Licnse Will Expire?",
+    type: "date",
+    required: true,
+  },
+  {
+    name: "instructorLicenseExpire",
+    label: "Instructor License Expire",
+    placeholder: "When Your Instructor Licnse Will Expire?",
+    type: "date",
+    required: true,
+  },
+  {
+    name: "childrenCheckLicenseExpire",
+    label: "Children Check License Expire",
+    placeholder: "When Your Children Check Licnse Will Expire?",
+    type: "date",
+    required: true,
+  },
+  {
+    name: "languages",
+    label: "Languages",
+    placeholder: "Select Languages You Know",
+    type: "autocomplete",
+    options: AllLanguages,
+    required: true,
+  },
+  {
+    name: "gender",
+    label: "Gender",
+    placeholder: "Select Your Gender *",
+    type: "select",
+    options: ["Male", "Female"],
+    required: true,
+  },
+  {
+    name: "transmissionType",
+    label: "Transmission Type",
+    placeholder: "Select Your Transmission Type *",
+    type: "select",
+    options: ["Auto", "Manual"],
+    required: true,
+  },
+
+  {
+    name: "avater",
+    label: "photo",
+    placeholder: "Please Select a Photo of You With Clear View Of Your Face",
+    type: "file",
+    required: true,
+  },
+
   {
     name: "message",
     label: "Message",
