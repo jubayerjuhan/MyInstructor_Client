@@ -146,7 +146,7 @@ export const applyInstructorFields = [
     name: "avater",
     label: "Photo",
     placeholder:
-      "Please Select a Photo of You With Clear View Of Your Face. Preferred Size (400 X 400 px)",
+      "Kindly Attach a Clear Image of Yours Along with The Both 3 of Your Driving License ID Image",
     type: "file",
     required: true,
   },
@@ -257,5 +257,20 @@ export const addInstructorFields = [
     label: "Avater",
     placeholder: "Avater",
     type: "file",
+  },
+];
+
+export const instructorAgreementFields = [
+  {
+    name: "bsb",
+    label: "BSB Number",
+    placeholder: "Enter Your BSB Number",
+    type: "text",
+  },
+  {
+    name: "accountNumber",
+    label: "Bank Account Number",
+    placeholder: "Enter Your Bank Account Number",
+    type: "text",
   },
 ];

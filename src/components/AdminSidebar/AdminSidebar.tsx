@@ -19,6 +19,7 @@ import AltRouteIcon from "@mui/icons-material/AltRoute";
 
 //
 import LogoutIcon from "@mui/icons-material/Logout";
+import HandshakeIcon from "@mui/icons-material/Handshake";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import CarIcon from "@mui/icons-material/DirectionsCarFilled";
@@ -88,6 +89,11 @@ export default function AdminSidebar(props: Props) {
       label: "Cars",
       link: "/cars",
       icon: <CarIcon />,
+    },
+    {
+      label: "Agreement",
+      link: "/agreement",
+      icon: <HandshakeIcon />,
     },
   ];
   const handleDrawerToggle = () => {

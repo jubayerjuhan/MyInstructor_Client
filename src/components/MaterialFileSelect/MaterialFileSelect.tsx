@@ -5,14 +5,13 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 import { Typography } from "@mui/material";
 
-export default function MaterialFileSelect({ title, label, placeholder }: any) {
+export default function MaterialFileSelect({
+  title,
+  label,
+  placeholder,
+  handleFileChange,
+}: any) {
   const [selectedFile, setSelectedFile] = React.useState<any>();
-
-  // on file change trigger this
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    setSelectedFile(e.target.files[0]);
-  };
 
   console.log(selectedFile, "selected file...");
   return (
