@@ -144,8 +144,9 @@ export const applyInstructorFields = [
 
   {
     name: "avater",
-    label: "photo",
-    placeholder: "Please Select a Photo of You With Clear View Of Your Face",
+    label: "Photo",
+    placeholder:
+      "Please Select a Photo of You With Clear View Of Your Face. Preferred Size (400 X 400 px)",
     type: "file",
     required: true,
   },

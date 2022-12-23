@@ -16,7 +16,7 @@
   .apply__instructor {
     > .title {
       @include smallTitle;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       color: var(--text-sec);
     }
   }
@@ -25,7 +25,7 @@
 .apply__instructor-fields {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 
   .select__field {
     border-radius: 5px;

@@ -13,15 +13,12 @@ import { toast } from "material-react-toastify";
 import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import TextField from "@mui/material/TextField";
 import { AllLanguages } from "../../json_data/languages";
-import {
-  Autocomplete,
-  InputLabel,
-  MenuItem,
-  NativeSelect,
-  Select,
-} from "@mui/material";
+import { Autocomplete } from "@mui/material";
+import { client } from "../../client";
+import MaterialFileSelect from "../../components/MaterialFileSelect/MaterialFileSelect";
 
 const ApplyInstructor = () => {
+  const [suburbs, setSuburbs] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -33,6 +30,16 @@ const ApplyInstructor = () => {
 
   // handle submit
   const onSubmit = (data: any) => submitData(data);
+
+  // handleSuburbSearch
+  const handleSuburbSearch = async (e: any) => {
+    if (e.target.value.length === 0) setSuburbs([]);
+    if (e.target.value.length < 2) return;
+    setLoading(true);
+    const { data } = await client.get(`/search-suburbs/${e.target.value}`);
+    setLoading(false);
+    setSuburbs(data.suburbs);
+  };
 
   // submit data
   const submitData = async (data: any) => {
@@ -46,6 +53,8 @@ const ApplyInstructor = () => {
     toast.success("Successfully Submitted Your Information");
     setLoading(false);
   };
+
+  console.log(suburbs, "suburbs...");
 
   return (
     <>
@@ -72,12 +81,17 @@ const ApplyInstructor = () => {
                     ></textarea>
                   </div>
                 );
+
+              // if field type us autocomplete
               if (field.type === "autocomplete") {
                 return (
                   <Autocomplete
                     multiple={true}
                     id="tags-standard"
-                    options={AllLanguages}
+                    loading={loading}
+                    options={
+                      field.name === "languages" ? AllLanguages : suburbs
+                    }
                     getOptionLabel={(option: any) =>
                       field.name === "languages" ? option.name : option.suburb
                     }
@@ -88,7 +102,7 @@ const ApplyInstructor = () => {
                           InputLabelProps={{
                             shrink: field.type === "date" ? true : true,
                           }}
-                          onChange={(e) => console.log(e)}
+                          onChange={handleSuburbSearch}
                           variant="outlined"
                           label={field.label + " *"}
                           placeholder={field.label}
@@ -98,6 +112,7 @@ const ApplyInstructor = () => {
                   />
                 );
               }
+
               // if field type is select
               if (field.type === "select")
                 return (
@@ -114,6 +129,17 @@ const ApplyInstructor = () => {
                     </select>
                   </>
                 );
+
+              // if input type is files
+              if (field.type === "file") {
+                return (
+                  <MaterialFileSelect
+                    title={"Select Photo"}
+                    label={field.label}
+                    placeholder={field.placeholder}
+                  />
+                );
+              }
               return (
                 <div className="input__wrapper">
                   <TextField

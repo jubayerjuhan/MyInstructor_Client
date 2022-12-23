@@ -108,7 +108,7 @@ const AddInstructor = () => {
     setCars(data?.cars);
   };
 
-  const handleSubrubSearch = async (e: any) => {
+  const handleSuburbSearch = async (e: any) => {
     if (e.target.value.length === 0) setSuburbs([]);
     if (e.target.value.length < 2) return;
     setLoading(true);
@@ -255,7 +255,7 @@ const AddInstructor = () => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      onChange={handleSubrubSearch}
+                      onChange={handleSuburbSearch}
                       variant="outlined"
                       label={field.label}
                       placeholder="Suburb"
