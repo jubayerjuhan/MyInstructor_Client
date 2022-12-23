@@ -48,13 +48,6 @@ export default function MaterialFileSelect({
           <PhotoCamera />
         </IconButton>
       </Stack>
-      {selectedFile && (
-        <img
-          src={URL.createObjectURL(selectedFile)}
-          alt=""
-          style={{ marginTop: "20px", height: "200px", width: "200px" }}
-        />
-      )}
     </div>
   );
 }

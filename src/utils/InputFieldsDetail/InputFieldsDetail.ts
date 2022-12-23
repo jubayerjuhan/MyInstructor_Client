@@ -73,6 +73,14 @@ export const applyInstructorFields = [
     type: "tel",
     required: true,
   },
+
+  {
+    name: "address",
+    label: "Address",
+    placeholder: "Enter Your Address",
+    type: "text",
+    required: true,
+  },
   {
     name: "dateOfBirth",
     label: "Date Of Birth",
