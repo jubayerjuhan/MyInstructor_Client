@@ -89,7 +89,12 @@ const ApplyInstructor = () => {
                     <div className="input__wrapper_w-header" key={key}>
                       <p className="title">{field.label}</p>
                       <textarea
-                        style={{ height: 100, width: "100%" }}
+                        style={{
+                          height: 100,
+                          width: "100%",
+                          padding: "5px 10px",
+                          borderRadius: "5px",
+                        }}
                         className="input__element"
                         id=""
                         rows={5}

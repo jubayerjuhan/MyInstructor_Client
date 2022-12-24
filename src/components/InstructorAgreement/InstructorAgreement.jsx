@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { InputLabel, TextField } from "@mui/material";
+import { Checkbox, InputLabel, TextField } from "@mui/material";
+import { toast } from "material-react-toastify";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import AgreementForm from "../../AgreementForm/AgreementForm";
@@ -12,6 +13,8 @@ import MaterialFileSelect from "../MaterialFileSelect/MaterialFileSelect";
 import "./InstructorAgreement.scss";
 
 const InstructorAgreement = ({ applyInputs }) => {
+  const [agreed, setAgreed] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -34,6 +37,10 @@ const InstructorAgreement = ({ applyInputs }) => {
 
   // on form submit
   const onSubmit = async (data) => {
+    if (!agreed)
+      return toast.error("You Must Need To Agree Our Terms And Conditions");
+    //  loading started
+    setLoading(true);
     let instructorData = { ...data, ...applyInputs };
     console.log(instructorData, "applicant instructor...");
 
@@ -48,11 +55,14 @@ const InstructorAgreement = ({ applyInputs }) => {
     // sending final data to server
     client
       .post("/apply-instructor", instructorData)
-      .then(
-        (res) =>
-          (window.location.href = `/application-success/${res.data.applicant?._id}`)
-      )
-      .catch((err) => alert("There Was an Error Submitting Your Application"));
+      .then((res) => {
+        window.location.href = `/application-success/${res.data.applicant?._id}`;
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        alert("There Was an Error Submitting Your Application");
+      });
   };
 
   return (
@@ -101,7 +111,17 @@ const InstructorAgreement = ({ applyInputs }) => {
           );
         })}
       </div>
+      <div className="checkbox__agreement">
+        <Checkbox checked={agreed} onChange={() => setAgreed(!agreed)} />
+        <p className="description">
+          By clicking this you will agree to My Instructor's{" "}
+          <a href="/terms/instructor" target={"_blank"}>
+            Instructor Terms And Conditions
+          </a>
+        </p>
+      </div>
       <Button
+        loading={loading}
         width={"100%"}
         title={"Apply Now"}
         onClick={handleSubmit(onSubmit)}
