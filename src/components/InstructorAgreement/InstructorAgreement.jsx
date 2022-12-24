@@ -3,6 +3,8 @@ import { InputLabel, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import AgreementForm from "../../AgreementForm/AgreementForm";
+import { uploadFileToCloud } from "../../api_calls/user_api";
+import { client } from "../../client.js";
 import { instructorAgreementFields } from "../../utils/InputFieldsDetail/InputFieldsDetail";
 import { instructorAgreementSchema } from "../../utils/validation_schemas/apply_schema";
 import Button from "../core/Button/Button";
@@ -13,6 +15,7 @@ const InstructorAgreement = ({ applyInputs }) => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
+
   const [signature, setSignature] = useState();
   const handleSignatureChange = (e) => {
     setSignature(e.target.files[0]);
@@ -30,8 +33,23 @@ const InstructorAgreement = ({ applyInputs }) => {
   });
 
   // on form submit
-  const onSubmit = (data) => {
-    console.log({ ...data, ...applyInputs }, "data.....");
+  const onSubmit = async (data) => {
+    let instructorData = { ...data, ...applyInputs };
+    console.log(instructorData, "applicant instructor...");
+
+    //  uploading signature and avater Image
+    const signature = await uploadFileToCloud(instructorData.signature);
+    const avater = await uploadFileToCloud(instructorData.avater);
+
+    // setting singanture and avater url
+    instructorData.signature = signature.file;
+    instructorData.avater = avater.file;
+
+    // sending final data to server
+    client
+      .post("/apply-instructor", instructorData)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
