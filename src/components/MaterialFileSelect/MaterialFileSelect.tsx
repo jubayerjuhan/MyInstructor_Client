@@ -10,6 +10,7 @@ export default function MaterialFileSelect({
   label,
   placeholder,
   handleFileChange,
+  ...otherProps
 }: any) {
   const [selectedFile, setSelectedFile] = React.useState<any>();
 
@@ -26,6 +27,7 @@ export default function MaterialFileSelect({
         >
           {title}
           <input
+            {...otherProps}
             hidden
             accept="image/*"
             multiple
@@ -41,6 +43,7 @@ export default function MaterialFileSelect({
         >
           <input
             hidden
+            {...otherProps}
             accept="image/*"
             type="file"
             onChange={handleFileChange}

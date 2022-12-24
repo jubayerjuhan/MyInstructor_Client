@@ -270,15 +270,24 @@ export const addInstructorFields = [
 
 export const instructorAgreementFields = [
   {
-    name: "bsb",
+    name: "abnNumber",
+    label: "Abn Number Number (Optional)",
+    placeholder: "Enter Your ABN Number (Optional)",
+    type: "text",
+    required: false,
+  },
+  {
+    name: "bsbNumber",
     label: "BSB Number",
     placeholder: "Enter Your BSB Number",
     type: "text",
+    required: true,
   },
   {
     name: "accountNumber",
     label: "Bank Account Number",
     placeholder: "Enter Your Bank Account Number",
     type: "text",
+    required: true,
   },
 ];

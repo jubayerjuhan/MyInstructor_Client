@@ -22,6 +22,7 @@ const ApplyInstructor = () => {
   const [suburbs, setSuburbs] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [nextpage, setNextpage] = useState<boolean>(false);
+  const [inputValues, setInputValues] = useState({});
   const [photo, setPhoto] = useState<File>();
   const {
     register,
@@ -36,7 +37,8 @@ const ApplyInstructor = () => {
 
   // handle submit
   const onSubmit = (data: any) => {
-    console.log(data);
+    setInputValues(data);
+    setNextpage(!nextpage);
   };
   // submitData(data);
 
@@ -53,7 +55,7 @@ const ApplyInstructor = () => {
   // handle profile avater change
   const handleFileChange = (e: any) => {
     setPhoto(e.target.files[0]);
-    setValue("photo", e.target.files[0]);
+    setValue("avater", e.target.files[0]);
   };
 
   // submit data
@@ -104,7 +106,12 @@ const ApplyInstructor = () => {
                         multiple={true}
                         id="tags-standard"
                         loading={loading}
-                        onChange={(event, value) => setValue(field.name, value)}
+                        onChange={(event, value) => {
+                          console.log(value, "changed...");
+                          if (value.length === 0)
+                            return setValue(field.name, "");
+                          setValue(field.name, value);
+                        }}
                         options={
                           field.name === "languages" ? AllLanguages : suburbs
                         }
@@ -171,7 +178,7 @@ const ApplyInstructor = () => {
                 // if input type is files
                 if (field.type === "file") {
                   return (
-                    <>
+                    <div>
                       <MaterialFileSelect
                         handleFileChange={handleFileChange}
                         title={"Select Photo"}
@@ -183,7 +190,12 @@ const ApplyInstructor = () => {
                         <img
                           src={URL.createObjectURL(photo)}
                           alt="avater"
-                          style={{ height: 200, width: 200 }}
+                          style={{
+                            height: 200,
+                            width: 200,
+                            marginTop: 20,
+                            borderRadius: "50%",
+                          }}
                         />
                       )}
                       {errors[field.name] && (
@@ -193,7 +205,7 @@ const ApplyInstructor = () => {
                           </>
                         </p>
                       )}
-                    </>
+                    </div>
                   );
                 }
                 return (
@@ -230,7 +242,7 @@ const ApplyInstructor = () => {
             </div>
           </div>
         ) : (
-          <InstructorAgreement />
+          <InstructorAgreement applyInputs={inputValues} />
         )}
       </div>
       <Footer />

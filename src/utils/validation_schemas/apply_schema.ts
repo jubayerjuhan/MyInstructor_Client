@@ -26,23 +26,21 @@ export const applyInstructorSchema = yup
       .required("Instructor License Expire Date Is Required"),
     gender: yup.string().required("Gender Is Required"),
     languages: yup
-      .mixed()
-      .when("isArray", {
-        is: Array.isArray,
-        then: yup
-          .array()
-          .of(yup.string().typeError("Language Name Is Not String")),
-        otherwise: yup.string().typeError("Language Is Required"),
-      })
+      .array()
+      .typeError("Please Enter Languages")
       .required("Language Is Required"),
-    photo: yup.mixed().required("Photo Is Required"),
-    serviceSuburbs: yup.mixed().when("isArray", {
-      is: Array.isArray,
-      then: yup
-        .array()
-        .of(yup.object().typeError("Service Subrubs Is Required")),
-      otherwise: yup.object().typeError("Service Subrubs Is Required"),
-    }),
+    avater: yup.mixed().required("Photo Is Required"),
+    serviceSuburbs: yup
+      .array()
+      .typeError("Please Select Service Suburbs")
+      .required("Service Suburb Is Required"),
     transmissionType: yup.string().required("Service Suburbs Is Required"),
   })
   .required();
+
+export const instructorAgreementSchema = yup.object({
+  signature: yup.mixed().required("Photo Of Your Signature Is Required"),
+  abnNumber: yup.string(),
+  bsbNumber: yup.string().required("Please Enter Your BSB Number"),
+  accountNumber: yup.string().required("Please Enter Your Bank Account Number"),
+});
