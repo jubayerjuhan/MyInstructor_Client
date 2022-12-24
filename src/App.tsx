@@ -5,6 +5,7 @@ import { client } from "./client";
 import AddInstructor from "./components/AddInstructor/AddInstructor";
 import AdminAgreement from "./components/AdminAgreement/AdminAgreement";
 import AdminChat from "./components/AdminChat/AdminChat";
+import AdminInstructorApplication from "./components/AdminInstructorApplication/AdminInstructorApplication";
 import AdminProtected from "./components/AdminProtected/AdminProtected";
 import Chat from "./components/Chat/Chat";
 
@@ -220,6 +221,14 @@ function App() {
             element={
               <AdminProtected location={"/admin/users"}>
                 <AdminUsers />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path={"/admin/application/:id"}
+            element={
+              <AdminProtected location={"/admin/application"}>
+                <AdminInstructorApplication />
               </AdminProtected>
             }
           />

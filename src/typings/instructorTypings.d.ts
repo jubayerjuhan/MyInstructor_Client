@@ -47,3 +47,28 @@ export type Review = {
   message: string;
   user: string;
 };
+
+export interface Applicant {
+  abnNumber: string;
+  accountNumber: string;
+  address: string;
+  avater: string;
+  bsbNumber: string;
+  car: string;
+  childrenCheckLicenseExpire: string;
+  createdAt: string;
+  dateOfBirth: string;
+  drivingLicenseExpire: string;
+  email: string;
+  firstName: string;
+  gender: string;
+  instructorLicenseExpire: string;
+  languages: [];
+  lastName: string;
+  message: string;
+  phone: string;
+  serviceSuburbs: Suburb[];
+  signature: string;
+  transmissionType: string;
+  _id;
+}

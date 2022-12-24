@@ -1,7 +1,10 @@
-import { GridColDef } from "@mui/x-data-grid";
+import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { Link } from "react-router-dom";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 export const applicantColumns: GridColDef[] = [
-  { field: "id", headerName: "ID", flex: 1 },
+  // { field: "id", headerName: "ID", flex: 1 },
+  { field: "transmissionType", headerName: "Transmission Type", flex: 1 },
   {
     field: "firstName",
     headerName: "First Name",
@@ -23,8 +26,17 @@ export const applicantColumns: GridColDef[] = [
     flex: 1,
   },
   {
-    field: "postCode",
-    headerName: "Post Code",
+    field: "action",
+    headerName: "Action",
+    type: "string",
     flex: 1,
+    renderCell: (params: GridRenderCellParams) => (
+      <Link
+        to={`/admin/application/${params.id}`}
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <RemoveRedEyeIcon />
+      </Link>
+    ),
   },
 ];
