@@ -22,6 +22,7 @@ import AdminInstructor from "./pages/AdminInstructor/AdminInstructor";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import AdminSuburbs from "./pages/AdminSuburbs/AdminSuburbs";
 import AdminUsers from "./pages/AdminUsers/AdminUsers";
+import ApplicationSuccess from "./pages/ApplicationSuccess/ApplicationSuccess";
 import ApplyInstructor from "./pages/ApplyInstructor/ApplyInstructor";
 import BookingInformation from "./pages/BookingInformation/BookingInformation";
 import BookingPage from "./pages/BookingPage/BookingPage";
@@ -83,6 +84,10 @@ function App() {
           />
           <Route path="/pricing" element={<Homepage title={title.pricing} />} />
           <Route path="/not-found" element={<NotFoundPage />} />
+          <Route
+            path="/application-success/:id"
+            element={<ApplicationSuccess />}
+          />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route
             path="/reset-password/:token"

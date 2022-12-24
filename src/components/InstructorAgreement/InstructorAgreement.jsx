@@ -48,8 +48,11 @@ const InstructorAgreement = ({ applyInputs }) => {
     // sending final data to server
     client
       .post("/apply-instructor", instructorData)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then(
+        (res) =>
+          (window.location.href = `/application-success/${res.data.applicant?._id}`)
+      )
+      .catch((err) => alert("There Was an Error Submitting Your Application"));
   };
 
   return (
