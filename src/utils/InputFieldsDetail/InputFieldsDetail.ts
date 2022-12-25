@@ -153,8 +153,7 @@ export const applyInstructorFields = [
   {
     name: "avater",
     label: "Photo",
-    placeholder:
-      "Kindly Attach a Clear Image of Yours Along with The Both 3 of Your Driving License ID Image",
+    placeholder: "Kindly Attach a Clear Image of Yours",
     type: "file",
     multiple: false,
     required: true,

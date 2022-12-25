@@ -185,6 +185,7 @@ const ApplyInstructor = () => {
                     <div>
                       <MaterialFileSelect
                         name={field.name}
+                        multiple
                         handleFileChange={(e: any) =>
                           handleFileChange(e, field?.multiple)
                         }
