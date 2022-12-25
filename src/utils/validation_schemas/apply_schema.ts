@@ -30,6 +30,7 @@ export const applyInstructorSchema = yup
       .typeError("Please Enter Languages")
       .required("Language Is Required"),
     avater: yup.mixed().required("Photo Is Required"),
+    licensePhotos: yup.mixed().required("License Photo Is Required"),
     serviceSuburbs: yup
       .array()
       .typeError("Please Select Service Suburbs")

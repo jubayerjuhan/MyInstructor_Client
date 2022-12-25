@@ -156,6 +156,16 @@ export const applyInstructorFields = [
     placeholder:
       "Kindly Attach a Clear Image of Yours Along with The Both 3 of Your Driving License ID Image",
     type: "file",
+    multiple: false,
+    required: true,
+  },
+  {
+    name: "licensePhotos",
+    label: "License Photo's",
+    placeholder:
+      "Kindly Attach Your Driving, Instructor and Children Check License Photo (Front Side)",
+    type: "file",
+    multiple: true,
     required: true,
   },
 

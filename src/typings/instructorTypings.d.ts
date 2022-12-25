@@ -70,5 +70,6 @@ export interface Applicant {
   serviceSuburbs: Suburb[];
   signature: string;
   transmissionType: string;
+  licensePhotos: string[];
   _id;
 }

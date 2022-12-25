@@ -18,12 +18,16 @@ import MaterialFileSelect from "../../components/MaterialFileSelect/MaterialFile
 import InstructorAgreement from "../../components/InstructorAgreement/InstructorAgreement";
 import { useForm } from "react-hook-form";
 
+interface PhotoPreview {
+  licensePhotos?: File | any;
+  avater?: File | any;
+}
 const ApplyInstructor = () => {
   const [suburbs, setSuburbs] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [nextpage, setNextpage] = useState<boolean>(false);
   const [inputValues, setInputValues] = useState({});
-  const [photo, setPhoto] = useState<File>();
+  const [photo, setPhoto] = useState<PhotoPreview>();
   const {
     register,
     handleSubmit,
@@ -33,14 +37,12 @@ const ApplyInstructor = () => {
     resolver: yupResolver(applyInstructorSchema),
   });
 
-  console.error(errors, "errors...");
-
   // handle submit
   const onSubmit = (data: any) => {
+    console.log(data, "data...");
     setInputValues(data);
     setNextpage(!nextpage);
   };
-  // submitData(data);
 
   // handleSuburbSearch
   const handleSuburbSearch = async (e: any) => {
@@ -53,22 +55,19 @@ const ApplyInstructor = () => {
   };
 
   // handle profile avater change
-  const handleFileChange = (e: any) => {
-    setPhoto(e.target.files[0]);
-    setValue("avater", e.target.files[0]);
-  };
-
-  // submit data
-  const submitData = async (data: any) => {
-    setLoading(true);
-    const { message, success } = await applyAsInstructor(data);
-
-    if (!success) {
-      setLoading(false);
-      return toast.error(message);
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    multiple: boolean | undefined
+  ) => {
+    if (!multiple && e.target.files) {
+      setPhoto({ ...photo, [e.target.name]: e.target.files[0] });
+      console.log(photo, e.target.files, "photo...");
+      // setValue(e.target.name, e.target.files[0]);
     }
-    toast.success("Successfully Submitted Your Information");
-    setLoading(false);
+
+    // if it is multiple input element
+    setPhoto({ ...photo, [e.target.name]: e.target.files });
+    setValue(e.target.name, e.target.files);
   };
 
   return (
@@ -185,23 +184,42 @@ const ApplyInstructor = () => {
                   return (
                     <div>
                       <MaterialFileSelect
-                        handleFileChange={handleFileChange}
-                        title={"Select Photo"}
+                        name={field.name}
+                        handleFileChange={(e: any) =>
+                          handleFileChange(e, field?.multiple)
+                        }
+                        title={
+                          field.multiple ? "Select Photos" : "Select Photo"
+                        }
                         label={field.label}
                         placeholder={field.placeholder}
                       />
 
-                      {photo && (
-                        <img
-                          src={URL.createObjectURL(photo)}
-                          alt="avater"
-                          style={{
-                            height: 200,
-                            width: 200,
-                            marginTop: 20,
-                            borderRadius: "50%",
-                          }}
-                        />
+                      {photo && photo[field.name as keyof typeof photo] && (
+                        <>
+                          {[...photo[field.name as keyof typeof photo]].map(
+                            (picture) => (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  gap: "10px",
+                                  flexDirection: "column",
+                                }}
+                              >
+                                <img
+                                  src={URL.createObjectURL(picture)}
+                                  alt="avater"
+                                  style={{
+                                    height: 200,
+                                    width: 200,
+                                    marginTop: 20,
+                                    borderRadius: 10,
+                                  }}
+                                />
+                              </div>
+                            )
+                          )}
+                        </>
                       )}
                       {errors[field.name] && (
                         <p className="input__errorMessage">

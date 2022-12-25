@@ -14,6 +14,7 @@ import "./InstructorAgreement.scss";
 
 const InstructorAgreement = ({ applyInputs }) => {
   const [agreed, setAgreed] = useState(false);
+  const [allLicensePhotosLink, setAllLicensePhotosLink] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     window.scroll(0, 0);
@@ -45,14 +46,24 @@ const InstructorAgreement = ({ applyInputs }) => {
     console.log(instructorData, "applicant instructor...");
 
     //  uploading signature and avater Image
+    const licensePhotos = [...instructorData.licensePhotos];
+
+    let licensePhotoLinks = [];
+    for (const photo in licensePhotos) {
+      const uploadedPhotoLink = await uploadFileToCloud(licensePhotos[photo]);
+      licensePhotoLinks.push(uploadedPhotoLink?.file);
+    }
+
+    console.log(licensePhotoLinks, "License Photo Links...");
+
     const signature = await uploadFileToCloud(instructorData.signature);
-    const avater = await uploadFileToCloud(instructorData.avater);
+    const avater = await uploadFileToCloud(instructorData.avater[0]);
 
     // setting singanture and avater url
     instructorData.signature = signature.file;
     instructorData.avater = avater.file;
+    instructorData.licensePhotos = licensePhotoLinks;
 
-    // sending final data to server
     client
       .post("/apply-instructor", instructorData)
       .then((res) => {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { client } from "./client";
 import AddInstructor from "./components/AddInstructor/AddInstructor";
@@ -7,8 +7,6 @@ import AdminAgreement from "./components/AdminAgreement/AdminAgreement";
 import AdminChat from "./components/AdminChat/AdminChat";
 import AdminInstructorApplication from "./components/AdminInstructorApplication/AdminInstructorApplication";
 import AdminProtected from "./components/AdminProtected/AdminProtected";
-import Chat from "./components/Chat/Chat";
-
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Register from "./components/Register/Register";
 import NotFoundPage from "./pages/404Page/NotFoundPage";
@@ -30,7 +28,6 @@ import BookingPage from "./pages/BookingPage/BookingPage";
 import BookingSuccess from "./pages/BookingSuccess/BookingSuccess";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
-import GiftcardCheckout from "./pages/GiftCardCheckout/GiftcardCheckout";
 import GiftCardPage from "./pages/GiftCardPage/GiftCardPage";
 import GiftcardSuccess from "./pages/GiftCardSuccess/GiftcardSuccess";
 import Homepage from "./pages/Homepage/Homepage";
@@ -39,7 +36,6 @@ import InstructorList from "./pages/InstructorList/InstructorList";
 import InstructorLogin from "./pages/InstructorLogin/InstructorLogin";
 import InstructorProfile from "./pages/InstructorProfile/InstructorProfile";
 import LearnerDashboard from "./pages/LearnerDashboard/LearnerDashboard";
-import LiveChat from "./pages/LiveChat/LiveChat";
 import Login from "./pages/Login/Login";
 import PasswordResetPage from "./pages/PasswordResetPage/PasswordResetPage";
 import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
@@ -47,7 +43,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import TermsAndCondition from "./pages/TermsAndCondtion/TermsAndCondition";
 import ViewItemsPage from "./pages/ViewItemsPage";
 import { SET_LESSON_PRICE } from "./redux/reducer/reduxNamings";
-import { State } from "./typings/reduxTypings";
 
 // stripe Promise
 const title = {

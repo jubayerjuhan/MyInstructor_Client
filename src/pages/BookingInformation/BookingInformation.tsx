@@ -86,6 +86,10 @@ const BookingInformation = () => {
     dispatch({ type: SET_PICKUP_DETAILS, payload: data });
     setPickupInfotmation(data);
 
+    if (state?.testPackage) {
+      return navigate("/checkout", { state: { testPackage: true } });
+    }
+
     setLoading(true);
     const user: User = await getCurrentUser();
     setLoading(false);
@@ -130,9 +134,7 @@ const BookingInformation = () => {
         duration: booking.duration,
         pickupDetails: pickUpInformation,
       };
-      if (state?.testPackage) {
-        return navigate("/checkout", { state: { testPackage: true } });
-      }
+
       return dispatch(bookLesson(bookingInfo));
     }
 

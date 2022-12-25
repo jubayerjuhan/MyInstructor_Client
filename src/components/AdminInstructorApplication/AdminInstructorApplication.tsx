@@ -1,4 +1,4 @@
-import { Avatar, Typography } from "@mui/material";
+import { Avatar, Chip, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
@@ -79,7 +79,11 @@ const AdminInstructorApplication = () => {
         <Typography>
           Service Suburbs :{" "}
           {application.serviceSuburbs.map((suburb) => (
-            <>{suburb.suburb} </>
+            <Chip
+              label={suburb.suburb}
+              variant="outlined"
+              sx={{ marginRight: 1 }}
+            />
           ))}
         </Typography>
         <Typography>Message : {application.message}</Typography>
@@ -89,6 +93,17 @@ const AdminInstructorApplication = () => {
           alt=""
           style={{ objectFit: "contain", width: "200px" }}
         />
+        <Typography>License Photos :</Typography>
+        <Box sx={{ display: "flex", gap: 3, flexDirection: "column" }}>
+          {application.licensePhotos?.map((photo, key) => (
+            <img
+              key={key}
+              src={photo}
+              alt={"License Pic"}
+              style={{ objectFit: "contain", width: "250px", borderRadius: 4 }}
+            />
+          ))}
+        </Box>
       </div>
     </AdminPageWrapper>
   );
