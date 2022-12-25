@@ -111,7 +111,7 @@ const HeroSection = ({ title }: Props) => {
             }}
             type="text"
             className="subrub__input input__element"
-            placeholder="Enter Your Subrub"
+            placeholder="Enter Your Suburb"
           />
           {listOpen && (
             <div
