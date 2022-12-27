@@ -14,7 +14,6 @@ import "./InstructorAgreement.scss";
 
 const InstructorAgreement = ({ applyInputs }) => {
   const [agreed, setAgreed] = useState(false);
-  const [allLicensePhotosLink, setAllLicensePhotosLink] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     window.scroll(0, 0);

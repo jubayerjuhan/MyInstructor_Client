@@ -48,10 +48,12 @@ const ApplyInstructor = () => {
   const handleSuburbSearch = async (e: any) => {
     if (e.target.value.length === 0) setSuburbs([]);
     if (e.target.value.length < 2) return;
-    setLoading(true);
-    const { data } = await client.get(`/search-suburbs/${e.target.value}`);
-    setLoading(false);
-    setSuburbs(data.suburbs);
+    setTimeout(async function () {
+      setLoading(true);
+      const { data } = await client.get(`/search-suburbs/${e.target.value}`);
+      setLoading(false);
+      setSuburbs(data.suburbs);
+    }, 1000);
   };
 
   // handle profile avater change
