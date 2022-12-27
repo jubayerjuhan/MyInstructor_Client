@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { getAllSuburbs } from "./api_calls/admin_api";
 import { client } from "./client";
 import AddInstructor from "./components/AddInstructor/AddInstructor";
 import AdminAgreement from "./components/AdminAgreement/AdminAgreement";
@@ -52,7 +53,8 @@ const title = {
 };
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
+
   useEffect(() => {
     getLessonPrices();
   }, []);

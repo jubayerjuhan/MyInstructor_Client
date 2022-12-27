@@ -1,6 +1,8 @@
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { Box, Button } from "@mui/material";
+import { deleteApplicant } from "../../api_calls/Admin/admin_applicants";
 
 export const applicantColumns: GridColDef[] = [
   // { field: "id", headerName: "ID", flex: 1 },
@@ -24,19 +26,5 @@ export const applicantColumns: GridColDef[] = [
     field: "phone",
     headerName: "Phone",
     flex: 1,
-  },
-  {
-    field: "action",
-    headerName: "Action",
-    type: "string",
-    flex: 1,
-    renderCell: (params: GridRenderCellParams) => (
-      <Link
-        to={`/admin/application/${params.id}`}
-        style={{ display: "flex", justifyContent: "center" }}
-      >
-        <RemoveRedEyeIcon />
-      </Link>
-    ),
   },
 ];

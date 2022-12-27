@@ -1,9 +1,15 @@
-import { Avatar, Chip, Typography } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Chip,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { client } from "../../client";
+import { admin, client } from "../../client";
 import { Applicant } from "../../typings/instructorTypings";
 import AdminPageWrapper from "../AdminPageWrapper/AdminPageWrapper";
 import "./AdminInstructorApplication.scss";
@@ -17,12 +23,25 @@ const AdminInstructorApplication = () => {
   }, []);
 
   const fetchApplicationData = async () => {
-    const { data } = await client.get(`/instructor-application/${id}`);
+    const { data } = await admin.get(`/instructor-application/${id}`);
     setApplication(data?.applicant);
   };
 
-  if (!application) return <></>;
-
+  console.log(application, "application");
+  if (!application)
+    return (
+      <Box
+        sx={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   return (
     <AdminPageWrapper>
       <div className="instructor__applicant-wrapper">
@@ -93,6 +112,7 @@ const AdminInstructorApplication = () => {
           alt=""
           style={{ objectFit: "contain", width: "200px" }}
         />
+        <Button sx={{ mt: 1 }}>Download Image</Button>
         <Typography>License Photos :</Typography>
         <Box sx={{ display: "flex", gap: 3, flexDirection: "column" }}>
           {application.licensePhotos?.map((photo, key) => (
