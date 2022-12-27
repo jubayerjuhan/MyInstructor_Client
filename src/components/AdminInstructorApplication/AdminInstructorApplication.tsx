@@ -45,12 +45,28 @@ const AdminInstructorApplication = () => {
   return (
     <AdminPageWrapper>
       <div className="instructor__applicant-wrapper">
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Avatar
             alt={application?.firstName}
             src={application?.avater}
             sx={{ width: 250, height: 250 }}
           />
+          <a
+            style={{ textAlign: "center", marginTop: "10px" }}
+            href={application?.avater}
+            download
+            target={"_blank"}
+            rel="noreferrer"
+          >
+            Download Image
+          </a>
         </Box>
 
         <Typography>Application ID : {application._id} </Typography>
@@ -107,21 +123,39 @@ const AdminInstructorApplication = () => {
         </Typography>
         <Typography>Message : {application.message}</Typography>
         <Typography>Signature :</Typography>
-        <img
-          src={application.signature}
-          alt=""
-          style={{ objectFit: "contain", width: "200px" }}
-        />
-        <Button sx={{ mt: 1 }}>Download Image</Button>
+        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <img
+            src={application.signature}
+            alt=""
+            style={{ objectFit: "contain", width: "200px" }}
+          />
+          <a
+            href={application?.signature}
+            download
+            target={"_blank"}
+            rel="noreferrer"
+          >
+            <Button sx={{ mt: 1, width: "20%" }}>Download Image</Button>
+          </a>
+        </div>
         <Typography>License Photos :</Typography>
         <Box sx={{ display: "flex", gap: 3, flexDirection: "column" }}>
           {application.licensePhotos?.map((photo, key) => (
-            <img
-              key={key}
-              src={photo}
-              alt={"License Pic"}
-              style={{ objectFit: "contain", width: "250px", borderRadius: 4 }}
-            />
+            <>
+              <img
+                key={key}
+                src={photo}
+                alt={"License Pic"}
+                style={{
+                  objectFit: "contain",
+                  width: "250px",
+                  borderRadius: 4,
+                }}
+              />
+              <a href={photo} download target={"_blank"} rel="noreferrer">
+                <Button sx={{ mt: 1, width: "20%" }}>Download Image</Button>
+              </a>
+            </>
           ))}
         </Box>
       </div>
