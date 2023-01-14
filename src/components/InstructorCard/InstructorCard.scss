@@ -39,8 +39,9 @@
   > .language {
     @include descriptionFont;
     font-size: 13px;
-
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 5px;
   }
   .availability {

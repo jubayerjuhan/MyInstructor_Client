@@ -31,12 +31,12 @@ const InstructorCard = ({
           <p className="name">
             {instructor.firstName} {instructor.lastName}
           </p>
-          <p className="language">
+          <div className="language">
             {instructor.firstName} Speaks
             {instructor.languages.map((lang, key) => (
-              <span key={key}>{lang}</span>
+              <p key={key}>{lang}</p>
             ))}
-          </p>
+          </div>
           <div
             className="availability"
             onClick={() =>
