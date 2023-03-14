@@ -1,10 +1,14 @@
 import { TextField, List, ListItem, ListItemText } from "@mui/material";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, forwardRef } from "react";
 import { client } from "../../client";
 import { Suburb } from "../../typings/instructorTypings";
 import "./SuburbSelector.scss";
 
-const SuburbSelector = () => {
+interface Props {
+  setValue: any;
+  error: String | any;
+}
+const SuburbSelector = forwardRef((props: Props, ref) => {
   const [suburbs, setSuburbs] = useState<Suburb[]>([]);
   const [selectedSuburb, setSelectedSuburb] = useState<Suburb>();
   const [filteredSuburbs, setFilteredSuburbs] = useState<Suburb[]>([]);
@@ -46,7 +50,7 @@ const SuburbSelector = () => {
   }, []);
 
   const handleSelectSuburb = (suburb: Suburb) => {
-    setSelectedSuburb(suburb);
+    props.setValue("suburb", suburb._id);
     // changing the inner value of the text field
     if (textFieldRef.current) textFieldRef.current.value = suburb.suburb;
     setListHidden(true);
@@ -97,8 +101,9 @@ const SuburbSelector = () => {
           ))}
         </List>
       )}
+      {props.error && <div className="not_suburb_found">{props.error}</div>}
     </div>
   );
-};
+});
 
 export default SuburbSelector;
