@@ -50,7 +50,7 @@ const BookingsDetailCard = ({ item }: Props) => {
             Address : {item.pickupDetails.address}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.primary">
-            Suburb : {item.pickupDetails.suburb}
+            Suburb : {item.pickupDetails.suburb.suburb}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.primary">
             Postcode : {item.pickupDetails.postcode}

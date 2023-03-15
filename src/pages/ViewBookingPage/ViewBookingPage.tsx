@@ -172,7 +172,7 @@ const ViewBookingPage = () => {
           <InformationFields
             title={"Pickup Details"}
             child1={`Address: ${booking?.pickupDetails.address}`}
-            child2={`Suburb: ${booking?.pickupDetails.suburb}`}
+            child2={`Suburb: ${booking?.pickupDetails.suburb.suburb}`}
             child3={`Post Code: ${booking?.pickupDetails.postcode}`}
             child4={`State: ${booking?.pickupDetails.state}`}
           />
