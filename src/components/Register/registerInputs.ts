@@ -127,6 +127,12 @@ export const instructorInput = [
     placeholder: "Suburbs",
     type: "autocomplete",
   },
+  {
+    name: "hasGst",
+    label: "Does Instructor Has GST?",
+    placeholder: "Does Instructor Has GST?",
+    type: "radio",
+  },
 ];
 
 export const bookingsField = [
