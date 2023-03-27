@@ -15,6 +15,7 @@ export interface Instructor {
   serviceSuburbs: {
     suburbs: Suburb[];
   };
+  hasGst: Boolean;
   createdAt: Date;
   transmissionType: string;
   drivingLicenseExpire: string;
