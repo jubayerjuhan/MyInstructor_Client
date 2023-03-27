@@ -25,8 +25,8 @@ const cities = [
   "sydney",
   "brisbane",
   "perth",
-  "adelade",
-  "hobert",
+  "adelaide",
+  "hobart",
   "canaberra",
 ];
 const Homepage = ({ title }: Props) => {
