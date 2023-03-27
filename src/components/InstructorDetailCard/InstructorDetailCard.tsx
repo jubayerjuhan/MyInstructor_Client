@@ -60,6 +60,9 @@ const InstructorDetailCard = ({ item }: Props) => {
             Car Transmission Type : {item.car.transmissionType}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            GST : {item.hasGst ? "Yes" : "No"}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Driving License Expire :{" "}
             {moment(item?.drivingLicenseExpire).format("MMM DD YYYY")}
           </Typography>
