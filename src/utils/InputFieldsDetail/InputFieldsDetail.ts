@@ -1,4 +1,3 @@
-import { getAllCars } from "../../api_calls/Admin/admin_car";
 import {
   genders,
   transmission,
@@ -167,7 +166,6 @@ export const applyInstructorFields = [
     multiple: true,
     required: true,
   },
-
   {
     name: "message",
     label: "Message",
@@ -268,6 +266,16 @@ export const addInstructorFields = [
     label: "Children Check License Expire",
     placeholder: "Children Check License Expire",
     type: "date",
+  },
+  {
+    name: "hasGst",
+    label: "Does Instructor Has GST?",
+    placeholder: "Does Instructor Has GST?",
+    type: "radio",
+    options: [
+      { label: "Yes", value: "true" },
+      { label: "No", value: "" },
+    ],
   },
   {
     name: "avater",
