@@ -1,49 +1,100 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
+
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getAllSuburbs } from "./api_calls/admin_api";
 import { client } from "./client";
-import AddInstructor from "./components/AddInstructor/AddInstructor";
-import AdminAgreement from "./components/AdminAgreement/AdminAgreement";
-import AdminChat from "./components/AdminChat/AdminChat";
-import AdminInstructorApplication from "./components/AdminInstructorApplication/AdminInstructorApplication";
-import AdminProtected from "./components/AdminProtected/AdminProtected";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import Register from "./components/Register/Register";
-import NotFoundPage from "./pages/404Page/NotFoundPage";
-import AboutUs from "./pages/AboutUs/AboutUs";
-import AddToCart from "./pages/AddToCart/AddToCart";
-import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
-import AdminApplicants from "./pages/AdminApplicantsInstructor/AdminApplicants";
-import AdminBookings from "./pages/AdminBookings/AdminBookings";
-import AdminCars from "./pages/AdminCars/AdminCars";
-import AdminExpiredInstructor from "./pages/AdminExpiredUser/AdminExpiredUser";
-import AdminInstructor from "./pages/AdminInstructor/AdminInstructor";
-import AdminLogin from "./pages/AdminLogin/AdminLogin";
-import AdminSuburbs from "./pages/AdminSuburbs/AdminSuburbs";
-import AdminUsers from "./pages/AdminUsers/AdminUsers";
-import ApplicationSuccess from "./pages/ApplicationSuccess/ApplicationSuccess";
-import ApplyInstructor from "./pages/ApplyInstructor/ApplyInstructor";
-import BookingInformation from "./pages/BookingInformation/BookingInformation";
-import BookingPage from "./pages/BookingPage/BookingPage";
-import BookingSuccess from "./pages/BookingSuccess/BookingSuccess";
-import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
-import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
-import GiftCardPage from "./pages/GiftCardPage/GiftCardPage";
-import GiftcardSuccess from "./pages/GiftCardSuccess/GiftcardSuccess";
-import Homepage from "./pages/Homepage/Homepage";
-import InstructorDashboard from "./pages/InstructorDashboard/InstructorDashboard";
-import InstructorList from "./pages/InstructorList/InstructorList";
-import InstructorLogin from "./pages/InstructorLogin/InstructorLogin";
-import InstructorProfile from "./pages/InstructorProfile/InstructorProfile";
-import LearnerDashboard from "./pages/LearnerDashboard/LearnerDashboard";
-import Login from "./pages/Login/Login";
-import PasswordResetPage from "./pages/PasswordResetPage/PasswordResetPage";
-import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
-import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
-import TermsAndCondition from "./pages/TermsAndCondtion/TermsAndCondition";
-import ViewItemsPage from "./pages/ViewItemsPage";
 import { SET_LESSON_PRICE } from "./redux/reducer/reduxNamings";
+
+const AddInstructor = lazy(
+  () => import("./components/AddInstructor/AddInstructor")
+);
+const AdminAgreement = lazy(
+  () => import("./components/AdminAgreement/AdminAgreement")
+);
+const AdminChat = lazy(() => import("./components/AdminChat/AdminChat"));
+const AdminInstructorApplication = lazy(
+  () =>
+    import("./components/AdminInstructorApplication/AdminInstructorApplication")
+);
+const AdminProtected = lazy(
+  () => import("./components/AdminProtected/AdminProtected")
+);
+const ProtectedRoute = lazy(
+  () => import("./components/ProtectedRoute/ProtectedRoute")
+);
+const Register = lazy(() => import("./components/Register/Register"));
+const NotFoundPage = lazy(() => import("./pages/404Page/NotFoundPage"));
+const AboutUs = lazy(() => import("./pages/AboutUs/AboutUs"));
+const AddToCart = lazy(() => import("./pages/AddToCart/AddToCart"));
+const AdminDashboard = lazy(
+  () => import("./pages/Admin/AdminDashboard/AdminDashboard")
+);
+const AdminApplicants = lazy(
+  () => import("./pages/AdminApplicantsInstructor/AdminApplicants")
+);
+const AdminBookings = lazy(() => import("./pages/AdminBookings/AdminBookings"));
+const AdminCars = lazy(() => import("./pages/AdminCars/AdminCars"));
+const AdminExpiredInstructor = lazy(
+  () => import("./pages/AdminExpiredUser/AdminExpiredUser")
+);
+const AdminInstructor = lazy(
+  () => import("./pages/AdminInstructor/AdminInstructor")
+);
+const AdminLogin = lazy(() => import("./pages/AdminLogin/AdminLogin"));
+const AdminSuburbs = lazy(() => import("./pages/AdminSuburbs/AdminSuburbs"));
+const AdminUsers = lazy(() => import("./pages/AdminUsers/AdminUsers"));
+const ApplicationSuccess = lazy(
+  () => import("./pages/ApplicationSuccess/ApplicationSuccess")
+);
+const ApplyInstructor = lazy(
+  () => import("./pages/ApplyInstructor/ApplyInstructor")
+);
+const BookingInformation = lazy(
+  () => import("./pages/BookingInformation/BookingInformation")
+);
+const BookingPage = lazy(() => import("./pages/BookingPage/BookingPage"));
+const BookingSuccess = lazy(
+  () => import("./pages/BookingSuccess/BookingSuccess")
+);
+const CheckoutPage = lazy(() => import("./pages/CheckoutPage/CheckoutPage"));
+const ForgetPassword = lazy(
+  () => import("./pages/ForgetPassword/ForgetPassword")
+);
+const GiftCardPage = lazy(() => import("./pages/GiftCardPage/GiftCardPage"));
+const GiftcardSuccess = lazy(
+  () => import("./pages/GiftCardSuccess/GiftcardSuccess")
+);
+const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
+const InstructorDashboard = lazy(
+  () => import("./pages/InstructorDashboard/InstructorDashboard")
+);
+const InstructorList = lazy(
+  () => import("./pages/InstructorList/InstructorList")
+);
+const InstructorLogin = lazy(
+  () => import("./pages/InstructorLogin/InstructorLogin")
+);
+const InstructorProfile = lazy(
+  () => import("./pages/InstructorProfile/InstructorProfile")
+);
+const LearnerDashboard = lazy(
+  () => import("./pages/LearnerDashboard/LearnerDashboard")
+);
+const Login = lazy(() => import("./pages/Login/Login"));
+const PasswordResetPage = lazy(
+  () => import("./pages/PasswordResetPage/PasswordResetPage")
+);
+const PaymentSuccess = lazy(
+  () => import("./pages/PaymentSuccess/PaymentSuccess")
+);
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy/PrivacyPolicy"));
+const TermsAndCondition = lazy(
+  () => import("./pages/TermsAndCondtion/TermsAndCondition")
+);
+const ViewItemsPage = lazy(() => import("./pages/ViewItemsPage"));
+
+// const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
 
 // stripe Promise
 const title = {
@@ -67,265 +118,270 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="/" element={<Homepage />} />
-          <Route path="/apply-instructor" element={<ApplyInstructor />} />
-          <Route
-            path="/driving-lessons"
-            element={<Homepage title={title.driving_lesson} />}
-          />
-          <Route path="/driving-lessons/:city" element={<Homepage />} />
-          <Route
-            path="/test-package"
-            element={<Homepage title={title.test_package} />}
-          />
-          <Route path="/pricing" element={<Homepage title={title.pricing} />} />
-          <Route path="/not-found" element={<NotFoundPage />} />
-          <Route
-            path="/application-success/:id"
-            element={<ApplicationSuccess />}
-          />
-          <Route path="/forget-password" element={<ForgetPassword />} />
-          <Route
-            path="/reset-password/:token"
-            element={<PasswordResetPage />}
-          />
-          <Route
-            path="/reset-password/instructor/:token"
-            element={<PasswordResetPage instructor />}
-          />
-          <Route
-            path="/forget-password/instructor"
-            element={<ForgetPassword instructor={true} />}
-          />
-          <Route path="/login" element={<Login instructor={false} />} />
-          <Route path="/instructor-login" element={<InstructorLogin />} />
-          <Route path="/register" element={<Register />} />
-          <Route
-            path="/instructors-list/:postCode/:transmission/:suburb"
-            element={<InstructorList />}
-          />
-          <Route
-            path="/instructor-profile/:id"
-            element={<InstructorProfile />}
-          />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/terms/instructor" element={<TermsAndCondition />} />
-          <Route
-            path="/terms/learner"
-            element={<TermsAndCondition learner />}
-          />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="*" element={<NotFoundPage />} />
+            <Route path="/" element={<Homepage />} />
+            <Route path="/apply-instructor" element={<ApplyInstructor />} />
+            <Route
+              path="/driving-lessons"
+              element={<Homepage title={title.driving_lesson} />}
+            />
+            <Route path="/driving-lessons/:city" element={<Homepage />} />
+            <Route
+              path="/test-package"
+              element={<Homepage title={title.test_package} />}
+            />
+            <Route
+              path="/pricing"
+              element={<Homepage title={title.pricing} />}
+            />
+            <Route path="/not-found" element={<NotFoundPage />} />
+            <Route
+              path="/application-success/:id"
+              element={<ApplicationSuccess />}
+            />
+            <Route path="/forget-password" element={<ForgetPassword />} />
+            <Route
+              path="/reset-password/:token"
+              element={<PasswordResetPage />}
+            />
+            <Route
+              path="/reset-password/instructor/:token"
+              element={<PasswordResetPage instructor />}
+            />
+            <Route
+              path="/forget-password/instructor"
+              element={<ForgetPassword instructor={true} />}
+            />
+            <Route path="/login" element={<Login instructor={false} />} />
+            <Route path="/instructor-login" element={<InstructorLogin />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/instructors-list/:postCode/:transmission/:suburb"
+              element={<InstructorList />}
+            />
+            <Route
+              path="/instructor-profile/:id"
+              element={<InstructorProfile />}
+            />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/terms/instructor" element={<TermsAndCondition />} />
+            <Route
+              path="/terms/learner"
+              element={<TermsAndCondition learner />}
+            />
 
-          {/* protected routes */}
-          <Route
-            path="/add-cart"
-            element={
-              <ProtectedRoute location={"/add-cart"}>
-                <AddToCart />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/gift-card"
-            element={
-              <ProtectedRoute location={"/add-cart"}>
-                <GiftCardPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/checkout"
-            element={
-              <ProtectedRoute location={"/checkout"}>
-                <CheckoutPage />
-              </ProtectedRoute>
-            }
-          />
+            {/* protected routes */}
+            <Route
+              path="/add-cart"
+              element={
+                <ProtectedRoute location={"/add-cart"}>
+                  <AddToCart />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/gift-card"
+              element={
+                <ProtectedRoute location={"/add-cart"}>
+                  <GiftCardPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/checkout"
+              element={
+                <ProtectedRoute location={"/checkout"}>
+                  <CheckoutPage />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route
-            path="/booking"
-            element={
-              <ProtectedRoute location={"/booking"}>
-                <BookingPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/booking-info"
-            element={
-              <ProtectedRoute location={"/booking-info"}>
-                <BookingInformation />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/payment-success"
-            element={
-              <ProtectedRoute location={"/payment-success"}>
-                <PaymentSuccess />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/giftcard-success"
-            element={
-              <ProtectedRoute location={"/giftcard-success"}>
-                <GiftcardSuccess />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/booking"
+              element={
+                <ProtectedRoute location={"/booking"}>
+                  <BookingPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/booking-info"
+              element={
+                <ProtectedRoute location={"/booking-info"}>
+                  <BookingInformation />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment-success"
+              element={
+                <ProtectedRoute location={"/payment-success"}>
+                  <PaymentSuccess />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/giftcard-success"
+              element={
+                <ProtectedRoute location={"/giftcard-success"}>
+                  <GiftcardSuccess />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route
-            path="/booking-success"
-            element={
-              <ProtectedRoute location={"/booking-success"}>
-                <BookingSuccess />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/learner/dashboard"
-            element={
-              <ProtectedRoute location={"/learner/dashboard"}>
-                <LearnerDashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/instructor/dashboard"
-            element={
-              <ProtectedRoute location={"/instructor/dashboard"}>
-                <InstructorDashboard />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/booking-success"
+              element={
+                <ProtectedRoute location={"/booking-success"}>
+                  <BookingSuccess />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/learner/dashboard"
+              element={
+                <ProtectedRoute location={"/learner/dashboard"}>
+                  <LearnerDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/instructor/dashboard"
+              element={
+                <ProtectedRoute location={"/instructor/dashboard"}>
+                  <InstructorDashboard />
+                </ProtectedRoute>
+              }
+            />
 
-          {/* admin routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
+            {/* admin routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
 
-          <Route
-            path={"/admin/dashboard"}
-            element={
-              <AdminProtected location={"/admin/dashboard"}>
-                <AdminDashboard />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/users"}
-            element={
-              <AdminProtected location={"/admin/users"}>
-                <AdminUsers />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/application/:id"}
-            element={
-              <AdminProtected location={"/admin/application"}>
-                <AdminInstructorApplication />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/cars"}
-            element={
-              <AdminProtected location={"/admin/cars"}>
-                <AdminCars />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/bookings"}
-            element={
-              <AdminProtected location={"/admin/bookings"}>
-                <AdminBookings />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/instructors"}
-            element={
-              <AdminProtected location={"/admin/instructors"}>
-                <AdminInstructor />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/suburbs"}
-            element={
-              <AdminProtected location={"/admin/suburbs"}>
-                <AdminSuburbs />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/expired-instructors"}
-            element={
-              <AdminProtected location={"/admin/expired-instructors"}>
-                <AdminExpiredInstructor />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/add-instructor"}
-            element={
-              <AdminProtected location={"/admin/add-instructor"}>
-                <AddInstructor />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/instructor-applicants"}
-            element={
-              <AdminProtected location={"/admin/instructor-applicants"}>
-                <AdminApplicants />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/user/:id"}
-            element={
-              <AdminProtected location={"/admin/user/:id"}>
-                <ViewItemsPage type={"user"} />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/instructor/:id"}
-            element={
-              <AdminProtected location={"/admin/instructor/:id"}>
-                <ViewItemsPage type={"instructor"} />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/booking/:id"}
-            element={
-              <AdminProtected location={"/admin/booking/:id"}>
-                <ViewItemsPage type={"booking"} />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/chat"}
-            element={
-              <AdminProtected location={"/admin/chat"}>
-                <AdminChat />
-              </AdminProtected>
-            }
-          />
-          <Route
-            path={"/admin/agreement"}
-            element={
-              <AdminProtected location={"/admin/agreement"}>
-                <AdminAgreement />
-              </AdminProtected>
-            }
-          />
-        </Routes>
+            <Route
+              path={"/admin/dashboard"}
+              element={
+                <AdminProtected location={"/admin/dashboard"}>
+                  <AdminDashboard />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/users"}
+              element={
+                <AdminProtected location={"/admin/users"}>
+                  <AdminUsers />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/application/:id"}
+              element={
+                <AdminProtected location={"/admin/application"}>
+                  <AdminInstructorApplication />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/cars"}
+              element={
+                <AdminProtected location={"/admin/cars"}>
+                  <AdminCars />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/bookings"}
+              element={
+                <AdminProtected location={"/admin/bookings"}>
+                  <AdminBookings />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/instructors"}
+              element={
+                <AdminProtected location={"/admin/instructors"}>
+                  <AdminInstructor />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/suburbs"}
+              element={
+                <AdminProtected location={"/admin/suburbs"}>
+                  <AdminSuburbs />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/expired-instructors"}
+              element={
+                <AdminProtected location={"/admin/expired-instructors"}>
+                  <AdminExpiredInstructor />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/add-instructor"}
+              element={
+                <AdminProtected location={"/admin/add-instructor"}>
+                  <AddInstructor />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/instructor-applicants"}
+              element={
+                <AdminProtected location={"/admin/instructor-applicants"}>
+                  <AdminApplicants />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/user/:id"}
+              element={
+                <AdminProtected location={"/admin/user/:id"}>
+                  <ViewItemsPage type={"user"} />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/instructor/:id"}
+              element={
+                <AdminProtected location={"/admin/instructor/:id"}>
+                  <ViewItemsPage type={"instructor"} />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/booking/:id"}
+              element={
+                <AdminProtected location={"/admin/booking/:id"}>
+                  <ViewItemsPage type={"booking"} />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/chat"}
+              element={
+                <AdminProtected location={"/admin/chat"}>
+                  <AdminChat />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/agreement"}
+              element={
+                <AdminProtected location={"/admin/agreement"}>
+                  <AdminAgreement />
+                </AdminProtected>
+              }
+            />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </>
   );
