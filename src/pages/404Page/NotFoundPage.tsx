@@ -8,7 +8,7 @@ import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 const NotFoundPage = () => {
   return (
     <div className="notfound__page">
-      <HelmetTitle title={"4*4 Not Found"} />
+      <HelmetTitle title={"404 Not Found"} />
       <Navbar />
       <div className="notfound__main sectionPadding">
         <img src={notfoundImage} alt="" />

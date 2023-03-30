@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getAllSuburbs } from "./api_calls/admin_api";
 import { client } from "./client";
+import SteeringLoader from "./components/Loader/SteeringLoader/SteeringLoader";
 import { SET_LESSON_PRICE } from "./redux/reducer/reduxNamings";
 
 const AddInstructor = lazy(
@@ -118,7 +119,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<SteeringLoader />}>
           <Routes>
             <Route path="*" element={<NotFoundPage />} />
             <Route path="/" element={<Homepage />} />
