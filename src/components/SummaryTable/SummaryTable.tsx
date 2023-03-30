@@ -3,8 +3,9 @@ import { Button } from "@mui/material";
 import "./summaryTable.scss";
 import { FaFileInvoiceDollar } from "react-icons/fa";
 import { SummaryTableColumnsType } from "./summaryTableTypes";
+import moment from "moment";
 
-const SummaryTable = ({ fields, data }: SummaryTableColumnsType) => {
+const SummaryTable = ({ fields, datas }: SummaryTableColumnsType) => {
   return (
     <table>
       <thead>
@@ -15,41 +16,28 @@ const SummaryTable = ({ fields, data }: SummaryTableColumnsType) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>John Doe</td>
-          <td>2023-03-30</td>
-          <td>Driving Test Prep</td>
-          <td>Parallel Parking</td>
-          <td>1 hour</td>
-          <td>
-            <Button
-              variant="outlined"
-              startIcon={<FaFileInvoiceDollar />}
-              color={"warning"}
-            >
-              Invoice
-            </Button>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jane Smith</td>
-          <td>2023-04-01</td>
-          <td>Beginner Lesson</td>
-          <td>Basic Controls</td>
-          <td>2 hours</td>
-          <td>2 hours</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>David Johnson</td>
-          <td>2023-04-02</td>
-          <td>Refresher Lesson</td>
-          <td>Merging onto Highway</td>
-          <td>1.5 hours</td>
-          <td>1.5 hours</td>
-        </tr>
+        {datas.map((data, key) => (
+          <tr>
+            <td>{data._id.substring(0, 10) + "..."}</td>
+            <td>{moment(data.createdAt).format("DD-MM-YYYY")}</td>
+            <td>
+              {data.learner.firstName} {data.learner.lastName}
+            </td>
+            <td>{data.duration} hrs</td>
+            <td>${data.subtotal}</td>
+            <td>
+              <a href={data.invoice} target={"_blank"} rel="noreferrer">
+                <Button
+                  variant="outlined"
+                  startIcon={<FaFileInvoiceDollar />}
+                  color={"warning"}
+                >
+                  Invoice
+                </Button>
+              </a>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

@@ -3,18 +3,23 @@ export interface InstructorEarningTableFields {
 }
 
 export interface Earning {
-  _id: string;
+  bookingAmount: number;
+  createdAt: string;
+  duration: number;
+  gst: number;
+  inclusiveGst: number;
+  instructor: string;
+  invoice: string;
   learner: {
     _id: string;
     firstName: string;
     lastName: string;
   };
-  instructor: string;
-  duration: number;
-  bookingAmount: number;
-  instructorAmount: number;
-  serviceCharge: number;
-  createdAt: Date;
-  updatedAt: Date;
+  managementFee: number;
+  subtotal: number;
+  total: number;
+  unitPrice: number;
+  updatedAt: string;
   __v: number;
+  _id: string;
 }

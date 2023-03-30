@@ -1,4 +1,6 @@
+import { Earning } from "../Earnings/earningsTypes";
+
 export interface SummaryTableColumnsType {
   fields: string[];
-  data?: [];
+  datas: Earning[];
 }
