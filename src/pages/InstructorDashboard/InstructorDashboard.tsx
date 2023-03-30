@@ -10,7 +10,6 @@ import Dashboard from "../../components/Dashboard/Dashboard";
 import Earnings from "../../components/Earnings/Earnings";
 import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import InstructorDashboardMain from "../../components/InstructorDashboardMain/InstructorDashboardMain";
-import LearnerDashboardMain from "../../components/LearnerDashboardMain/LearnerDashboardMain";
 import { State } from "../../typings/reduxTypings";
 import Profile from "../ProfilePage/Profile";
 
@@ -20,7 +19,7 @@ const InstructorDashboard = () => {
 
   useEffect(() => {
     if (user.userType !== "instructor") return navigation("/not-found");
-  }, []);
+  }, [user.userType, navigation]);
   const navLinks = [
     {
       label: "Dashboard",

@@ -2,18 +2,16 @@ import React from "react";
 import { Button } from "@mui/material";
 import "./summaryTable.scss";
 import { FaFileInvoiceDollar } from "react-icons/fa";
-const SummaryTable = () => {
+import { SummaryTableColumnsType } from "./summaryTableTypes";
+
+const SummaryTable = ({ fields, data }: SummaryTableColumnsType) => {
   return (
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Date</th>
-          <th>Learner Name</th>
-          <th>Lesson Type</th>
-          <th>Duration (hr)</th>
-          <th>Amount</th>
-          <th>Invoice</th>
+          {fields.map((field, key) => (
+            <th key={key}>{field}</th>
+          ))}
         </tr>
       </thead>
       <tbody>
