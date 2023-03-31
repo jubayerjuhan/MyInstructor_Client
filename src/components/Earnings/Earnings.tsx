@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./earnings.scss";
-import earningPageData from "./earnings.data.json";
+import SkeletonTable from "../SummaryTable/Loader/SummaryTable.loader";
 import SummaryTable from "../SummaryTable/SummaryTable";
-import {
-  getInstructorEarnings,
-  InstructorEarningsReturn,
-} from "../../api_calls/earnings_api";
+import { getInstructorEarnings } from "../../api_calls/earnings_api";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
-import SkeletonTable from "../SummaryTable/Loader/SummaryTable.loader";
 import { Earning } from "./earningsTypes";
+import earningPageData from "./earnings.data.json";
 
 const Earnings = () => {
   const { user } = useSelector((state: State) => state.user);
@@ -21,9 +18,8 @@ const Earnings = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const { earnings }: InstructorEarningsReturn =
-          await getInstructorEarnings(user._id);
-        setEarnings(earnings ?? []);
+        const result = await getInstructorEarnings(user._id);
+        setEarnings(result.earnings ?? []);
       } catch (error) {
         console.error(error);
       } finally {
@@ -41,7 +37,11 @@ const Earnings = () => {
         {loading ? (
           <SkeletonTable row={5} column={7} />
         ) : (
-          <SummaryTable fields={earningPageData.tableFields} datas={earnings} />
+          <SummaryTable
+            fields={earningPageData.tableFields}
+            datas={earnings}
+            warningMessage={earningPageData.tableWarningMessage}
+          />
         )}
       </div>
     </div>

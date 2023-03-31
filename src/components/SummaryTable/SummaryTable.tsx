@@ -1,11 +1,16 @@
 import React from "react";
+import SummaryTableWarning from "./Warning/SummaryTableWaring";
 import { Button } from "@mui/material";
 import "./summaryTable.scss";
 import { FaFileInvoiceDollar } from "react-icons/fa";
 import { SummaryTableColumnsType } from "./summaryTableTypes";
 import moment from "moment";
 
-const SummaryTable = ({ fields, datas }: SummaryTableColumnsType) => {
+const SummaryTable = ({
+  fields,
+  datas,
+  warningMessage,
+}: SummaryTableColumnsType) => {
   return (
     <table>
       <thead>
@@ -38,6 +43,7 @@ const SummaryTable = ({ fields, datas }: SummaryTableColumnsType) => {
             </td>
           </tr>
         ))}
+        <SummaryTableWarning colspan={fields.length} message={warningMessage} />
       </tbody>
     </table>
   );
