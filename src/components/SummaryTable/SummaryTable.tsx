@@ -43,7 +43,12 @@ const SummaryTable = ({
             </td>
           </tr>
         ))}
-        <SummaryTableWarning colspan={fields.length} message={warningMessage} />
+        {datas.length === 0 && (
+          <SummaryTableWarning
+            colspan={fields.length}
+            message={warningMessage}
+          />
+        )}
       </tbody>
     </table>
   );
