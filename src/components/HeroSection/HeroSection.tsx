@@ -11,6 +11,7 @@ export interface Suburb {
   suburb: string;
   state: string;
   postcode: number;
+  price: number;
 }
 
 interface Props {
@@ -20,11 +21,7 @@ const HeroSection = ({ title }: Props) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [suburbs, setSuburbs] = useState<Suburb[]>([]);
-  const [selectedSuburb, setSelectedSuburb] = useState<Suburb>({
-    suburb: "",
-    state: "",
-    postcode: 0,
-  });
+  const [selectedSuburb, setSelectedSuburb] = useState<Suburb>();
   const [keyWord, setkeyWord] = useState("");
   const [listOpen, setListOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -62,8 +59,7 @@ const HeroSection = ({ title }: Props) => {
   };
 
   const handleSubmit = () => {
-    console.log(transmission);
-    console.log(selectedSuburb);
+    if (!selectedSuburb) return console.log("No Suburb Selected");
     if (!selectedSuburb.state) return toast.warn("Please Select A Suburb");
     window.location.href = `/instructors-list/${selectedSuburb.postcode}/${transmission.value}/${selectedSuburb.suburb}`;
   };

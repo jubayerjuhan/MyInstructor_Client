@@ -1,3 +1,4 @@
+import { Suburb } from "./../components/HeroSection/HeroSection";
 import { Instructor } from "./instructorTypings";
 import { User } from "./reduxTypings";
 
@@ -14,7 +15,7 @@ export interface BookingTypeBack {
   duration: number;
   pickupDetails: {
     address: string;
-    suburb: string;
+    suburb: Suburb;
     postcode: number;
     state: string;
   };

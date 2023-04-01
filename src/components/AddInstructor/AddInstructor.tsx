@@ -8,6 +8,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
+
 import React, { useEffect, useRef, useState } from "react";
 import { addInstructorFields } from "../../utils/InputFieldsDetail/InputFieldsDetail";
 import AdminPageWrapper from "../AdminPageWrapper/AdminPageWrapper";
@@ -20,6 +22,7 @@ import { useForm } from "react-hook-form";
 import { addInstructorAdmin } from "../../api_calls/Admin/admin_instructors";
 import { toast } from "material-react-toastify";
 import HelmetTitle from "../HelmetTitle/HelmetTitle";
+import { InstructorHasGSTOption } from "../../typings/Input/Instructor/instructor_create_typings";
 
 const AddInstructor = () => {
   const ref = useRef<HTMLDivElement>();
@@ -39,6 +42,7 @@ const AddInstructor = () => {
     register,
     watch,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -269,6 +273,19 @@ const AddInstructor = () => {
           if (field.type === "dataPicker") {
             return <></>;
           }
+
+          if (field.name === "hasGst")
+            return (
+              <Box
+                className="hasgst__field"
+                sx={{ display: "flex", gap: 2, alignItems: "center" }}
+              >
+                <p>{field.label}</p>
+                <Checkbox
+                  onChange={(e) => setValue(field.name, e.target.checked)}
+                />
+              </Box>
+            );
 
           // text field
           return (

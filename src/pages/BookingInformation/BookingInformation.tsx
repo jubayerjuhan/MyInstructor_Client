@@ -21,6 +21,7 @@ import {
 } from "../../redux/reducer/reduxNamings";
 import { bookLesson } from "../../redux/actions/bookingAction";
 import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
+import SuburbSelector from "../../components/SuburbSelector/SuburbSelector";
 
 export interface BookingInfoProps {
   state: {
@@ -52,7 +53,7 @@ const BookingInformation = () => {
   });
   const pickupDetailsField = [
     { name: "address", label: " Pickup Address", type: "text" },
-    { name: "suburb", label: "Suburb", type: "text" },
+    { name: "suburb", label: "Suburb", type: "suburb" },
     { name: "postcode", label: "Post Code", type: "text" },
     { name: "state", label: "State", type: "select", options: states },
   ];
@@ -70,6 +71,8 @@ const BookingInformation = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(pickupInfoSchema),
@@ -77,6 +80,7 @@ const BookingInformation = () => {
 
   // =============on submit
   const onSubmit = (data: any) => {
+    // return console.log(data, "data");
     handleSubmitClick(data);
   };
 
@@ -169,6 +173,13 @@ const BookingInformation = () => {
             <p className="title">Pickup Details</p>
             <div className="fields">
               {pickupDetailsField.map((field, key) => {
+                if (field.type === "suburb")
+                  return (
+                    <SuburbSelector
+                      setValue={setValue}
+                      error={errors[field.name]?.message}
+                    />
+                  );
                 if (field.type === "select")
                   return (
                     <div>

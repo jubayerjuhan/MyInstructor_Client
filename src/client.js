@@ -7,7 +7,7 @@ const adminJwtToken = getLocalStorageData("adminJwtToken");
 export const client = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
-      ? "https://my-instructor-server.ts.r.appspot.com/api"
+      ? "https://api.myinstructor.com.au/api"
       : "http://localhost:6969/api",
   // baseURL: "https://my-instructor-server.ts.r.appspot.com/api",
   headers: {
@@ -18,7 +18,7 @@ export const client = axios.create({
 export const admin = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
-      ? "https://my-instructor-server.ts.r.appspot.com/api/admin"
+      ? "https://api.myinstructor.com.au/api/admin"
       : "http://localhost:6969/api/admin",
   // baseURL: "https://my-instructor-server.ts.r.appspot.com/api/admin",
   headers: {

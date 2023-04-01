@@ -1,4 +1,11 @@
-import { Autocomplete, Box, Button, Modal, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Button,
+  Checkbox,
+  Modal,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import {
   bookingsField,
@@ -98,6 +105,21 @@ const AdminListEdit = ({ item, type, visible, setEditVisible }: Props) => {
         <Box className={"model__fields"}>
           {fields[type as keyof typeof fields].map((field, key) => {
             if (field.name === "password") return <></>;
+            if (field.type === "radio")
+              return (
+                <Box
+                  className="hasgst__field"
+                  sx={{ display: "flex", gap: 2, alignItems: "center" }}
+                >
+                  <p>{field.label}</p>
+                  <Checkbox
+                    defaultChecked={item[field.name]}
+                    onChange={(e) =>
+                      setEdits({ ...edits, [field.name]: e.target.checked })
+                    }
+                  />
+                </Box>
+              );
             if (field.type === "select")
               return (
                 <>
