@@ -18,7 +18,7 @@ const Earnings = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const result = await getInstructorEarnings(user._id);
+        const result = await getInstructorEarnings();
         setEarnings(result.earnings ?? []);
       } catch (error) {
         console.error(error);

@@ -13,6 +13,10 @@ import { State } from "../../typings/reduxTypings";
 import { BookingTypeBack } from "../../typings/bookingsType";
 import { Instructor } from "../../typings/instructorTypings";
 import { toast } from "material-react-toastify";
+import {
+  InstructorAvailablePayoutAmount,
+  getInstructorAvailablePayoutAmount,
+} from "../../api_calls/earnings_api";
 
 const InstructorDashboardMain = ({ setActiveRoute }: any) => {
   const [bookings, setBookings] = useState<BookingTypeBack[]>([]);
@@ -20,6 +24,7 @@ const InstructorDashboardMain = ({ setActiveRoute }: any) => {
   const [pendingBookings, setPendingBookings] = useState<BookingTypeBack[]>();
   const [loading, setLoading] = useState(false);
   const [fetchedInstructor, setFetchedInstructor] = useState<Instructor>();
+  const [payoutAmount, setPayoutAmount] = useState<number>();
 
   const { user: instructor } = useSelector((state: State) => state.user);
   useEffect(() => {
@@ -28,8 +33,19 @@ const InstructorDashboardMain = ({ setActiveRoute }: any) => {
   }, []);
   useEffect(() => {
     countUpcomingBookings();
+    getDashboardDataOnRender();
   }, [bookings]);
 
+  // getting dashboard data on render
+  const getDashboardDataOnRender = async () => {
+    try {
+      const amount: InstructorAvailablePayoutAmount =
+        await getInstructorAvailablePayoutAmount();
+      if (typeof amount === "number") setPayoutAmount(amount);
+    } catch (error: any) {
+      alert(error.message);
+    }
+  };
   const getBookingsByInstructor = async () => {
     setLoading(true);
     const bookings = await getInstructorBookings(instructor._id);
@@ -86,8 +102,8 @@ const InstructorDashboardMain = ({ setActiveRoute }: any) => {
           />
           <CounterCards
             loading={loading}
-            title={"Withdraw Available"}
-            count={`${fetchedInstructor?.credit || 0} hr`}
+            title={"Payout Amount Available"}
+            count={`$${payoutAmount ? payoutAmount : 0}`}
             icon={<BsCurrencyDollar />}
           />
         </div>
