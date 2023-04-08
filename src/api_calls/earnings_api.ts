@@ -19,7 +19,7 @@ export const getInstructorEarnings = async (
   instructorId: string
 ): Promise<InstructorEarningsReturn> => {
   try {
-    const { data } = await client.get(`earning/${instructorId}`);
+    const { data } = await client.get(`earning/list`);
     return {
       success: true,
       earnings: data?.earnings ?? [],
