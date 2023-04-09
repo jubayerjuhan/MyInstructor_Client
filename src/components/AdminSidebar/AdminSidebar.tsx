@@ -12,6 +12,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import logo from "../../assets/logo.png";
@@ -94,6 +95,11 @@ export default function AdminSidebar(props: Props) {
       label: "Agreement",
       link: "/agreement",
       icon: <HandshakeIcon />,
+    },
+    {
+      label: "Instructor Earnings",
+      link: "/earnings",
+      icon: <AttachMoneyIcon />,
     },
   ];
   const handleDrawerToggle = () => {
