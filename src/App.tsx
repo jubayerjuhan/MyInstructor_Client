@@ -6,6 +6,7 @@ import { getAllSuburbs } from "./api_calls/admin_api";
 import { client } from "./client";
 import SteeringLoader from "./components/Loader/SteeringLoader/SteeringLoader";
 import { SET_LESSON_PRICE } from "./redux/reducer/reduxNamings";
+import FortnightPayments from "./pages/Admin/FortnightPayments/FortnightPayments";
 
 const AddInstructor = lazy(
   () => import("./components/AddInstructor/AddInstructor")
@@ -389,6 +390,14 @@ function App() {
               element={
                 <AdminProtected location={"/admin/earnings"}>
                   <AdminInstructorEarnings />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/fortnight-payments"}
+              element={
+                <AdminProtected location={"/admin/fortnight-payments"}>
+                  <FortnightPayments />
                 </AdminProtected>
               }
             />

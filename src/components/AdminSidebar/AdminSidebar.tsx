@@ -13,6 +13,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import PaidIcon from "@mui/icons-material/Paid";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import logo from "../../assets/logo.png";
@@ -100,6 +101,11 @@ export default function AdminSidebar(props: Props) {
       label: "Instructor Earnings",
       link: "/earnings",
       icon: <AttachMoneyIcon />,
+    },
+    {
+      label: "Fortnight Payments",
+      link: "/fortnight-payments",
+      icon: <PaidIcon />,
     },
   ];
   const handleDrawerToggle = () => {
