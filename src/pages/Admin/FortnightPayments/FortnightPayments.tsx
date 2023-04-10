@@ -89,6 +89,8 @@ const FortnightPayments = () => {
 
   return (
     <AdminPageWrapper>
+      <h5>Fortnightly Payment</h5>
+      <p>Send Fortnigly Payment Reports To Instructors From Here</p>
       <div className="instructor_pay-btn">
         {typeof selectedInstructors !== "undefined" &&
           selectedInstructors?.length > 0 && (
