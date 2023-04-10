@@ -6,10 +6,12 @@ interface changeBookingProps {
   booking: BookingTypeBack;
   changeBookingStatus: any;
   title: String;
+  loading: boolean;
 }
 const ConfirmBooking = ({
   title,
   booking,
+  loading,
   changeBookingStatus,
 }: changeBookingProps) => {
   return (
@@ -22,7 +24,11 @@ const ConfirmBooking = ({
             revertColor
             onClick={() => changeBookingStatus(false)}
           />
-          <Button title={"Yes"} onClick={() => changeBookingStatus(true)} />
+          <Button
+            loading={loading}
+            title={"Yes"}
+            onClick={() => changeBookingStatus(true)}
+          />
         </div>
       </div>
     </>
