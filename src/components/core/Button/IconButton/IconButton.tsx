@@ -4,11 +4,17 @@ import React from "react";
 interface IconButtonProps {
   Icon: React.ElementType;
   title: string;
-  onClick?: () => void;
+  onClick?: any;
+  className?: string;
 }
-const IconButton = ({ Icon, title, onClick }: IconButtonProps) => {
+const IconButton = ({ Icon, title, onClick, className }: IconButtonProps) => {
   return (
-    <Button variant="outlined" startIcon={<Icon />} onClick={onClick}>
+    <Button
+      className={className}
+      variant="outlined"
+      startIcon={<Icon />}
+      onClick={onClick}
+    >
       {title}
     </Button>
   );

@@ -22,6 +22,7 @@ import { adminReducer } from "../reducer/admin_reducer";
 import { adminDataReducer } from "../reducer/admin_dataReducer";
 import { adminSuburbs, suburbReducer } from "../reducer/suburbs_reducer";
 import { priceReducer } from "../reducer/price_reducer";
+import { sendPromiseReducer } from "../reducer/promise/sendPromise_reducer";
 
 // root reducer
 const rootReducer = combineReducers({
@@ -36,12 +37,13 @@ const rootReducer = combineReducers({
   suburb: suburbReducer,
   lessonPrice: priceReducer,
   adminSuburbs: adminSuburbs,
+  sendPromise: sendPromiseReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["adminData"],
+  blacklist: ["adminData", "sendPromise"],
 };
 
 // created reducer to be persisted at local storage
