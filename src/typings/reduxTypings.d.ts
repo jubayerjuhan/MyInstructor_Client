@@ -1,3 +1,4 @@
+import { PromiseReducerState } from "./reduxTypings.d";
 import { BookingTypeBack } from "./bookingsType";
 import { BillingInfo, Cart } from "./cartTypings";
 import { Car, Instructor, Suburb } from "./instructorTypings";
@@ -34,6 +35,7 @@ export interface State {
   };
   car: Car;
   suburb: { suburb: Suburb };
+  sendPromise: PromiseReducerState;
 }
 
 export interface PriceReducerPrpos {
@@ -122,3 +124,12 @@ export interface Message {
   messageType: string;
   fileName: string;
 }
+
+// initial promise state
+
+export type PromiseReducerState = {
+  loading: boolean;
+  success?: boolean;
+  error?: string;
+  message?: string;
+};

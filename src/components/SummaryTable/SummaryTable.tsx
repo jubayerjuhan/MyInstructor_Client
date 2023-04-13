@@ -30,6 +30,7 @@ const SummaryTable = ({
             </td>
             <td>{data.duration} hrs</td>
             <td>${data.subtotal}</td>
+            <td>{data.paid ? "Yes" : "No"}</td>
             <td>
               <a href={data.invoice} target={"_blank"} rel="noreferrer">
                 <Button

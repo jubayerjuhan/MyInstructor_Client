@@ -27,6 +27,7 @@ const ViewBookingPage = () => {
   const [statusChanged, setStatusChanged] = useState(false);
   const [timeOver, setBookingTimeOver] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [bookingStatusLoading, setBookingStatusLoading] = useState(false);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -51,26 +52,39 @@ const ViewBookingPage = () => {
   // change booking status
   const changeBookingStatus = async (status: boolean) => {
     const bookingStatus = status ? "Approved" : "Canceled";
-
-    const success = await changeStatusOfBooking(
-      bookingStatus,
-      booking ? booking._id : ""
-    );
-    if (!success)
-      return toast.error("Error Occoured, Can't Change Booking Status");
-    toast.success(`Booking Status Changed ${bookingStatus}`);
-    setStatusChanged(!statusChanged);
+    setBookingStatusLoading(true);
+    try {
+      const success = await changeStatusOfBooking(
+        bookingStatus,
+        booking ? booking._id : ""
+      );
+      if (!success)
+        return toast.error("Error Occoured, Can't Change Booking Status");
+      toast.success(`Booking Status Changed ${bookingStatus}`);
+      setStatusChanged(!statusChanged);
+    } catch (error) {
+      alert("Can't Change Booking Status");
+    } finally {
+      setBookingStatusLoading(false);
+    }
   };
 
   const endBooking = async () => {
-    const success = await changeStatusOfBooking(
-      "Ended",
-      booking ? booking._id : ""
-    );
-    if (!success)
-      return toast.error("Error Occoured, Can't Change Booking Status");
-    toast.success(`Booking Status Changed To Ended`);
-    setStatusChanged(!statusChanged);
+    setBookingStatusLoading(true);
+    try {
+      const success = await changeStatusOfBooking(
+        "Ended",
+        booking ? booking._id : ""
+      );
+      if (!success)
+        return toast.error("Error Occoured, Can't Change Booking Status");
+      toast.success(`Booking Status Changed To Ended`);
+      setStatusChanged(!statusChanged);
+    } catch (err) {
+      alert("Can't Change Booking Status");
+    } finally {
+      setBookingStatusLoading(false);
+    }
   };
 
   if (!booking)
@@ -101,6 +115,7 @@ const ViewBookingPage = () => {
         {/* change booking status */}
         {booking.status === "Pending" && user.userType === "instructor" && (
           <ConfirmBooking
+            loading={bookingStatusLoading}
             title={`Do You Want To Confirm Booking With ${booking?.user?.firstName} ?`}
             booking={booking}
             changeBookingStatus={changeBookingStatus}
@@ -110,6 +125,7 @@ const ViewBookingPage = () => {
           timeOver &&
           user.userType === "instructor" && (
             <ConfirmBooking
+              loading={bookingStatusLoading}
               title={`End Booking Successfully! ${booking?.user?.firstName} ?`}
               booking={booking}
               changeBookingStatus={endBooking}

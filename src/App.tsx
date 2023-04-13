@@ -6,6 +6,7 @@ import { getAllSuburbs } from "./api_calls/admin_api";
 import { client } from "./client";
 import SteeringLoader from "./components/Loader/SteeringLoader/SteeringLoader";
 import { SET_LESSON_PRICE } from "./redux/reducer/reduxNamings";
+import FortnightPayments from "./pages/Admin/FortnightPayments/FortnightPayments";
 
 const AddInstructor = lazy(
   () => import("./components/AddInstructor/AddInstructor")
@@ -94,6 +95,9 @@ const TermsAndCondition = lazy(
   () => import("./pages/TermsAndCondtion/TermsAndCondition")
 );
 const ViewItemsPage = lazy(() => import("./pages/ViewItemsPage"));
+const AdminInstructorEarnings = lazy(
+  () => import("./pages/Admin/InstuctorEarnings/InstructorEarnings")
+);
 
 // const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
 
@@ -378,6 +382,22 @@ function App() {
               element={
                 <AdminProtected location={"/admin/agreement"}>
                   <AdminAgreement />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/earnings"}
+              element={
+                <AdminProtected location={"/admin/earnings"}>
+                  <AdminInstructorEarnings />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/fortnight-payments"}
+              element={
+                <AdminProtected location={"/admin/fortnight-payments"}>
+                  <FortnightPayments />
                 </AdminProtected>
               }
             />
