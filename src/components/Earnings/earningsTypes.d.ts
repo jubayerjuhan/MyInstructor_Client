@@ -20,6 +20,7 @@ export interface Earning {
   total: number;
   unitPrice: number;
   updatedAt: string;
+  paid: boolean;
   __v: number;
   _id: string;
 }
