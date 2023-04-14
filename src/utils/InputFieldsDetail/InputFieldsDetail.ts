@@ -268,6 +268,30 @@ export const addInstructorFields = [
     type: "date",
   },
   {
+    name: "bankAccountNumber",
+    label: "Bank Account Number",
+    placeholder: "Bank Account Number",
+    type: "number",
+  },
+  {
+    name: "bsbNumber",
+    label: "BSB Number",
+    placeholder: "BSB Number",
+    type: "number",
+  },
+  {
+    name: "abnNumber",
+    label: "ABN Number",
+    placeholder: "ABN Number",
+    type: "number",
+  },
+  {
+    name: "invoiceAddress",
+    label: "Invoice Address",
+    placeholder: "Invoice Address",
+    type: "string",
+  },
+  {
     name: "hasGst",
     label: "Does Instructor Has GST?",
     placeholder: "Does Instructor Has GST?",

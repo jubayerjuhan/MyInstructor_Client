@@ -59,7 +59,6 @@ const AddInstructor = () => {
 
     // car
     instructor.car = { ...multiValue.car, numberPlate: instructor.numberPlate };
-    console.log(instructor);
 
     // suburbs
     const suburbs: any[] = [];
@@ -71,10 +70,32 @@ const AddInstructor = () => {
     instructor.serviceSuburbs = {};
     instructor.serviceSuburbs.suburbs = suburbs;
 
+    // pushing paymentInfo
+    instructor.paymentInfo = {
+      bankAccountNumber: data.bankAccountNumber,
+      bsbNumber: data.bsbNumber,
+    };
+    // pushing additional info
+    instructor.additionalInfo = {
+      abnNumber: data.abnNumber,
+      invoiceAddress: data.invoiceAddress,
+    };
+
+    const blackListedFields = [
+      "car",
+      "serviceSuburbs",
+      "bsbNumber",
+      "abnNumber",
+      "invoiceAddress",
+      "bankAccountNumber",
+    ];
+    const needToManuallyStringify = ["paymentInfo", "additionalInfo"];
     const formData = new FormData();
     Object.keys(instructor).forEach((key, index) => {
-      if (key === "car") return;
-      if (key === "serviceSuburbs") return;
+      if (blackListedFields.includes(key)) return;
+      if (needToManuallyStringify.includes(key))
+        return formData.append(key, JSON.stringify(instructor[key]));
+
       if (key === "languages")
         return formData.append(key, JSON.stringify(instructor[key]));
       formData.append(key, instructor[key]);
@@ -94,13 +115,13 @@ const AddInstructor = () => {
 
   const saveInstructor = async (formData: any) => {
     setLoading(true);
-    const { success, message } = await addInstructorAdmin(formData);
-    if (!success) {
-      setLoading(false);
+    try {
+      const { success, message } = await addInstructorAdmin(formData);
+      if (success) return toast.success("Instructor Added Successfully");
       return toast.error(message);
+    } finally {
+      setLoading(false);
     }
-    toast.success("Instructor Added Successfully");
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -115,10 +136,15 @@ const AddInstructor = () => {
   const handleSuburbSearch = async (e: any) => {
     if (e.target.value.length === 0) setSuburbs([]);
     if (e.target.value.length < 2) return;
+
     setLoading(true);
-    const { data } = await client.get(`/search-suburbs/${e.target.value}`);
-    setLoading(false);
-    setSuburbs(data.suburbs);
+    try {
+      const { data } = await client.get(`/search-suburbs/${e.target.value}`);
+      setSuburbs(data.suburbs);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -199,7 +225,6 @@ const AddInstructor = () => {
                   <>
                     <TextField
                       {...params}
-                      onChange={(e) => console.log(e)}
                       variant="outlined"
                       label={field.label}
                       placeholder={field.label}
