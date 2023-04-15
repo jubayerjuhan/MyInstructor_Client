@@ -53,12 +53,15 @@ const AdminListEdit = ({ item, type, visible, setEditVisible }: Props) => {
     booking: adminEditBooking,
   };
 
+  console.log(edits, "instructorEdit");
   const handleChange = (e: any) => {
-    if (type === "instructor") return handleInstructorEdit(edits, setEdits, e);
+    if (type === "instructor")
+      return handleInstructorEdit(edits, setEdits, e, item);
     setEdits({ ...edits, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async () => {
+    // return console.log(edits, "edits");
     const { success, message } = await editFunc[type as keyof typeof editFunc](
       item._id,
       edits,
