@@ -22,7 +22,14 @@ export interface Instructor {
   instructorLicenseExpire?: string;
   instructorLicenseExpire?: string;
   childrenCheckLicenseExpire?: string;
-
+  additionalInfo: {
+    abnNumber: number;
+    invoiceAddress: string;
+  };
+  paymentInfo: {
+    bankAccountNumber: number;
+    bsbNumber: number;
+  };
   _id: string;
   reviews: Review[];
 }
