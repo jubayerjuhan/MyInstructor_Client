@@ -33,7 +33,6 @@ export const adminEditInstructor = async (
   item: Instructor
 ) => {
   let suburbs: any[] = [];
-  // return console.log(edits, editedSuburbs, "admin edits...");
   if (edits.carNumber)
     edits = {
       ...edits,
@@ -43,13 +42,13 @@ export const adminEditInstructor = async (
       },
     };
 
-  editedSuburbs.suburbs.forEach((suburb: Suburb) => {
+  editedSuburbs?.suburbs.forEach((suburb: Suburb) => {
     console.log(suburb, "sub...");
     const customisedSuburb = { name: suburb.suburb, postCode: suburb.postcode };
     suburbs.push(customisedSuburb);
   });
 
-  if (editedSuburbs)
+  if (editedSuburbs.suburbs.length > 0)
     edits = {
       ...edits,
       serviceSuburbs: {

@@ -26,6 +26,7 @@ import { adminEditInstructor } from "../../api_calls/Admin/admin_instructors";
 import { adminEditBooking } from "../../api_calls/Admin/admin_booking";
 import { Suburb } from "../../typings/instructorTypings";
 import { client } from "../../client";
+import { handleInstructorEdit } from "./instructorEdit";
 
 interface Props {
   visible: boolean;
@@ -53,6 +54,7 @@ const AdminListEdit = ({ item, type, visible, setEditVisible }: Props) => {
   };
 
   const handleChange = (e: any) => {
+    if (type === "instructor") return handleInstructorEdit(edits, setEdits, e);
     setEdits({ ...edits, [e.target.name]: e.target.value });
   };
 
