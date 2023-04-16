@@ -97,6 +97,7 @@ const FortnightPayments = () => {
             <IconButton
               title="Pay Selected Instructors"
               Icon={PaidIcon}
+              loading={loading}
               onClick={() =>
                 dispatch(paySelectedInstructors(selectedInstructors))
               }
