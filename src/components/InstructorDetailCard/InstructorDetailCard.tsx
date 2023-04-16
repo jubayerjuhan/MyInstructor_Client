@@ -74,6 +74,18 @@ const InstructorDetailCard = ({ item }: Props) => {
             Children Check License Expire :{" "}
             {moment(item?.childrenCheckLicenseExpire).format("MMM DD YYYY")}
           </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            ABN Number : {item.abnNumber}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            Invoice Address : {item.invoiceAddress}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            BSB Number : {item.bsbNumber}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            Bank Account Number : {item.bankAccountNumber}
+          </Typography>
 
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Language :

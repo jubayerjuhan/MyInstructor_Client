@@ -70,31 +70,10 @@ const AddInstructor = () => {
     instructor.serviceSuburbs = {};
     instructor.serviceSuburbs.suburbs = suburbs;
 
-    // pushing paymentInfo
-    instructor.paymentInfo = {
-      bankAccountNumber: data.bankAccountNumber,
-      bsbNumber: data.bsbNumber,
-    };
-    // pushing additional info
-    instructor.additionalInfo = {
-      abnNumber: data.abnNumber,
-      invoiceAddress: data.invoiceAddress,
-    };
-
-    const blackListedFields = [
-      "car",
-      "serviceSuburbs",
-      "bsbNumber",
-      "abnNumber",
-      "invoiceAddress",
-      "bankAccountNumber",
-    ];
-    const needToManuallyStringify = ["paymentInfo", "additionalInfo"];
+    const blackListedFields = ["car", "serviceSuburbs"];
     const formData = new FormData();
     Object.keys(instructor).forEach((key, index) => {
       if (blackListedFields.includes(key)) return;
-      if (needToManuallyStringify.includes(key))
-        return formData.append(key, JSON.stringify(instructor[key]));
 
       if (key === "languages")
         return formData.append(key, JSON.stringify(instructor[key]));

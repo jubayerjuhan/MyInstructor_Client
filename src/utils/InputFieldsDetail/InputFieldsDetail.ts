@@ -271,19 +271,19 @@ export const addInstructorFields = [
     name: "bankAccountNumber",
     label: "Bank Account Number",
     placeholder: "Bank Account Number",
-    type: "number",
+    type: "string",
   },
   {
     name: "bsbNumber",
     label: "BSB Number",
     placeholder: "BSB Number",
-    type: "number",
+    type: "string",
   },
   {
     name: "abnNumber",
     label: "ABN Number",
     placeholder: "ABN Number",
-    type: "number",
+    type: "string",
   },
   {
     name: "invoiceAddress",
