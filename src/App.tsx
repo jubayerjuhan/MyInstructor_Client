@@ -7,6 +7,7 @@ import { client } from "./client";
 import SteeringLoader from "./components/Loader/SteeringLoader/SteeringLoader";
 import { SET_LESSON_PRICE } from "./redux/reducer/reduxNamings";
 import FortnightPayments from "./pages/Admin/FortnightPayments/FortnightPayments";
+import SentPayments from "./pages/SentPayments/SentPayments";
 
 const AddInstructor = lazy(
   () => import("./components/AddInstructor/AddInstructor")
@@ -398,6 +399,14 @@ function App() {
               element={
                 <AdminProtected location={"/admin/fortnight-payments"}>
                   <FortnightPayments />
+                </AdminProtected>
+              }
+            />
+            <Route
+              path={"/admin/sent-payments"}
+              element={
+                <AdminProtected location={"/admin/sent-payments"}>
+                  <SentPayments />
                 </AdminProtected>
               }
             />

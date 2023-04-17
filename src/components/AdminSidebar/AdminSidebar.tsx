@@ -19,7 +19,7 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/logo.png";
 import AltRouteIcon from "@mui/icons-material/AltRoute";
 
-//
+// Icons Import
 import LogoutIcon from "@mui/icons-material/Logout";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
@@ -29,6 +29,8 @@ import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import LibraryBooksOutlinedIcon from "@mui/icons-material/LibraryBooksOutlined";
 import CreditCardOffOutlinedIcon from "@mui/icons-material/CreditCardOffOutlined";
+import PaymentsIcon from "@mui/icons-material/Payments";
+
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ADMIN_LOGOUT } from "../../redux/reducer/reduxNamings";
@@ -106,6 +108,11 @@ export default function AdminSidebar(props: Props) {
       label: "Fortnight Payments",
       link: "/fortnight-payments",
       icon: <PaidIcon />,
+    },
+    {
+      label: "Sent Payments",
+      link: "/sent-payments",
+      icon: <PaymentsIcon />,
     },
   ];
   const handleDrawerToggle = () => {
