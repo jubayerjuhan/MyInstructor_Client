@@ -42,10 +42,6 @@ const SentPayments = () => {
     }
   };
 
-  const handleReciptIconClick = (url: string) => {
-    window.open(url, "_blank");
-  };
-
   const rows: any = [];
   fortnightlyPayments?.forEach((payment) => {
     rows.push({
