@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBookingInfo } from "../../redux/actions/bookingAction";
 import { useNavigate } from "react-router-dom";
 import { getInstructorBookings } from "../../api_calls/instructor_api";
+import { client } from "../../client";
 
 const BookingSelector = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const BookingSelector = () => {
 
   useEffect(() => {
     getBookings();
+
   }, []);
   // get selected Instructor bookings to compare values with time
   const getBookings = async () => {
@@ -58,8 +60,15 @@ const BookingSelector = () => {
     const inputDate = JSON.parse(e.target.value);
     setSelectedDate(inputDate);
 
-    const addHour = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-    const twoAddHour = [7, 9, 11, 13, 15, 17, 19];
+    const addHour = [0, 1,
+      2, 3, 4, 5, 6, 7, 8,
+      9,
+      10,
+      11,
+      12,
+      13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+    ];
+    const twoAddHour = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24];
     const hrs = [];
     if (inputDate) {
       if (duration === 2) {
@@ -100,6 +109,35 @@ const BookingSelector = () => {
     const setBooking = dispatch(setBookingInfo(booking));
     if (setBooking) return navigate("/booking-info");
   };
+
+
+
+  const unavailableChecker = (date, hour) => {
+    const selectedDay = moment(date).format("dddd");
+    const daySlot = instructor.availability?.find(
+      (slot) => slot.day === selectedDay
+    );
+
+    if (daySlot) {
+      let anyAvailable = false;
+      for (let i = 0; i < daySlot.slots.length; i++) {
+        const slot = daySlot.slots[i];
+        const slotStartTime =
+          moment(date).format("YYYY-MM-DD") + " " + slot.startTime;
+        const slotEndTime =
+          moment(date).format("YYYY-MM-DD") + " " + slot.endTime;
+        if (moment(slotEndTime) >= moment(hour).add(duration, "hour") && moment(slotStartTime) <= hour) {
+          anyAvailable = true;
+          break;
+        }
+      }
+      return !anyAvailable;
+    } else {
+      return true;
+    }
+  };
+
+
 
   return (
     <div className="booking__selector">
@@ -173,10 +211,11 @@ const BookingSelector = () => {
                     );
                   }
                   if (
-                    bookingTimes.includes(Date.parse(hour)) ||
-                    bookingEnd.includes(
-                      Date.parse(moment(hour).add(duration, "hour"))
-                    )
+                    unavailableChecker(selectedDate, hour) ||
+                    (bookingTimes.includes(Date.parse(hour)) ||
+                      bookingEnd.includes(
+                        Date.parse(moment(hour).add(duration, "hour"))
+                      ))
                   ) {
                     return (
                       <option
