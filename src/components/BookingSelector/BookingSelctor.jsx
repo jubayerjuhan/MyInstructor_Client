@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Button from "../core/Button/Button";
 import "./BookingSelctor.scss";
 import { toast } from "material-react-toastify";
@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBookingInfo } from "../../redux/actions/bookingAction";
 import { useNavigate } from "react-router-dom";
 import { getInstructorBookings } from "../../api_calls/instructor_api";
-import { client } from "../../client";
+import { fetchInstructorAvailabilities } from "../../api_calls/instructor_availability";
 
 const BookingSelector = () => {
   const dispatch = useDispatch();
@@ -17,18 +17,15 @@ const BookingSelector = () => {
   // const bookingTimes = [];
   const { instructor } = useSelector((state) => state.instructor);
   const [selectedDate, setSelectedDate] = useState();
+  const [instructorAvailabilities, setinstructorAvailabilities] = useState([]);
   const [hours, setHours] = useState([]);
   const lessonDuration = [1, 2];
   const [duration, setDuration] = useState(null);
   const [time, setTime] = useState(null);
   const dates = [];
 
-  useEffect(() => {
-    getBookings();
-
-  }, []);
   // get selected Instructor bookings to compare values with time
-  const getBookings = async () => {
+  const getBookings = useCallback(async () => {
     const bookingTime = [];
     const bookEnd = [];
     const bookings = await getInstructorBookings(instructor._id);
@@ -38,7 +35,15 @@ const BookingSelector = () => {
     });
     setbookingTimes(bookingTime);
     setbookingEnd(bookEnd);
-  };
+  }, [instructor._id])
+
+
+  // fetch bookings and instructor availabilities
+  useEffect(() => {
+    getBookings();
+    fetchInstructorAvailabilities(instructor._id, setinstructorAvailabilities)
+  }, [getBookings, instructor._id]);
+
 
   const getDate = async () => {
     for (let index = 0; index < 30; index++) {
@@ -60,14 +65,7 @@ const BookingSelector = () => {
     const inputDate = JSON.parse(e.target.value);
     setSelectedDate(inputDate);
 
-    const addHour = [0, 1,
-      2, 3, 4, 5, 6, 7, 8,
-      9,
-      10,
-      11,
-      12,
-      13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
-    ];
+    const addHour = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
     const twoAddHour = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24];
     const hrs = [];
     if (inputDate) {
@@ -114,7 +112,7 @@ const BookingSelector = () => {
 
   const unavailableChecker = (date, hour) => {
     const selectedDay = moment(date).format("dddd");
-    const daySlot = instructor.availability?.find(
+    const daySlot = instructorAvailabilities?.find(
       (slot) => slot.day === selectedDay
     );
 
