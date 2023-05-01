@@ -12,6 +12,7 @@ import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import InstructorDashboardMain from "../../components/InstructorDashboardMain/InstructorDashboardMain";
 import { State } from "../../typings/reduxTypings";
 import Profile from "../ProfilePage/Profile";
+import InstructorAvailability from "../InstructorAvailability/InstructorAvailability";
 
 const InstructorDashboard = () => {
   const { user } = useSelector((state: State) => state.user);
@@ -38,6 +39,12 @@ const InstructorDashboard = () => {
       link: "earnings",
       icon: AiOutlineDollar,
       component: Earnings,
+    },
+    {
+      label: "Availability",
+      link: "availability",
+      icon: AiOutlineDollar,
+      component: InstructorAvailability,
     },
   ];
   return (
