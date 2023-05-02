@@ -4,17 +4,21 @@ import "./instructorAvailability.scss";
 
 //
 import dayjs from "dayjs";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
-import moment from "moment";
 import { Button } from "@mui/material";
-import { fetchInstructorAvailabilities } from "../../api_calls/instructor_availability";
+import { fetchInstructorAvailabilities, saveInstructorAvailability } from "../../api_calls/instructor_availability";
 import { useSelector } from "react-redux";
+import { toast } from "material-react-toastify";
+import IconButton from "../../components/core/Button/IconButton/IconButton";
+import SaveIcon from "@mui/icons-material/Save";
 
 const InstructorAvailability = () => {
   const { user } = useSelector((state) => state.user);
+  const [removedSlots, setRemovedSlots] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [instructorAvailability, setInstructorAvailability] = useState([]);
   const [slots, setSlots] = useState({
     Monday: [{ startTime: "", endTime: "" }],
@@ -53,6 +57,12 @@ const InstructorAvailability = () => {
 
   // remove slot
   const removeSlot = (day, slotIndex) => {
+    setRemovedSlots((prevRemovedSlots) => {
+      const newRemovedSlots = [...prevRemovedSlots];
+      newRemovedSlots.push({ ...slots[day.name][slotIndex], day: day.name });
+      return newRemovedSlots;
+    });
+
     setSlots((prevSlots) => {
       const newSlots = { ...prevSlots }; // create a new object to avoid mutating the previous state
       newSlots[day.name].splice(slotIndex, 1);
@@ -75,7 +85,7 @@ const InstructorAvailability = () => {
     });
   };
 
-  const submitSlots = () => {
+  const submitSlots = async () => {
     const slotsArray = [];
 
     for (const day in slots) {
@@ -93,6 +103,17 @@ const InstructorAvailability = () => {
           endTime: formattedEndTime,
         });
       });
+    }
+
+    try {
+      setLoading(true);
+      const status = await saveInstructorAvailability(user._id, slotsArray, removedSlots);
+      if (status) return toast.success("Instructor Availability Saved");
+      toast.error("Can't Set Availability");
+    } catch (error) {
+      toast.error("Can't Set Availability");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -137,7 +158,9 @@ const InstructorAvailability = () => {
                         </DemoItem>
                       </LocalizationProvider>
 
-                      <div onClick={() => removeSlot(day, key)}>Cross</div>
+                      <Button onClick={() => removeSlot(day, key)} variant="outlined">
+                        Delete Slot
+                      </Button>
                     </div>
                   );
                 })}
@@ -145,9 +168,7 @@ const InstructorAvailability = () => {
             </div>
           );
         })}
-        <Button onClick={submitSlots} variant="contained">
-          Submit Slots
-        </Button>
+        <IconButton onClick={submitSlots} Icon={SaveIcon} title="Save Slots" loading={loading} />
       </div>
     </div>
   );
