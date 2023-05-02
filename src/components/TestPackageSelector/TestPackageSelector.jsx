@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Button from "../core/Button/Button";
 import "./TestPackageSelector.scss";
 import { toast } from "material-react-toastify";
@@ -20,8 +20,7 @@ const TestPackageSelector = () => {
   const { instructor } = useSelector((state) => state.instructor);
   const [selectedDate, setSelectedDate] = useState();
   const [hours, setHours] = useState([]);
-  const lessonDuration = [1, 2];
-  const [duration, setDuration] = useState(2);
+  const duration = 2;
   const [time, setTime] = useState(null);
   const dates = [];
 

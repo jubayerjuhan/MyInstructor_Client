@@ -76,12 +76,7 @@ const InstructorProfile = () => {
           </div>
           <div className="instructor__profile-right">
             <div className="instructor__action-buttons">
-              <Button
-                width="100%"
-                smallFont
-                title="Book Now"
-                onClick={handleBookNow}
-              />
+              <Button width="100%" smallFont title="Book Now" onClick={handleBookNow} />
               <Button
                 onClick={() => setShowModal(true)}
                 width="100%"
