@@ -8,7 +8,7 @@ const NavbarHeader = () => {
   return (
     <div className="nav__header-links">
       <div>
-        <a className="navbar__header-link" href="/apply-instructor">
+        <a className="navbar__header-link apply__instructor-link" href="/apply-instructor">
           Apply As Instructor
         </a>
       </div>

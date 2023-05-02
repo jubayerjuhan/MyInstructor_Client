@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  AiOutlineDashboard,
-  AiOutlineUser,
-  AiOutlineDollar,
-} from "react-icons/ai";
+import { AiOutlineDashboard, AiOutlineCalendar, AiFillCalendar, AiOutlineUser, AiOutlineDollar } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../../components/Dashboard/Dashboard";
@@ -12,6 +8,8 @@ import HelmetTitle from "../../components/HelmetTitle/HelmetTitle";
 import InstructorDashboardMain from "../../components/InstructorDashboardMain/InstructorDashboardMain";
 import { State } from "../../typings/reduxTypings";
 import Profile from "../ProfilePage/Profile";
+import InstructorAvailability from "../InstructorAvailability/InstructorAvailability";
+import Bookingcalendar from "../BookingCalander/BookingCalander";
 
 const InstructorDashboard = () => {
   const { user } = useSelector((state: State) => state.user);
@@ -28,6 +26,12 @@ const InstructorDashboard = () => {
       component: InstructorDashboardMain,
     },
     {
+      label: "Calendar",
+      link: "booking-calendar",
+      icon: AiOutlineCalendar,
+      component: Bookingcalendar,
+    },
+    {
       label: "Profile",
       link: "profile",
       icon: AiOutlineUser,
@@ -38,6 +42,12 @@ const InstructorDashboard = () => {
       link: "earnings",
       icon: AiOutlineDollar,
       component: Earnings,
+    },
+    {
+      label: "Availability",
+      link: "availability",
+      icon: AiFillCalendar,
+      component: InstructorAvailability,
     },
   ];
   return (

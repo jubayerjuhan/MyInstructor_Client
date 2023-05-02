@@ -4,18 +4,24 @@ import "./CheckAvailability.scss";
 import moment from "moment";
 import { getInstructorBookings } from "../../api_calls/instructor_api";
 import { FaTimes } from "react-icons/fa";
+import { fetchInstructorAvailabilities } from "../../api_calls/instructor_availability";
 
 const CheckAvailability = ({ instructor, setShowModal, visible }) => {
+  // instructor = {id: "instructorid", name: "Instructor Name"}
   const [dates, setDates] = useState([]);
+  const [instructorAvailabilities, setinstructorAvailabilities] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [bookedHours, setBookedHours] = useState([]);
   const [bookingEndHours, setBookingEndHours] = useState([]);
-
-  const hours = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+  const hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
   useEffect(() => {
     getDate();
     getBookings();
   }, []);
+
+  useEffect(() => {
+    fetchInstructorAvailabilities(instructor._id, setinstructorAvailabilities);
+  }, [instructor._id]);
 
   const getBookings = async () => {
     const unixBookingTime = [];
@@ -43,6 +49,27 @@ const CheckAvailability = ({ instructor, setShowModal, visible }) => {
     setDates(generatedDates);
   };
 
+  // unavailable checker
+  const unavailableChecker = (date, hour) => {
+    const selectedDay = moment(date).format("dddd");
+    const daySlot = instructorAvailabilities?.find((slot) => slot.day === selectedDay);
+
+    if (daySlot) {
+      let anyAvailable = false;
+      for (let i = 0; i < daySlot.slots.length; i++) {
+        const slot = daySlot.slots[i];
+        const slotStartTime = moment(date).format("YYYY-MM-DD") + " " + slot.startTime;
+        const slotEndTime = moment(date).format("YYYY-MM-DD") + " " + slot.endTime;
+        if (moment(slotEndTime) >= moment(hour).add(1, "hour") && moment(slotStartTime) <= hour) {
+          anyAvailable = true;
+          break;
+        }
+      }
+      return anyAvailable;
+    } else {
+      return true;
+    }
+  };
   return (
     <Modal
       open={visible}
@@ -86,10 +113,7 @@ const CheckAvailability = ({ instructor, setShowModal, visible }) => {
                     {hours.map((hour, key) => {
                       return (
                         <p className="hour hourrow" key={key}>
-                          {moment()
-                            .startOf("day")
-                            .add(hour, "hour")
-                            .format("LT")}
+                          {moment().startOf("day").add(hour, "hour").format("LT")}
                         </p>
                       );
                     })}
@@ -105,9 +129,12 @@ const CheckAvailability = ({ instructor, setShowModal, visible }) => {
                 <div className="hours">
                   {hours.map((hour, key) => {
                     const uhr = moment(date).add(hour, "hour");
+                    const isAvailable = unavailableChecker(date, hour);
+                    console.log(isAvailable);
                     if (
                       bookedHours.includes(Date.parse(uhr)) ||
-                      bookingEndHours.includes(Date.parse(uhr))
+                      bookingEndHours.includes(Date.parse(uhr)) ||
+                      unavailableChecker(date, hour)
                     ) {
                       return <p className="hour booked__hour" key={key}></p>;
                     }
