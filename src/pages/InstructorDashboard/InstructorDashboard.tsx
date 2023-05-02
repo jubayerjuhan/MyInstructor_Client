@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  AiOutlineDashboard,
-  AiOutlineUser,
-  AiOutlineDollar,
-} from "react-icons/ai";
+import { AiOutlineDashboard, AiOutlineUser, AiOutlineDollar } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../../components/Dashboard/Dashboard";
@@ -13,6 +9,7 @@ import InstructorDashboardMain from "../../components/InstructorDashboardMain/In
 import { State } from "../../typings/reduxTypings";
 import Profile from "../ProfilePage/Profile";
 import InstructorAvailability from "../InstructorAvailability/InstructorAvailability";
+import BookingCalander from "../BookingCalander/BookingCalander";
 
 const InstructorDashboard = () => {
   const { user } = useSelector((state: State) => state.user);
@@ -27,6 +24,12 @@ const InstructorDashboard = () => {
       link: "dashbaord",
       icon: AiOutlineDashboard,
       component: InstructorDashboardMain,
+    },
+    {
+      label: "Calander",
+      link: "booking-calander",
+      icon: AiOutlineDashboard,
+      component: BookingCalander,
     },
     {
       label: "Profile",

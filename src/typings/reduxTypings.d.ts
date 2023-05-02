@@ -55,6 +55,7 @@ export interface BookingType {
   duration: number;
   date: string;
   type?: string;
+  instructor: Instructor;
   time: { startFrom?: string; endTo?: string; from?: string; to?: string };
 }
 
