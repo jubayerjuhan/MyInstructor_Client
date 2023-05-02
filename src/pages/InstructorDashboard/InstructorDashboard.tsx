@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AiOutlineDashboard, AiOutlineUser, AiOutlineDollar } from "react-icons/ai";
+import { AiOutlineDashboard, AiOutlineCalendar, AiFillCalendar, AiOutlineUser, AiOutlineDollar } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../../components/Dashboard/Dashboard";
@@ -26,9 +26,9 @@ const InstructorDashboard = () => {
       component: InstructorDashboardMain,
     },
     {
-      label: "calendar",
+      label: "Calendar",
       link: "booking-calendar",
-      icon: AiOutlineDashboard,
+      icon: AiOutlineCalendar,
       component: Bookingcalendar,
     },
     {
@@ -46,7 +46,7 @@ const InstructorDashboard = () => {
     {
       label: "Availability",
       link: "availability",
-      icon: AiOutlineDollar,
+      icon: AiFillCalendar,
       component: InstructorAvailability,
     },
   ];

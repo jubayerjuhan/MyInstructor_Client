@@ -14,8 +14,8 @@ export const bookingToEventFormatter = (bookings: BookingType[]) => {
   bookings.forEach((booking, index) => {
     if (booking.time.from && booking.time.to)
       events.push({
-        end: new Date(booking.time.from),
-        start: new Date(booking.time.to),
+        end: new Date(booking.time.to),
+        start: new Date(booking.time.from),
         title: `Booking With ${booking.instructor.firstName}`,
       });
   });
