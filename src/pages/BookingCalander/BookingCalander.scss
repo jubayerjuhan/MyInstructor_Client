@@ -1,18 +1,18 @@
 @import "react-big-calendar/lib/sass/styles";
 @import "react-big-calendar/lib/addons/dragAndDrop/styles"; // if using DnD
 
-.booking_calander {
+.booking_calendar {
   min-height: 100vh;
   padding: 20px;
 
-  .calander__wrapper {
+  .calendar__wrapper {
     background-color: white;
     padding: 40px;
     border-radius: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     overflow: scroll;
 
-    .calander__header {
+    .calendar__header {
       // text-align: center;
       margin-bottom: 20px;
     }
@@ -21,7 +21,7 @@
       margin: 10px 0;
     }
   }
-  .calander {
+  .calendar {
     height: 80vh;
   }
 }
@@ -44,9 +44,9 @@
 }
 
 @media (max-width: 768px) {
-  .booking_calander {
-    .calander__wrapper {
-      .calander {
+  .booking_calendar {
+    .calendar__wrapper {
+      .calendar {
         height: 80vh;
         width: 700px;
       }

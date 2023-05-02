@@ -9,7 +9,7 @@ import InstructorDashboardMain from "../../components/InstructorDashboardMain/In
 import { State } from "../../typings/reduxTypings";
 import Profile from "../ProfilePage/Profile";
 import InstructorAvailability from "../InstructorAvailability/InstructorAvailability";
-import BookingCalander from "../BookingCalander/BookingCalander";
+import Bookingcalendar from "../BookingCalander/BookingCalander";
 
 const InstructorDashboard = () => {
   const { user } = useSelector((state: State) => state.user);
@@ -26,10 +26,10 @@ const InstructorDashboard = () => {
       component: InstructorDashboardMain,
     },
     {
-      label: "Calander",
-      link: "booking-calander",
+      label: "calendar",
+      link: "booking-calendar",
       icon: AiOutlineDashboard,
-      component: BookingCalander,
+      component: Bookingcalendar,
     },
     {
       label: "Profile",

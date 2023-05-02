@@ -14,7 +14,7 @@ export interface Event {
   start?: any;
   end?: any;
 }
-const BookingCalander = () => {
+const Bookingcalendar = () => {
   const localizer = momentLocalizer(moment);
   const [events, setEvents] = useState<Event[]>();
   const { user } = useSelector((state: State) => state.user);
@@ -34,13 +34,13 @@ const BookingCalander = () => {
   }, [getBookings]);
 
   return (
-    <div className="booking_calander">
-      <div className="calander__wrapper">
-        <h4 className="calander__header">Bookings Calander</h4>
-        <Calendar localizer={localizer} events={events} startAccessor="start" endAccessor="end" className="calander" />
+    <div className="booking_calendar">
+      <div className="calendar__wrapper">
+        <h4 className="calendar__header">Bookings calendar</h4>
+        <Calendar localizer={localizer} events={events} startAccessor="start" endAccessor="end" className="calendar" />
       </div>
     </div>
   );
 };
 
-export default BookingCalander;
+export default Bookingcalendar;
