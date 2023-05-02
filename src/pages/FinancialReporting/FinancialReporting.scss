@@ -18,3 +18,9 @@
   display: flex;
   gap: 30px;
 }
+
+@media (max-width: 768px) {
+  .date__selector {
+    gap: 10px;
+  }
+}
