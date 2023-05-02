@@ -23,6 +23,7 @@ import { adminDataReducer } from "../reducer/admin_dataReducer";
 import { adminSuburbs, suburbReducer } from "../reducer/suburbs_reducer";
 import { priceReducer } from "../reducer/price_reducer";
 import { sendPromiseReducer } from "../reducer/promise/sendPromise_reducer";
+import financialReportsReducer from "../reducer/financialReportsReducer";
 
 // root reducer
 const rootReducer = combineReducers({
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   lessonPrice: priceReducer,
   adminSuburbs: adminSuburbs,
   sendPromise: sendPromiseReducer,
+  financialReports: financialReportsReducer,
 });
 
 const persistConfig = {

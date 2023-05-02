@@ -36,6 +36,7 @@ export interface State {
   car: Car;
   suburb: { suburb: Suburb };
   sendPromise: PromiseReducerState;
+  financialReports: FinancialReportsReducer;
 }
 
 export interface PriceReducerPrpos {
@@ -134,3 +135,25 @@ export type PromiseReducerState = {
   error?: string;
   message?: string;
 };
+
+export interface FortnightlyPayment {
+  _id: string;
+  bookingAmount: number;
+  total: number;
+  subtotal: number;
+  managementFee: number;
+  gst: number;
+  inclusiveGst: number;
+  instructor: string;
+  invoice: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+}
+
+export interface FinancialReportsReducer {
+  loading: boolean;
+  error?: string;
+  reports: FortnightlyPayment[];
+  totalAmount: number;
+}
