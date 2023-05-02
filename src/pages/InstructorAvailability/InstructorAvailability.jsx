@@ -129,7 +129,13 @@ const InstructorAvailability = () => {
             <div className="day__container" key={dayIndex}>
               <p className="day__title">{day.name}</p>
               <div className="slots">
-                <Button className="addSlotBtn" onClick={() => addSlot(day)} sx={{ width: 100 }}>
+                <Button
+                  className="addSlotBtn"
+                  variant="contained"
+                  onClick={() => addSlot(day)}
+                  sx={{ width: 120 }}
+                  size="small"
+                >
                   Add Slot
                 </Button>
 
@@ -158,8 +164,8 @@ const InstructorAvailability = () => {
                         </DemoItem>
                       </LocalizationProvider>
 
-                      <Button onClick={() => removeSlot(day, key)} variant="outlined">
-                        Delete Slot
+                      <Button onClick={() => removeSlot(day, key)} variant="contained" size="small" color="error">
+                        Delete
                       </Button>
                     </div>
                   );
