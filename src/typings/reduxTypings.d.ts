@@ -144,7 +144,7 @@ export interface FortnightlyPayment {
   managementFee: number;
   gst: number;
   inclusiveGst: number;
-  instructor: string;
+  instructor: Instructor;
   invoice: string;
   createdAt: Date;
   updatedAt: Date;

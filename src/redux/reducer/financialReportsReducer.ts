@@ -1,5 +1,5 @@
 import { Action } from "../actions/actionTypings";
-import { GET_REPORTS_ERROR, GET_REPORTS_PENDING, GET_REPORTS_SUCCESS } from "./reduxNamings";
+import { CLEAR_ERROR, GET_REPORTS_ERROR, GET_REPORTS_PENDING, GET_REPORTS_SUCCESS } from "./reduxNamings";
 
 const financialReportsReducer = (
   state = {
@@ -19,7 +19,7 @@ const financialReportsReducer = (
       return {
         ...state,
         loading: false,
-        reports: action.payload,
+        reports: action.payload.reports,
         totalAmount: action.payload.totalAmount,
       };
     case GET_REPORTS_ERROR:
@@ -27,6 +27,11 @@ const financialReportsReducer = (
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
       };
 
     default:

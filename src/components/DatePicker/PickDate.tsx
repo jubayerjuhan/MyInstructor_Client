@@ -11,7 +11,7 @@ const PickDate = ({ title, onChange }: Props) => {
   return (
     <div>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker label={title} onChange={(val) => onChange(val)} />
+        <DatePicker label={title} onChange={(value) => onChange(value)} />
       </LocalizationProvider>
     </div>
   );
