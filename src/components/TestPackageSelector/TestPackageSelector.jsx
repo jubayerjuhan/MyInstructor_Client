@@ -6,7 +6,7 @@ import { toast } from "material-react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setBookingInfo } from "../../redux/actions/bookingAction";
 import { useNavigate } from "react-router-dom";
-import { getInstructorBookings } from "../../api_calls/instructor_api";
+import { getInstructorBookings, getSingleInstructor } from "../../api_calls/instructor_api";
 import TestPackageBanner from "../TestPackageBanner/TestPackageBanner";
 import { fetchInstructorAvailabilities } from "../../api_calls/instructor_availability";
 
@@ -16,6 +16,8 @@ const TestPackageSelector = () => {
   const [bookingTimes, setbookingTimes] = useState([]);
   const [bookingEnd, setbookingEnd] = useState([]);
   const [instructorAvailabilities, setinstructorAvailabilities] = useState([]);
+  const [instructorClosedEvents, setInstructorClosedEvents] = useState([]);
+
   // const bookingTimes = [];
   const { instructor } = useSelector((state) => state.instructor);
   const [selectedDate, setSelectedDate] = useState();
@@ -41,7 +43,13 @@ const TestPackageSelector = () => {
   useEffect(() => {
     getBookings();
     fetchInstructorAvailabilities(instructor._id, setinstructorAvailabilities);
+    fetchInstructor(instructor._id);
   }, [getBookings, instructor._id]);
+
+  const fetchInstructor = async (instructor) => {
+    const instructorData = await getSingleInstructor(instructor);
+    setInstructorClosedEvents(instructorData.instructor?.closedEvents);
+  };
 
   const getDate = async () => {
     for (let index = 0; index < 30; index++) {
@@ -114,6 +122,16 @@ const TestPackageSelector = () => {
     }
   };
 
+  const closedEventChecker = (hour, closedEvents) => {
+    let closed = false;
+    closedEvents.forEach((event) => {
+      const available = moment(hour) >= moment(event.startTime) && moment(hour) < moment(event.endTime);
+      if (available) return (closed = true);
+    });
+
+    return closed;
+  };
+
   return (
     <div className="booking__selector">
       <TestPackageBanner />
@@ -151,6 +169,7 @@ const TestPackageSelector = () => {
                     );
                   }
                   if (
+                    closedEventChecker(hour, instructorClosedEvents) ||
                     unavailableChecker(selectedDate, hour) ||
                     bookingTimes.includes(Date.parse(hour)) ||
                     bookingEnd.includes(Date.parse(moment(hour).add(duration, "hour")))
