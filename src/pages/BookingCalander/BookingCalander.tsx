@@ -17,6 +17,7 @@ export interface Event {
   end?: any;
 }
 const Bookingcalendar = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   const localizer = momentLocalizer(moment);
   const [events, setEvents] = useState<Event[]>();
   const { user } = useSelector((state: State) => state.user);
@@ -42,9 +43,9 @@ const Bookingcalendar = () => {
           title={"Add Closed Event"}
           width={"200px"}
           style={{ marginBottom: 10 }}
-          onClick={() => console.log("object")}
+          onClick={() => setModalOpen(true)}
         />
-        <EventAddTimeSelector />
+        <EventAddTimeSelector open={modalOpen} setOpen={setModalOpen} />
         <h4 className="calendar__header" style={{ marginTop: 20 }}>
           Bookings calendar
         </h4>

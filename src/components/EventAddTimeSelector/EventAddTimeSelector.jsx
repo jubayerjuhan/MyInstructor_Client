@@ -7,8 +7,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import Button from "../core/Button/Button";
 import { TextField } from "@mui/material";
-import moment from "moment";
 import dayjs from "dayjs";
+import { addClosedEvent } from "../../api_calls/event_api";
+import { toast } from "material-react-toastify";
 
 const style = {
   position: "absolute",
@@ -24,26 +25,29 @@ const style = {
   borderRadius: 2,
 };
 
-export default function EventAddTimeSelector() {
+export default function EventAddTimeSelector({ open, setOpen }) {
+  console.log(open, setOpen, "lala");
   const [event, setEvent] = React.useState({});
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const handleDateChange = (fieldName, e) => {
-    setEvent({ ...event, [fieldName]: moment(e) });
+    setEvent({ ...event, [fieldName]: dayjs(e) });
   };
 
-  const saveEvent = () => {
-    console.log(event);
+  const saveEvent = async () => {
+    try {
+      const message = await addClosedEvent(event);
+      toast.success(message);
+      setOpen(false);
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -59,10 +63,10 @@ export default function EventAddTimeSelector() {
               <MobileDateTimePicker onChange={(e) => handleDateChange("startTime", e)} />
             </DemoItem>
             <DemoItem label="End Time">
-              <MobileDateTimePicker onChange={(e) => handleDateChange("to", e)} />
+              <MobileDateTimePicker onChange={(e) => handleDateChange("endTime", e)} />
             </DemoItem>
           </LocalizationProvider>
-          <Button width={"100%"} onClick={saveEvent} />
+          <Button width={"100%"} onClick={saveEvent} title={"Save Event"} />
         </Box>
       </Modal>
     </div>
