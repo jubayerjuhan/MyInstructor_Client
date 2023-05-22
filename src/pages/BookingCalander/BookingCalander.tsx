@@ -4,10 +4,10 @@ import moment from "moment";
 
 import "./BookingCalander.scss";
 import { useCallback, useEffect, useState } from "react";
-import { getInstructorBookings } from "../../api_calls/instructor_api";
+import { getInstructorBookings, getSingleInstructor } from "../../api_calls/instructor_api";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
-import { bookingToEventFormatter } from "./eventFormatter";
+import { bookingToEventFormatter, closedEventsFormatter } from "./eventFormatter";
 import Button from "../../components/core/Button/Button";
 import EventAddTimeSelector from "../../components/EventAddTimeSelector/EventAddTimeSelector";
 
@@ -18,8 +18,9 @@ export interface Event {
 }
 const Bookingcalendar = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [closedEvents, setClosedEvents] = useState([]);
   const localizer = momentLocalizer(moment);
-  const [events, setEvents] = useState<Event[]>();
+  const [events, setEvents] = useState<Event[]>([]);
   const { user } = useSelector((state: State) => state.user);
 
   const getBookings = useCallback(async () => {
@@ -27,14 +28,25 @@ const Bookingcalendar = () => {
       const res = await getInstructorBookings(user._id);
       const events = bookingToEventFormatter(res);
       setEvents(events);
+      const closedEventDays = closedEventsFormatter(closedEvents);
+      setEvents((prev) => [...prev, ...closedEventDays]);
     } catch (err) {
       console.log(err);
     }
-  }, [user._id]);
+  }, [user._id, closedEvents]);
 
   useEffect(() => {
     getBookings();
   }, [getBookings]);
+
+  const fetchInstructor = useCallback(async () => {
+    const data = await getSingleInstructor(user._id);
+    setClosedEvents(data.instructor.closedEvents);
+  }, [user._id]);
+
+  useEffect(() => {
+    fetchInstructor();
+  }, [fetchInstructor]);
 
   return (
     <div className="booking_calendar">

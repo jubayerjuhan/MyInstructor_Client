@@ -23,3 +23,24 @@ export const bookingToEventFormatter = (bookings: BookingType[]) => {
   console.log(events, "all events");
   return events;
 };
+
+interface ClosedEvent {
+  startTime: string;
+  endTime: string;
+  eventName: string;
+}
+// closed events to events formatter
+export const closedEventsFormatter = (closedEvents: ClosedEvent[]) => {
+  const events: Event[] = [];
+
+  closedEvents.forEach((event, index) => {
+    events.push({
+      end: new Date(event.endTime),
+      start: new Date(event.startTime),
+      title: event.eventName,
+    });
+  });
+
+  console.log(events, "all events");
+  return events;
+};
