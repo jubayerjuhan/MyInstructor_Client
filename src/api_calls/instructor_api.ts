@@ -61,12 +61,9 @@ export const addReview = async (review: object) => {
 
 export const changeAvailability = async (available: boolean, id: string) => {
   try {
-    const { data } = await client.post(
-      `/instructor/change-availability/${id}`,
-      {
-        available,
-      }
-    );
+    const { data } = await client.post(`/instructor/change-availability/${id}`, {
+      available,
+    });
     return data;
   } catch (error: any) {
     return {

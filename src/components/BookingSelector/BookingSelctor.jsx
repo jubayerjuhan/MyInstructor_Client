@@ -6,7 +6,7 @@ import { toast } from "material-react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setBookingInfo } from "../../redux/actions/bookingAction";
 import { useNavigate } from "react-router-dom";
-import { getInstructorBookings } from "../../api_calls/instructor_api";
+import { getInstructorBookings, getSingleInstructor } from "../../api_calls/instructor_api";
 import { fetchInstructorAvailabilities } from "../../api_calls/instructor_availability";
 
 const BookingSelector = () => {
@@ -18,6 +18,7 @@ const BookingSelector = () => {
   const { instructor } = useSelector((state) => state.instructor);
   const [selectedDate, setSelectedDate] = useState();
   const [instructorAvailabilities, setinstructorAvailabilities] = useState([]);
+  const [instructorClosedEvents, setInstructorClosedEvents] = useState([]);
   const [hours, setHours] = useState([]);
   const lessonDuration = [1, 2];
   const [duration, setDuration] = useState(null);
@@ -41,7 +42,13 @@ const BookingSelector = () => {
   useEffect(() => {
     getBookings();
     fetchInstructorAvailabilities(instructor._id, setinstructorAvailabilities);
+    fetchInstructor(instructor._id);
   }, [getBookings, instructor._id]);
+
+  const fetchInstructor = async (instructor) => {
+    const instructorData = await getSingleInstructor(instructor);
+    setInstructorClosedEvents(instructorData.instructor?.closedEvents);
+  };
 
   const getDate = async () => {
     for (let index = 0; index < 30; index++) {
@@ -125,6 +132,16 @@ const BookingSelector = () => {
     }
   };
 
+  const closedEventChecker = (selectedDate, hour, closedEvents) => {
+    let closed = false;
+    closedEvents.forEach((event) => {
+      const available = moment(hour) >= moment(event.startTime) && moment(hour) < moment(event.endTime);
+      if (available) return (closed = true);
+    });
+
+    return closed;
+  };
+
   return (
     <div className="booking__selector">
       <div className="lesson__duration">
@@ -182,6 +199,7 @@ const BookingSelector = () => {
                   }
                   if (
                     unavailableChecker(selectedDate, hour) ||
+                    closedEventChecker(selectedDate, hour, instructorClosedEvents) ||
                     bookingTimes.includes(Date.parse(hour)) ||
                     bookingEnd.includes(Date.parse(moment(hour).add(duration, "hour")))
                   ) {

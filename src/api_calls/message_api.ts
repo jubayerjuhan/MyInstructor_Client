@@ -4,18 +4,10 @@ export const getMessages = async (id: string) => {
   try {
     const { data } = await client.get(`convo/get-messages/${id}`);
     return data;
-  } catch (error: any) {
-    alert(error.messages);
-  }
+  } catch (error: any) {}
 };
 
-export const sendMessageToServer = async (
-  text: string,
-  from: string,
-  type: string,
-  fileName: string,
-  to: string
-) => {
+export const sendMessageToServer = async (text: string, from: string, type: string, fileName: string, to: string) => {
   try {
     const { data } = await client.post(`convo/add-message`, {
       text,
@@ -36,9 +28,7 @@ export const getConversationMessages = async (id: string) => {
   try {
     const { data } = await client.get(`convo/get-messages/${id}`);
     return data;
-  } catch (error: any) {
-    alert(error.message);
-  }
+  } catch (error: any) {}
 };
 
 export const getConversations = async () => {
