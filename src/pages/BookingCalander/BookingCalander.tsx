@@ -8,6 +8,8 @@ import { getInstructorBookings } from "../../api_calls/instructor_api";
 import { useSelector } from "react-redux";
 import { State } from "../../typings/reduxTypings";
 import { bookingToEventFormatter } from "./eventFormatter";
+import Button from "../../components/core/Button/Button";
+import EventAddTimeSelector from "../../components/EventAddTimeSelector/EventAddTimeSelector";
 
 export interface Event {
   title: string;
@@ -36,7 +38,16 @@ const Bookingcalendar = () => {
   return (
     <div className="booking_calendar">
       <div className="calendar__wrapper">
-        <h4 className="calendar__header">Bookings calendar</h4>
+        <Button
+          title={"Add Closed Event"}
+          width={"200px"}
+          style={{ marginBottom: 10 }}
+          onClick={() => console.log("object")}
+        />
+        <EventAddTimeSelector />
+        <h4 className="calendar__header" style={{ marginTop: 20 }}>
+          Bookings calendar
+        </h4>
         <Calendar localizer={localizer} events={events} startAccessor="start" endAccessor="end" className="calendar" />
       </div>
     </div>

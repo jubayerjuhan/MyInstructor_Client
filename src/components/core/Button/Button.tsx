@@ -12,16 +12,11 @@ const Button = ({
   link,
   width,
   onClick,
+  style,
 }: any) => {
   return (
     <div
-      onClick={
-        loading || disabled
-          ? ""
-          : onClick
-          ? onClick
-          : () => (window.location.href = "/driving-lessons")
-      }
+      onClick={loading || disabled ? "" : onClick ? onClick : () => (window.location.href = "/driving-lessons")}
       className={`btn-box ${className}`}
       style={{
         width: width ? width : "140px",
@@ -40,13 +35,7 @@ const Button = ({
           }}
         >
           {loading ? (
-            <RotatingLines
-              strokeColor="black"
-              strokeWidth="5"
-              animationDuration="0.75"
-              width="25"
-              visible={true}
-            />
+            <RotatingLines strokeColor="black" strokeWidth="5" animationDuration="0.75" width="25" visible={true} />
           ) : (
             <>{title}</>
           )}
