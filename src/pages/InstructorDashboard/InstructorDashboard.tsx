@@ -7,6 +7,7 @@ import {
   AiOutlineUser,
   AiOutlineDollar,
 } from "react-icons/ai";
+import { TbCarOff } from "react-icons/tb";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../../components/Dashboard/Dashboard";
@@ -41,9 +42,9 @@ const InstructorDashboard = () => {
       component: Bookingcalendar,
     },
     {
-      label: "Calendar",
+      label: "Closed Events",
       link: "closed-events",
-      icon: AiOutlineCalendar,
+      icon: TbCarOff,
       component: ClosedEvents,
     },
     {
