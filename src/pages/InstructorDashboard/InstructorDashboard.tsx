@@ -18,6 +18,7 @@ import Profile from "../ProfilePage/Profile";
 import InstructorAvailability from "../InstructorAvailability/InstructorAvailability";
 import Bookingcalendar from "../BookingCalander/BookingCalander";
 import FinancialReporting from "../FinancialReporting/FinancialReporting";
+import ClosedEvents from "../../components/ClosedEvents/ClosedEvents";
 
 const InstructorDashboard = () => {
   const { user } = useSelector((state: State) => state.user);
@@ -38,6 +39,12 @@ const InstructorDashboard = () => {
       link: "booking-calendar",
       icon: AiOutlineCalendar,
       component: Bookingcalendar,
+    },
+    {
+      label: "Calendar",
+      link: "closed-events",
+      icon: AiOutlineCalendar,
+      component: ClosedEvents,
     },
     {
       label: "Profile",
