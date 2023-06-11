@@ -3,15 +3,7 @@ import Button from "../core/Button/Button";
 import "./Footer.scss";
 
 const Footer = () => {
-  const cities = [
-    "Sydney",
-    "Melbourne",
-    "Brisbane",
-    "Perth",
-    "Adelade",
-    "Hobert",
-    "Canaberra",
-  ];
+  const cities = ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Hobart", "Canaberra"];
 
   const resources = [
     // { name: "Blog", link: "/blog" },
@@ -40,11 +32,9 @@ const Footer = () => {
       <div className="footer__intro">
         <p className="footer__title">Who is My Instructor?</p>
         <p className="description">
-          By assisting new drivers in finding, comparing, and booking verified
-          driving instructors online, My Instructor eliminates the headache of
-          selecting a driving school. The My Instructor online platform
-          streamlines the scheduling, management, and administration of driving
-          instructors and driving classes across the Australia.
+          By assisting new drivers in finding, comparing, and booking verified driving instructors online, My Instructor
+          eliminates the headache of selecting a driving school. The My Instructor online platform streamlines the
+          scheduling, management, and administration of driving instructors and driving classes across the Australia.
         </p>
       </div>
       <div className="footer__tests">
@@ -56,11 +46,7 @@ const Footer = () => {
           <p className="footer__title">Driving Instructors by City</p>
           <div className="footer__instructor-cities">
             {cities.map((city, key) => (
-              <a
-                href={`/driving-lessons/${city.toLowerCase()}`}
-                className="footer__link"
-                key={key}
-              >
+              <a href={`/driving-lessons/${city.toLowerCase()}`} className="footer__link" key={key}>
                 {city} Driving Instructors
               </a>
             ))}
@@ -83,12 +69,7 @@ const Footer = () => {
         <Button title="Book now" />
         <div className="footer__drive-links">
           {driveLinks.map((driveLink, key) => (
-            <a
-              href={driveLink.link}
-              target={"_blank"}
-              className="footer__link"
-              key={key}
-            >
+            <a href={driveLink.link} target={"_blank"} className="footer__link" key={key}>
               {driveLink.name}
             </a>
           ))}
