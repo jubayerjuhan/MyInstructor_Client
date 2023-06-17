@@ -62,10 +62,10 @@ export default function EventAddTimeSelector({ open, setOpen, getBookings, fetch
               onChange={(e) => setEvent({ ...event, eventName: e.target.value })}
             />
             <DemoItem label="Start Time">
-              <MobileDateTimePicker onChange={(e) => handleDateChange("startTime", e)} />
+              <MobileDateTimePicker onChange={(e) => handleDateChange("startTime", e)} format="DD-MM-YYYY HH:mm a" />
             </DemoItem>
             <DemoItem label="End Time">
-              <MobileDateTimePicker onChange={(e) => handleDateChange("endTime", e)} />
+              <MobileDateTimePicker onChange={(e) => handleDateChange("endTime", e)} format="DD-MM-YYYY HH:mm a" />
             </DemoItem>
           </LocalizationProvider>
           <Button width={"100%"} onClick={saveEvent} title={"Save Event"} />
