@@ -25,7 +25,7 @@ const style = {
   borderRadius: 2,
 };
 
-export default function EventAddTimeSelector({ open, setOpen }) {
+export default function EventAddTimeSelector({ open, setOpen, getBookings, fetchInstructor }) {
   console.log(open, setOpen, "lala");
   const [event, setEvent] = React.useState({});
 
@@ -37,6 +37,8 @@ export default function EventAddTimeSelector({ open, setOpen }) {
     try {
       const message = await addClosedEvent(event);
       toast.success(message);
+      await getBookings();
+      await fetchInstructor();
       setOpen(false);
     } catch (error) {
       toast.error(error);

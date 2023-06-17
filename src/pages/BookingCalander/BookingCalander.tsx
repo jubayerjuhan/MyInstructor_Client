@@ -29,7 +29,7 @@ const Bookingcalendar = () => {
       const events = bookingToEventFormatter(res);
       setEvents(events);
       const closedEventDays = closedEventsFormatter(closedEvents);
-      setEvents((prev) => [...prev, ...closedEventDays]);
+      setEvents([...events, ...closedEventDays]);
     } catch (err) {
       console.log(err);
     }
@@ -57,7 +57,12 @@ const Bookingcalendar = () => {
           style={{ marginBottom: 10 }}
           onClick={() => setModalOpen(true)}
         />
-        <EventAddTimeSelector open={modalOpen} setOpen={setModalOpen} />
+        <EventAddTimeSelector
+          open={modalOpen}
+          setOpen={setModalOpen}
+          getBookings={getBookings}
+          fetchInstructor={fetchInstructor}
+        />
         <h4 className="calendar__header" style={{ marginTop: 20 }}>
           Bookings calendar
         </h4>
