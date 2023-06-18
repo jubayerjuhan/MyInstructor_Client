@@ -30,6 +30,9 @@ export default function EventAddTimeSelector({ open, setOpen, getBookings, fetch
   const [event, setEvent] = React.useState({});
 
   const handleDateChange = (fieldName, e) => {
+    if (fieldName === "endTime") {
+      return setEvent({ ...event, [fieldName]: dayjs(e).add(1, "hour") });
+    }
     setEvent({ ...event, [fieldName]: dayjs(e) });
   };
 
